@@ -3,48 +3,51 @@
 ## Board Package
 
 ### Board Class
+
 - Relationship:
     public class Board
 
-- Attributes: 
+- Attributes:
     private Sector tab[][];
 
-- Constructor: 
+- Constructor:
     public Board()
 
 - Getters and Setters
-    public Sector getSector(int x, int y) 
-    public Sector getSector(Player p) 
+    public Sector getSector(int x, int y)
+    public Sector getSector(Player p)
     public Virus getEnemy(Player p)
 
 - Methods:
-	public void virusTurn(Player p, Random generator)
+ public void virusTurn(Player p, Random generator)
 
 ### Door Class
-- Relationship:
-    public class Door 
 
-- Attributes: 
+- Relationship:
+    public class Door
+
+- Attributes:
     private int u
     private int d
     private int l
     private int r
 
-- Constructor: 
+- Constructor:
     public Door(int u, int d, int l, int r)
 
 - Getters and Setters
-    public int getR() 
-    public int getU() 
-    public int getD() 
-    public int getL() 
+    public int getR()
+    public int getU()
+    public int getD()
+    public int getL()
 
 - Methods
-    public void printDoors() 
+    public void printDoors()
 
 ### Sector Class
+
 - Relationship:
-    public class Sector 
+    public class Sector
 
 - Attributes:
     private Door door
@@ -57,51 +60,54 @@
     public Sector(int u, int d, int l, int r)
 
 - Getters and Setters
-    public int getPlayers() 
-    public void setPlayers(int np) 
+    public int getPlayers()
+    public void setPlayers(int np)
     public ArrayList<Virus> getEnemies()
-    public void setInfection() 
+    public void setInfection()
 
 - Methods
-    public int hasDoor(char dir) 
-    public boolean isKnown() 
-    public void visitSector() 
-    public void printDoors() 
-    public boolean hasInfection() 
-    public void printSector(int i, int j) 
-    public void removePlayers(int P) 
-    public void addPlayers(int P) 
+    public int hasDoor(char dir)
+    public boolean isKnown()
+    public void visitSector()
+    public void printDoors()
+    public boolean hasInfection()
+    public void printSector(int i, int j)
+    public void removePlayers(int P)
+    public void addPlayers(int P)
     public void generateEnemies(Random rand)
-    public void printEnemies() 
-    public int haveEnemies() 
+    public void printEnemies()
+    public int haveEnemies()
 
 ### SectorOcult Class
+
 - Relationship:
     public class SectorOcult extends Sector
 
 - Attributes:
 
 - Constructor:
-    public SectorOcult(int u, int d, int l, int r) 
+    public SectorOcult(int u, int d, int l, int r)
 
 - Getters and Setters
 
 - Methods
 
 ### SectorPrivate Class
+
 - Relationship:
     public class SectorPrivate extends Sector
 
 - Attributes:
 
 - Constructor:
-    public SectorPrivate(int u, int d, int l, int r) 
+    public SectorPrivate(int u, int d, int l, int r)
 
 - Getters and Setters
 
 - Methods
 
 ### PrintGame Class
+
 - Relationship:
     public class PrintGame
 
@@ -112,12 +118,12 @@
 - Getters and Setters
 
 - Methods
-    public void printBoard(Player main, Player support, Board tab) 
-    public void prinSet(Sector set, int lin, Player main, int P) 
-    public void prinSet(Sector set, int lin, Player main, Player support) 
-    public void showPossibleActions(Player p, Sector set) 
-    public void printHeader(int turn) 
-    public void printTable(Board tabb, Player[] p, int turno) 
+    public void printBoard(Player main, Player support, Board tab)
+    public void prinSet(Sector set, int lin, Player main, int P)
+    public void prinSet(Sector set, int lin, Player main, Player support)
+    public void showPossibleActions(Player p, Sector set)
+    public void printHeader(int turn)
+    public void printTable(Board tabb, Player[] p, int turno)
     public void printSector(Player p, Sector set)
     public void printWinMessage()
     public void availableDirections(Sector set)
@@ -125,6 +131,7 @@
 ## Entities package
 
 ### Coordinates Class
+
 - Relationship:
     public class Coordinates
 
@@ -133,66 +140,69 @@
     private int y
 
 - Constructor:
-    public Coordinates(int x, int y) 
+    public Coordinates(int x, int y)
 
 - Getters and Setters
-    public int getX() 
-    public int getY() 
-    public void setX(int x) 
-    public void setY(int y) 
-    public void setCoordinates(int x, int y) 
+    public int getX()
+    public int getY()
+    public void setX(int x)
+    public void setY(int y)
+    public void setCoordinates(int x, int y)
 
 - Methods
 
 ### Entity Class
+
 - Relationship:
-    public abstract class Entity 
+    public abstract class Entity
 
 - Attributes:
     protected int attackPower
     protected int defensePower
 
 - Constructor:
-    public Entity() 
-    public Entity(int attackPower, int defensePower) 
+    public Entity()
+    public Entity(int attackPower, int defensePower)
 
 - Getters and Setters
-    public int getAttackPower() 
-    public int getDefensePower() 
-    public void setAttackPower(int attackPower) 
-    public void setDefensePower(int defensePower) 
+    public int getAttackPower()
+    public int getDefensePower()
+    public void setAttackPower(int attackPower)
+    public void setDefensePower(int defensePower)
 
 - Methods
-    public boolean attack(Entity entity) 
+    public boolean attack(Entity entity)
 
 ### Player Class
+
 - Relationship:
-public class Player extends Entity 
+public class Player extends Entity
 
 - Attributes:
     private Coordinates position
 
 - Constructor:
-    public Player() 
+    public Player()
     public Player(int attackPower, int defensePower, int x, int y)
 
 - Getters and Setters
-    public Coordinates getPosition() 
-    public void setPosition(int x, int y) 
+    public Coordinates getPosition()
+    public void setPosition(int x, int y)
 
 - Methods
     public void incrementDefense(int increment)
-    public void search(Sector setor) 
-    public int move(Board T, char dir, int P) 
+    public void search(Sector setor)
+    public int move(Board T, char dir, int P)
     public int playerAction(Board tab, char input, Player []p, Scanner reader)
-    public boolean isSupport() 
+    public boolean isSupport()
     public boolean isAlive()
     public boolean availabeOptions(Board tab)
     public boolean isGameWon(Board tab)
 
 ### SupPlayer Class
+
 - Relationship:
-    public class SupPlayer extends Player 
+    public class SupPlayer extends Player
 - Attributes:
 
 - Constructor:
@@ -204,12 +214,13 @@ public class Player extends Entity
     public void heal(Player player)
 
 ### SupPlayer Class
+
 - Relationship:
-    public class Virus extends Entity 
+    public class Virus extends Entity
 - Attributes:
 
 - Constructor:
-    public Virus() 
+    public Virus()
 
 - Getters and Setters
 
@@ -217,7 +228,9 @@ public class Player extends Entity
     public Virus(Random generator)
 
 ## Main
+
 ### Main Class
+
 - Relationship:
     public class Main
 
