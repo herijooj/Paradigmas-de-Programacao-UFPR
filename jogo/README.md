@@ -33,6 +33,19 @@ menos um jogador sobreviver
 
 ***
 
+## Estrutura
+
+Precisaremos de alguns elementos chave para o funcionamento do jogo. São eles:
+
+- [ ] Tabuleiro
+- [ ] Jogador
+- [ ] Fake News
+- [ ] Itens
+
+Estes elementos irão se relacionar por meio de orientação a objetos. A seguir descrevemos como eles se relacionam
+
+### Tabuleiro
+
 ## autores
 
 - Heric Camargo
