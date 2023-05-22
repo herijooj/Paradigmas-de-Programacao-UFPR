@@ -1,41 +1,42 @@
-package jogo.Sector;
+package Sector;
 
 public class Sector {
-    private int x;
-    private int y;
-
-    public Sector(int x, int y) {
-        this.setX(x);
-        this.setY(y);
-    }
+    private int i;
+    private int j;
 
     // getters
-    public int getX() {
-        return this.x;
+    public int getI() {
+        return this.i;
     }
 
-    public int getY() {
-        return this.y;
+    public int getJ() {
+        return this.j;
     }
 
     // setters
 
-    public void setX(int x) {
-        if (x < 0)
-            throw new IllegalArgumentException("X must be positive");
-        this.x = x;
+    public void setI(int i) {
+        if (i < 0)
+            throw new IllegalArgumentException("I must be positive");
+        this.i = i;
         return;
     }
 
-    public void setY(int y) {
-        if (y < 0)
-            throw new IllegalArgumentException("Y must be positive");
-        this.y = y;
+    public void setJ(int j) {
+        if (j < 0)
+            throw new IllegalArgumentException("J must be positive");
+        this.j = j;
         return;
     }
 
-    public void draw(int x, int y) {
-
+    public void draw() {
+        i = this.getI();
+        j = this.getJ();
+        if (i == 0 && j == 0) {
+            System.out.println("+----+");
+            System.out.println("|    |");
+            System.out.println("+----+");
+        }
     }
 
 }
