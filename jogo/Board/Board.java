@@ -34,24 +34,26 @@ public class Board {
     }
 
     public void drawBoard() {
-        for (int i = 0; i < this.getSize(); i++) {
-            if (i == 0)
+        size = this.getSize();
+        for (int i = 0; i < size; i++) {
+            if (i == 0 || i == size) {
                 System.out.print("+----+");
-            for (int j = 0; j < this.getSize(); j++) {
-                System.out.print("\t+----+");
+                for (int j = 0; j < size; j++) {
+                    System.out.print("----+");
+                }
+                System.out.println();
+            }
+            System.out.print("|    |");
+            for (int j = 0; j < size; j++) {
+                System.out.print("    |");
             }
             System.out.println();
-            
-            for (int j = 0; j < this.getSize(); j++) {
-                if (j == 0)
-                    System.out.print("|    |");
-                else
-                    System.out.print("\t|");
-            }
-
             System.out.print("+----+");
+            for (int j = 0; j < size; j++) {
+                System.out.print("----+");
+            }
             System.out.println();
+
         }
     }
-
 }
