@@ -10,8 +10,8 @@ public class Main {
         System.out.println(Cores.ANSI_YELLOW_BACKGROUND + "Yellow background"
                 + Cores.ANSI_RESET);
 
-        Board board = new Board(5);
-        
+        Board board = new Board(9);
+
         board.drawBoard();
     }
 }
