@@ -5,11 +5,10 @@ public class Sector {
     private int j;
     private boolean restricted;
 
-    public Sector(int i, int j) {
-        // will randomly assing a restricted sector
-        this.setRestricted(Math.random() < 0.5);
+    public Sector(int i, int j, Boolean restricted) {
         this.setI(i);
         this.setJ(j);
+        this.setRestricted(restricted);
     }
 
     // getters
@@ -47,13 +46,7 @@ public class Sector {
     }
 
     public void draw() {
-        i = this.getI();
-        j = this.getJ();
-        if (i == 0 && j == 0) {
-            System.out.println("+----+");
-            System.out.println("|    |");
-            System.out.println("+----+");
-        }
+        return;
     }
 
 }
