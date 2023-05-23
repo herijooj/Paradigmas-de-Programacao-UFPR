@@ -1,13 +1,16 @@
 package Board;
 
+import Coordinate.Coordinate;
 import Sector.Sector;
 
 public class Board {
     private int size;
     private Sector[][] board;
+    private Coordinate[] restrictedSectors;
 
     public Board(int size) {
         this.setSize(size);
+        this.setRestrictedSectors();
         this.setBoard();
     }
 
@@ -19,6 +22,10 @@ public class Board {
     public Sector[][] getBoard() {
         return this.board;
     }
+
+    public int getRestrictedSectors() {
+        return this.restrictedSectorsCount;
+    }
     // setters
 
     public void setSize(int size) {
@@ -28,45 +35,58 @@ public class Board {
         return;
     }
 
+    public void setRestrictedSectors() {
+        this.restrictedSectorsCount = (int) Math.floor(Math.pow(this.getSize(), 2) / 3);
+        return;
+    }
+
     public void setBoard() {
         size = this.getSize();
-        System.out.println(size);
         this.board = new Sector[size][size];
 
+        // create the board
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                System.out.printf("%s %s\n", i, j);
-                this.board[i][j] = new Sector(i, j);
+                boolean isRestricted = false;
+                this.board[i][j] = new Sector(i, j, isRestricted);
             }
         }
     }
+    // methods
 
     public void drawBoard() {
         size = this.getSize();
         board = this.getBoard();
+
+        // draw the board
         for (int i = 0; i < size; i++) {
+            // draw the top and bottom of the board
             if (i == 0 || i == size) {
                 System.out.print("+----+");
-                for (int j = 0; j < size; j++) {
+                for (int j = 1; j < size; j++) {
                     System.out.print("----+");
                 }
                 System.out.println();
             }
 
-            // if the sector is restricted draw a restricted sector
-            // else draw the player inside it
+            // draw the first side of the board
+            System.out.printf("| %s |", board[i][0].isRestricted() ? "XX" : "  ");
 
-            System.out.printf("| %s |", board[i][0].isRestricted() ? "XX" : "JJ");
-            for (int j = 0; j < size; j++) {
-                System.out.printf(" %s |", board[i][j].isRestricted() ? "XX" : "JJ");
+            // draw the rest of the board
+            for (int j = 1; j < size; j++) {
+                System.out.printf(" %s |", board[i][j].isRestricted() ? "XX" : "  ");
             }
+
             System.out.println();
             System.out.print("+----+");
-            for (int j = 0; j < size; j++) {
+
+            // draw the bottom of the board
+            for (int j = 1; j < size; j++) {
                 System.out.print("----+");
             }
             System.out.println();
 
         }
     }
+
 }
