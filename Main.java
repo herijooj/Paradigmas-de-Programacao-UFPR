@@ -1,7 +1,12 @@
 
+import java.util.Scanner;
+
+// import custom classes
 import Board.*;
-import Sector.*;
-import Cores.*;
+
+import Entities.Beings.*;
+import Entities.Itens.*;
+import Entities.*;
 
 public class Main {
 
