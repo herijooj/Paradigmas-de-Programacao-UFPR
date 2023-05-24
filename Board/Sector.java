@@ -3,7 +3,7 @@ package Sector;
 public class Sector {
     private int i;
     private int j;
-    private boolean restricted;
+    private boolean restricted; // não tem comportamento diferente
 
     public Sector(int i, int j, Boolean restricted) {
         this.setI(i);
