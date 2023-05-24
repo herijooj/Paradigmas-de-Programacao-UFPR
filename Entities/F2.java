@@ -1,15 +1,17 @@
 package Entities;
 
+// imports
 import Coordinate.Coordinate;
 
-public class F3 extends FakeNews {
+// class
+public class F2 extends FakeNews {
 
     // attributes
 
     // constructor
-    public F3 (Coordinate position, int type) 
+    public F2 (Coordinate position) 
     {
-        super(position, type);
+        super(position);
     }
     
     // getters
@@ -20,6 +22,6 @@ public class F3 extends FakeNews {
 
     public void draw ()
     {
-        System.out.println("F3");
+        System.out.println("F2");
     }
 }

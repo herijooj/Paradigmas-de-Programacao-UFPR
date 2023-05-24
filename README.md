@@ -3,6 +3,9 @@
 Um jogo para a disciplina de Paradigmas de Programação da UFPR.
 ***
 
+a especificação do trabalho pode ser acessada em PDF aqui -> [especificação](ProjetoPratico_CI1062_novo.pdf)
+ou em [markdown](ProjetoPratico_CI1062_novo.md)
+
 ## Formato dos commits
 
 Por organização, vamos seguir o seguinte padrão para os commits:

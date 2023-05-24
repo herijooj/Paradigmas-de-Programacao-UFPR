@@ -25,7 +25,6 @@ public class Sector {
     }
 
     // setters
-
     public void setI(int i) {
         if (i < 0)
             throw new IllegalArgumentException("I must be positive");
@@ -45,6 +44,7 @@ public class Sector {
         return;
     }
 
+    // methods
     public void draw() {
         return;
     }
