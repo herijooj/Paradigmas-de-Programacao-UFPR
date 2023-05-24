@@ -1,5 +1,6 @@
-package Coordinate;
+package Entities;
 
+// class
 public class Coordinate {
     private int i;
     private int j;
@@ -36,6 +37,7 @@ public class Coordinate {
 
     // methods
 
+    // this method calculates the distance between two coordinates
     public int calculateDistance(Coordinate coordinate) {
         int i = this.getI();
         int j = this.getJ();
@@ -47,6 +49,7 @@ public class Coordinate {
         return distance;
     }
 
+    // this method checks if the coordinate is valid
     public boolean Isvalid() {
         int i = this.getI();
         int j = this.getJ();
@@ -55,4 +58,15 @@ public class Coordinate {
             return false;
         return true;
     }
+
+    // this function generates a random coordinate
+    public static Coordinate generateRandomCoordinate() {
+        int i = (int) (Math.random() * 10);
+        int j = (int) (Math.random() * 10);
+
+        Coordinate coordinate = new Coordinate(i, j);
+
+        return coordinate;
+    }
+    
 }

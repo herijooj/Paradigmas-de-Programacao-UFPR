@@ -1,9 +1,19 @@
 
+import java.util.Scanner;
+
+// import custom classes
 import Board.*;
-import Sector.*;
-import Cores.*;
+
+import Entities.Beings.*;
+import Entities.Itens.*;
+import Entities.*;
 
 public class Main {
+
+    //function to generate random number
+    public static int randomNumber(int min, int max) {
+        return (int) (Math.random() * (max - min + 1) + min);
+    }
 
     public static void main(String[] args) {
         // System.out.println(Cores.ANSI_RED + "Red text" + Cores.ANSI_RESET);

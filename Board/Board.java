@@ -1,11 +1,10 @@
 package Board;
 
-import Entities.*; // adicionei pra importar as entidades - amaral
+// imports 
 import java.util.List;
+import Entities.*; // adicionei pra importar as entidades - amaral
 
-import Coordinate.Coordinate;
-import Sector.Sector;
-
+// class
 public class Board {
     private int size;
     private Sector[][] board;

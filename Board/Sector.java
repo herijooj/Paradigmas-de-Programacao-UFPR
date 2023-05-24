@@ -1,9 +1,9 @@
-package Sector;
+package Board;
 
 public class Sector {
     private int i;
     private int j;
-    private boolean restricted;
+    private boolean restricted; // não tem comportamento diferente
 
     public Sector(int i, int j, Boolean restricted) {
         this.setI(i);
@@ -25,7 +25,6 @@ public class Sector {
     }
 
     // setters
-
     public void setI(int i) {
         if (i < 0)
             throw new IllegalArgumentException("I must be positive");
@@ -45,6 +44,7 @@ public class Sector {
         return;
     }
 
+    // methods
     public void draw() {
         return;
     }
