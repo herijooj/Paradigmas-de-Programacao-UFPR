@@ -1,4 +1,4 @@
-package Sector;
+package Board;
 
 public class Sector {
     private int i;
