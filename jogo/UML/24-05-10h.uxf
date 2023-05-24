@@ -1,0 +1,142 @@
+<diagram program="umletino" version="15.1"><zoom_level>8</zoom_level><element><id>UMLPackage</id><coordinates><x>0</x><y>120</y><w>400</w><h>232</h></coordinates><panel_attributes>Package Board
+--
+bg=white</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>16</x><y>144</y><w>168</w><h>184</h></coordinates><panel_attributes>Sector
+--
+-Relationship: 
+public class Sector
+--
+Attributes:
+- i: int;
+- j: int; 
+- restricted: bool; 
+--
+Methods
++ getI(): int;
++ getJ(): int;
++ isRestricted(): bool;
++ setI(int i): void;
++ setJ(int j): void;
++ setRestricted(bool value): void;
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>200</x><y>152</y><w>168</w><h>160</h></coordinates><panel_attributes>Board
+--
+-Relationship: 
+public class Board
+--
+Attributes:
+- size: int;
+- board: Sector[][]; 
+--
+Methods
++ getSize(): int;
++ getBoard(): Sector[][];
++ setSize(int size): void;
++ setBoard(): void;
++ drawBoard(): void;
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>416</x><y>120</y><w>872</w><h>632</h></coordinates><panel_attributes>Package Entities
+--
+bg=white</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>584</x><y>144</y><w>168</w><h>136</h></coordinates><panel_attributes>&lt;&lt;abstract&gt;&gt;
+Entity
+--
+-Relationship: 
+public abstract class Entity
+--
+Attributes:
+# type: int;
+--
+Methods
++ getType(): int;
++ setType(int type): void;
++ abstract draw(): void;
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>808</x><y>352</y><w>224</w><h>136</h></coordinates><panel_attributes>&lt;&lt;abstract&gt;&gt;
+Fake news
+--
+-Relationship: 
+public abstract class FakeNews extends Entity
+implements Movement
+--
+Attributes:
+# position: Coordinate;
+--
+Methods
++ setPosition(Coordinate coordinate): void;
++ getPosition(): Coordinate;  
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1072</x><y>352</y><w>184</w><h>136</h></coordinates><panel_attributes>&lt;&lt;concrete&gt;&gt;
+Player
+--
+-Relationship: 
+public class Player extends Entity
+--
+Attributes:
+- playerNum: int;
+--
+Methods
++ getPlayerNum(): int;
++ setPlayerNum(int playerNum): void;
++ move(): void;
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>432</x><y>624</y><w>208</w><h>104</h></coordinates><panel_attributes>&lt;&lt;concrete&gt;&gt;
+Item
+--
+-Relationship: 
+public class Item extends ItemCharacteristics
+--
+Attributes:
+--
+Methods
++ itemAbility(): void;
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>520</x><y>272</y><w>168</w><h>96</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>190;10;10;100</additional_attributes></element><element><id>Relation</id><coordinates><x>664</x><y>272</y><w>256</w><h>96</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;300;100</additional_attributes></element><element><id>Relation</id><coordinates><x>664</x><y>272</y><w>520</w><h>96</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;630;100</additional_attributes></element><element><id>UMLClass</id><coordinates><x>912</x><y>144</y><w>168</w><h>88</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
+Movement
+--
+-Relationship: 
+public interface Movement
+--
+Methods
++ abstract move(): void;
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>992</x><y>224</y><w>192</w><h>144</h></coordinates><panel_attributes>lt=&lt;..</panel_attributes><additional_attributes>10;10;220;160</additional_attributes></element><element><id>Relation</id><coordinates><x>896</x><y>224</y><w>120</w><h>144</h></coordinates><panel_attributes>lt=&lt;..</panel_attributes><additional_attributes>130;10;10;160</additional_attributes></element><element><id>UMLClass</id><coordinates><x>672</x><y>624</y><w>160</w><h>112</h></coordinates><panel_attributes>&lt;&lt;concrete&gt;&gt;
+F1
+--
+-Relationship: 
+public class F1 extends FakeNews
+--
+Attributes:
+--
+Methods
++ move(): void;
++ draw() : void;
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>840</x><y>624</y><w>160</w><h>112</h></coordinates><panel_attributes>&lt;&lt;concrete&gt;&gt;
+F2
+--
+-Relationship: 
+public class F2 extends FakeNews
+--
+Attributes:
+--
+Methods
++ move(): void;
++ draw() : void;
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1008</x><y>624</y><w>160</w><h>112</h></coordinates><panel_attributes>&lt;&lt;concrete&gt;&gt;
+F3
+--
+-Relationship: 
+public class F3 extends FakeNews
+--
+Attributes:
+--
+Methods
++ move(): void;
++ draw() : void;
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>744</x><y>480</y><w>184</w><h>160</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>210;10;10;180</additional_attributes></element><element><id>Relation</id><coordinates><x>904</x><y>480</y><w>24</w><h>160</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;180</additional_attributes></element><element><id>Relation</id><coordinates><x>904</x><y>480</y><w>200</w><h>160</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;230;180</additional_attributes></element><element><id>UMLClass</id><coordinates><x>432</x><y>352</y><w>256</w><h>136</h></coordinates><panel_attributes>&lt;&lt;abstract&gt;&gt;
+Item Characteristics
+--
+-Relationship: 
+public abstract class ItemCharacteristics extends Entity
+--
+Attributes:
+#itemNum: int;
+--
+Methods
++ abstract itemAbility(): void;
++ setItemNum(int num): void;
++ getItemNum(): int;
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>520</x><y>480</y><w>56</w><h>160</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>50;10;10;180</additional_attributes></element></diagram>
