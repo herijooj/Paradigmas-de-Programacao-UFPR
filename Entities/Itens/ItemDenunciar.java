@@ -1,12 +1,12 @@
 package Entities;
 
 // class
-public class Item extends ItemCharacteristics {
+public class ItemDenunciar extends ItemCharacteristics {
 
     // attributes
-
+    
     // constructor
-    public Item (Coordinate position) 
+    public ItemDenunciar (Coordinate position) 
     {
         super(position);
     }
