@@ -1,4 +1,4 @@
-package Coordinate;
+package Entities;
 
 // class
 public class Coordinate {
