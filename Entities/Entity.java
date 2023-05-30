@@ -11,6 +11,7 @@ public abstract class Entity {
 
     // constructor
     public Entity(Coordinate position) {
+        this.position = new Coordinate(0, 0);  // Tava dando bug de inicializacao NULL
         this.setPosition(position);
     }
 
