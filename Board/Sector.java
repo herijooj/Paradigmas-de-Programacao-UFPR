@@ -4,11 +4,13 @@ public class Sector {
     private int i;
     private int j;
     private boolean restricted; // não tem comportamento diferente
+    private boolean isF1;
 
-    public Sector(int i, int j, Boolean restricted) {
+    public Sector(int i, int j, boolean restricted, boolean isF1) {
         this.setI(i);
         this.setJ(j);
         this.setRestricted(restricted);
+        this.setIsF1(isF1);
     }
 
     // getters
@@ -22,6 +24,10 @@ public class Sector {
 
     public boolean isRestricted() {
         return this.restricted;
+    }
+
+    public boolean getIsF1() {
+        return this.isF1;
     }
 
     // setters
@@ -41,6 +47,12 @@ public class Sector {
 
     public void setRestricted(boolean value) {
         this.restricted = value;
+        return;
+    }
+
+    public void setIsF1(boolean isF1) 
+    {
+        this.isF1 = isF1;
         return;
     }
 
