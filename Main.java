@@ -16,7 +16,7 @@ public class Main {
     }
 
     // ascii art title screen
-    public static void asciiArt() {
+    public static void titleScreen() {
         String[] pattern = {
             ".........................................................................",
             ".######...####...##..##..######..........##..##..######..##...##...####..",
@@ -30,6 +30,21 @@ public class Main {
             System.out.println(pattern[i]);
         }
     }
+    
+    public static void gameOver() {
+        String[] pattern = {
+            "   _____                         ____                 ",
+            "  / ____|                       / __ \\                ",
+            " | |  __  __ _ _ __ ___   ___  | |  | |_   _____ _ __ ",
+            " | | |_ |/ _` | '_ ` _ \\ / _ \\ | |  | \\ \\ / / _ \\ '__|",
+            " | |__| | (_| | | | | | |  __/ | |__| |\\ V /  __/ |   ",
+            "  \\_____|\\__,_|_| |_| |_|\\___|  \\____/  \\_/ \\___|_|   "
+        };
+        for (int i = 0; i < pattern.length; i++) {
+            System.out.println(pattern[i]);
+        }
+    }
+
 
     // function to clear screen
     public static void flushScreen() {
@@ -43,7 +58,7 @@ public class Main {
         // title screen ------------------------------------
 
         flushScreen();
-        asciiArt();
+        titleScreen();
         System.out.println("Welcome to the game!");
         System.out.println("Press any key to continue...");
         Scanner scanner = new Scanner(System.in);
@@ -59,7 +74,7 @@ public class Main {
         for (int i = 0; i < 25; i++) {
             if (i == 24) {
                 flushScreen();
-                asciiArt(); // substitute for game over screen
+                gameOver();
                 break;
             }
             System.out.println("Turn " + (i + 1) + " of 25");
