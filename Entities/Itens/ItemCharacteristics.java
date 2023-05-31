@@ -5,8 +5,8 @@ import Entities.Entity;
 
 // class
 public abstract class ItemCharacteristics extends Entity {
-
     // attributes
+    protected Coordinate position;
 
     // constructor
     public ItemCharacteristics(Coordinate position) {
@@ -14,8 +14,15 @@ public abstract class ItemCharacteristics extends Entity {
     }
 
     // getters
+    public Coordinate getPosition() {
+        return this.position;
+    }
 
     // setters
+    // não precisa fazer nenhuma verificação pois a classe 'Coordenada' já verifica
+    public void setPosition(Coordinate position) {
+        this.position = position;
+    }
 
     // methods
     public abstract void itemAbility();
