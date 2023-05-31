@@ -4,13 +4,13 @@ public class Sector {
     private int i;
     private int j;
     private boolean restricted;
-    private String whichFN;
+    private String whichFakeNews;
 
-    public Sector(int i, int j, boolean restricted, String whichFN) {
+    public Sector(int i, int j, boolean restricted, String whichFakeNews) {
         this.setI(i);
         this.setJ(j);
         this.setRestricted(restricted);
-        this.setWhichFN(whichFN);
+        this.setWhichFN(whichFakeNews);
     }
 
     // getters
@@ -24,7 +24,7 @@ public class Sector {
 
     public String getWhichFN()
     {
-        return this.whichFN;
+        return this.whichFakeNews;
     }
 
     public boolean isRestricted()
@@ -54,7 +54,7 @@ public class Sector {
 
     public void setWhichFN(String name)
     {
-        this.whichFN = name;
+        this.whichFakeNews = name;
     }
 
     // methods

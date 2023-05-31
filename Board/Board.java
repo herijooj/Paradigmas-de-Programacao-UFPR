@@ -37,8 +37,7 @@ public class Board {
         return this.restrictedSectors;
     }
 
-    public FakeNews[] getFakeNews()
-    {
+    public FakeNews[] getFakeNews() {
         return this.fakeNews;
     }
 
@@ -61,127 +60,107 @@ public class Board {
         return;
     }
 
-    public void setRestrictedSectors() 
-    {
+    public void setRestrictedSectors() {
         int restrictedSectorsCount = this.getRestrictedSectorsCount();
         this.restrictedSectors = new Coordinate[restrictedSectorsCount];
         int iC, jC, i, j;
-        boolean hasEqualC = false;
-        Coordinate newC;
+        boolean hasEqualCoordinate = false;
+        Coordinate newCoordinate;
 
         // create the restricted sectors
-        for (i = 0; i < restrictedSectorsCount; i++) 
-        {
+        for (i = 0; i < restrictedSectorsCount; i++) {
             // randomnly generate two numbers between 0 and 8
             iC = (int) (Math.random() * 9);
             jC = (int) (Math.random() * 9);
-            newC = new Coordinate(iC, jC);
+            newCoordinate = new Coordinate(iC, jC);
 
             // To check if the coordinate it's not already set
-            for (j = 0; j < i; j++)
-            {
-                if (newC.getI() == this.restrictedSectors[j].getI() && newC.getJ() == this.restrictedSectors[j].getJ())
-                {
-                    hasEqualC = true;
+            for (j = 0; j < i; j++) {
+                if (newCoordinate.getI() == this.restrictedSectors[j].getI()
+                        && newCoordinate.getJ() == this.restrictedSectors[j].getJ()) {
+                    hasEqualCoordinate = true;
                     break;
                 }
             }
 
-            if (!hasEqualC)
-                this.restrictedSectors[i] = newC;
+            if (!hasEqualCoordinate)
+                this.restrictedSectors[i] = newCoordinate;
             else
                 i--;
 
-            hasEqualC = false;
+            hasEqualCoordinate = false;
         }
     }
 
-    public void setFakeNews()
-    {
+    public void setFakeNews() {
         int i, j, iC, jC;
-        boolean hasEqualC = false;
-        Coordinate newC;
+        boolean hasEqualCoordinate = false;
+        Coordinate newCoordinate;
         this.fakeNews = new FakeNews[6];
         int F1Qnt = 0, F2Qnt = 0, F3Qnt = 0;
 
         // Create the F1
-        for (i = 0; i < 6; i++)
-        {
+        for (i = 0; i < 6; i++) {
             // randomnly generate two coordinates
             iC = (int) (Math.random() * 9);
             jC = (int) (Math.random() * 9);
-            newC = new Coordinate(iC, jC);
+            newCoordinate = new Coordinate(iC, jC);
 
             // To check if the coordinate it's not already set
-            for (j = 0; j < this.getRestrictedSectorsCount(); j++)
-            {
-                if (newC.getI() == this.restrictedSectors[j].getI() && newC.getJ() == this.restrictedSectors[j].getJ())
-                {
-                    hasEqualC = true;
-                    //System.out.println("equal");
+            for (j = 0; j < this.getRestrictedSectorsCount(); j++) {
+                if (newCoordinate.getI() == this.restrictedSectors[j].getI()
+                        && newCoordinate.getJ() == this.restrictedSectors[j].getJ()) {
+                    hasEqualCoordinate = true;
+                    // System.out.println("equal");
                     break;
                 }
 
                 // AINDA PRECISA CHECAR SE A COORDENADA N É A MESMA POSICAO DE OUTRA FAKE NEWS
             }
 
-            if (!hasEqualC)
-            {
-                if (F1Qnt < 2)
-                {
-                    this.fakeNews[i] = new F1(newC);
+            if (!hasEqualCoordinate) {
+                if (F1Qnt < 2) {
+                    this.fakeNews[i] = new F1(newCoordinate);
                     F1Qnt++;
-                }
-                else if (F1Qnt == 2 && F2Qnt < 2)
-                {
-                    this.fakeNews[i] = new F2(newC);
+                } else if (F1Qnt == 2 && F2Qnt < 2) {
+                    this.fakeNews[i] = new F2(newCoordinate);
                     F2Qnt++;
-                }
-                else
-                {
-                    this.fakeNews[i] = new F3(newC);
+                } else {
+                    this.fakeNews[i] = new F3(newCoordinate);
                     F3Qnt++;
                 }
-            }
-            else
+            } else
                 i--;
 
-            hasEqualC = false;
+            hasEqualCoordinate = false;
         }
     }
 
-    public void setBoard() 
-    {
+    public void setBoard() {
         size = this.getSize();
         this.board = new Sector[size][size];
         boolean isRestricted = false;
         String whichFN = "";
 
         // Set the restricted ones to the board
-        for (int i = 0; i < size; i++) 
-        {
-            for (int j = 0; j < size; j++) 
-            {
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
                 // Set the restricted sectors
-                for (int x = 0; x < this.restrictedSectorsCount; x++) 
-                {
-                    if (i == this.restrictedSectors[x].getI() && j == this.restrictedSectors[x].getJ()) 
-                    {
+                for (int x = 0; x < this.restrictedSectorsCount; x++) {
+                    if (i == this.restrictedSectors[x].getI() && j == this.restrictedSectors[x].getJ()) {
                         isRestricted = true;
                         break;
                     }
                 }
 
                 // Set the Fake News
-                for (int x = 0; x < 6; x++) 
-                {
-                    if (i == this.fakeNews[x].getPosition().getI() && j == this.fakeNews[x].getPosition().getJ()) 
-                    {
-                        if (this.fakeNews[x] instanceof F1) 
+                for (int x = 0; x < 6; x++) {
+                    if (i == this.fakeNews[x].getPosition().getI() && j == this.fakeNews[x].getPosition().getJ()) {
+                        if (this.fakeNews[x] instanceof F1)
                             whichFN = "F1";
-                        else if (this.fakeNews[x] instanceof F2) 
+                        else if (this.fakeNews[x] instanceof F2)
                             whichFN = "F2";
-                        else                        
+                        else
                             whichFN = "F3";
 
                         break;
@@ -194,7 +173,6 @@ public class Board {
             }
         }
     }
-
 
     // methods
 
@@ -214,7 +192,7 @@ public class Board {
             }
 
             // draw the first side of the board
-            //System.out.printf("| %s |", board[i][0].isRestricted() ? "XX" : "  ");
+            // System.out.printf("| %s |", board[i][0].isRestricted() ? "XX" : " ");
 
             if (board[i][0].isRestricted())
                 System.out.printf("| XX |");
@@ -228,8 +206,7 @@ public class Board {
                 System.out.printf("|    |");
 
             // draw the rest of the board
-            for (int j = 1; j < size; j++) 
-            {
+            for (int j = 1; j < size; j++) {
                 if (board[i][j].isRestricted())
                     System.out.printf(" XX |");
                 else if (board[i][j].getWhichFN() == "F1")
