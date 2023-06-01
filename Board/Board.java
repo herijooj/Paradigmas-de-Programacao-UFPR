@@ -26,6 +26,7 @@ public class Board {
         this.setRestrictedSectorsMax(4);
         this.setRestrictedSectors();
         this.setFakeNews();
+        this.setItens();
         this.setBoard();
     }
 
@@ -128,95 +129,44 @@ public class Board {
         }
     }
 
-    /*
-    public void setItens()
-    {
-        int i, x, j, iC, jC;
-        boolean hasEqualCoordinate = false;
+    public void setItens() {
+        int i, itemNum, iC, jC;
         Coordinate newCoordinate;
-        this.listaItens = new LinkedList<ItemCharacteristics>();
 
-        for (i = 0; i < this.itemMax; i++) 
-        {
+        for (i = 0; i < this.itemMax; i++) {
             iC = (int) (Math.random() * 9);
             jC = (int) (Math.random() * 9);
             newCoordinate = new Coordinate(iC, jC);
 
-            // To check if the coordinate it's not already set as a restricted sector
-            /*
-            for (j = 0; j < this.getRestrictedSectorsCount(); j++) 
-            {
-                if (newCoordinate.getI() == this.restrictedSectors.get(j).getI() && newCoordinate.getJ() == this.restrictedSectors.get(j).getJ()) 
-                {
-                    hasEqualCoordinate = true;
-                    break;
-                }
-            }
-
-            // Now as an fake news
-            for (j = 0; j < i; j++) 
-            {
-                if (newCoordinate.getI() == this.listaFakeNews.get(j).getPosition().getI() 
-                && newCoordinate.getJ() == this.listaFakeNews.get(j).getPosition().getJ()) 
-                {
-                    hasEqualCoordinate = true;
-                    break;
-                }
-            }
-
-            // And as an Item
-
             if (!hasEqualCoordinate(newCoordinate)) {
+                itemNum = (int) (Math.random() * 4);
 
-                // TODO - GERAR UM NUMERO ALEATORIO DE 0 A 3, DEPENDENDO
-                // DO RESULTADO, VAI GERAR O ITEM RELACIONADO A ESSE 
-                // NUMERO, COMO DAS FAKE NEWS (F1, F2, F3), fui pra otimizacao
-            } 
-            else
+                if (itemNum == 0)
+                    this.listaItens.add(new ItemBoato(newCoordinate));
+                else if (itemNum == 1)
+                    this.listaItens.add(new ItemDenunciar(newCoordinate));
+                else if (itemNum == 2)
+                    this.listaItens.add(new ItemFugir(newCoordinate));
+                else
+                    this.listaItens.add(new ItemLer(newCoordinate));
+            } else
                 i--;
         }
     }
-    */
 
     public void setBoard() {
         this.board = new Sector[this.size][this.size];
-        String sectorState = "";
 
         // Set the restricted ones to the board
-        for (int i = 0; i < this.size; i++) {
-            for (int j = 0; j < this.size; j++) {
-                // Set the restricted sectors
-                for (int x = 0; x < this.restrictedSectorsMax; x++) {
-                    if (i == this.listaRestrictedSectors.get(x).getI() && j == this.listaRestrictedSectors.get(x).getJ()) {
-                        sectorState = "Restricted";
-                        break;
-                    }
-                }
-
-                // Set the Fake News
-                for (int x = 0; x < this.fakeNewsMax; x++) {
-                    if (i == this.listaFakeNews.get(x).getPosition().getI() && j == this.listaFakeNews.get(x).getPosition().getJ()) {
-                        if ( this.listaFakeNews.get(x) instanceof F1)
-                           sectorState = "F1";
-                        else if ( this.listaFakeNews.get(x) instanceof F2)
-                            sectorState = "F2";
-                        else
-                            sectorState = "F3";
-
-                        break;
-                    }
-                }
-
-                this.board[i][j] = new Sector(i, j, sectorState);
-                sectorState = "";
-            }
-        }
+        for (int i = 0; i < this.size; i++)
+            for (int j = 0; j < this.size; j++)
+                setEntityToSector(i, j);
     }
 
     // methods
 
-    private boolean hasEqualCoordinate(Coordinate coordinate)
-    {
+    // Helper method used to define the entities positions
+    private boolean hasEqualCoordinate(Coordinate coordinate) {
         int j;
 
         // Check if it has the same coordinate as a restricted sector
@@ -236,6 +186,56 @@ public class Board {
 
         // If it got here, means there's no repeated coordinate so far
         return false;
+    }
+
+    // Helper method used in the setBoard method
+    private void setEntityToSector(int i, int j) {
+        String sectorState = "";
+
+        // Verify if it is restricted
+        for (int x = 0; x < this.restrictedSectorsMax; x++) {
+            if (i == this.listaRestrictedSectors.get(x).getI() && j == this.listaRestrictedSectors.get(x).getJ()) {
+                sectorState = "Restricted";
+                break;
+            }
+        }
+
+        // Verify if it is a FakeNews
+        if (sectorState == "") {
+            for (int x = 0; x < this.fakeNewsMax; x++) {
+                if (i == this.listaFakeNews.get(x).getPosition().getI() && j == this.listaFakeNews.get(x).getPosition().getJ()) {
+                    if (this.listaFakeNews.get(x) instanceof F1)
+                        sectorState = "F1";
+                    else if (this.listaFakeNews.get(x) instanceof F2)
+                        sectorState = "F2";
+                    else
+                        sectorState = "F3";
+
+                    break;
+                }
+            }
+        }
+
+        // Verify if it is an item
+        if (sectorState == "") {
+            for (int x = 0; x < this.itemMax; x++) {
+                if (i == this.listaItens.get(x).getPosition().getI() && j == this.listaItens.get(x).getPosition().getJ()) {
+                    if (this.listaItens.get(x) instanceof ItemBoato)
+                    sectorState = "Item Boato";
+                    else if (this.listaItens.get(x) instanceof ItemDenunciar)
+                        sectorState = "Item Denunciar";
+                    else if (this.listaItens.get(x) instanceof ItemFugir)
+                        sectorState = "Item Fugir";
+                    else if (this.listaItens.get(x) instanceof ItemLer)
+                        sectorState = "Item Ler";
+                    break;
+                }
+            }
+        }
+
+        // If it is none of the 4, them it assings the sector with 
+        // sectorState == NULL meaning there's nothing there
+        this.board[i][j] = new Sector(i, j, sectorState);
     }
 
     public void drawBoard() {
@@ -262,6 +262,8 @@ public class Board {
                 System.out.printf("| F2 |");
             else if (board[i][0].getSectorState() == "F3")
                 System.out.printf("| F3 |");
+            else if (board[i][0].getSectorState().contains("Item"))
+                System.out.printf("| ?? |");
             else
                 System.out.printf("|    |");
 
@@ -275,6 +277,8 @@ public class Board {
                     System.out.printf(" F2 |");
                 else if (board[i][j].getSectorState() == "F3")
                     System.out.printf(" F3 |");
+                else if (board[i][j].getSectorState().contains("Item"))
+                    System.out.printf(" ?? |");
                 else
                     System.out.printf("    |");
             }
