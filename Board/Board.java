@@ -71,9 +71,10 @@ public class Board {
             newCoordinate = new Coordinate(iC, jC);
 
             // To check if the coordinate it's not already set
-            for (j = 0; j < i; j++) {
-                if (newCoordinate.getI() == this.restrictedSectors.get(j).getI()
-                        && newCoordinate.getJ() == this.restrictedSectors.get(j).getJ()) {
+            for (j = 0; j < i; j++) 
+            {
+                if (newCoordinate.getI() == this.restrictedSectors.get(j).getI() && newCoordinate.getJ() == this.restrictedSectors.get(j).getJ()) 
+                {
                     hasEqualCoordinate = true;
                     break;
                 }
@@ -89,7 +90,7 @@ public class Board {
     }
 
     public void setFakeNews() {
-        int i, j, iC, jC;
+        int i, x, j, iC, jC;
         boolean hasEqualCoordinate = false;
         Coordinate newCoordinate;
         this.listaFakeNews = new LinkedList<FakeNews>();
@@ -102,15 +103,25 @@ public class Board {
             jC = (int) (Math.random() * 9);
             newCoordinate = new Coordinate(iC, jC);
 
-            // To check if the coordinate it's not already set
-            for (j = 0; j < this.getRestrictedSectorsCount(); j++) {
-                if (newCoordinate.getI() == this.restrictedSectors.get(j).getI()
-                        && newCoordinate.getJ() == this.restrictedSectors.get(j).getJ()) {
+            // To check if the coordinate it's not already set as a restricted sector
+            for (j = 0; j < this.getRestrictedSectorsCount(); j++) 
+            {
+                if (newCoordinate.getI() == this.restrictedSectors.get(j).getI() && newCoordinate.getJ() == this.restrictedSectors.get(j).getJ()) 
+                {
                     hasEqualCoordinate = true;
                     break;
                 }
+            }
 
-                // AINDA PRECISA CHECAR SE A COORDENADA N É A MESMA POSICAO DE OUTRA FAKE NEWS
+            // Now as a fake news
+            for (j = 0; j < i; j++) 
+            {
+                if (newCoordinate.getI() == this.listaFakeNews.get(j).getPosition().getI() 
+                && newCoordinate.getJ() == this.listaFakeNews.get(j).getPosition().getJ()) 
+                {
+                    hasEqualCoordinate = true;
+                    break;
+                }
             }
 
             if (!hasEqualCoordinate) {
