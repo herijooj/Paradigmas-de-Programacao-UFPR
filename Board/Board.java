@@ -4,6 +4,7 @@ package Board;
 import java.util.*;
 import Entities.*;
 import Entities.Beings.*;
+import Entities.Itens.*;
 import Board.Sector;
 
 // class
@@ -11,15 +12,18 @@ public class Board {
     private int size;
     private Sector[][] board;
 
-    private LinkedList<Coordinate> restrictedSectors;
-    private int restrictedSectorsCount;
+    private LinkedList<Coordinate> listaRestrictedSectors;
+    private int restrictedSectorsMax = 4;
 
     private LinkedList<FakeNews> listaFakeNews;
     private int fakeNewsMax = 6;
 
+    private LinkedList<ItemCharacteristics> listaItens;
+    private int itemMax = 2;
+
     public Board(int size) {
         this.setSize(size);
-        this.setRestrictedSectorsCount(4);
+        this.setRestrictedSectorsMax(4);
         this.setRestrictedSectors();
         this.setFakeNews();
         this.setBoard();
@@ -35,11 +39,27 @@ public class Board {
     }
 
     public LinkedList<Coordinate> getRestrictedSectors() {
-        return this.restrictedSectors;
+        return this.listaRestrictedSectors;
     }
 
-    public int getRestrictedSectorsCount() {
-        return this.restrictedSectorsCount;
+    public LinkedList<FakeNews> getFakeNews() {
+        return this.listaFakeNews;
+    }
+
+    public LinkedList<ItemCharacteristics> getItens() {
+        return this.listaItens;
+    }
+
+    public int getRestrictedSectorsMax() {
+        return this.restrictedSectorsMax;
+    }
+
+    public int getFakeNewsMax() {
+        return this.fakeNewsMax;
+    }
+
+    public int getItensMax() {
+        return this.itemMax;
     }
 
     // setters
@@ -50,81 +70,48 @@ public class Board {
         return;
     }
 
-    public void setRestrictedSectorsCount(int restrictedSectorsCount) {
-        if (restrictedSectorsCount < 0)
+    public void setRestrictedSectorsMax(int number) {
+        if (number < 0)
             throw new IllegalArgumentException("Restricted sectors count must be positive");
-        this.restrictedSectorsCount = restrictedSectorsCount;
+        this.restrictedSectorsMax = number;
         return;
     }
 
     public void setRestrictedSectors() {
-        this.restrictedSectors = new LinkedList<Coordinate>();
-        int iC, jC, i, j;
-        boolean hasEqualCoordinate = false;
+        this.listaRestrictedSectors = new LinkedList<Coordinate>();
+        this.listaFakeNews = new LinkedList<FakeNews>();
+        this.listaItens = new LinkedList<ItemCharacteristics>();
+
+        int iC, jC, i;
         Coordinate newCoordinate;
 
         // create the restricted sectors
-        for (i = 0; i < this.restrictedSectorsCount; i++) {
+        for (i = 0; i < this.restrictedSectorsMax; i++) {
             // randomnly generate two numbers between 0 and 8
             iC = (int) (Math.random() * 9);
             jC = (int) (Math.random() * 9);
             newCoordinate = new Coordinate(iC, jC);
 
-            // To check if the coordinate it's not already set
-            for (j = 0; j < i; j++) 
-            {
-                if (newCoordinate.getI() == this.restrictedSectors.get(j).getI() && newCoordinate.getJ() == this.restrictedSectors.get(j).getJ()) 
-                {
-                    hasEqualCoordinate = true;
-                    break;
-                }
-            }
-
-            if (!hasEqualCoordinate)
-                this.restrictedSectors.add(newCoordinate);
+            if (!hasEqualCoordinate(newCoordinate))
+                this.listaRestrictedSectors.add(newCoordinate);
             else
                 i--;
-
-            hasEqualCoordinate = false;
         }
     }
 
     public void setFakeNews() {
-        int i, x, j, iC, jC;
-        boolean hasEqualCoordinate = false;
+        int i, iC, jC;
         Coordinate newCoordinate;
-        this.listaFakeNews = new LinkedList<FakeNews>();
         int F1Quantity = 0, F2Quantity = 0, F3Quantity = 0;
 
-        // Create the F1
+        // Create the Fake News
         for (i = 0; i < this.fakeNewsMax; i++) {
             // randomnly generate two coordinates
             iC = (int) (Math.random() * 9);
             jC = (int) (Math.random() * 9);
             newCoordinate = new Coordinate(iC, jC);
 
-            // To check if the coordinate it's not already set as a restricted sector
-            for (j = 0; j < this.getRestrictedSectorsCount(); j++) 
-            {
-                if (newCoordinate.getI() == this.restrictedSectors.get(j).getI() && newCoordinate.getJ() == this.restrictedSectors.get(j).getJ()) 
-                {
-                    hasEqualCoordinate = true;
-                    break;
-                }
-            }
-
-            // Now as a fake news
-            for (j = 0; j < i; j++) 
-            {
-                if (newCoordinate.getI() == this.listaFakeNews.get(j).getPosition().getI() 
-                && newCoordinate.getJ() == this.listaFakeNews.get(j).getPosition().getJ()) 
-                {
-                    hasEqualCoordinate = true;
-                    break;
-                }
-            }
-
-            if (!hasEqualCoordinate) {
+            if (!hasEqualCoordinate(newCoordinate)) {
                 if (F1Quantity < 2) {
                     this.listaFakeNews.add(new F1(newCoordinate));
                     F1Quantity++;
@@ -135,26 +122,72 @@ public class Board {
                     this.listaFakeNews.add(new F3(newCoordinate));
                     F3Quantity++;
                 }
-            } else
+            } 
+            else
                 i--;
-
-            hasEqualCoordinate = false;
         }
     }
 
+    /*
+    public void setItens()
+    {
+        int i, x, j, iC, jC;
+        boolean hasEqualCoordinate = false;
+        Coordinate newCoordinate;
+        this.listaItens = new LinkedList<ItemCharacteristics>();
+
+        for (i = 0; i < this.itemMax; i++) 
+        {
+            iC = (int) (Math.random() * 9);
+            jC = (int) (Math.random() * 9);
+            newCoordinate = new Coordinate(iC, jC);
+
+            // To check if the coordinate it's not already set as a restricted sector
+            /*
+            for (j = 0; j < this.getRestrictedSectorsCount(); j++) 
+            {
+                if (newCoordinate.getI() == this.restrictedSectors.get(j).getI() && newCoordinate.getJ() == this.restrictedSectors.get(j).getJ()) 
+                {
+                    hasEqualCoordinate = true;
+                    break;
+                }
+            }
+
+            // Now as an fake news
+            for (j = 0; j < i; j++) 
+            {
+                if (newCoordinate.getI() == this.listaFakeNews.get(j).getPosition().getI() 
+                && newCoordinate.getJ() == this.listaFakeNews.get(j).getPosition().getJ()) 
+                {
+                    hasEqualCoordinate = true;
+                    break;
+                }
+            }
+
+            // And as an Item
+
+            if (!hasEqualCoordinate(newCoordinate)) {
+
+                // TODO - GERAR UM NUMERO ALEATORIO DE 0 A 3, DEPENDENDO
+                // DO RESULTADO, VAI GERAR O ITEM RELACIONADO A ESSE 
+                // NUMERO, COMO DAS FAKE NEWS (F1, F2, F3), fui pra otimizacao
+            } 
+            else
+                i--;
+        }
+    }
+    */
+
     public void setBoard() {
         this.board = new Sector[this.size][this.size];
-        //boolean isRestricted = false;
-        //String whichFN = "";
         String sectorState = "";
 
         // Set the restricted ones to the board
         for (int i = 0; i < this.size; i++) {
             for (int j = 0; j < this.size; j++) {
                 // Set the restricted sectors
-                for (int x = 0; x < this.restrictedSectorsCount; x++) {
-                    if (i == this.restrictedSectors.get(x).getI() && j == this.restrictedSectors.get(x).getJ()) {
-                        //isRestricted = true;
+                for (int x = 0; x < this.restrictedSectorsMax; x++) {
+                    if (i == this.listaRestrictedSectors.get(x).getI() && j == this.listaRestrictedSectors.get(x).getJ()) {
                         sectorState = "Restricted";
                         break;
                     }
@@ -164,13 +197,10 @@ public class Board {
                 for (int x = 0; x < this.fakeNewsMax; x++) {
                     if (i == this.listaFakeNews.get(x).getPosition().getI() && j == this.listaFakeNews.get(x).getPosition().getJ()) {
                         if ( this.listaFakeNews.get(x) instanceof F1)
-                           //whichFN = "F1";
                            sectorState = "F1";
                         else if ( this.listaFakeNews.get(x) instanceof F2)
-                            //whichFN = "F2";
                             sectorState = "F2";
                         else
-                            //whichFN = "F3";
                             sectorState = "F3";
 
                         break;
@@ -178,13 +208,35 @@ public class Board {
                 }
 
                 this.board[i][j] = new Sector(i, j, sectorState);
-                //isRestricted = false;
                 sectorState = "";
             }
         }
     }
 
     // methods
+
+    private boolean hasEqualCoordinate(Coordinate coordinate)
+    {
+        int j;
+
+        // Check if it has the same coordinate as a restricted sector
+        for (j = 0; j < this.listaRestrictedSectors.size(); j++) 
+            if (coordinate.getI() == this.listaRestrictedSectors.get(j).getI() && coordinate.getJ() == this.listaRestrictedSectors.get(j).getJ()) 
+                return true;
+
+        // Check if it has the same coordinate as a fake news
+            for (j = 0; j < this.listaFakeNews.size(); j++) 
+                if (coordinate.getI() == this.listaFakeNews.get(j).getPosition().getI() && coordinate.getJ() == this.listaFakeNews.get(j).getPosition().getJ()) 
+                    return true;
+
+        // And check if it has the same coordinate as an item
+            for (j = 0; j < this.listaItens.size(); j++) 
+                if (coordinate.getI() == this.listaItens.get(j).getPosition().getI() && coordinate.getJ() == this.listaItens.get(j).getPosition().getJ()) 
+                    return true;
+
+        // If it got here, means there's no repeated coordinate so far
+        return false;
+    }
 
     public void drawBoard() {
         size = this.getSize();
