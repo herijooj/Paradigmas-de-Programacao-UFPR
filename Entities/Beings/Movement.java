@@ -1,7 +1,9 @@
 package Entities.Beings;
 
+import java.awt.event.KeyEvent;
+
 // class
 public interface Movement {
     // methods
-    public void move();
+    public void move(KeyEvent e);
 }
