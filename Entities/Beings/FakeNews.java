@@ -10,13 +10,11 @@ public abstract class FakeNews extends Entity implements Movement {
     // attributes
 
     // constructor
-    public FakeNews (Coordinate position) 
-    {
+    public FakeNews(Coordinate position) {
         super(position);
     }
 
     // getters
-
 
     // setters
 
@@ -27,22 +25,22 @@ public abstract class FakeNews extends Entity implements Movement {
         // THE REAL METHOD SHOULD CHECK IF THE SECTOR IS VALID
         switch (direction) {
             case 1:
-                if (this.position.x + 1 > 9) {
+                if (this.position.getI() + 1 > 9) {
                     return false;
                 }
                 break;
             case 2:
-                if (this.position.x - 1 < 0) {
+                if (this.position.getI() - 1 < 0) {
                     return false;
                 }
                 break;
             case 3:
-                if (this.position.y + 1 > 9) {
+                if (this.position.getJ() + 1 > 9) {
                     return false;
                 }
                 break;
             case 4:
-                if (this.position.y - 1 < 0) {
+                if (this.position.getJ() - 1 < 0) {
                     return false;
                 }
                 break;
