@@ -6,6 +6,7 @@ import Entities.*;
 import Entities.Beings.*;
 import Entities.Itens.*;
 import Board.Sector;
+import Entities.Beings.*;
 
 // class
 public class Board {
@@ -123,8 +124,7 @@ public class Board {
                     this.listaFakeNews.add(new F3(newCoordinate));
                     F3Quantity++;
                 }
-            } 
-            else
+            } else
                 i--;
         }
     }
@@ -170,19 +170,22 @@ public class Board {
         int j;
 
         // Check if it has the same coordinate as a restricted sector
-        for (j = 0; j < this.listaRestrictedSectors.size(); j++) 
-            if (coordinate.getI() == this.listaRestrictedSectors.get(j).getI() && coordinate.getJ() == this.listaRestrictedSectors.get(j).getJ()) 
+        for (j = 0; j < this.listaRestrictedSectors.size(); j++)
+            if (coordinate.getI() == this.listaRestrictedSectors.get(j).getI()
+                    && coordinate.getJ() == this.listaRestrictedSectors.get(j).getJ())
                 return true;
 
         // Check if it has the same coordinate as a fake news
-            for (j = 0; j < this.listaFakeNews.size(); j++) 
-                if (coordinate.getI() == this.listaFakeNews.get(j).getPosition().getI() && coordinate.getJ() == this.listaFakeNews.get(j).getPosition().getJ()) 
-                    return true;
+        for (j = 0; j < this.listaFakeNews.size(); j++)
+            if (coordinate.getI() == this.listaFakeNews.get(j).getPosition().getI()
+                    && coordinate.getJ() == this.listaFakeNews.get(j).getPosition().getJ())
+                return true;
 
         // And check if it has the same coordinate as an item
-            for (j = 0; j < this.listaItens.size(); j++) 
-                if (coordinate.getI() == this.listaItens.get(j).getPosition().getI() && coordinate.getJ() == this.listaItens.get(j).getPosition().getJ()) 
-                    return true;
+        for (j = 0; j < this.listaItens.size(); j++)
+            if (coordinate.getI() == this.listaItens.get(j).getPosition().getI()
+                    && coordinate.getJ() == this.listaItens.get(j).getPosition().getJ())
+                return true;
 
         // If it got here, means there's no repeated coordinate so far
         return false;
@@ -203,7 +206,8 @@ public class Board {
         // Verify if it is a FakeNews
         if (sectorState == "") {
             for (int x = 0; x < this.fakeNewsMax; x++) {
-                if (i == this.listaFakeNews.get(x).getPosition().getI() && j == this.listaFakeNews.get(x).getPosition().getJ()) {
+                if (i == this.listaFakeNews.get(x).getPosition().getI()
+                        && j == this.listaFakeNews.get(x).getPosition().getJ()) {
                     if (this.listaFakeNews.get(x) instanceof F1)
                         sectorState = "F1";
                     else if (this.listaFakeNews.get(x) instanceof F2)
@@ -219,9 +223,10 @@ public class Board {
         // Verify if it is an item
         if (sectorState == "") {
             for (int x = 0; x < this.itemMax; x++) {
-                if (i == this.listaItens.get(x).getPosition().getI() && j == this.listaItens.get(x).getPosition().getJ()) {
+                if (i == this.listaItens.get(x).getPosition().getI()
+                        && j == this.listaItens.get(x).getPosition().getJ()) {
                     if (this.listaItens.get(x) instanceof ItemBoato)
-                    sectorState = "Item Boato";
+                        sectorState = "Item Boato";
                     else if (this.listaItens.get(x) instanceof ItemDenunciar)
                         sectorState = "Item Denunciar";
                     else if (this.listaItens.get(x) instanceof ItemFugir)
@@ -233,7 +238,7 @@ public class Board {
             }
         }
 
-        // If it is none of the 4, them it assings the sector with 
+        // If it is none of the 4, them it assings the sector with
         // sectorState == NULL meaning there's nothing there
         this.board[i][j] = new Sector(i, j, sectorState);
     }
