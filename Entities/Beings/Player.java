@@ -38,7 +38,8 @@ public class Player extends Entity implements Movement {
         switch (keyCode) {
             case KeyEvent.VK_UP:
                 Coordinate positionToGo = new Coordinate(this.position.getI() - 1, this.position.getJ());
-                break;
+                if (positionToGo.Isvalid())
+                    break;
 
             default:
                 // TODO: show error message and try again
