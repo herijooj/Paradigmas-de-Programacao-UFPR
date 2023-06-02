@@ -23,14 +23,14 @@ public class Coordinate {
 
     public void setI(int i) {
         if (i < 0 || i > 9)
-            throw new IllegalArgumentException("I must be positive");
+            throw new IllegalArgumentException("I must be positive and less than 10");
         this.i = i;
         return;
     }
 
     public void setJ(int j) {
         if (j < 0 || j > 9)
-            throw new IllegalArgumentException("J must be positive");
+            throw new IllegalArgumentException("J must be positive and less than 10");
         this.j = j;
         return;
     }
@@ -68,5 +68,5 @@ public class Coordinate {
 
         return coordinate;
     }
-    
+
 }
