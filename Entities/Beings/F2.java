@@ -27,24 +27,35 @@ public class F2 extends FakeNews {
     public void move(KeyEvent e) {
         // goes up, down, left or right two positions randomly
         int direction = (int) Math.random() * 4 + 1;
-
-        // checks if the movement is valid, if not, tries again
-        while (!checkMovement(direction)) {
-            direction = (int) Math.random() * 4 + 1;
-        }
-
+        int newI, newJ;
         switch (direction) {
             case 1:
-                this.position.setI(this.position.getI() + 2);
+                newI = this.position.getI() + 2;
+                if (!checkMovement(newI, this.position.getJ()))
+                    this.setAlive(alive = false);
+                else
+                    this.position.setI(this.position.getI() + 2);
                 break;
             case 2:
-                this.position.setI(this.position.getI() - 2);
+                newI = this.position.getI() - 2;
+                if (!checkMovement(newI, this.position.getJ()))
+                    this.setAlive(alive = false);
+                else
+                    this.position.setI(this.position.getI() - 2);
                 break;
             case 3:
-                this.position.setJ(this.position.getJ() + 2);
+                newJ = this.position.getJ() + 2;
+                if (!checkMovement(this.position.getI(), newJ))
+                    this.setAlive(alive = false);
+                else
+                    this.position.setJ(this.position.getJ() + 2);
                 break;
             case 4:
-                this.position.setJ(this.position.getJ() - 2);
+                newJ = this.position.getJ() - 2;
+                if (!checkMovement(this.position.getI(), newJ))
+                    this.setAlive(alive = false);
+                else
+                    this.position.setJ(this.position.getJ() - 2);
                 break;
         }
     }
