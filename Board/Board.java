@@ -8,6 +8,9 @@ import Entities.Itens.*;
 import Board.Sector;
 import Entities.Beings.*;
 
+import java.awt.Component;
+import java.awt.event.KeyEvent;
+
 // class
 public class Board {
     private int size;
@@ -247,6 +250,23 @@ public class Board {
         // If it is none of the 4, them it assings the sector with
         // sectorState == NULL meaning there's nothing there
         this.board[i][j] = new Sector(i, j, sectorState);
+    }
+
+    public void moveFakeNews() {
+        // iterate through the list of fake news
+        // and move them
+
+        LinkedList<FakeNews> fakeNews = getFakeNews();
+
+        // calls the move method for each fake news
+        for (int i = 0; i < fakeNews.size(); i++) {
+            // passing a blank keyEvent because it's not used
+            // non-null component source and keyChar of ' ' because it's not used
+            Component source = new Component() {
+            };
+            KeyEvent e = new KeyEvent(source, 0, 0, 0, 0, ' ');
+            fakeNews.get(i).move(e);
+        }
     }
 
     public void drawBoard() {
