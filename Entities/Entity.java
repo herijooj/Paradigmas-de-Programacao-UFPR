@@ -5,19 +5,24 @@ public abstract class Entity {
 
     // attributes
     protected Coordinate position;
+    protected boolean alive = true;
     // the type can be handled by the class name
     // it is not necessary to have an attribute for it
     // it can be tested with instanceof
 
     // constructor
     public Entity(Coordinate position) {
-        this.position = new Coordinate(0, 0);  // Tava dando bug de inicializacao NULL
+        this.position = new Coordinate(0, 0); // Tava dando bug de inicializacao NULL
         this.setPosition(position);
     }
 
     // getters
     public Coordinate getPosition() {
         return this.position;
+    }
+
+    public boolean IsAlive() {
+        return this.alive;
     }
 
     // setters
@@ -29,6 +34,16 @@ public abstract class Entity {
         this.position.setJ(position.getJ());
     }
 
+    public void setAlive(boolean alive) {
+        this.alive = alive;
+    }
+
     // methods
-    public abstract void draw(); 
+    public abstract void draw();
+
+    public boolean checkMovement(int i, int j) {
+        if (i < 0 || i > 8 || j < 0 || j > 8)
+            return false;
+        return true;
+    }
 }
