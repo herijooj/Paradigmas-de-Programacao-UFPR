@@ -8,7 +8,7 @@ public class Sector {
     public Sector(int i, int j, String sectorState) {
         this.setI(i);
         this.setJ(j);
-        this.setSectorState(sectorState);
+        this.setSectorState(sectorState); // it can be ...
     }
 
     // getters
@@ -20,8 +20,7 @@ public class Sector {
         return this.j;
     }
 
-    public String getSectorState()
-    {
+    public String getSectorState() {
         return this.sectorState;
     }
 
@@ -40,8 +39,7 @@ public class Sector {
         return;
     }
 
-    public void setSectorState(String state)
-    {
+    public void setSectorState(String state) {
         this.sectorState = state;
     }
 
