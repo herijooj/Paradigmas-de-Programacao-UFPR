@@ -167,6 +167,10 @@ public class Board {
 
     // Helper method used to define the entities positions
     private boolean hasEqualCoordinate(Coordinate coordinate) {
+        // this method checks if the coordinate is already in use
+        // by another entity
+        // if it is, it returns true
+
         int j;
 
         // Check if it has the same coordinate as a restricted sector
@@ -206,8 +210,9 @@ public class Board {
         // Verify if it is a FakeNews
         if (sectorState == "") {
             for (int x = 0; x < this.fakeNewsMax; x++) {
-                if (i == this.listaFakeNews.get(x).getPosition().getI()
-                        && j == this.listaFakeNews.get(x).getPosition().getJ()) {
+                int iFakeNews = this.listaFakeNews.get(x).getPosition().getI();
+                int jFakeNews = this.listaFakeNews.get(x).getPosition().getJ();
+                if (i == iFakeNews && j == jFakeNews) {
                     if (this.listaFakeNews.get(x) instanceof F1)
                         sectorState = "F1";
                     else if (this.listaFakeNews.get(x) instanceof F2)
@@ -223,8 +228,9 @@ public class Board {
         // Verify if it is an item
         if (sectorState == "") {
             for (int x = 0; x < this.itemMax; x++) {
-                if (i == this.listaItens.get(x).getPosition().getI()
-                        && j == this.listaItens.get(x).getPosition().getJ()) {
+                int iItem = this.listaItens.get(x).getPosition().getI();
+                int jItem = this.listaItens.get(x).getPosition().getJ();
+                if (i == iItem && j == jItem) {
                     if (this.listaItens.get(x) instanceof ItemBoato)
                         sectorState = "Item Boato";
                     else if (this.listaItens.get(x) instanceof ItemDenunciar)
