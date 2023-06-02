@@ -22,15 +22,15 @@ public class Coordinate {
     // setters
 
     public void setI(int i) {
-        if (i < 0 || i > 9)
-            throw new IllegalArgumentException("I must be positive and less than 10");
+        // if (i < 0)
+        // throw new IllegalArgumentException("I must be positive and less than 10");
         this.i = i;
         return;
     }
 
     public void setJ(int j) {
-        if (j < 0 || j > 9)
-            throw new IllegalArgumentException("J must be positive and less than 10");
+        // if (j < 0)
+        // throw new IllegalArgumentException("J must be positive and less than 10");
         this.j = j;
         return;
     }

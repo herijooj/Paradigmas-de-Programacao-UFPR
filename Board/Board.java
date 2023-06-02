@@ -265,8 +265,10 @@ public class Board {
             Component source = new Component() {
             };
             KeyEvent e = new KeyEvent(source, 0, 0, 0, 0, ' ');
-            fakeNews.get(i).move(e);
+            fakeNews.get(i).move(e); // deverá retornar novas coordenadas da fake news, e logo em seguida atualizar
+                                     // a posição da fake news no tabuleiro
         }
+
     }
 
     public void drawBoard() {
