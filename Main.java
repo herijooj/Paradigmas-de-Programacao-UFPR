@@ -85,8 +85,7 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        String chosenAction;
-        int playerCount;
+        int playerCount, input;
 
         // title screen ------------------------------------
 
@@ -119,9 +118,6 @@ public class Main {
 
         // create board
         Board board = new Board(9, playerCount);
-        // create player
-
-        board.drawBoard();
 
         // 25 turns
         for (int i = 0; i < 25; i++) {
@@ -132,36 +128,65 @@ public class Main {
                 break;
             }
 
-            System.out.println("Turn " + (i + 1) + " of 25");
-
             // player turn ==================================
 
             // for loop between players
-            System.out.println("--> Player x turn");
+            for (int j = 0; j < playerCount; j++)
+            {
+                // Getting action
+                flushScreen();
+                System.out.println("Turn " + (i + 1) + " of 25");
+                board.drawBoard();
+                System.out.printf("--> Player %d turn\n", j + 1);
+                System.out.println("Press action desired [1 -> move / 2 -> use itens]");
 
-            sleep(2);
+                input = scanner.nextInt();
+                scanner.nextLine();
+                while (input < 1 || input > 2)
+                {
+                    flushScreen();
+                    System.out.println("Turn " + (i + 1) + " of 25");
+                    board.drawBoard();
+                    System.out.println("Invalid action! Press 1 to move, or 2 to use itens");
+                    input = scanner.nextInt();
+                    scanner.nextLine();
+                }
 
-            System.out.println("Press action desired [1 -> move / 2 -> use itens]");
-            chosenAction = scanner.nextLine();
-            flushScreen();
-            
-            board.drawBoard();
+                // Realizing action
+                flushScreen();
+                if (input == 1)
+                {
+                    System.out.println("Turn " + (i + 1) + " of 25");
+                    board.drawBoard();
+                    System.out.println("Choose a direction to move: [1 - DOWN], [2 - UP], [3 - RIGHT], [4 - LEFT]");
+                    input = scanner.nextInt();
+                    scanner.nextLine();
+                    while (input < 1 || input > 4)
+                    {
+                        flushScreen();
+                        System.out.println("Turn " + (i + 1) + " of 25");
+                        board.drawBoard();
+                        System.out.println("Invalid direction, type again:");
+                        System.out.println("[1 - DOWN], [2 - UP], [3 - RIGHT], [4 - LEFT]");
+                        input = scanner.nextInt();
+                        scanner.nextLine();
+                    }
 
-            System.out.println("Chosen action = " + chosenAction);
-        
-            sleep(2);
+                    board.movePlayer(j, input);
+                    flushScreen();
+                    System.out.println("Turn " + (i + 1) + " of 25");
+                    board.drawBoard();
+                    System.out.printf("Player J%d moved!\n", j + 1);
+                }
+
+                sleep(2);
+            }
 
             // EXECUTE ACTION /////////////
 
-            // After the action was exexuted
-            flushScreen();
-            board.drawBoard();
-            System.out.println("Action executed");
-
-            sleep(2);
-
             // Enemy turn ===================================
             flushScreen();
+            System.out.println("Turn " + (i + 1) + " of 25");
             board.drawBoard();
             System.out.println("--> Fake news turn");
 
@@ -170,6 +195,7 @@ public class Main {
             // Enemy movement
             board.moveFakeNews();
             flushScreen();
+            System.out.println("Turn " + (i + 1) + " of 25");
             board.drawBoard();
             System.out.println("--> Fake news moved");
 
@@ -177,8 +203,6 @@ public class Main {
 
             System.out.println("Press any key to continue the game...");
             scanner.nextLine();
-            flushScreen();
-            board.drawBoard();
         }
     }
 }
