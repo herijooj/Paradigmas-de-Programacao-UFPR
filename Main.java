@@ -118,7 +118,7 @@ public class Main {
         // game loop ---------------------------------------
 
         // create board
-        Board board = new Board(9);
+        Board board = new Board(9, playerCount);
         // create player
 
         board.drawBoard();
