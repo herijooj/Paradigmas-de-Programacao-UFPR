@@ -60,6 +60,21 @@ public class Main {
         }
     }
 
+    public static void sleep(int seconds) 
+    {
+         // Stops time for 1 secondd
+         try 
+         {
+             // in milliseconds
+             Thread.sleep(seconds * 1000);
+         }
+         catch (InterruptedException e) 
+         {
+             // Handle the exception if needed
+             e.printStackTrace();
+         }
+    }
+
     // function to clear screen
     public static void flushScreen() {
         System.out.print("\033[H\033[2J");
@@ -69,16 +84,35 @@ public class Main {
     // main function ====================================
     public static void main(String[] args) {
 
+        Scanner scanner = new Scanner(System.in);
         String chosenAction;
+        int playerCount;
 
         // title screen ------------------------------------
 
         flushScreen();
         titleScreen();
         System.out.println("Welcome to the game!");
-        System.out.println("Press any key to start...");
-        Scanner scanner = new Scanner(System.in);
-        scanner.nextLine();
+        System.out.println("Choose a number of players [1-4]");
+
+        playerCount = scanner.nextInt();
+        scanner.nextLine();  // clears the \n from the buffer
+
+        while (playerCount < 1 || playerCount > 4)
+        {
+            flushScreen();
+            titleScreen();
+            System.out.println("Invalid player Count, choose between 1 and 4.");
+
+            playerCount = scanner.nextInt();       
+            scanner.nextLine();  // clears the \n from the buffer     
+        }
+
+        flushScreen();
+        titleScreen();
+        System.out.println(playerCount + " player game starting...");
+
+        sleep(2);
         flushScreen();
 
         // game loop ---------------------------------------
@@ -101,31 +135,21 @@ public class Main {
             System.out.println("Turn " + (i + 1) + " of 25");
 
             // player turn ==================================
+
+            // for loop between players
             System.out.println("--> Player x turn");
 
-            // Stops time for 1 secondd
-            try {
-            // Pause the execution for 1 seconds (1000 milliseconds)
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                // Handle the exception if needed
-                e.printStackTrace();
-            }
+            sleep(2);
 
             System.out.println("Press action desired [1 -> move / 2 -> use itens]");
             chosenAction = scanner.nextLine();
             flushScreen();
+            
             board.drawBoard();
 
             System.out.println("Chosen action = " + chosenAction);
         
-            try {
-                // Pause the execution for 2 seconds (2000 milliseconds)
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                // Handle the exception if needed
-                e.printStackTrace();
-            }
+            sleep(2);
 
             // EXECUTE ACTION /////////////
 
@@ -134,26 +158,14 @@ public class Main {
             board.drawBoard();
             System.out.println("Action executed");
 
-             try {
-                // Pause the execution for 2 seconds (2000 milliseconds)
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                // Handle the exception if needed
-                e.printStackTrace();
-            }
+            sleep(2);
 
             // Enemy turn ===================================
             flushScreen();
             board.drawBoard();
             System.out.println("--> Fake news turn");
 
-            try {
-                // Pause the execution for 2 seconds (2000 milliseconds)
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                // Handle the exception if needed
-                e.printStackTrace();
-            }
+            sleep(2);
 
             // Enemy movement
             board.moveFakeNews();
@@ -161,13 +173,7 @@ public class Main {
             board.drawBoard();
             System.out.println("--> Fake news moved");
 
-            try {
-                // Pause the execution for 2 seconds (2000 milliseconds)
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                // Handle the exception if needed
-                e.printStackTrace();
-            }
+            sleep(2);
 
             System.out.println("Press any key to continue the game...");
             scanner.nextLine();
