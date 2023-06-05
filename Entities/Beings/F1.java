@@ -25,9 +25,8 @@ public class F1 extends FakeNews {
         System.out.print("F1");
     }
 
-    public void move(KeyEvent e) {
-        // goes up, down, left or right one position randomly
-        int direction = (int) (Math.random() * 4) + 1;
+    public void move(KeyEvent e, int direction) {
+
         int newI, newJ;
 
         //System.out.println("ccc");

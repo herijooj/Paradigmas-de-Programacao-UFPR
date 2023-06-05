@@ -32,19 +32,55 @@ public class Player extends Entity implements Movement {
         System.out.printf("F%d", this.playerNum);
     }
 
-    public void move(KeyEvent e) {
-        // check if the input was an arrow keyCode
-        int keyCode = e.getKeyCode();
-        switch (keyCode) {
-            case KeyEvent.VK_UP:
-                Coordinate positionToGo = new Coordinate(this.position.getI() - 1, this.position.getJ());
-                if (positionToGo.Isvalid())
-                    break;
-
-            default:
-                // TODO: show error message and try again
+    public void move(KeyEvent e, int direction) 
+    {
+        int newI, newJ;
+ 
+        switch (direction) {
+            // goes down
+            case 1:
+                newI = this.position.getI() + 1;
+                if (!checkMovement(newI, this.position.getJ()))
+                    this.setAlive(alive = false);
+                else
+                    this.position.setI(this.position.getI() + 1);
+                break;
+            // goes up
+            case 2:
+                newI = this.position.getI() - 1;
+                if (!checkMovement(newI, this.position.getJ()))
+                    this.setAlive(alive = false);
+                else
+                    this.position.setI(this.position.getI() - 1);
+                break;
+            // goes right
+            case 3:
+                newJ = this.position.getJ() + 1;
+                if (!checkMovement(this.position.getI(), newJ))
+                    this.setAlive(alive = false);
+                else
+                    this.position.setJ(this.position.getJ() + 1);
+                break;
+            // goes left
+            case 4:
+                newJ = this.position.getJ() - 1;
+                if (!checkMovement(this.position.getI(), newJ))
+                    this.setAlive(alive = false);
+                else
+                    this.position.setJ(this.position.getJ() - 1);
                 break;
         }
+    }
 
+    public String toString() 
+    {
+        if (this.playerNum == 1)
+            return "Player 1";
+        else if (this.playerNum == 2)
+            return "Player 2";
+        else if (this.playerNum == 3)
+            return "Player 3";
+        else
+            return "Player 4";
     }
 }
