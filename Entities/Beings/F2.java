@@ -29,7 +29,7 @@ public class F2 extends FakeNews {
         int direction = (int) Math.random() * 4 + 1;
         int newI, newJ;
         switch (direction) {
-            // goes two up
+            // goes two down
             case 1:
                 newI = this.position.getI() + 2;
                 if (!checkMovement(newI, this.position.getJ()))
@@ -37,7 +37,7 @@ public class F2 extends FakeNews {
                 else
                     this.position.setI(this.position.getI() + 2);
                 break;
-            // goes two down
+            // goes two up
             case 2:
                 newI = this.position.getI() - 2;
                 if (!checkMovement(newI, this.position.getJ()))

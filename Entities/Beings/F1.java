@@ -31,7 +31,7 @@ public class F1 extends FakeNews {
         int newI, newJ;
 
         switch (direction) {
-            // goes up
+            // goes down
             case 1:
                 newI = this.position.getI() + 1;
                 if (!checkMovement(newI, this.position.getJ()))
@@ -39,7 +39,7 @@ public class F1 extends FakeNews {
                 else
                     this.position.setI(this.position.getI() + 1);
                 break;
-            // goes down
+            // goes up
             case 2:
                 newI = this.position.getI() - 1;
                 if (!checkMovement(newI, this.position.getJ()))
