@@ -20,7 +20,7 @@ public class ItemLer extends ItemCharacteristics {
     // methods
     public void itemAbility() 
     {
-        // TODO
+        // escolhe um inimigo para deletar
     }
 
     public void draw()

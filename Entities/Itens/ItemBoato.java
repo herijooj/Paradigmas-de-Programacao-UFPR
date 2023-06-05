@@ -20,7 +20,7 @@ public class ItemBoato extends ItemCharacteristics {
     // methods
     public void itemAbility() 
     {
-        // TODO
+        // proximo turno de forma aleatoria
     }
 
     public void draw()

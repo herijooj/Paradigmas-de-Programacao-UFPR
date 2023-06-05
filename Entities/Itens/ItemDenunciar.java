@@ -20,7 +20,8 @@ public class ItemDenunciar extends ItemCharacteristics {
     // methods
     public void itemAbility() 
     {
-        // TODO
+        // deleta todos os inimigos ao redor do jogador
+        // recebe um vetor e checa a posição de cada inimigo
     }
 
     public void draw()
