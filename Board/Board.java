@@ -265,7 +265,7 @@ public class Board {
                     sectorState = "Player 1";
                 else if (this.listaPlayers.get(x).getPlayerNum() == 2)
                     sectorState = "Player 2";
-                else if (this.listaPlayers.get(x).getPlayerNum() == 2)
+                else if (this.listaPlayers.get(x).getPlayerNum() == 3)
                     sectorState = "Player 3";
                 else
                     sectorState = "Player 4";            
