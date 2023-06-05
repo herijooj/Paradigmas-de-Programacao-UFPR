@@ -27,12 +27,15 @@ public class F1 extends FakeNews {
 
     public void move(KeyEvent e) {
         // goes up, down, left or right one position randomly
-        int direction = (int) Math.random() * 4 + 1;
+        int direction = (int) (Math.random() * 4) + 1;
         int newI, newJ;
+
+        //System.out.println("ccc");
 
         switch (direction) {
             // goes down
             case 1:
+            System.out.println("DOWN");
                 newI = this.position.getI() + 1;
                 if (!checkMovement(newI, this.position.getJ()))
                     this.setAlive(alive = false);
@@ -41,6 +44,7 @@ public class F1 extends FakeNews {
                 break;
             // goes up
             case 2:
+            System.out.println("UP");
                 newI = this.position.getI() - 1;
                 if (!checkMovement(newI, this.position.getJ()))
                     this.setAlive(alive = false);
@@ -49,6 +53,7 @@ public class F1 extends FakeNews {
                 break;
             // goes right
             case 3:
+            System.out.println("RIGHT");
                 newJ = this.position.getJ() + 1;
                 if (!checkMovement(this.position.getI(), newJ))
                     this.setAlive(alive = false);
@@ -57,6 +62,7 @@ public class F1 extends FakeNews {
                 break;
             // goes left
             case 4:
+            System.out.println("LEFT");
                 newJ = this.position.getJ() - 1;
                 if (!checkMovement(this.position.getI(), newJ))
                     this.setAlive(alive = false);
