@@ -2,6 +2,7 @@ package Board;
 
 // imports 
 import java.util.*;
+import Cores.Cores;
 import Entities.*;
 import Entities.Beings.*;
 import Entities.Itens.*;
@@ -204,7 +205,9 @@ public class Board {
 
         // Verify if it is restricted
         for (int x = 0; x < this.restrictedSectorsMax; x++) {
-            if (i == this.listaRestrictedSectors.get(x).getI() && j == this.listaRestrictedSectors.get(x).getJ()) {
+            int iRestricted = this.listaRestrictedSectors.get(x).getI();
+            int jRestricted = this.listaRestrictedSectors.get(x).getJ();
+            if (i == iRestricted && j == jRestricted) {
                 sectorState = "Restricted";
                 break;
             }
@@ -265,8 +268,22 @@ public class Board {
             Component source = new Component() {
             };
             KeyEvent e = new KeyEvent(source, 0, 0, 0, 0, ' ');
+            // get the current coordinates
+            int iFakeNews = fakeNews.get(i).getPosition().getI();
+            int jFakeNews = fakeNews.get(i).getPosition().getJ();
+
+            // clear the old position
+            this.board[iFakeNews][jFakeNews].setSectorState("");
+
             fakeNews.get(i).move(e); // deverá retornar novas coordenadas da fake news, e logo em seguida atualizar
                                      // a posição da fake news no tabuleiro
+
+            // get the new coordinates
+            iFakeNews = fakeNews.get(i).getPosition().getI();
+            jFakeNews = fakeNews.get(i).getPosition().getJ();
+
+            // update the board
+            this.board[iFakeNews][jFakeNews].setSectorState(fakeNews.get(i).toString());
         }
 
     }
@@ -288,30 +305,30 @@ public class Board {
 
             // draw the first side of the board
             if (board[i][0].getSectorState() == "Restricted")
-                System.out.printf("| XX |");
+                System.out.printf("|" + Cores.ANSI_WHITE + " XX " + Cores.ANSI_RESET + "|");
             else if (board[i][0].getSectorState() == "F1")
-                System.out.printf("| F1 |");
+                System.out.printf("|" + Cores.ANSI_RED + " F1 " + Cores.ANSI_RESET + "|");
             else if (board[i][0].getSectorState() == "F2")
-                System.out.printf("| F2 |");
+                System.out.printf("|" + Cores.ANSI_RED + " F2 " + Cores.ANSI_RESET + "|");
             else if (board[i][0].getSectorState() == "F3")
-                System.out.printf("| F3 |");
+                System.out.printf("|" + Cores.ANSI_RED + " F3 " + Cores.ANSI_RESET + "|");
             else if (board[i][0].getSectorState().contains("Item"))
-                System.out.printf("| ?? |");
+                System.out.printf("|" + Cores.ANSI_YELLOW + " ?? " + Cores.ANSI_RESET + "|");
             else
                 System.out.printf("|    |");
 
             // draw the rest of the board
             for (int j = 1; j < size; j++) {
                 if (board[i][j].getSectorState() == "Restricted")
-                    System.out.printf(" XX |");
+                    System.out.printf(Cores.ANSI_WHITE + " XX " + Cores.ANSI_RESET + "|");
                 else if (board[i][j].getSectorState() == "F1")
-                    System.out.printf(" F1 |");
+                    System.out.printf(Cores.ANSI_RED + " F1 " + Cores.ANSI_RESET + "|");
                 else if (board[i][j].getSectorState() == "F2")
-                    System.out.printf(" F2 |");
+                    System.out.printf(Cores.ANSI_RED + " F2 " + Cores.ANSI_RESET + "|");
                 else if (board[i][j].getSectorState() == "F3")
-                    System.out.printf(" F3 |");
+                    System.out.printf(Cores.ANSI_RED + " F3 " + Cores.ANSI_RESET + "|");
                 else if (board[i][j].getSectorState().contains("Item"))
-                    System.out.printf(" ?? |");
+                    System.out.printf(Cores.ANSI_YELLOW + " ?? " + Cores.ANSI_RESET + "|");
                 else
                     System.out.printf("    |");
             }
