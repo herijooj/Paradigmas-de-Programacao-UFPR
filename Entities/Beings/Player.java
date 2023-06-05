@@ -15,12 +15,12 @@ public class Player extends Entity implements Movement {
     }
 
     // getters
-    int getPlayerNum() {
+    public int getPlayerNum() {
         return this.playerNum;
     }
 
     // setters
-    void setPlayerNum(int playerNum) {
+    public void setPlayerNum(int playerNum) {
         if (playerNum < 1 || playerNum > 4)
             throw new IllegalArgumentException("Player number must be between 1 and 4");
 
