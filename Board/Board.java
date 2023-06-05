@@ -49,6 +49,10 @@ public class Board {
         return this.board;
     }
 
+    public LinkedList<Player> getPlayers() {
+        return this.listaPlayers;
+    }
+
     public LinkedList<Coordinate> getRestrictedSectors() {
         return this.listaRestrictedSectors;
     }
@@ -337,8 +341,7 @@ public class Board {
         for (int i = 0; i < fakeNews.size(); i++) {
             // passing a blank keyEvent because it's not used
             // non-null component source and keyChar of ' ' because it's not used
-            Component source = new Component() {
-            };
+            Component source = new Component() {};
             KeyEvent e = new KeyEvent(source, 0, 0, 0, 0, ' ');
             // get the current coordinates
             int iFakeNews = fakeNews.get(i).getPosition().getI();
@@ -347,7 +350,10 @@ public class Board {
             // clear the old position
             this.board[iFakeNews][jFakeNews].setSectorState("");
 
-            fakeNews.get(i).move(e); // deverá retornar novas coordenadas da fake news, e logo em seguida atualizar
+            // goes up, down, left or right one position randomly
+            int direction = (int) (Math.random() * 4) + 1;
+
+            fakeNews.get(i).move(e, direction); // deverá retornar novas coordenadas da fake news, e logo em seguida atualizar
                                      // a posição da fake news no tabuleiro
 
             // get the new coordinates
@@ -357,7 +363,29 @@ public class Board {
             // update the board
             this.board[iFakeNews][jFakeNews].setSectorState(fakeNews.get(i).toString());
         }
+    }
 
+    public void movePlayer(int i, int direction)
+    {
+        LinkedList<Player> players = getPlayers();
+        Component source = new Component() {};
+        KeyEvent e = new KeyEvent(source, 0, 0, 0, 0, ' ');
+
+         // get the current coordinates
+         int iPlayer = players.get(i).getPosition().getI();
+         int jPlayer = players.get(i).getPosition().getJ();
+
+         //System.out.println(players.get(i).toString());
+         // clear the old position
+         this.board[iPlayer][jPlayer].setSectorState("");
+
+         players.get(i).move(e, direction);
+
+         // get the new coordinates
+         iPlayer = players.get(i).getPosition().getI();
+         jPlayer = players.get(i).getPosition().getJ();
+        // update the board
+        this.board[iPlayer][jPlayer].setSectorState(players.get(i).toString());
     }
 
     public void drawBoard() {
