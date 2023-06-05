@@ -108,9 +108,6 @@ public class Main {
 
             // Enemy movement
             board.moveFakeNews();
-
-            // the enemies will move randomly
-
             board.drawBoard();
 
             System.out.println("Turn " + (i + 1) + " of 25");
