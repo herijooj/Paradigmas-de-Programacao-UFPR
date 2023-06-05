@@ -29,44 +29,48 @@ public class F3 extends FakeNews {
         int direction = (int) Math.random() * 4 + 1;
         int newI, newJ;
         switch (direction) {
+            // goes down-right
             case 1:
                 newI = this.position.getI() + 1;
                 newJ = this.position.getJ() + 1;
                 if (!checkMovement(newI, newJ))
                     this.setAlive(alive = false);
                 else {
-                    this.position.setI(this.position.getI() + 1);
-                    this.position.setJ(this.position.getJ() + 1);
+                    this.position.setI(newI);
+                    this.position.setJ(newJ);
                 }
                 break;
+            // goes up-right
             case 2:
                 newI = this.position.getI() - 1;
                 newJ = this.position.getJ() + 1;
                 if (!checkMovement(newI, newJ))
                     this.setAlive(alive = false);
                 else {
-                    this.position.setI(this.position.getI() - 1);
-                    this.position.setJ(this.position.getJ() + 1);
+                    this.position.setI(newI);
+                    this.position.setJ(newJ);
                 }
                 break;
+            // goes down-left
             case 3:
                 newI = this.position.getI() + 1;
                 newJ = this.position.getJ() - 1;
                 if (!checkMovement(newI, newJ))
                     this.setAlive(alive = false);
                 else {
-                    this.position.setI(this.position.getI() + 1);
-                    this.position.setJ(this.position.getJ() - 1);
+                    this.position.setI(newI);
+                    this.position.setJ(newJ);
                 }
                 break;
+            // goes up-left
             case 4:
                 newI = this.position.getI() - 1;
                 newJ = this.position.getJ() - 1;
                 if (!checkMovement(newI, newJ))
                     this.setAlive(alive = false);
                 else {
-                    this.position.setI(this.position.getI() - 1);
-                    this.position.setJ(this.position.getJ() - 1);
+                    this.position.setI(newI);
+                    this.position.setJ(newJ);
                 }
                 break;
         }
