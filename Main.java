@@ -115,9 +115,10 @@ public class Main {
             System.out.println("Press action desired [1 -> move / 2 -> use itens]");
             chosenAction = scanner.nextLine();
             flushScreen();
+            board.drawBoard();
 
             System.out.println("Chosen action = " + chosenAction);
-            // Stops time for 2 seconds
+        
             try {
                 // Pause the execution for 2 seconds (2000 milliseconds)
                 Thread.sleep(2000);
@@ -126,9 +127,14 @@ public class Main {
                 e.printStackTrace();
             }
 
-            board.drawBoard();
+            // EXECUTE ACTION /////////////
 
-            try {
+            // After the action was exexuted
+            flushScreen();
+            board.drawBoard();
+            System.out.println("Action executed");
+
+             try {
                 // Pause the execution for 2 seconds (2000 milliseconds)
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
@@ -137,6 +143,8 @@ public class Main {
             }
 
             // Enemy turn ===================================
+            flushScreen();
+            board.drawBoard();
             System.out.println("--> Fake news turn");
 
             try {
@@ -149,7 +157,10 @@ public class Main {
 
             // Enemy movement
             board.moveFakeNews();
+            flushScreen();
             board.drawBoard();
+            System.out.println("--> Fake news moved");
+
             try {
                 // Pause the execution for 2 seconds (2000 milliseconds)
                 Thread.sleep(2000);
@@ -160,7 +171,8 @@ public class Main {
 
             System.out.println("Press any key to continue the game...");
             scanner.nextLine();
-            //board.drawBoard();
+            flushScreen();
+            board.drawBoard();
         }
     }
 }
