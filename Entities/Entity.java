@@ -41,7 +41,8 @@ public abstract class Entity {
     // methods
     public abstract void draw();
 
-    public boolean checkMovement(int i, int j) {
+    // checks two coordinates and returns true if they are inside the board
+    public boolean checkMovement(int i, int j) { // MUDAR NOME E USAR COORDENADAS
         if (i < 0 || i > 8 || j < 0 || j > 8)
             return false;
         return true;
