@@ -26,8 +26,13 @@ public class Board {
     private LinkedList<ItemCharacteristics> listaItens;
     private int itemMax = 2;
 
-    public Board(int size) {
+    private LinkedList<Player> listaPlayers;
+    //private int playerCount;
+
+    public Board(int size, int playerCount) {
         this.setSize(size);
+        //this.setPlayerCount(playerCount);
+        this.setPlayers(playerCount);
         this.setRestrictedSectorsMax(4);
         this.setRestrictedSectors();
         this.setFakeNews();
@@ -83,10 +88,53 @@ public class Board {
         return;
     }
 
-    public void setRestrictedSectors() {
+    public void setPlayers(int playerCount)
+    {
+        this.listaPlayers = new LinkedList<Player>();
         this.listaRestrictedSectors = new LinkedList<Coordinate>();
         this.listaFakeNews = new LinkedList<FakeNews>();
         this.listaItens = new LinkedList<ItemCharacteristics>();
+
+        // i = 0 -> (0, 4)
+        // i = 1 -> (4, 8)
+        // i = 2 -> (8, 4)
+        // i = 3 -> (4, 0)
+
+        int iC, jC, i;
+        Coordinate newCoordinate;
+        
+        for (i = 0; i < playerCount; i++) 
+        {
+            if (i == 0)
+            {
+                iC = 0;
+                jC = 4;
+            }
+            else if (i == 1)
+            {
+                iC = 4;
+                jC = 8;
+            }
+            else if (i == 2)
+            {
+                iC = 8;
+                jC = 4;
+            }
+            else 
+            {
+                iC = 4;
+                jC = 0;
+            }
+
+            newCoordinate = new Coordinate(iC, jC);
+
+            // Doesn't need to verify repeteated position for
+            // player, it's a static position and the first to be generated
+            this.listaPlayers.add(new Player(i + 1, newCoordinate));
+        }
+    }
+
+    public void setRestrictedSectors() {
 
         int iC, jC, i;
         Coordinate newCoordinate;
@@ -169,14 +217,18 @@ public class Board {
 
     // methods
 
-    // Helper method used to define the entities positions
+    // this method checks if the coordinate is already in use
+    // by another entity, if it is, it returns true
     private boolean hasEqualCoordinate(Coordinate coordinate) {
-        // this method checks if the coordinate is already in use
-        // by another entity
-        // if it is, it returns true
-
+        
         int j;
 
+        // Check if it has the same coordinate as a player
+        for (j = 0; j < this.listaPlayers.size(); j++)
+            if (coordinate.getI() == this.listaPlayers.get(j).getPosition().getI()
+                    && coordinate.getJ() == this.listaPlayers.get(j).getPosition().getJ())
+                return true;
+        
         // Check if it has the same coordinate as a restricted sector
         for (j = 0; j < this.listaRestrictedSectors.size(); j++)
             if (coordinate.getI() == this.listaRestrictedSectors.get(j).getI()
@@ -202,6 +254,26 @@ public class Board {
     // Helper method used in the setBoard method
     private void setEntityToSector(int i, int j) {
         String sectorState = "";
+
+        // Vefiry if it is a Player
+        for (int x = 0; x < this.listaPlayers.size(); x++) {
+            int iPlayer = this.listaPlayers.get(x).getPosition().getI();
+            int jPlayer = this.listaPlayers.get(x).getPosition().getJ();
+            if (i == iPlayer && j == jPlayer) 
+            {
+                if (this.listaPlayers.get(x).getPlayerNum() == 1)
+                    sectorState = "Player 1";
+                else if (this.listaPlayers.get(x).getPlayerNum() == 2)
+                    sectorState = "Player 2";
+                else if (this.listaPlayers.get(x).getPlayerNum() == 2)
+                    sectorState = "Player 3";
+                else
+                    sectorState = "Player 4";            
+
+                break;
+            }
+        }
+
 
         // Verify if it is restricted
         for (int x = 0; x < this.restrictedSectorsMax; x++) {
@@ -304,7 +376,15 @@ public class Board {
             }
 
             // draw the first side of the board
-            if (board[i][0].getSectorState() == "Restricted")
+            if (board[i][0].getSectorState() == "Player 1")
+                System.out.printf("|" + Cores.ANSI_GREEN + " J1 " + Cores.ANSI_RESET + "|");
+            else if (board[i][0].getSectorState() == "Player 2")
+                System.out.printf("|" + Cores.ANSI_GREEN + " J2 " + Cores.ANSI_RESET + "|");
+            else if (board[i][0].getSectorState() == "Player 3")
+                System.out.printf("|" + Cores.ANSI_GREEN + " J3 " + Cores.ANSI_RESET + "|");
+            else if (board[i][0].getSectorState() == "Player 4")
+                System.out.printf("|" + Cores.ANSI_GREEN + " J4 " + Cores.ANSI_RESET + "|");
+            else if (board[i][0].getSectorState() == "Restricted")
                 System.out.printf("|" + Cores.ANSI_WHITE + " XX " + Cores.ANSI_RESET + "|");
             else if (board[i][0].getSectorState() == "F1")
                 System.out.printf("|" + Cores.ANSI_RED + " F1 " + Cores.ANSI_RESET + "|");
@@ -319,7 +399,15 @@ public class Board {
 
             // draw the rest of the board
             for (int j = 1; j < size; j++) {
-                if (board[i][j].getSectorState() == "Restricted")
+                if (board[i][j].getSectorState() == "Player 1")
+                    System.out.printf(Cores.ANSI_GREEN + " J1 " + Cores.ANSI_RESET + "|");
+                else if (board[i][j].getSectorState() == "Player 2")
+                    System.out.printf(Cores.ANSI_GREEN + " J2 " + Cores.ANSI_RESET + "|");
+                else if (board[i][j].getSectorState() == "Player 3")
+                    System.out.printf(Cores.ANSI_GREEN + " J3 " + Cores.ANSI_RESET + "|");
+                else if (board[i][j].getSectorState() == "Player 4")
+                    System.out.printf(Cores.ANSI_GREEN + " J4 " + Cores.ANSI_RESET + "|");
+                else if (board[i][j].getSectorState() == "Restricted")
                     System.out.printf(Cores.ANSI_WHITE + " XX " + Cores.ANSI_RESET + "|");
                 else if (board[i][j].getSectorState() == "F1")
                     System.out.printf(Cores.ANSI_RED + " F1 " + Cores.ANSI_RESET + "|");
