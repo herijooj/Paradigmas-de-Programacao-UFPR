@@ -59,4 +59,8 @@ public class F2 extends FakeNews {
                 break;
         }
     }
+
+    public String toString() {
+        return "F2";
+    }
 }

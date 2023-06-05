@@ -71,4 +71,8 @@ public class F3 extends FakeNews {
                 break;
         }
     }
+
+    public String toString() {
+        return "F3";
+    }
 }
