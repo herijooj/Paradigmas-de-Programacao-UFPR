@@ -8,7 +8,7 @@ public class Sector {
     public Sector(int i, int j, String sectorState) {
         this.setI(i);
         this.setJ(j);
-        this.setSectorState(sectorState); // it can be ...
+        this.setSectorState(sectorState);
     }
 
     // getters
@@ -20,7 +20,13 @@ public class Sector {
         return this.j;
     }
 
+    /**
+     * it can be:
+     * 
+     * "Restricted", "Player 1..4", "F1..F3", "Item" or ""
+     */
     public String getSectorState() {
+        //
         return this.sectorState;
     }
 

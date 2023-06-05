@@ -3,6 +3,7 @@ package Entities.Beings;
 // imports
 import Entities.Coordinate;
 import java.awt.event.KeyEvent;
+import Board.Sector;
 
 // class
 public class F3 extends FakeNews {
@@ -24,7 +25,7 @@ public class F3 extends FakeNews {
         System.out.print("F3");
     }
 
-    public void move(KeyEvent e, int direction) {
+    public void move(Sector[][] board, KeyEvent e, int direction) {
 
         int newI, newJ;
         switch (direction) {
@@ -32,7 +33,7 @@ public class F3 extends FakeNews {
             case 1:
                 newI = this.position.getI() + 1;
                 newJ = this.position.getJ() + 1;
-                if (!checkMovement(newI, newJ))
+                if (!checkMovement(board, newI, newJ))
                     this.setAlive(alive = false);
                 else {
                     this.position.setI(newI);
@@ -43,7 +44,7 @@ public class F3 extends FakeNews {
             case 2:
                 newI = this.position.getI() - 1;
                 newJ = this.position.getJ() + 1;
-                if (!checkMovement(newI, newJ))
+                if (!checkMovement(board, newI, newJ))
                     this.setAlive(alive = false);
                 else {
                     this.position.setI(newI);
@@ -54,7 +55,7 @@ public class F3 extends FakeNews {
             case 3:
                 newI = this.position.getI() + 1;
                 newJ = this.position.getJ() - 1;
-                if (!checkMovement(newI, newJ))
+                if (!checkMovement(board, newI, newJ))
                     this.setAlive(alive = false);
                 else {
                     this.position.setI(newI);
@@ -65,7 +66,7 @@ public class F3 extends FakeNews {
             case 4:
                 newI = this.position.getI() - 1;
                 newJ = this.position.getJ() - 1;
-                if (!checkMovement(newI, newJ))
+                if (!checkMovement(board, newI, newJ))
                     this.setAlive(alive = false);
                 else {
                     this.position.setI(newI);

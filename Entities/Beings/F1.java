@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 
 // imports
 import Entities.Coordinate;
+import Board.Sector;
 
 // class
 public class F1 extends FakeNews {
@@ -25,45 +26,45 @@ public class F1 extends FakeNews {
         System.out.print("F1");
     }
 
-    public void move(KeyEvent e, int direction) {
+    public void move(Sector[][] board, KeyEvent e, int direction) {
 
         int newI, newJ;
 
-        //System.out.println("ccc");
+        // System.out.println("ccc");
 
         switch (direction) {
             // goes down
             case 1:
-            System.out.println("DOWN");
+                System.out.println("DOWN");
                 newI = this.position.getI() + 1;
-                if (!checkMovement(newI, this.position.getJ()))
+                if (!checkMovement(board, newI, this.position.getJ()))
                     this.setAlive(alive = false);
                 else
                     this.position.setI(this.position.getI() + 1);
                 break;
             // goes up
             case 2:
-            System.out.println("UP");
+                System.out.println("UP");
                 newI = this.position.getI() - 1;
-                if (!checkMovement(newI, this.position.getJ()))
+                if (!checkMovement(board, newI, this.position.getJ()))
                     this.setAlive(alive = false);
                 else
                     this.position.setI(this.position.getI() - 1);
                 break;
             // goes right
             case 3:
-            System.out.println("RIGHT");
+                System.out.println("RIGHT");
                 newJ = this.position.getJ() + 1;
-                if (!checkMovement(this.position.getI(), newJ))
+                if (!checkMovement(board, this.position.getI(), newJ))
                     this.setAlive(alive = false);
                 else
                     this.position.setJ(this.position.getJ() + 1);
                 break;
             // goes left
             case 4:
-            System.out.println("LEFT");
+                System.out.println("LEFT");
                 newJ = this.position.getJ() - 1;
-                if (!checkMovement(this.position.getI(), newJ))
+                if (!checkMovement(board, this.position.getI(), newJ))
                     this.setAlive(alive = false);
                 else
                     this.position.setJ(this.position.getJ() - 1);

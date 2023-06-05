@@ -27,11 +27,11 @@ public class Board {
     private int itemMax = 2;
 
     private LinkedList<Player> listaPlayers;
-    //private int playerCount;
+    // private int playerCount;
 
     public Board(int size, int playerCount) {
         this.setSize(size);
-        //this.setPlayerCount(playerCount);
+        // this.setPlayerCount(playerCount);
         this.setPlayers(playerCount);
         this.setRestrictedSectorsMax(4);
         this.setRestrictedSectors();
@@ -92,8 +92,7 @@ public class Board {
         return;
     }
 
-    public void setPlayers(int playerCount)
-    {
+    public void setPlayers(int playerCount) {
         this.listaPlayers = new LinkedList<Player>();
         this.listaRestrictedSectors = new LinkedList<Coordinate>();
         this.listaFakeNews = new LinkedList<FakeNews>();
@@ -106,26 +105,18 @@ public class Board {
 
         int iC, jC, i;
         Coordinate newCoordinate;
-        
-        for (i = 0; i < playerCount; i++) 
-        {
-            if (i == 0)
-            {
+
+        for (i = 0; i < playerCount; i++) {
+            if (i == 0) {
                 iC = 0;
                 jC = 4;
-            }
-            else if (i == 1)
-            {
+            } else if (i == 1) {
                 iC = 4;
                 jC = 8;
-            }
-            else if (i == 2)
-            {
+            } else if (i == 2) {
                 iC = 8;
                 jC = 4;
-            }
-            else 
-            {
+            } else {
                 iC = 4;
                 jC = 0;
             }
@@ -224,7 +215,7 @@ public class Board {
     // this method checks if the coordinate is already in use
     // by another entity, if it is, it returns true
     private boolean hasEqualCoordinate(Coordinate coordinate) {
-        
+
         int j;
 
         // Check if it has the same coordinate as a player
@@ -232,7 +223,7 @@ public class Board {
             if (coordinate.getI() == this.listaPlayers.get(j).getPosition().getI()
                     && coordinate.getJ() == this.listaPlayers.get(j).getPosition().getJ())
                 return true;
-        
+
         // Check if it has the same coordinate as a restricted sector
         for (j = 0; j < this.listaRestrictedSectors.size(); j++)
             if (coordinate.getI() == this.listaRestrictedSectors.get(j).getI()
@@ -263,8 +254,7 @@ public class Board {
         for (int x = 0; x < this.listaPlayers.size(); x++) {
             int iPlayer = this.listaPlayers.get(x).getPosition().getI();
             int jPlayer = this.listaPlayers.get(x).getPosition().getJ();
-            if (i == iPlayer && j == jPlayer) 
-            {
+            if (i == iPlayer && j == jPlayer) {
                 if (this.listaPlayers.get(x).getPlayerNum() == 1)
                     sectorState = "Player 1";
                 else if (this.listaPlayers.get(x).getPlayerNum() == 2)
@@ -272,12 +262,11 @@ public class Board {
                 else if (this.listaPlayers.get(x).getPlayerNum() == 3)
                     sectorState = "Player 3";
                 else
-                    sectorState = "Player 4";            
+                    sectorState = "Player 4";
 
                 break;
             }
         }
-
 
         // Verify if it is restricted
         for (int x = 0; x < this.restrictedSectorsMax; x++) {
@@ -341,7 +330,8 @@ public class Board {
         for (int i = 0; i < fakeNews.size(); i++) {
             // passing a blank keyEvent because it's not used
             // non-null component source and keyChar of ' ' because it's not used
-            Component source = new Component() {};
+            Component source = new Component() {
+            };
             KeyEvent e = new KeyEvent(source, 0, 0, 0, 0, ' ');
             // get the current coordinates
             int iFakeNews = fakeNews.get(i).getPosition().getI();
@@ -353,8 +343,9 @@ public class Board {
             // goes up, down, left or right one position randomly
             int direction = (int) (Math.random() * 4) + 1;
 
-            fakeNews.get(i).move(e, direction); // deverá retornar novas coordenadas da fake news, e logo em seguida atualizar
-                                     // a posição da fake news no tabuleiro
+            fakeNews.get(i).move(board, e, direction); // deverá retornar novas coordenadas da fake news, e logo em
+                                                       // seguida atualizar
+            // a posição da fake news no tabuleiro
 
             // get the new coordinates
             iFakeNews = fakeNews.get(i).getPosition().getI();
@@ -365,25 +356,25 @@ public class Board {
         }
     }
 
-    public void movePlayer(int i, int direction)
-    {
+    public void movePlayer(int i, int direction) {
         LinkedList<Player> players = getPlayers();
-        Component source = new Component() {};
+        Component source = new Component() {
+        };
         KeyEvent e = new KeyEvent(source, 0, 0, 0, 0, ' ');
 
-         // get the current coordinates
-         int iPlayer = players.get(i).getPosition().getI();
-         int jPlayer = players.get(i).getPosition().getJ();
+        // get the current coordinates
+        int iPlayer = players.get(i).getPosition().getI();
+        int jPlayer = players.get(i).getPosition().getJ();
 
-         //System.out.println(players.get(i).toString());
-         // clear the old position
-         this.board[iPlayer][jPlayer].setSectorState("");
+        // System.out.println(players.get(i).toString());
+        // clear the old position
+        this.board[iPlayer][jPlayer].setSectorState("");
 
-         players.get(i).move(e, direction);
+        players.get(i).move(board, e, direction);
 
-         // get the new coordinates
-         iPlayer = players.get(i).getPosition().getI();
-         jPlayer = players.get(i).getPosition().getJ();
+        // get the new coordinates
+        iPlayer = players.get(i).getPosition().getI();
+        jPlayer = players.get(i).getPosition().getJ();
         // update the board
         this.board[iPlayer][jPlayer].setSectorState(players.get(i).toString());
     }

@@ -3,6 +3,7 @@ package Entities.Beings;
 import Entities.Coordinate;
 import Entities.Entity;
 import java.awt.event.KeyEvent;
+import Board.Sector;
 
 public class Player extends Entity implements Movement {
     // attributes
@@ -32,15 +33,14 @@ public class Player extends Entity implements Movement {
         System.out.printf("F%d", this.playerNum);
     }
 
-    public void move(KeyEvent e, int direction) 
-    {
+    public void move(Sector[][] board, KeyEvent e, int direction) {
         int newI, newJ;
- 
+
         switch (direction) {
             // goes down
             case 1:
                 newI = this.position.getI() + 1;
-                if (!checkMovement(newI, this.position.getJ()))
+                if (!checkMovement(board, newI, this.position.getJ()))
                     this.setAlive(alive = false);
                 else
                     this.position.setI(this.position.getI() + 1);
@@ -48,7 +48,7 @@ public class Player extends Entity implements Movement {
             // goes up
             case 2:
                 newI = this.position.getI() - 1;
-                if (!checkMovement(newI, this.position.getJ()))
+                if (!checkMovement(board, newI, this.position.getJ()))
                     this.setAlive(alive = false);
                 else
                     this.position.setI(this.position.getI() - 1);
@@ -56,7 +56,7 @@ public class Player extends Entity implements Movement {
             // goes right
             case 3:
                 newJ = this.position.getJ() + 1;
-                if (!checkMovement(this.position.getI(), newJ))
+                if (!checkMovement(board, this.position.getI(), newJ))
                     this.setAlive(alive = false);
                 else
                     this.position.setJ(this.position.getJ() + 1);
@@ -64,7 +64,7 @@ public class Player extends Entity implements Movement {
             // goes left
             case 4:
                 newJ = this.position.getJ() - 1;
-                if (!checkMovement(this.position.getI(), newJ))
+                if (!checkMovement(board, this.position.getI(), newJ))
                     this.setAlive(alive = false);
                 else
                     this.position.setJ(this.position.getJ() - 1);
@@ -72,8 +72,7 @@ public class Player extends Entity implements Movement {
         }
     }
 
-    public String toString() 
-    {
+    public String toString() {
         if (this.playerNum == 1)
             return "Player 1";
         else if (this.playerNum == 2)

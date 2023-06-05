@@ -1,5 +1,7 @@
 package Entities;
 
+import Board.Sector;
+
 // class
 public abstract class Entity {
 
@@ -42,8 +44,13 @@ public abstract class Entity {
     public abstract void draw();
 
     // checks two coordinates and returns true if they are inside the board
-    public boolean checkMovement(int i, int j) { // MUDAR NOME E USAR COORDENADAS
+    public boolean checkMovement(Sector[][] board, int i, int j) { // MUDAR NOME E USAR COORDENADAS
         if (i < 0 || i > 8 || j < 0 || j > 8)
+            return false;
+
+        // checking if the sector already has something other than a player or item
+        String sectorState = board[i][j].getSectorState();
+        if (sectorState == "Restricted" || sectorState == "F1" || sectorState == "F2" || sectorState == "F3")
             return false;
         return true;
     }
