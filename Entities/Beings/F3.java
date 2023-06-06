@@ -6,6 +6,7 @@ import java.util.*;
 
 import Entities.Coordinate;
 import Board.Sector;
+import Cores.Cores;
 
 // class
 public class F3 extends FakeNews {
@@ -36,6 +37,7 @@ public class F3 extends FakeNews {
                 newI = this.position.getI() + 1;
                 newJ = this.position.getJ() + 1;
                 if (!checkMovement(board, newI, newJ)) {
+                    System.out.println("A FakeNews has " + Cores.ANSI_GREEN + "Died!" + Cores.ANSI_RESET);
                     fakeNews.remove(this);
                     fakeNews.add(null);
                     return false;
@@ -49,6 +51,7 @@ public class F3 extends FakeNews {
                 newI = this.position.getI() - 1;
                 newJ = this.position.getJ() + 1;
                 if (!checkMovement(board, newI, newJ)) {
+                    System.out.println("A FakeNews has " + Cores.ANSI_GREEN + "Died!" + Cores.ANSI_RESET);
                     fakeNews.remove(this);
                     fakeNews.add(null);
                     return false;
@@ -62,6 +65,7 @@ public class F3 extends FakeNews {
                 newI = this.position.getI() + 1;
                 newJ = this.position.getJ() - 1;
                 if (!checkMovement(board, newI, newJ)) {
+                    System.out.println("A FakeNews has " + Cores.ANSI_GREEN + "Died!" + Cores.ANSI_RESET);
                     fakeNews.remove(this);
                     fakeNews.add(null);
                     return false;
@@ -75,6 +79,7 @@ public class F3 extends FakeNews {
                 newI = this.position.getI() - 1;
                 newJ = this.position.getJ() - 1;
                 if (!checkMovement(board, newI, newJ)) {
+                    System.out.println("A FakeNews has " + Cores.ANSI_GREEN + "Died!" + Cores.ANSI_RESET);
                     fakeNews.remove(this);
                     fakeNews.add(null);
                     return false;

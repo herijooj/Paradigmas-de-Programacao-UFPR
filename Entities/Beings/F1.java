@@ -6,6 +6,7 @@ import java.util.*;
 // imports
 import Entities.Coordinate;
 import Board.Sector;
+import Cores.Cores;
 
 // class
 public class F1 extends FakeNews {
@@ -31,14 +32,13 @@ public class F1 extends FakeNews {
 
         int newI, newJ;
 
-        // System.out.println("ccc");
-
         switch (direction) {
             // goes down
             case 1:
                 System.out.println("DOWN");
                 newI = this.position.getI() + 1;
                 if (!checkMovement(board, newI, this.position.getJ())) {
+                    System.out.println("A FakeNews has " + Cores.ANSI_GREEN + "Died!" + Cores.ANSI_RESET);
                     fakeNews.remove(this);
                     fakeNews.add(null);
                     return false;
@@ -51,6 +51,7 @@ public class F1 extends FakeNews {
                 System.out.println("UP");
                 newI = this.position.getI() - 1;
                 if (!checkMovement(board, newI, this.position.getJ())) {
+                    System.out.println("A FakeNews has " + Cores.ANSI_GREEN + "Died!" + Cores.ANSI_RESET);
                     fakeNews.remove(this);
                     fakeNews.add(null);
                     return false;
@@ -63,6 +64,7 @@ public class F1 extends FakeNews {
                 System.out.println("RIGHT");
                 newJ = this.position.getJ() + 1;
                 if (!checkMovement(board, this.position.getI(), newJ)) {
+                    System.out.println("A FakeNews has " + Cores.ANSI_GREEN + "Died!" + Cores.ANSI_RESET);
                     fakeNews.remove(this);
                     fakeNews.add(null);
                     return false;
@@ -75,6 +77,7 @@ public class F1 extends FakeNews {
                 System.out.println("LEFT");
                 newJ = this.position.getJ() - 1;
                 if (!checkMovement(board, this.position.getI(), newJ)) {
+                    System.out.println("A FakeNews has " + Cores.ANSI_GREEN + "Died!" + Cores.ANSI_RESET);
                     fakeNews.remove(this);
                     fakeNews.add(null);
                     return false;

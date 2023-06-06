@@ -7,6 +7,7 @@ import java.util.*;
 import Entities.Coordinate;
 import Entities.Entity;
 import Board.Sector;
+import Cores.Cores;
 
 public class Player extends Entity {
     // attributes
@@ -61,6 +62,7 @@ public class Player extends Entity {
                 newI = this.position.getI() + 1;
                 if (!checkMovement(board, newI, this.position.getJ())) {
                     // substitute player for NULL
+                    System.out.println("A Player has " + Cores.ANSI_RED + "Died!" + Cores.ANSI_RESET);
                     players.remove(this);
                     players.add(null);
                     return false;
@@ -72,6 +74,7 @@ public class Player extends Entity {
             case 2:
                 newI = this.position.getI() - 1;
                 if (!checkMovement(board, newI, this.position.getJ())) {
+                    System.out.println("A Player has " + Cores.ANSI_RED + "Died!" + Cores.ANSI_RESET);
                     players.remove(this);
                     players.add(null);
                     return false;
@@ -83,6 +86,7 @@ public class Player extends Entity {
             case 3:
                 newJ = this.position.getJ() + 1;
                 if (!checkMovement(board, this.position.getI(), newJ)) {
+                    System.out.println("A Player has " + Cores.ANSI_RED + "Died!" + Cores.ANSI_RESET);
                     players.remove(this);
                     players.add(null);
                     return false;
@@ -94,6 +98,7 @@ public class Player extends Entity {
             case 4:
                 newJ = this.position.getJ() - 1;
                 if (!checkMovement(board, this.position.getI(), newJ)) {
+                    System.out.println("A Player has " + Cores.ANSI_RED + "Died!" + Cores.ANSI_RESET);
                     players.remove(this);
                     players.add(null);
                     return false;
