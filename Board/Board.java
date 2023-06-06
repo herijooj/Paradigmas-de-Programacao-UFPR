@@ -3,14 +3,13 @@ package Board;
 // imports 
 import java.util.*;
 import Cores.Cores;
+import java.awt.Component;
+import java.awt.event.KeyEvent;
+
 import Entities.*;
 import Entities.Beings.*;
 import Entities.Itens.*;
 import Board.Sector;
-import Entities.Beings.*;
-
-import java.awt.Component;
-import java.awt.event.KeyEvent;
 
 // class
 public class Board {
@@ -354,9 +353,10 @@ public class Board {
             // goes up, down, left or right one position randomly
             int direction = (int) (Math.random() * 4) + 1;
 
-            fakeNews.get(i).move(board, e, direction); // deverá retornar novas coordenadas da fake news, e logo em
-                                                       // seguida atualizar
-                                                       // a posição da fake news no tabuleiro
+            fakeNews.get(i).move(board, fakeNews, e, direction); // deverá retornar novas coordenadas da fake news, e
+                                                                 // logo em
+            // seguida atualizar
+            // a posição da fake news no tabuleiro
 
             // get the new coordinates
             iFakeNews = fakeNews.get(i).getPosition().getI();
@@ -385,13 +385,15 @@ public class Board {
         // clear the old position
         this.board[iPlayer][jPlayer].setSectorState("");
 
-        players.get(i).move(board, e, direction);
+        boolean movementWorked = players.get(i).move(board, players, e, direction);
 
-        // get the new coordinates
-        iPlayer = players.get(i).getPosition().getI();
-        jPlayer = players.get(i).getPosition().getJ();
-        // update the board
-        this.board[iPlayer][jPlayer].setSectorState(players.get(i).toString());
+        if (movementWorked) {
+            // get the new coordinates
+            iPlayer = players.get(i).getPosition().getI();
+            jPlayer = players.get(i).getPosition().getJ();
+            // update the board
+            this.board[iPlayer][jPlayer].setSectorState(players.get(i).toString());
+        }
     }
 
     /**
@@ -400,7 +402,8 @@ public class Board {
     public void drawBoard() {
         size = this.getSize();
         board = this.getBoard();
-
+        LinkedList<Player> players = getPlayers();
+        LinkedList<FakeNews> fakeNews = getFakeNews();
         // draw the board
         for (int i = 0; i < size; i++) {
             // draw the top and bottom of the board
@@ -413,48 +416,48 @@ public class Board {
             }
 
             // draw the first side of the board
-            String currentState = board[i][0].getSectorState();
-            if (currentState == "Player 1")
+            String currentSectorState = board[i][0].getSectorState();
+            if (currentSectorState == "Player 1")
                 System.out.printf("|" + Cores.ANSI_GREEN + " J1 " + Cores.ANSI_RESET + "|");
-            else if (currentState == "Player 2")
+            else if (currentSectorState == "Player 2")
                 System.out.printf("|" + Cores.ANSI_GREEN + " J2 " + Cores.ANSI_RESET + "|");
-            else if (currentState == "Player 3")
+            else if (currentSectorState == "Player 3")
                 System.out.printf("|" + Cores.ANSI_GREEN + " J3 " + Cores.ANSI_RESET + "|");
-            else if (currentState == "Player 4")
+            else if (currentSectorState == "Player 4")
                 System.out.printf("|" + Cores.ANSI_GREEN + " J4 " + Cores.ANSI_RESET + "|");
-            else if (currentState == "Restricted")
+            else if (currentSectorState == "Restricted")
                 System.out.printf("|" + Cores.ANSI_WHITE + " XX " + Cores.ANSI_RESET + "|");
-            else if (currentState == "F1")
+            else if (currentSectorState == "F1")
                 System.out.printf("|" + Cores.ANSI_RED + " F1 " + Cores.ANSI_RESET + "|");
-            else if (currentState == "F2")
+            else if (currentSectorState == "F2")
                 System.out.printf("|" + Cores.ANSI_RED + " F2 " + Cores.ANSI_RESET + "|");
-            else if (currentState == "F3")
+            else if (currentSectorState == "F3")
                 System.out.printf("|" + Cores.ANSI_RED + " F3 " + Cores.ANSI_RESET + "|");
-            else if (currentState.contains("Item"))
+            else if (currentSectorState.contains("Item"))
                 System.out.printf("|" + Cores.ANSI_YELLOW + " ?? " + Cores.ANSI_RESET + "|");
             else
                 System.out.printf("|    |");
 
             // draw the rest of the board
             for (int j = 1; j < size; j++) {
-                currentState = board[i][j].getSectorState();
-                if (currentState == "Player 1")
+                currentSectorState = board[i][j].getSectorState();
+                if (currentSectorState == "Player 1")
                     System.out.printf(Cores.ANSI_GREEN + " J1 " + Cores.ANSI_RESET + "|");
-                else if (currentState == "Player 2")
+                else if (currentSectorState == "Player 2")
                     System.out.printf(Cores.ANSI_GREEN + " J2 " + Cores.ANSI_RESET + "|");
-                else if (currentState == "Player 3")
+                else if (currentSectorState == "Player 3")
                     System.out.printf(Cores.ANSI_GREEN + " J3 " + Cores.ANSI_RESET + "|");
-                else if (currentState == "Player 4")
+                else if (currentSectorState == "Player 4")
                     System.out.printf(Cores.ANSI_GREEN + " J4 " + Cores.ANSI_RESET + "|");
-                else if (currentState == "Restricted")
+                else if (currentSectorState == "Restricted")
                     System.out.printf(Cores.ANSI_WHITE + " XX " + Cores.ANSI_RESET + "|");
-                else if (currentState == "F1")
+                else if (currentSectorState == "F1")
                     System.out.printf(Cores.ANSI_RED + " F1 " + Cores.ANSI_RESET + "|");
-                else if (currentState == "F2")
+                else if (currentSectorState == "F2")
                     System.out.printf(Cores.ANSI_RED + " F2 " + Cores.ANSI_RESET + "|");
-                else if (currentState == "F3")
+                else if (currentSectorState == "F3")
                     System.out.printf(Cores.ANSI_RED + " F3 " + Cores.ANSI_RESET + "|");
-                else if (currentState.contains("Item"))
+                else if (currentSectorState.contains("Item"))
                     System.out.printf(Cores.ANSI_YELLOW + " ?? " + Cores.ANSI_RESET + "|");
                 else
                     System.out.printf("    |");
