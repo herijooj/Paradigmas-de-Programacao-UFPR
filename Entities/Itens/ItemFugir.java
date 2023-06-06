@@ -20,6 +20,7 @@ public class ItemFugir extends ItemCharacteristics {
     // setters
 
     // methods
+    /*
     public void itemAbility(Sector[][] board, Player player) {
         // Move o jogador para uma posição da E/S
         Scanner input = new Scanner(System.in);
@@ -28,12 +29,24 @@ public class ItemFugir extends ItemCharacteristics {
         int i = input.nextInt();
         int j = input.nextInt();
 
-        player.move(board, i, j);
+        //player.move(board, i, j);
 
         input.close();
     }
+    */
 
     public void draw() {
         // TODO
+    }
+
+    public void itemAbility() 
+    {
+        // deleta todos os inimigos ao redor do jogador
+        // recebe um vetor e checa a posição de cada inimigo
+    }
+
+    public String toString() 
+    {
+        return "Item Fugir";
     }
 }
