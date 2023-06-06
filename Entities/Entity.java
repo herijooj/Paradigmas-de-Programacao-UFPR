@@ -43,7 +43,12 @@ public abstract class Entity {
     // methods
     public abstract void draw();
 
-    // checks two coordinates and returns true if they are inside the board
+    /**
+     * Check if a Beign can move to a certain position
+     * 
+     * 
+     * Returns: true if it can move, false otherwise
+     **/
     public boolean checkMovement(Sector[][] board, int i, int j) { // MUDAR NOME E USAR COORDENADAS
         if (i < 0 || i > 8 || j < 0 || j > 8)
             return false;

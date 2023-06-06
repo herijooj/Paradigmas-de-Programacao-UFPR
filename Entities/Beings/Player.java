@@ -1,11 +1,12 @@
 package Entities.Beings;
 
-import Entities.Coordinate;
-import Entities.Entity;
 import Entities.Itens.*;
 import java.awt.event.KeyEvent;
-import Board.Sector;
 import java.util.*;
+
+import Entities.Coordinate;
+import Entities.Entity;
+import Board.Sector;
 
 public class Player extends Entity implements Movement {
     // attributes
@@ -25,8 +26,7 @@ public class Player extends Entity implements Movement {
         return this.playerNum;
     }
 
-    public LinkedList<ItemCharacteristics> getInventory()
-    {
+    public LinkedList<ItemCharacteristics> getInventory() {
         return this.inventory;
     }
 
@@ -38,8 +38,7 @@ public class Player extends Entity implements Movement {
         this.playerNum = playerNum;
     }
 
-    public void setInventory()
-    {
+    public void setInventory() {
         this.inventory = new LinkedList<ItemCharacteristics>();
     }
 
@@ -48,11 +47,10 @@ public class Player extends Entity implements Movement {
         System.out.printf("F%d", this.playerNum);
     }
 
-
     // public boolean addItems()
-    //{
+    // {
 
-    //}
+    // }
 
     public void move(Sector[][] board, KeyEvent e, int direction) {
         int newI, newJ;

@@ -61,19 +61,15 @@ public class Main {
         }
     }
 
-    public static void sleep(int seconds) 
-    {
-         // Stops time for 1 secondd
-         try 
-         {
-             // in milliseconds
-             Thread.sleep(seconds * 1000);
-         }
-         catch (InterruptedException e) 
-         {
-             // Handle the exception if needed
-             e.printStackTrace();
-         }
+    public static void sleep(int seconds) {
+        // Stops time for 1 secondd
+        try {
+            // in milliseconds
+            Thread.sleep(seconds * 1000);
+        } catch (InterruptedException e) {
+            // Handle the exception if needed
+            e.printStackTrace();
+        }
     }
 
     // function to clear screen
@@ -97,16 +93,15 @@ public class Main {
         System.out.println("Choose a number of players [1-4]");
 
         playerCount = scanner.nextInt();
-        scanner.nextLine();  // clears the \n from the buffer
+        scanner.nextLine(); // clears the \n from the buffer
 
-        while (playerCount < 1 || playerCount > 4)
-        {
+        while (playerCount < 1 || playerCount > 4) {
             flushScreen();
             titleScreen();
             System.out.println("Invalid player Count, choose between 1 and 4.");
 
-            playerCount = scanner.nextInt();       
-            scanner.nextLine();  // clears the \n from the buffer     
+            playerCount = scanner.nextInt();
+            scanner.nextLine(); // clears the \n from the buffer
         }
 
         flushScreen();
@@ -133,11 +128,9 @@ public class Main {
             // player turn ==================================
 
             // for loop between players
-            for (int j = 0; j < playerCount; j++)
-            {
+            for (int j = 0; j < playerCount; j++) {
                 // Getting action
-                if (!itemUsed)
-                { 
+                if (!itemUsed) {
                     flushScreen();
                     System.out.println("Turn " + (i + 1) + " of 25");
                     board.drawBoard();
@@ -146,8 +139,9 @@ public class Main {
 
                     input = scanner.nextInt();
                     scanner.nextLine();
-                    while (input < 1 || input > 2)
-                    {
+
+                    // input validation
+                    while (input < 1 || input > 2) {
                         flushScreen();
                         System.out.println("Turn " + (i + 1) + " of 25");
                         board.drawBoard();
@@ -156,8 +150,7 @@ public class Main {
                         scanner.nextLine();
                     }
 
-                    if (input == 2)
-                    {
+                    if (input == 2) {
                         flushScreen();
                         System.out.println("Turn " + (i + 1) + " of 25");
                         board.drawBoard();
@@ -166,8 +159,7 @@ public class Main {
                         input = scanner.nextInt();
                         scanner.nextLine();
 
-                        while (input < 0 || input > inventorySize && input != 5)
-                        {
+                        while (input < 0 || input > inventorySize && input != 5) {
                             flushScreen();
                             System.out.println("Turn " + (i + 1) + " of 25");
                             board.drawBoard();
@@ -178,31 +170,29 @@ public class Main {
                             scanner.nextLine();
                         }
 
-                        if (input > 0 && input < 5)
-                        {
+                        if (input > 0 && input < 5) {
                             // USE ITEM --------------------
                             flushScreen();
                             System.out.println("Turn " + (i + 1) + " of 25");
                             board.drawBoard();
                             System.out.println("Item used!");
                             itemUsed = true;
-                        }
-                        else 
+                        } else
                             itemUsed = false;
                         j--;
                     }
 
-                     // Realizing action
-                    else if (input == 1)
-                    {
+                    // Realizing action
+                    else if (input == 1) {
                         flushScreen();
                         System.out.println("Turn " + (i + 1) + " of 25");
                         board.drawBoard();
                         System.out.println("Choose a direction to move: [1 - DOWN], [2 - UP], [3 - RIGHT], [4 - LEFT]");
                         input = scanner.nextInt();
                         scanner.nextLine();
-                        while (input < 1 || input > 4)
-                        {
+
+                        // input validation
+                        while (input < 1 || input > 4) {
                             flushScreen();
                             System.out.println("Turn " + (i + 1) + " of 25");
                             board.drawBoard();
@@ -221,8 +211,7 @@ public class Main {
                 }
 
                 // If item was used, only thing player can do now is move
-                else
-                {
+                else {
                     flushScreen();
                     System.out.println("Turn " + (i + 1) + " of 25");
                     board.drawBoard();
@@ -230,8 +219,7 @@ public class Main {
                     System.out.println("Choose a direction to move: [1 - DOWN], [2 - UP], [3 - RIGHT], [4 - LEFT]");
                     input = scanner.nextInt();
                     scanner.nextLine();
-                    while (input < 1 || input > 4)
-                    {
+                    while (input < 1 || input > 4) {
                         flushScreen();
                         System.out.println("Turn " + (i + 1) + " of 25");
                         board.drawBoard();
