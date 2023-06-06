@@ -14,6 +14,8 @@ import java.awt.event.KeyEvent;
 
 // class
 public class Board {
+
+    // attributes
     private int size;
     private Sector[][] board;
 
@@ -29,6 +31,7 @@ public class Board {
     private LinkedList<Player> listaPlayers;
     // private int playerCount;
 
+    // constructor
     public Board(int size, int playerCount) {
         this.setSize(size);
         // this.setPlayerCount(playerCount);
@@ -345,7 +348,7 @@ public class Board {
 
             fakeNews.get(i).move(board, e, direction); // deverá retornar novas coordenadas da fake news, e logo em
                                                        // seguida atualizar
-            // a posição da fake news no tabuleiro
+                                                       // a posição da fake news no tabuleiro
 
             // get the new coordinates
             iFakeNews = fakeNews.get(i).getPosition().getI();

@@ -1,10 +1,13 @@
 package Board;
 
 public class Sector {
+    
+    // attributes
     private int i;
     private int j;
     private String sectorState;
 
+    // constructors
     public Sector(int i, int j, String sectorState) {
         this.setI(i);
         this.setJ(j);
@@ -26,7 +29,6 @@ public class Sector {
      * "Restricted", "Player 1..4", "F1..F3", "Item" or ""
      */
     public String getSectorState() {
-        //
         return this.sectorState;
     }
 
