@@ -469,4 +469,28 @@ public class Board {
 
         }
     }
+
+    /*
+     * Function to draw the player inventory on screen,
+     * return player's inventory size
+     */
+    public int drawPlayerInventory(int playerNum)
+    {
+        int i;
+        Player player = listaPlayers.get(playerNum - 1);
+
+        if (player.getInventory().size() == 0)
+            System.out.println("Player " + playerNum + ", you have no items in your inventory, press 5 to return");    
+        else
+        {
+            System.out.println("Player " + playerNum + ", this is your inventory");
+            System.out.println("Choose the item you want to use, or 5 to return");
+            System.out.println("==================INVENTORY===================\n");
+            System.out.print("| ");
+            for (i = 0; i < player.getInventory().size(); i++)
+                System.out.print((i + 1) + " - " + player.getInventory().get(i).toString() + " |");
+        }
+
+        return player.getInventory().size();
+    }
 }
