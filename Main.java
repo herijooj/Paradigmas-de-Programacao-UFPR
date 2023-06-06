@@ -119,7 +119,7 @@ public class Main {
         // 25 turns
         for (int i = 0; i < 25; i++) {
             // if it is the last turn, game over
-            if (i == 24) {
+            if (i == 24 || board.getPlayers().size() == 0) {
                 flushScreen();
                 gameOver();// PASSIVO DE FAZER FACTORY METHOD, FICARA flushScreen("gameOver")
                 break;
@@ -130,6 +130,15 @@ public class Main {
             // for loop between players
             int playersQuantity = board.getPlayers().size();
             for (int j = 0; j < playersQuantity; j++) {
+                if (board.getPlayers().get(j) == null) {
+                    continue;
+                }
+
+                if (board.getFakeNews().size() == 0) {
+                    flushScreen();
+                    gameWin();
+                    break;
+                }
                 // Getting action
                 if (!itemUsed) {
                     flushScreen();
