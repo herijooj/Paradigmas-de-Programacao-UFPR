@@ -23,7 +23,7 @@ public abstract class Entity {
         return this.position;
     }
 
-    public boolean IsAlive() {
+    public boolean isAlive() {
         return this.alive;
     }
 
