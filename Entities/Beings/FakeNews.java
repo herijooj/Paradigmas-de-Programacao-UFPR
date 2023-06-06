@@ -23,7 +23,8 @@ public abstract class FakeNews extends Entity {
     // setters
 
     // methods
-    public void move(Sector[][] board, LinkedList<FakeNews> fakeNews, KeyEvent e, int direction) {
+    public boolean move(Sector[][] board, LinkedList<FakeNews> fakeNews, KeyEvent e, int direction) {
+        return false;
     }
     // checks if the movement is valid
 }

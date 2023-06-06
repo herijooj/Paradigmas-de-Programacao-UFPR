@@ -27,7 +27,7 @@ public class F1 extends FakeNews {
         System.out.print("F1");
     }
 
-    public void move(Sector[][] board, LinkedList<FakeNews> fakeNews, KeyEvent e, int direction) {
+    public boolean move(Sector[][] board, LinkedList<FakeNews> fakeNews, KeyEvent e, int direction) {
 
         int newI, newJ;
 
@@ -38,39 +38,52 @@ public class F1 extends FakeNews {
             case 1:
                 System.out.println("DOWN");
                 newI = this.position.getI() + 1;
-                if (!checkMovement(board, newI, this.position.getJ()))
+                if (!checkMovement(board, newI, this.position.getJ())) {
                     fakeNews.remove(this);
-                else
+                    fakeNews.add(null);
+                    return false;
+                } else {
                     this.position.setI(this.position.getI() + 1);
-                break;
-            // goes up
+                    return true;
+                }
+                // goes up
             case 2:
                 System.out.println("UP");
                 newI = this.position.getI() - 1;
-                if (!checkMovement(board, newI, this.position.getJ()))
+                if (!checkMovement(board, newI, this.position.getJ())) {
                     fakeNews.remove(this);
-                else
+                    fakeNews.add(null);
+                    return false;
+                } else {
                     this.position.setI(this.position.getI() - 1);
-                break;
-            // goes right
+                    return true;
+                }
+                // goes right
             case 3:
                 System.out.println("RIGHT");
                 newJ = this.position.getJ() + 1;
-                if (!checkMovement(board, this.position.getI(), newJ))
+                if (!checkMovement(board, this.position.getI(), newJ)) {
                     fakeNews.remove(this);
-                else
+                    fakeNews.add(null);
+                    return false;
+                } else {
                     this.position.setJ(this.position.getJ() + 1);
-                break;
-            // goes left
+                    return true;
+                }
+                // goes left
             case 4:
                 System.out.println("LEFT");
                 newJ = this.position.getJ() - 1;
-                if (!checkMovement(board, this.position.getI(), newJ))
+                if (!checkMovement(board, this.position.getI(), newJ)) {
                     fakeNews.remove(this);
-                else
+                    fakeNews.add(null);
+                    return false;
+                } else {
                     this.position.setJ(this.position.getJ() - 1);
-                break;
+                    return true;
+                }
         }
+        return false;
     }
 
     public String toString() {
