@@ -8,7 +8,7 @@ import Entities.Coordinate;
 import Entities.Entity;
 import Board.Sector;
 
-public class Player extends Entity implements Movement {
+public class Player extends Entity {
     // attributes
     private int playerNum;
     private LinkedList<ItemCharacteristics> inventory;
@@ -52,43 +52,52 @@ public class Player extends Entity implements Movement {
 
     // }
 
-    public void move(Sector[][] board, KeyEvent e, int direction) {
+    public boolean move(Sector[][] board, LinkedList<Player> players, KeyEvent e, int direction) {
         int newI, newJ;
 
         switch (direction) {
             // goes down
             case 1:
                 newI = this.position.getI() + 1;
-                if (!checkMovement(board, newI, this.position.getJ()))
-                    this.setAlive(alive = false);
-                else
+                if (!checkMovement(board, newI, this.position.getJ())) {
+                    players.remove(this);
+                    return false;
+                } else {
                     this.position.setI(this.position.getI() + 1);
-                break;
-            // goes up
+                    return true;
+                }
+                // goes up
             case 2:
                 newI = this.position.getI() - 1;
-                if (!checkMovement(board, newI, this.position.getJ()))
-                    this.setAlive(alive = false);
-                else
+                if (!checkMovement(board, newI, this.position.getJ())) {
+                    players.remove(this);
+                    return false;
+                } else {
                     this.position.setI(this.position.getI() - 1);
-                break;
-            // goes right
+                    return true;
+                }
+                // goes right
             case 3:
                 newJ = this.position.getJ() + 1;
-                if (!checkMovement(board, this.position.getI(), newJ))
-                    this.setAlive(alive = false);
-                else
+                if (!checkMovement(board, this.position.getI(), newJ)) {
+                    players.remove(this);
+                    return false;
+                } else {
                     this.position.setJ(this.position.getJ() + 1);
-                break;
-            // goes left
+                    return true;
+                }
+                // goes left
             case 4:
                 newJ = this.position.getJ() - 1;
-                if (!checkMovement(board, this.position.getI(), newJ))
-                    this.setAlive(alive = false);
-                else
+                if (!checkMovement(board, this.position.getI(), newJ)) {
+                    players.remove(this);
+                    return false;
+                } else {
                     this.position.setJ(this.position.getJ() - 1);
-                break;
+                    return true;
+                }
         }
+        return false;
     }
 
     public String toString() {
