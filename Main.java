@@ -97,7 +97,7 @@ public class Main {
 
         while (playerCount < 1 || playerCount > 4) {
             flushScreen();
-            titleScreen();
+            titleScreen(); // PASSIVO DE FAZER FACTORY METHOD, FICARA flushScreen("TitleScreen")
             System.out.println("Invalid player Count, choose between 1 and 4.");
 
             playerCount = scanner.nextInt();
@@ -121,14 +121,15 @@ public class Main {
             // if it is the last turn, game over
             if (i == 24) {
                 flushScreen();
-                gameOver();
+                gameOver();// PASSIVO DE FAZER FACTORY METHOD, FICARA flushScreen("gameOver")
                 break;
             }
 
             // player turn ==================================
 
             // for loop between players
-            for (int j = 0; j < playerCount; j++) {
+            int playersQuantity = board.getPlayers().size();
+            for (int j = 0; j < playersQuantity; j++) {
                 // Getting action
                 if (!itemUsed) {
                     flushScreen();
