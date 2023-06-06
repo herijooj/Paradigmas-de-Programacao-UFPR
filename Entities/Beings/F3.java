@@ -1,8 +1,10 @@
 package Entities.Beings;
 
 // imports
-import Entities.Coordinate;
 import java.awt.event.KeyEvent;
+import java.util.*;
+
+import Entities.Coordinate;
 import Board.Sector;
 
 // class
@@ -25,7 +27,7 @@ public class F3 extends FakeNews {
         System.out.print("F3");
     }
 
-    public void move(Sector[][] board, KeyEvent e, int direction) {
+    public void move(Sector[][] board, LinkedList<FakeNews> fakeNews, KeyEvent e, int direction) {
 
         int newI, newJ;
         switch (direction) {
@@ -34,7 +36,7 @@ public class F3 extends FakeNews {
                 newI = this.position.getI() + 1;
                 newJ = this.position.getJ() + 1;
                 if (!checkMovement(board, newI, newJ))
-                    this.setAlive(alive = false);
+                    fakeNews.remove(this);
                 else {
                     this.position.setI(newI);
                     this.position.setJ(newJ);
@@ -45,7 +47,7 @@ public class F3 extends FakeNews {
                 newI = this.position.getI() - 1;
                 newJ = this.position.getJ() + 1;
                 if (!checkMovement(board, newI, newJ))
-                    this.setAlive(alive = false);
+                    fakeNews.remove(this);
                 else {
                     this.position.setI(newI);
                     this.position.setJ(newJ);
@@ -56,7 +58,7 @@ public class F3 extends FakeNews {
                 newI = this.position.getI() + 1;
                 newJ = this.position.getJ() - 1;
                 if (!checkMovement(board, newI, newJ))
-                    this.setAlive(alive = false);
+                    fakeNews.remove(this);
                 else {
                     this.position.setI(newI);
                     this.position.setJ(newJ);
@@ -67,7 +69,7 @@ public class F3 extends FakeNews {
                 newI = this.position.getI() - 1;
                 newJ = this.position.getJ() - 1;
                 if (!checkMovement(board, newI, newJ))
-                    this.setAlive(alive = false);
+                    fakeNews.remove(this);
                 else {
                     this.position.setI(newI);
                     this.position.setJ(newJ);

@@ -1,6 +1,7 @@
 package Entities.Beings;
 
 import java.awt.event.KeyEvent;
+import java.util.*;
 
 // imports
 import Entities.Coordinate;
@@ -26,7 +27,7 @@ public class F1 extends FakeNews {
         System.out.print("F1");
     }
 
-    public void move(Sector[][] board, KeyEvent e, int direction) {
+    public void move(Sector[][] board, LinkedList<FakeNews> fakeNews, KeyEvent e, int direction) {
 
         int newI, newJ;
 
@@ -38,7 +39,7 @@ public class F1 extends FakeNews {
                 System.out.println("DOWN");
                 newI = this.position.getI() + 1;
                 if (!checkMovement(board, newI, this.position.getJ()))
-                    this.setAlive(alive = false);
+                    fakeNews.remove(this);
                 else
                     this.position.setI(this.position.getI() + 1);
                 break;
@@ -47,7 +48,7 @@ public class F1 extends FakeNews {
                 System.out.println("UP");
                 newI = this.position.getI() - 1;
                 if (!checkMovement(board, newI, this.position.getJ()))
-                    this.setAlive(alive = false);
+                    fakeNews.remove(this);
                 else
                     this.position.setI(this.position.getI() - 1);
                 break;
@@ -56,7 +57,7 @@ public class F1 extends FakeNews {
                 System.out.println("RIGHT");
                 newJ = this.position.getJ() + 1;
                 if (!checkMovement(board, this.position.getI(), newJ))
-                    this.setAlive(alive = false);
+                    fakeNews.remove(this);
                 else
                     this.position.setJ(this.position.getJ() + 1);
                 break;
@@ -65,7 +66,7 @@ public class F1 extends FakeNews {
                 System.out.println("LEFT");
                 newJ = this.position.getJ() - 1;
                 if (!checkMovement(board, this.position.getI(), newJ))
-                    this.setAlive(alive = false);
+                    fakeNews.remove(this);
                 else
                     this.position.setJ(this.position.getJ() - 1);
                 break;
