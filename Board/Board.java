@@ -338,6 +338,8 @@ public class Board {
 
         // calls the move method for each fake news
         for (int i = 0; i < fakeNews.size(); i++) {
+            if (fakeNews.get(i) == null)
+                continue;
             // passing a blank keyEvent because it's not used
             // non-null component source and keyChar of ' ' because it's not used
             Component source = new Component() {
@@ -353,17 +355,16 @@ public class Board {
             // goes up, down, left or right one position randomly
             int direction = (int) (Math.random() * 4) + 1;
 
-            fakeNews.get(i).move(board, fakeNews, e, direction); // deverá retornar novas coordenadas da fake news, e
-                                                                 // logo em
-            // seguida atualizar
-            // a posição da fake news no tabuleiro
+            boolean movementWorked = fakeNews.get(i).move(board, fakeNews, e, direction);
 
-            // get the new coordinates
-            iFakeNews = fakeNews.get(i).getPosition().getI();
-            jFakeNews = fakeNews.get(i).getPosition().getJ();
-
-            // update the board
-            this.board[iFakeNews][jFakeNews].setSectorState(fakeNews.get(i).toString());
+            // if the movement worked, update the board
+            if (movementWorked) {
+                // get the new coordinates
+                iFakeNews = fakeNews.get(i).getPosition().getI();
+                jFakeNews = fakeNews.get(i).getPosition().getJ();
+                // update the board
+                this.board[iFakeNews][jFakeNews].setSectorState(fakeNews.get(i).toString());
+            }
         }
     }
 
@@ -387,6 +388,7 @@ public class Board {
 
         boolean movementWorked = players.get(i).move(board, players, e, direction);
 
+        // if the movement worked, update the board
         if (movementWorked) {
             // get the new coordinates
             iPlayer = players.get(i).getPosition().getI();
