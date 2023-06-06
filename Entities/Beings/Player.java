@@ -2,22 +2,32 @@ package Entities.Beings;
 
 import Entities.Coordinate;
 import Entities.Entity;
+import Entities.Itens.*;
 import java.awt.event.KeyEvent;
 import Board.Sector;
+import java.util.*;
 
 public class Player extends Entity implements Movement {
     // attributes
     private int playerNum;
+    private LinkedList<ItemCharacteristics> inventory;
+    private int inventorySize = 4;
 
     // constructor
     public Player(int playerNum, Coordinate position) {
         super(position);
         this.setPlayerNum(playerNum);
+        this.setInventory();
     }
 
     // getters
     public int getPlayerNum() {
         return this.playerNum;
+    }
+
+    public LinkedList<ItemCharacteristics> getInventory()
+    {
+        return this.inventory;
     }
 
     // setters
@@ -28,10 +38,21 @@ public class Player extends Entity implements Movement {
         this.playerNum = playerNum;
     }
 
+    public void setInventory()
+    {
+        this.inventory = new LinkedList<ItemCharacteristics>();
+    }
+
     // methods
     public void draw() {
         System.out.printf("F%d", this.playerNum);
     }
+
+
+    // public boolean addItems()
+    //{
+
+    //}
 
     public void move(Sector[][] board, KeyEvent e, int direction) {
         int newI, newJ;
