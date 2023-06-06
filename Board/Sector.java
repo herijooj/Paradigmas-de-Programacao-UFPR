@@ -2,19 +2,19 @@ package Board;
 
 public class Sector {
     
-    // attributes
+    // attributes ====================================
     private int i;
     private int j;
     private String sectorState;
 
-    // constructors
+    // constructors ==================================
     public Sector(int i, int j, String sectorState) {
         this.setI(i);
         this.setJ(j);
         this.setSectorState(sectorState);
     }
 
-    // getters
+    // getters =======================================
     public int getI() {
         return this.i;
     }
@@ -25,14 +25,13 @@ public class Sector {
 
     /**
      * it can be:
-     * 
      * "Restricted", "Player 1..4", "F1..F3", "Item" or ""
      */
     public String getSectorState() {
         return this.sectorState;
     }
 
-    // setters
+    // setters =======================================
     public void setI(int i) {
         if (i < 0)
             throw new IllegalArgumentException("I must be positive");
@@ -51,7 +50,7 @@ public class Sector {
         this.sectorState = state;
     }
 
-    // methods
+    // methods =======================================
     public void draw() {
         return;
     }

@@ -15,7 +15,7 @@ import java.awt.event.KeyEvent;
 // class
 public class Board {
 
-    // attributes
+    // attributes =============================================
     private int size;
     private Sector[][] board;
 
@@ -31,7 +31,7 @@ public class Board {
     private LinkedList<Player> listaPlayers;
     // private int playerCount;
 
-    // constructor
+    // constructor ============================================
     public Board(int size, int playerCount) {
         this.setSize(size);
         // this.setPlayerCount(playerCount);
@@ -43,7 +43,7 @@ public class Board {
         this.setBoard();
     }
 
-    // getters
+    // getters ================================================
     public int getSize() {
         return this.size;
     }
@@ -80,7 +80,7 @@ public class Board {
         return this.itemMax;
     }
 
-    // setters
+    // setters =================================================
     public void setSize(int size) {
         if (size < 0)
             throw new IllegalArgumentException("Size must be positive");
@@ -213,10 +213,12 @@ public class Board {
                 setEntityToSector(i, j);
     }
 
-    // methods
+    // methods ==================================================================
 
-    // this method checks if the coordinate is already in use
-    // by another entity, if it is, it returns true
+    /*
+     * this method checks if the coordinate is already in use
+     * by another entity, if it is, it returns true
+     */
     private boolean hasEqualCoordinate(Coordinate coordinate) {
 
         int j;
@@ -249,7 +251,9 @@ public class Board {
         return false;
     }
 
-    // Helper method used in the setBoard method
+    /*
+     * Helper method used in the setBoard method
+     */
     private void setEntityToSector(int i, int j) {
         String sectorState = "";
 
@@ -323,6 +327,10 @@ public class Board {
         this.board[i][j] = new Sector(i, j, sectorState);
     }
 
+    /*
+     * This method is used to move the fake news
+     * it iterates through the list of fake news
+     */
     public void moveFakeNews() {
         // iterate through the list of fake news
         // and move them
@@ -359,6 +367,10 @@ public class Board {
         }
     }
 
+    /*
+     * This method is used to move the players
+     * it iterates through the list of players
+     */
     public void movePlayer(int i, int direction) {
         LinkedList<Player> players = getPlayers();
         Component source = new Component() {
@@ -382,6 +394,9 @@ public class Board {
         this.board[iPlayer][jPlayer].setSectorState(players.get(i).toString());
     }
 
+    /*
+     * This method is used to draw the board
+     */
     public void drawBoard() {
         size = this.getSize();
         board = this.getBoard();
