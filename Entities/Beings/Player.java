@@ -60,7 +60,9 @@ public class Player extends Entity {
             case 1:
                 newI = this.position.getI() + 1;
                 if (!checkMovement(board, newI, this.position.getJ())) {
+                    // substitute player for NULL
                     players.remove(this);
+                    players.add(null);
                     return false;
                 } else {
                     this.position.setI(this.position.getI() + 1);
@@ -71,6 +73,7 @@ public class Player extends Entity {
                 newI = this.position.getI() - 1;
                 if (!checkMovement(board, newI, this.position.getJ())) {
                     players.remove(this);
+                    players.add(null);
                     return false;
                 } else {
                     this.position.setI(this.position.getI() - 1);
@@ -81,6 +84,7 @@ public class Player extends Entity {
                 newJ = this.position.getJ() + 1;
                 if (!checkMovement(board, this.position.getI(), newJ)) {
                     players.remove(this);
+                    players.add(null);
                     return false;
                 } else {
                     this.position.setJ(this.position.getJ() + 1);
@@ -91,6 +95,7 @@ public class Player extends Entity {
                 newJ = this.position.getJ() - 1;
                 if (!checkMovement(board, this.position.getI(), newJ)) {
                     players.remove(this);
+                    players.add(null);
                     return false;
                 } else {
                     this.position.setJ(this.position.getJ() - 1);
