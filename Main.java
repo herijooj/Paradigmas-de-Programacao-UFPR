@@ -44,6 +44,8 @@ public class Main {
         for (int i = 0; i < pattern.length; i++) {
             System.out.println(pattern[i]);
         }
+        // exit program
+        System.exit(1);
     }
 
     // placeholder for game win
@@ -59,6 +61,9 @@ public class Main {
         for (int i = 0; i < pattern.length; i++) {
             System.out.println(pattern[i]);
         }
+        // exit program
+        System.exit(0);
+
     }
 
     public static void sleep(int seconds) {
@@ -130,14 +135,34 @@ public class Main {
             // for loop between players
             int playersQuantity = board.getPlayers().size();
             for (int j = 0; j < playersQuantity; j++) {
+
+                // if every player is null, game over
+                for (int k = 0; k < board.getPlayers().size(); k++) {
+                    if (board.getPlayers().get(k) != null) {
+                        break;
+                    }
+                    if (k == board.getPlayers().size() - 1) {
+                        flushScreen();
+                        gameOver();// PASSIVO DE FAZER FACTORY METHOD, FICARA flushScreen("gameWin")
+                        break;
+                    }
+                }
+
+                // if player is null, skip
                 if (board.getPlayers().get(j) == null) {
                     continue;
                 }
 
-                if (board.getFakeNews().size() == 0) {
-                    flushScreen();
-                    gameWin();
-                    break;
+                // if every fakeNews is null, game over
+                for (int k = 0; k < board.getFakeNews().size(); k++) {
+                    if (board.getFakeNews().get(k) != null) {
+                        break;
+                    }
+                    if (k == board.getFakeNews().size() - 1) {
+                        flushScreen();
+                        gameWin();// PASSIVO DE FAZER FACTORY METHOD, FICARA flushScreen("gameWin")
+                        break;
+                    }
                 }
                 // Getting action
                 if (!itemUsed) {
