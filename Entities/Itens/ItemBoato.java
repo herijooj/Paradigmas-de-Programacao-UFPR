@@ -27,4 +27,9 @@ public class ItemBoato extends ItemCharacteristics {
     {
         // TODO
     }
+
+    public String toString() 
+    {
+        return "Item Boato";
+    }
 }

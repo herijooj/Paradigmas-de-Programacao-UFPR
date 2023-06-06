@@ -27,4 +27,9 @@ public class ItemLer extends ItemCharacteristics {
     {
         // TODO
     }
+
+    public String toString() 
+    {
+        return "Item Ler";
+    }
 }

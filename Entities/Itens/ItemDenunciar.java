@@ -28,4 +28,9 @@ public class ItemDenunciar extends ItemCharacteristics {
     {
         // TODO
     }
+
+    public String toString() 
+    {
+        return "Item Denunciar";
+    }
 }
