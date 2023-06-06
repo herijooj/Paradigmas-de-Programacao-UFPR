@@ -48,13 +48,14 @@ public class Player extends Entity {
         System.out.printf("F%d", this.playerNum);
     }
 
-    // public boolean addItems()
-    // {
-
-    // }
+    public void addItem(ItemCharacteristics item)
+    {
+        this.inventory.add(item);
+    }
 
     public boolean move(Sector[][] board, LinkedList<Player> players, KeyEvent e, int direction) {
         int newI, newJ;
+        Coordinate position;
 
         switch (direction) {
             // goes down
@@ -67,6 +68,16 @@ public class Player extends Entity {
                     players.add(null);
                     return false;
                 } else {
+                    position = new Coordinate(newI, this.position.getJ());
+
+                    if (board[newI][this.position.getJ()].getSectorState() == "Item Boato")
+                        addItem(new ItemBoato(position));
+                    else if (board[newI][this.position.getJ()].getSectorState() == "Item Denunciar")
+                        addItem(new ItemDenunciar(position));
+                    else if (board[newI][this.position.getJ()].getSectorState() == "Item Fugir")
+                        addItem(new ItemFugir(position));
+                    else if (board[newI][this.position.getJ()].getSectorState() == "Item Ler")
+                        addItem(new ItemLer(position));
                     this.position.setI(this.position.getI() + 1);
                     return true;
                 }
@@ -79,6 +90,16 @@ public class Player extends Entity {
                     players.add(null);
                     return false;
                 } else {
+                    position = new Coordinate(newI, this.position.getJ());
+
+                    if (board[newI][this.position.getJ()].getSectorState() == "Item Boato")
+                        addItem(new ItemBoato(position));
+                    else if (board[newI][this.position.getJ()].getSectorState() == "Item Denunciar")
+                        addItem(new ItemDenunciar(position));
+                    else if (board[newI][this.position.getJ()].getSectorState() == "Item Fugir")
+                        addItem(new ItemFugir(position));
+                    else if (board[newI][this.position.getJ()].getSectorState() == "Item Ler")
+                        addItem(new ItemLer(position));
                     this.position.setI(this.position.getI() - 1);
                     return true;
                 }
@@ -91,6 +112,16 @@ public class Player extends Entity {
                     players.add(null);
                     return false;
                 } else {
+                    position = new Coordinate(this.getPosition().getI(), newJ);
+
+                    if (board[this.getPosition().getI()][newJ].getSectorState() == "Item Boato")
+                        addItem(new ItemBoato(position));
+                    else if (board[this.getPosition().getI()][newJ].getSectorState() == "Item Denunciar")
+                        addItem(new ItemDenunciar(position));
+                    else if (board[this.getPosition().getI()][newJ].getSectorState() == "Item Fugir")
+                        addItem(new ItemFugir(position));
+                    else if (board[this.getPosition().getI()][newJ].getSectorState() == "Item Ler")
+                        addItem(new ItemLer(position));
                     this.position.setJ(this.position.getJ() + 1);
                     return true;
                 }
@@ -103,6 +134,16 @@ public class Player extends Entity {
                     players.add(null);
                     return false;
                 } else {
+                    position = new Coordinate(this.getPosition().getI(), newJ);
+
+                    if (board[this.getPosition().getI()][newJ].getSectorState() == "Item Boato")
+                        addItem(new ItemBoato(position));
+                    else if (board[this.getPosition().getI()][newJ].getSectorState() == "Item Denunciar")
+                        addItem(new ItemDenunciar(position));
+                    else if (board[this.getPosition().getI()][newJ].getSectorState() == "Item Fugir")
+                        addItem(new ItemFugir(position));
+                    else if (board[this.getPosition().getI()][newJ].getSectorState() == "Item Ler")
+                        addItem(new ItemLer(position));
                     this.position.setJ(this.position.getJ() - 1);
                     return true;
                 }
