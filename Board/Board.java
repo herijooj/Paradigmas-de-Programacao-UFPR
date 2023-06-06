@@ -367,10 +367,10 @@ public class Board {
         }
     }
 
-    /*
+    /**
      * This method is used to move the players
      * it iterates through the list of players
-     */
+     **/
     public void movePlayer(int i, int direction) {
         LinkedList<Player> players = getPlayers();
         Component source = new Component() {
@@ -394,9 +394,9 @@ public class Board {
         this.board[iPlayer][jPlayer].setSectorState(players.get(i).toString());
     }
 
-    /*
+    /**
      * This method is used to draw the board
-     */
+     **/
     public void drawBoard() {
         size = this.getSize();
         board = this.getBoard();
@@ -413,46 +413,48 @@ public class Board {
             }
 
             // draw the first side of the board
-            if (board[i][0].getSectorState() == "Player 1")
+            String currentState = board[i][0].getSectorState();
+            if (currentState == "Player 1")
                 System.out.printf("|" + Cores.ANSI_GREEN + " J1 " + Cores.ANSI_RESET + "|");
-            else if (board[i][0].getSectorState() == "Player 2")
+            else if (currentState == "Player 2")
                 System.out.printf("|" + Cores.ANSI_GREEN + " J2 " + Cores.ANSI_RESET + "|");
-            else if (board[i][0].getSectorState() == "Player 3")
+            else if (currentState == "Player 3")
                 System.out.printf("|" + Cores.ANSI_GREEN + " J3 " + Cores.ANSI_RESET + "|");
-            else if (board[i][0].getSectorState() == "Player 4")
+            else if (currentState == "Player 4")
                 System.out.printf("|" + Cores.ANSI_GREEN + " J4 " + Cores.ANSI_RESET + "|");
-            else if (board[i][0].getSectorState() == "Restricted")
+            else if (currentState == "Restricted")
                 System.out.printf("|" + Cores.ANSI_WHITE + " XX " + Cores.ANSI_RESET + "|");
-            else if (board[i][0].getSectorState() == "F1")
+            else if (currentState == "F1")
                 System.out.printf("|" + Cores.ANSI_RED + " F1 " + Cores.ANSI_RESET + "|");
-            else if (board[i][0].getSectorState() == "F2")
+            else if (currentState == "F2")
                 System.out.printf("|" + Cores.ANSI_RED + " F2 " + Cores.ANSI_RESET + "|");
-            else if (board[i][0].getSectorState() == "F3")
+            else if (currentState == "F3")
                 System.out.printf("|" + Cores.ANSI_RED + " F3 " + Cores.ANSI_RESET + "|");
-            else if (board[i][0].getSectorState().contains("Item"))
+            else if (currentState.contains("Item"))
                 System.out.printf("|" + Cores.ANSI_YELLOW + " ?? " + Cores.ANSI_RESET + "|");
             else
                 System.out.printf("|    |");
 
             // draw the rest of the board
             for (int j = 1; j < size; j++) {
-                if (board[i][j].getSectorState() == "Player 1")
+                currentState = board[i][j].getSectorState();
+                if (currentState == "Player 1")
                     System.out.printf(Cores.ANSI_GREEN + " J1 " + Cores.ANSI_RESET + "|");
-                else if (board[i][j].getSectorState() == "Player 2")
+                else if (currentState == "Player 2")
                     System.out.printf(Cores.ANSI_GREEN + " J2 " + Cores.ANSI_RESET + "|");
-                else if (board[i][j].getSectorState() == "Player 3")
+                else if (currentState == "Player 3")
                     System.out.printf(Cores.ANSI_GREEN + " J3 " + Cores.ANSI_RESET + "|");
-                else if (board[i][j].getSectorState() == "Player 4")
+                else if (currentState == "Player 4")
                     System.out.printf(Cores.ANSI_GREEN + " J4 " + Cores.ANSI_RESET + "|");
-                else if (board[i][j].getSectorState() == "Restricted")
+                else if (currentState == "Restricted")
                     System.out.printf(Cores.ANSI_WHITE + " XX " + Cores.ANSI_RESET + "|");
-                else if (board[i][j].getSectorState() == "F1")
+                else if (currentState == "F1")
                     System.out.printf(Cores.ANSI_RED + " F1 " + Cores.ANSI_RESET + "|");
-                else if (board[i][j].getSectorState() == "F2")
+                else if (currentState == "F2")
                     System.out.printf(Cores.ANSI_RED + " F2 " + Cores.ANSI_RESET + "|");
-                else if (board[i][j].getSectorState() == "F3")
+                else if (currentState == "F3")
                     System.out.printf(Cores.ANSI_RED + " F3 " + Cores.ANSI_RESET + "|");
-                else if (board[i][j].getSectorState().contains("Item"))
+                else if (currentState.contains("Item"))
                     System.out.printf(Cores.ANSI_YELLOW + " ?? " + Cores.ANSI_RESET + "|");
                 else
                     System.out.printf("    |");
@@ -470,19 +472,17 @@ public class Board {
         }
     }
 
-    /*
+    /**
      * Function to draw the player inventory on screen,
      * return player's inventory size
-     */
-    public int drawPlayerInventory(int playerNum)
-    {
+     **/
+    public int drawPlayerInventory(int playerNum) {
         int i;
         Player player = listaPlayers.get(playerNum - 1);
 
         if (player.getInventory().size() == 0)
-            System.out.println("Player " + playerNum + ", you have no items in your inventory, press 5 to return");    
-        else
-        {
+            System.out.println("Player " + playerNum + ", you have no items in your inventory, press 5 to return");
+        else {
             System.out.println("Player " + playerNum + ", this is your inventory");
             System.out.println("Choose the item you want to use, or 5 to return");
             System.out.println("==================INVENTORY===================\n");
