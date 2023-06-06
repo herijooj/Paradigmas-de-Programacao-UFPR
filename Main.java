@@ -7,6 +7,7 @@ import Board.*;
 import Entities.Beings.*;
 import Entities.Itens.*;
 import Entities.*;
+import Cores.*;
 
 public class Main {
 
@@ -85,7 +86,8 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        int playerCount, input;
+        int playerCount, input, inventorySize;
+        boolean itemUsed = false;
 
         // title screen ------------------------------------
 
@@ -134,30 +136,97 @@ public class Main {
             for (int j = 0; j < playerCount; j++)
             {
                 // Getting action
-                flushScreen();
-                System.out.println("Turn " + (i + 1) + " of 25");
-                board.drawBoard();
-                System.out.printf("--> Player %d turn\n", j + 1);
-                System.out.println("Press action desired [1 -> move / 2 -> use itens]");
+                if (!itemUsed)
+                { 
+                    flushScreen();
+                    System.out.println("Turn " + (i + 1) + " of 25");
+                    board.drawBoard();
+                    System.out.printf("--> " + Cores.ANSI_GREEN + "Player %d " + Cores.ANSI_RESET + "turn\n", j + 1);
+                    System.out.println("Press action desired [1 -> move / 2 -> use itens]");
 
-                input = scanner.nextInt();
-                scanner.nextLine();
-                while (input < 1 || input > 2)
+                    input = scanner.nextInt();
+                    scanner.nextLine();
+                    while (input < 1 || input > 2)
+                    {
+                        flushScreen();
+                        System.out.println("Turn " + (i + 1) + " of 25");
+                        board.drawBoard();
+                        System.out.println("Invalid action! Press 1 to move, or 2 to use itens");
+                        input = scanner.nextInt();
+                        scanner.nextLine();
+                    }
+
+                    if (input == 2)
+                    {
+                        flushScreen();
+                        System.out.println("Turn " + (i + 1) + " of 25");
+                        board.drawBoard();
+                        inventorySize = board.drawPlayerInventory(j + 1);
+
+                        input = scanner.nextInt();
+                        scanner.nextLine();
+
+                        while (input < 0 || input > inventorySize && input != 5)
+                        {
+                            flushScreen();
+                            System.out.println("Turn " + (i + 1) + " of 25");
+                            board.drawBoard();
+                            System.out.println("Invalid item number, type again.");
+                            inventorySize = board.drawPlayerInventory(j + 1);
+
+                            input = scanner.nextInt();
+                            scanner.nextLine();
+                        }
+
+                        if (input > 0 && input < 5)
+                        {
+                            // USE ITEM --------------------
+                            flushScreen();
+                            System.out.println("Turn " + (i + 1) + " of 25");
+                            board.drawBoard();
+                            System.out.println("Item used!");
+                            itemUsed = true;
+                        }
+                        else 
+                            itemUsed = false;
+                        j--;
+                    }
+
+                     // Realizing action
+                    else if (input == 1)
+                    {
+                        flushScreen();
+                        System.out.println("Turn " + (i + 1) + " of 25");
+                        board.drawBoard();
+                        System.out.println("Choose a direction to move: [1 - DOWN], [2 - UP], [3 - RIGHT], [4 - LEFT]");
+                        input = scanner.nextInt();
+                        scanner.nextLine();
+                        while (input < 1 || input > 4)
+                        {
+                            flushScreen();
+                            System.out.println("Turn " + (i + 1) + " of 25");
+                            board.drawBoard();
+                            System.out.println("Invalid direction, type again:");
+                            System.out.println("[1 - DOWN], [2 - UP], [3 - RIGHT], [4 - LEFT]");
+                            input = scanner.nextInt();
+                            scanner.nextLine();
+                        }
+
+                        board.movePlayer(j, input);
+                        flushScreen();
+                        System.out.println("Turn " + (i + 1) + " of 25");
+                        board.drawBoard();
+                        System.out.printf("Player " + Cores.ANSI_GREEN + "J%d " + Cores.ANSI_RESET + "moved!\n", j + 1);
+                    }
+                }
+
+                // If item was used, only thing player can do now is move
+                else
                 {
                     flushScreen();
                     System.out.println("Turn " + (i + 1) + " of 25");
                     board.drawBoard();
-                    System.out.println("Invalid action! Press 1 to move, or 2 to use itens");
-                    input = scanner.nextInt();
-                    scanner.nextLine();
-                }
 
-                // Realizing action
-                flushScreen();
-                if (input == 1)
-                {
-                    System.out.println("Turn " + (i + 1) + " of 25");
-                    board.drawBoard();
                     System.out.println("Choose a direction to move: [1 - DOWN], [2 - UP], [3 - RIGHT], [4 - LEFT]");
                     input = scanner.nextInt();
                     scanner.nextLine();
@@ -176,19 +245,17 @@ public class Main {
                     flushScreen();
                     System.out.println("Turn " + (i + 1) + " of 25");
                     board.drawBoard();
-                    System.out.printf("Player J%d moved!\n", j + 1);
+                    System.out.printf("Player " + Cores.ANSI_GREEN + "J%d " + Cores.ANSI_RESET + "moved!\n", j + 1);
+                    itemUsed = false;
                 }
-
                 sleep(2);
             }
-
-            // EXECUTE ACTION /////////////
 
             // Enemy turn ===================================
             flushScreen();
             System.out.println("Turn " + (i + 1) + " of 25");
             board.drawBoard();
-            System.out.println("--> Fake news turn");
+            System.out.println("--> " + Cores.ANSI_RED + "Fake news " + Cores.ANSI_RESET + "turn");
 
             sleep(2);
 
@@ -197,7 +264,7 @@ public class Main {
             flushScreen();
             System.out.println("Turn " + (i + 1) + " of 25");
             board.drawBoard();
-            System.out.println("--> Fake news moved");
+            System.out.println("--> " + Cores.ANSI_RED + "Fake news " + Cores.ANSI_RESET + "moved");
 
             sleep(2);
 
