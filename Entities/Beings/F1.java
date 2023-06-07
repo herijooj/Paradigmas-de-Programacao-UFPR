@@ -39,8 +39,8 @@ public class F1 extends FakeNews {
                 newI = this.position.getI() + 1;
                 if (!checkMovement(board, newI, this.position.getJ())) {
                     System.out.println("A FakeNews has " + Cores.ANSI_GREEN + "Died!" + Cores.ANSI_RESET);
-                    fakeNews.remove(this);
-                    fakeNews.add(null);
+                    //fakeNews.remove(this);
+                    //fakeNews.add(null);
                     return false;
                 } else {
                     this.position.setI(this.position.getI() + 1);
@@ -52,8 +52,8 @@ public class F1 extends FakeNews {
                 newI = this.position.getI() - 1;
                 if (!checkMovement(board, newI, this.position.getJ())) {
                     System.out.println("A FakeNews has " + Cores.ANSI_GREEN + "Died!" + Cores.ANSI_RESET);
-                    fakeNews.remove(this);
-                    fakeNews.add(null);
+                    //fakeNews.remove(this);
+                    //fakeNews.add(null);
                     return false;
                 } else {
                     this.position.setI(this.position.getI() - 1);
@@ -65,8 +65,8 @@ public class F1 extends FakeNews {
                 newJ = this.position.getJ() + 1;
                 if (!checkMovement(board, this.position.getI(), newJ)) {
                     System.out.println("A FakeNews has " + Cores.ANSI_GREEN + "Died!" + Cores.ANSI_RESET);
-                    fakeNews.remove(this);
-                    fakeNews.add(null);
+                    //fakeNews.remove(this);
+                    //fakeNews.add(null);
                     return false;
                 } else {
                     this.position.setJ(this.position.getJ() + 1);
@@ -78,8 +78,8 @@ public class F1 extends FakeNews {
                 newJ = this.position.getJ() - 1;
                 if (!checkMovement(board, this.position.getI(), newJ)) {
                     System.out.println("A FakeNews has " + Cores.ANSI_GREEN + "Died!" + Cores.ANSI_RESET);
-                    fakeNews.remove(this);
-                    fakeNews.add(null);
+                    //fakeNews.remove(this);
+                    //fakeNews.add(null);
                     return false;
                 } else {
                     this.position.setJ(this.position.getJ() - 1);
