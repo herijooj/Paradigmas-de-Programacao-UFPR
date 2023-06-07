@@ -33,12 +33,11 @@ public class Board {
     // constructor ============================================
     public Board(int size, int playerCount) {
         this.setSize(size);
-        // this.setPlayerCount(playerCount);
         this.setPlayers(playerCount);
         this.setRestrictedSectorsMax(4);
         this.setRestrictedSectors();
         this.setFakeNews();
-        this.setItens(this.itemMax);
+        this.setItens(12);
         this.setBoard();
     }
 
@@ -221,8 +220,54 @@ public class Board {
         int i;
 
         for (i = 0; i < itemQuantity; i++) 
+        {
+            System.out.println("a");
             if (!addItemToBoard())
                 i--;
+        }
+    }
+
+    public boolean addItemToBoardAndSetEntity()
+    {
+        int iC, jC, itemNum;
+        Coordinate newCoordinate;
+
+        // Generates random coordinate
+        iC = (int) (Math.random() * 9);
+        jC = (int) (Math.random() * 9);
+        newCoordinate = new Coordinate(iC, jC);
+
+        // See if coordinate generated isn't already occupied
+        if (!hasEqualCoordinate(newCoordinate)) {
+            itemNum = (int) (Math.random() * 4);
+
+            if (itemNum == 0)
+                this.listaItens.add(new ItemBoato(newCoordinate));
+            else if (itemNum == 1)
+                this.listaItens.add(new ItemDenunciar(newCoordinate));
+            else if (itemNum == 2)
+                this.listaItens.add(new ItemFugir(newCoordinate));
+            else
+                this.listaItens.add(new ItemLer(newCoordinate));
+
+            setEntityToSector(iC, jC);
+
+            return true;
+        } else
+            return false;
+    }
+
+
+    public void addItens(int itemQuantity) 
+    {
+        int i;
+
+        for (i = 0; i < itemQuantity; i++) 
+        {
+            System.out.println("a");
+            if (!addItemToBoardAndSetEntity())
+                i--;
+        }
     }
 
     public void setBoard() {
@@ -257,10 +302,12 @@ public class Board {
                 return true;
 
         // Check if it has the same coordinate as a fake news
+        /*
         for (j = 0; j < this.listaFakeNews.size(); j++)
             if (coordinate.getI() == this.listaFakeNews.get(j).getPosition().getI()
                     && coordinate.getJ() == this.listaFakeNews.get(j).getPosition().getJ())
                 return true;
+                */
 
         // And check if it has the same coordinate as an item
         for (j = 0; j < this.listaItens.size(); j++)
@@ -408,7 +455,7 @@ public class Board {
         // clear the old position
         this.board[iPlayer][jPlayer].setSectorState("");
 
-        boolean movementWorked = players.get(i).move(board, players, e, direction);
+        boolean movementWorked = players.get(i).move(this, players, e, direction);
 
         // if the movement worked, update the board
         if (movementWorked) {
