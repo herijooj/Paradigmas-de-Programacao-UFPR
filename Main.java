@@ -83,6 +83,43 @@ public class Main {
         System.out.flush();
     }
 
+    // this function receives a key and returns the corresponding direction
+    public static int keyToDirection(String key) {
+        //touppercase
+        key = key.toUpperCase();
+
+        // 1 = down, 2 = up, 3 = right, 4 = left
+        switch (key) {
+            case "W":
+                return 2;
+            case "A":
+                return 4;
+            case "S":
+                return 1;
+            case "D":
+                return 3;
+            default:
+                return 0;
+        }
+    }
+
+    // choose a direction to move
+    public static int chooseDirection(Scanner scanner) {
+        String input;
+
+        System.out.println("Choose a direction to move [WASD]");
+
+        input = scanner.nextLine();
+
+        while (input.length() != 1 || keyToDirection(input) == 0) {
+            System.out.println("Invalid input, choose a direction to move [WASD]");
+            input = scanner.nextLine();
+        }
+
+        return keyToDirection(input);
+    }
+    
+
     // main function ====================================
     public static void main(String[] args) {
 
@@ -222,20 +259,7 @@ public class Main {
                         flushScreen();
                         System.out.println("Turn " + (i + 1) + " of 25");
                         board.drawBoard();
-                        System.out.println("Choose a direction to move: [1 - DOWN], [2 - UP], [3 - RIGHT], [4 - LEFT]");
-                        input = scanner.nextInt();
-                        scanner.nextLine();
-
-                        // input validation
-                        while (input < 1 || input > 4) {
-                            flushScreen();
-                            System.out.println("Turn " + (i + 1) + " of 25");
-                            board.drawBoard();
-                            System.out.println("Invalid direction, type again:");
-                            System.out.println("[1 - DOWN], [2 - UP], [3 - RIGHT], [4 - LEFT]");
-                            input = scanner.nextInt();
-                            scanner.nextLine();
-                        }
+                        input = chooseDirection(scanner);
 
                         board.movePlayer(j, input);
                         flushScreen();
@@ -251,18 +275,7 @@ public class Main {
                     System.out.println("Turn " + (i + 1) + " of 25");
                     board.drawBoard();
 
-                    System.out.println("Choose a direction to move: [1 - DOWN], [2 - UP], [3 - RIGHT], [4 - LEFT]");
-                    input = scanner.nextInt();
-                    scanner.nextLine();
-                    while (input < 1 || input > 4) {
-                        flushScreen();
-                        System.out.println("Turn " + (i + 1) + " of 25");
-                        board.drawBoard();
-                        System.out.println("Invalid direction, type again:");
-                        System.out.println("[1 - DOWN], [2 - UP], [3 - RIGHT], [4 - LEFT]");
-                        input = scanner.nextInt();
-                        scanner.nextLine();
-                    }
+                    input = chooseDirection(scanner);
 
                     board.movePlayer(j, input);
                     flushScreen();
