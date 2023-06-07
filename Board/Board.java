@@ -38,7 +38,7 @@ public class Board {
         this.setRestrictedSectorsMax(4);
         this.setRestrictedSectors();
         this.setFakeNews();
-        this.setItens();
+        this.setItens(this.itemMax);
         this.setBoard();
     }
 
@@ -178,29 +178,51 @@ public class Board {
         }
     }
 
-    public void setItens() {
-        int i, itemNum, iC, jC;
+    /*
+     * Adds a singular item to the board
+     * returns true if succeeded or false if the coordinate
+     * generated for it was already occupied
+     * (to be used inside the setItens)
+     */
+    public boolean addItemToBoard()
+    {
+        int iC, jC, itemNum;
         Coordinate newCoordinate;
 
-        for (i = 0; i < this.itemMax; i++) {
-            iC = (int) (Math.random() * 9);
-            jC = (int) (Math.random() * 9);
-            newCoordinate = new Coordinate(iC, jC);
+        // Generates random coordinate
+        iC = (int) (Math.random() * 9);
+        jC = (int) (Math.random() * 9);
+        newCoordinate = new Coordinate(iC, jC);
 
-            if (!hasEqualCoordinate(newCoordinate)) {
-                itemNum = (int) (Math.random() * 4);
+        // See if coordinate generated isn't already occupied
+        if (!hasEqualCoordinate(newCoordinate)) {
+            itemNum = (int) (Math.random() * 4);
 
-                if (itemNum == 0)
-                    this.listaItens.add(new ItemBoato(newCoordinate));
-                else if (itemNum == 1)
-                    this.listaItens.add(new ItemDenunciar(newCoordinate));
-                else if (itemNum == 2)
-                    this.listaItens.add(new ItemFugir(newCoordinate));
-                else
-                    this.listaItens.add(new ItemLer(newCoordinate));
-            } else
+            if (itemNum == 0)
+                this.listaItens.add(new ItemBoato(newCoordinate));
+            else if (itemNum == 1)
+                this.listaItens.add(new ItemDenunciar(newCoordinate));
+            else if (itemNum == 2)
+                this.listaItens.add(new ItemFugir(newCoordinate));
+            else
+                this.listaItens.add(new ItemLer(newCoordinate));
+
+            return true;
+        } else
+            return false;
+    }
+
+    /*
+     * Sets itens to the board depending on the quantity passed
+     * as a parameter
+     */
+    public void setItens(int itemQuantity) 
+    {
+        int i;
+
+        for (i = 0; i < itemQuantity; i++) 
+            if (!addItemToBoard())
                 i--;
-        }
     }
 
     public void setBoard() {
@@ -304,7 +326,7 @@ public class Board {
 
         // Verify if it is an item
         if (sectorState == "") {
-            for (int x = 0; x < this.itemMax; x++) {
+            for (int x = 0; x < this.listaItens.size(); x++) {
                 int iItem = this.listaItens.get(x).getPosition().getI();
                 int jItem = this.listaItens.get(x).getPosition().getJ();
                 if (i == iItem && j == jItem) {
