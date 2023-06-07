@@ -37,7 +37,7 @@ public class Board {
         this.setRestrictedSectorsMax(4);
         this.setRestrictedSectors();
         this.setFakeNews();
-        this.setItens(12);
+        this.setItens(16);
         this.setBoard();
     }
 
@@ -220,11 +220,9 @@ public class Board {
         int i;
 
         for (i = 0; i < itemQuantity; i++) 
-        {
-            System.out.println("a");
+            //System.out.println("a");
             if (!addItemToBoard())
                 i--;
-        }
     }
 
     public boolean addItemToBoardAndSetEntity()
@@ -465,6 +463,13 @@ public class Board {
             // update the board
             this.board[iPlayer][jPlayer].setSectorState(players.get(i).toString());
         }
+    }
+
+    public void useItem(int itemIndex)
+    {
+        ItemCharacteristics item = this.listaItens.get(itemIndex);
+
+        item.itemAbility(this);
     }
 
     /**
