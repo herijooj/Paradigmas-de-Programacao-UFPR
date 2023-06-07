@@ -7,6 +7,7 @@ import Board.*;
 import Entities.Beings.*;
 import Entities.Itens.*;
 import Entities.*;
+
 import Cores.*;
 
 public class Main {
@@ -121,13 +122,14 @@ public class Main {
         input = scanner.nextLine();
 
         while (input.length() != 1 || keyToDirection(input) == 0) {
+            // clear 2 lines
+            System.out.print("\033[2A");
             System.out.println("Invalid input, choose a direction to move [WASD]");
             input = scanner.nextLine();
         }
 
         return keyToDirection(input);
     }
-    
 
     // main function ====================================
     public static void main(String[] args) {
@@ -135,30 +137,27 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         int playerCount, input, inventorySize;
         boolean itemUsed = false;
+        String placeholder;
 
         // title screen ------------------------------------
-
         flushScreen();
         titleScreen();
         System.out.println("Welcome to the game!");
+
+        // configuration screen ----------------------------
         System.out.println("Choose a number of players [1-4]");
-
-        playerCount = scanner.nextInt();
-        scanner.nextLine(); // clears the \n from the buffer
-
-        while (playerCount < 1 || playerCount > 4) {
-            flushScreen();
-            titleScreen(); // PASSIVO DE FAZER FACTORY METHOD, FICARA flushScreen("TitleScreen")
-            System.out.println("Invalid player Count, choose between 1 and 4.");
-
-            playerCount = scanner.nextInt();
-            scanner.nextLine(); // clears the \n from the buffer
+        placeholder = scanner.nextLine();
+        while (!placeholder.matches("[1-4]")) {
+            System.out.print("\033[2A");
+            System.out.println("Invalid input, choose a number of players [1-4]");
+            placeholder = scanner.nextLine();
         }
+        playerCount = Integer.parseInt(placeholder);
 
+        // game start --------------------------------------
         flushScreen();
         titleScreen();
         System.out.println(playerCount + " player game starting...");
-
         sleep(2);
         flushScreen();
 
@@ -218,16 +217,13 @@ public class Main {
                     System.out.printf("--> " + Cores.ANSI_GREEN + "Player %d " + Cores.ANSI_RESET + "turn\n", j + 1);
                     System.out.println("Press action desired [1 -> move / 2 -> use itens]");
 
-                    input = scanner.nextInt();
-                    scanner.nextLine();
-
-                    // input validation
-                    while (input < 1 || input > 2) {
-                        nextTurn(i, board);
-                        System.out.println("Invalid action! Press 1 to move, or 2 to use itens");
-                        input = scanner.nextInt();
-                        scanner.nextLine();
+                    placeholder = scanner.nextLine();
+                    while (!placeholder.matches("[1-2]+")) {
+                        System.out.print("\033[2A");
+                        System.out.println("invalid entry, Try again. [1 -> move / 2 -> use itens]");
+                        placeholder = scanner.nextLine();
                     }
+                    input = Integer.parseInt(placeholder);
 
                     if (input == 2) {
                         nextTurn(i, board);
