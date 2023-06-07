@@ -1,28 +1,29 @@
 package Entities.Beings;
 
-import Entities.Itens.*;
 import java.awt.event.KeyEvent;
 import java.util.*;
 
+import Entities.Itens.*;
 import Entities.Coordinate;
 import Entities.Entity;
 import Board.*;
-import Cores.Cores;
+import Cores.*;
 
 public class Player extends Entity {
-    // attributes
+
+    // Attributes
     private int playerNum;
     private LinkedList<ItemCharacteristics> inventory;
     private int inventorySize = 4;
 
-    // constructor
+    // Full Constructor
     public Player(int playerNum, Coordinate position) {
         super(position);
         this.setPlayerNum(playerNum);
         this.setInventory();
     }
 
-    // getters
+    // Getters
     public int getPlayerNum() {
         return this.playerNum;
     }
@@ -31,7 +32,7 @@ public class Player extends Entity {
         return this.inventory;
     }
 
-    // setters
+    // Setters
     public void setPlayerNum(int playerNum) {
         if (playerNum < 1 || playerNum > 4)
             throw new IllegalArgumentException("Player number must be between 1 and 4");
@@ -43,9 +44,13 @@ public class Player extends Entity {
         this.inventory = new LinkedList<ItemCharacteristics>();
     }
 
-    // methods
+    // Methods
+
+    /*
+     * Draws the player on screen
+     */
     public void draw() {
-        System.out.printf("F%d", this.playerNum);
+        System.out.printf("J%d", this.playerNum);
     }
 
     /*
@@ -53,7 +58,7 @@ public class Player extends Entity {
      */
     public void addItemToInventory(ItemCharacteristics item)
     {
-        if (this.inventory.size() < 4)
+        if (this.inventory.size() < this.inventorySize)
             this.inventory.add(item);
     }
 
@@ -83,25 +88,25 @@ public class Player extends Entity {
             return (new ItemLer(position));
     }
 
-    public boolean move(Board board, LinkedList<Player> players, KeyEvent e, int direction) {
+    /*
+     * Moves the player according to the direction passed
+     * returns true if moved, false if couldn't move (died)
+     */
+    public boolean move(Board board, int direction) {
         int newI, newJ;
         Coordinate position;
 
         switch (direction) {
-            // goes down
+            // Goes down
             case 1:
                 newI = this.position.getI() + 1;
-                if (!checkMovement(board.getBoard(), newI, this.position.getJ())) {
-                    // substitute player for NULL
-                    //System.out.println("A Player has " + Cores.ANSI_RED + "Died!" + Cores.ANSI_RESET);
-                    //players.remove(this);
-                    //players.add(null);
+
+                if (!checkMovement(board.getBoard(), newI, this.position.getJ()))
                     return false;
-                } else {
+                else {
                     position = new Coordinate(newI, this.position.getJ());
 
-                    if (hasItem(board.getBoard(), position))
-                    {
+                    if (hasItem(board.getBoard(), position)) {
                         // Adds an item to the player  
                         // inventory and adds a new item to the board
                         addItemToInventory(getSpecificItem(board.getBoard(), position));
@@ -111,19 +116,16 @@ public class Player extends Entity {
                     this.position.setI(this.position.getI() + 1);
                     return true;
                 }
-                // goes up
+            // Goes up
             case 2:
                 newI = this.position.getI() - 1;
-                if (!checkMovement(board.getBoard(), newI, this.position.getJ())) {
-                    //System.out.println("A Player has " + Cores.ANSI_RED + "Died!" + Cores.ANSI_RESET);
-                    //players.remove(this);
-                    //players.add(null);
+
+                if (!checkMovement(board.getBoard(), newI, this.position.getJ()))
                     return false;
-                } else {
+                else {
                     position = new Coordinate(newI, this.position.getJ());
 
-                    if (hasItem(board.getBoard(), position))
-                    {
+                    if (hasItem(board.getBoard(), position)) {
                         // Adds an item to the player  
                         // inventory and adds a new item to the board
                         addItemToInventory(getSpecificItem(board.getBoard(), position));
@@ -133,19 +135,17 @@ public class Player extends Entity {
                     this.position.setI(this.position.getI() - 1);
                     return true;
                 }
-                // goes right
+
+            // Goes right
             case 3:
                 newJ = this.position.getJ() + 1;
-                if (!checkMovement(board.getBoard(), this.position.getI(), newJ)) {
-                    //System.out.println("A Player has " + Cores.ANSI_RED + "Died!" + Cores.ANSI_RESET);
-                    //players.remove(this);
-                    //players.add(null);
+
+                if (!checkMovement(board.getBoard(), this.position.getI(), newJ))
                     return false;
-                } else {
+                else {
                     position = new Coordinate(this.getPosition().getI(), newJ);
 
-                    if (hasItem(board.getBoard(), position))
-                    {
+                    if (hasItem(board.getBoard(), position)) {
                         // Adds an item to the player  
                         // inventory and adds a new item to the board
                         addItemToInventory(getSpecificItem(board.getBoard(), position));
@@ -155,19 +155,15 @@ public class Player extends Entity {
                     this.position.setJ(this.position.getJ() + 1);
                     return true;
                 }
-                // goes left
+            // Goes left
             case 4:
                 newJ = this.position.getJ() - 1;
-                if (!checkMovement(board.getBoard(), this.position.getI(), newJ)) {
-                    //System.out.println("A Player has " + Cores.ANSI_RED + "Died!" + Cores.ANSI_RESET);
-                    //players.remove(this);
-                    //players.add(null);
+                if (!checkMovement(board.getBoard(), this.position.getI(), newJ))
                     return false;
-                } else {
+                else {
                     position = new Coordinate(this.getPosition().getI(), newJ);
 
-                    if (hasItem(board.getBoard(), position))
-                    {
+                    if (hasItem(board.getBoard(), position)) {
                         // Adds an item to the player  
                         // inventory and adds a new item to the board
                         addItemToInventory(getSpecificItem(board.getBoard(), position));
@@ -181,14 +177,11 @@ public class Player extends Entity {
         return false;
     }
 
+    /*
+     * Returns the player number related to this
+     * player object
+     */
     public String toString() {
-        if (this.playerNum == 1)
-            return "Player 1";
-        else if (this.playerNum == 2)
-            return "Player 2";
-        else if (this.playerNum == 3)
-            return "Player 3";
-        else
-            return "Player 4";
+        return "Player " + this.playerNum;
     }
 }
