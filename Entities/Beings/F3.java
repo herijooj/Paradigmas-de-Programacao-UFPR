@@ -38,8 +38,8 @@ public class F3 extends FakeNews {
                 newJ = this.position.getJ() + 1;
                 if (!checkMovement(board, newI, newJ)) {
                     System.out.println("A FakeNews has " + Cores.ANSI_GREEN + "Died!" + Cores.ANSI_RESET);
-                    fakeNews.remove(this);
-                    fakeNews.add(null);
+                    //fakeNews.remove(this);
+                    //fakeNews.add(null);
                     return false;
                 } else {
                     this.position.setI(newI);
@@ -52,8 +52,8 @@ public class F3 extends FakeNews {
                 newJ = this.position.getJ() + 1;
                 if (!checkMovement(board, newI, newJ)) {
                     System.out.println("A FakeNews has " + Cores.ANSI_GREEN + "Died!" + Cores.ANSI_RESET);
-                    fakeNews.remove(this);
-                    fakeNews.add(null);
+                    //fakeNews.remove(this);
+                    //fakeNews.add(null);
                     return false;
                 } else {
                     this.position.setI(newI);
@@ -66,8 +66,8 @@ public class F3 extends FakeNews {
                 newJ = this.position.getJ() - 1;
                 if (!checkMovement(board, newI, newJ)) {
                     System.out.println("A FakeNews has " + Cores.ANSI_GREEN + "Died!" + Cores.ANSI_RESET);
-                    fakeNews.remove(this);
-                    fakeNews.add(null);
+                    //fakeNews.remove(this);
+                    //fakeNews.add(null);
                     return false;
                 } else {
                     this.position.setI(newI);
@@ -80,8 +80,8 @@ public class F3 extends FakeNews {
                 newJ = this.position.getJ() - 1;
                 if (!checkMovement(board, newI, newJ)) {
                     System.out.println("A FakeNews has " + Cores.ANSI_GREEN + "Died!" + Cores.ANSI_RESET);
-                    fakeNews.remove(this);
-                    fakeNews.add(null);
+                    //fakeNews.remove(this);
+                    //fakeNews.add(null);
                     return false;
                 } else {
                     this.position.setI(newI);
