@@ -229,17 +229,13 @@ public class Main {
                         nextTurn(i, board);
                         inventorySize = board.drawPlayerInventory(j + 1);
 
-                        input = scanner.nextInt();
-                        scanner.nextLine();
-
-                        while (input < 0 || input > inventorySize && input != 5) {
-                            nextTurn(i, board);
-                            System.out.println("Invalid item number, type again.");
-                            inventorySize = board.drawPlayerInventory(j + 1);
-
-                            input = scanner.nextInt();
-                            scanner.nextLine();
+                        placeholder = scanner.nextLine();
+                        while (!placeholder.matches("[1-5]")) {
+                            System.out.print("\033[2A");
+                            System.out.println("invalid entry, Try again. [1 -> move / 2 -> use itens]");
+                            placeholder = scanner.nextLine();
                         }
+                        input = Integer.parseInt(placeholder);
 
                         if (input > 0 && input < 5) {
                             // USE ITEM --------------------
