@@ -1,6 +1,7 @@
 package Entities.Itens;
 
 import Entities.Coordinate;
+import Board.*;
 
 // class
 public class ItemLer extends ItemCharacteristics {
@@ -18,7 +19,7 @@ public class ItemLer extends ItemCharacteristics {
     // setters
 
     // methods
-    public void itemAbility() 
+    public void itemAbility(Board board) 
     {
         // escolhe um inimigo para deletar
     }

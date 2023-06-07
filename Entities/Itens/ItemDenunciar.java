@@ -1,6 +1,7 @@
 package Entities.Itens;
 
 import Entities.Coordinate;
+import Board.*;
 
 // class
 public class ItemDenunciar extends ItemCharacteristics {
@@ -18,7 +19,7 @@ public class ItemDenunciar extends ItemCharacteristics {
     // setters
 
     // methods
-    public void itemAbility() 
+    public void itemAbility(Board board) 
     {
         // deleta todos os inimigos ao redor do jogador
         // recebe um vetor e checa a posição de cada inimigo

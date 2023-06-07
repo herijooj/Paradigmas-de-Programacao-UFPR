@@ -1,6 +1,7 @@
 package Entities.Itens;
 
 import Entities.Coordinate;
+import Board.*;
 
 // class
 public class ItemBoato extends ItemCharacteristics {
@@ -18,7 +19,7 @@ public class ItemBoato extends ItemCharacteristics {
     // setters
 
     // methods
-    public void itemAbility() 
+    public void itemAbility(Board board) 
     {
         // proximo turno de forma aleatoria
     }
