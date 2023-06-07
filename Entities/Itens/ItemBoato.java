@@ -2,6 +2,7 @@ package Entities.Itens;
 
 import Entities.Coordinate;
 import Board.*;
+import Entities.Beings.*;
 
 // class
 public class ItemBoato extends ItemCharacteristics {
@@ -19,7 +20,7 @@ public class ItemBoato extends ItemCharacteristics {
     // setters
 
     // methods
-    public void itemAbility(Board board) 
+    public void itemAbility(Board board, Player player) 
     {
         // proximo turno de forma aleatoria
     }

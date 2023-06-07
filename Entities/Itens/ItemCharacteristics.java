@@ -2,6 +2,7 @@ package Entities.Itens;
 
 import Entities.Coordinate;
 import Entities.Entity;
+import Entities.Beings.*;
 import Board.*;
 
 // class
@@ -26,6 +27,6 @@ public abstract class ItemCharacteristics extends Entity {
     }
 
     // methods
-    public abstract void itemAbility(Board board);
+    public abstract void itemAbility(Board board, Player player);
 
 }

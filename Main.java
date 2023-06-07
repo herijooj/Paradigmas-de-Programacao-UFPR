@@ -249,7 +249,7 @@ public class Main {
                             // USE ITEM --------------------
                             nextTurn(i, board);
                             System.out.println("Item used!");
-                            //board.useItem(input - 1);
+                            //board.useItem(j + 1, input - 1);
                             itemUsed = true;
                         } else
                             itemUsed = false;

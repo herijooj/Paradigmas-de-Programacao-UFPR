@@ -2,7 +2,7 @@ package Entities.Itens;
 
 import java.util.Scanner;
 import Entities.Coordinate;
-import Entities.Beings.Player;
+import Entities.Beings.*;
 import Board.Sector;
 import Board.*;
 
@@ -40,7 +40,7 @@ public class ItemFugir extends ItemCharacteristics {
         // TODO
     }
 
-    public void itemAbility(Board board) 
+    public void itemAbility(Board board, Player player) 
     {
         // deleta todos os inimigos ao redor do jogador
         // recebe um vetor e checa a posição de cada inimigo

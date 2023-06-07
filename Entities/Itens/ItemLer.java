@@ -2,6 +2,7 @@ package Entities.Itens;
 
 import Entities.Coordinate;
 import Board.*;
+import Entities.Beings.*;
 
 // class
 public class ItemLer extends ItemCharacteristics {
@@ -19,7 +20,7 @@ public class ItemLer extends ItemCharacteristics {
     // setters
 
     // methods
-    public void itemAbility(Board board) 
+    public void itemAbility(Board board, Player player) 
     {
         // escolhe um inimigo para deletar
     }

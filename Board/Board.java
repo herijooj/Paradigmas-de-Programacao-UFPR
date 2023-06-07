@@ -465,11 +465,12 @@ public class Board {
         }
     }
 
-    public void useItem(int itemIndex)
+    public void useItem(int playerIndex, int itemIndex)
     {
         ItemCharacteristics item = this.listaItens.get(itemIndex);
+        Player player = this.listaPlayers.get(playerIndex);
 
-        item.itemAbility(this);
+        item.itemAbility(this, player);
     }
 
     /**
