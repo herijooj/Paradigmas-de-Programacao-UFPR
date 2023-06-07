@@ -103,6 +103,15 @@ public class Main {
         }
     }
 
+    // this function turns the turn
+    // it clears the screen, prints the turn number and draws the board
+    // it should be called at the start of each turn
+    public static void nextTurn(int turn, Board board) {
+        flushScreen();
+        System.out.println("Turn " + (turn + 1) + " of 25");
+        board.drawBoard();
+    }
+
     // choose a direction to move
     public static int chooseDirection(Scanner scanner) {
         String input;
@@ -214,27 +223,21 @@ public class Main {
 
                     // input validation
                     while (input < 1 || input > 2) {
-                        flushScreen();
-                        System.out.println("Turn " + (i + 1) + " of 25");
-                        board.drawBoard();
+                        nextTurn(i, board);
                         System.out.println("Invalid action! Press 1 to move, or 2 to use itens");
                         input = scanner.nextInt();
                         scanner.nextLine();
                     }
 
                     if (input == 2) {
-                        flushScreen();
-                        System.out.println("Turn " + (i + 1) + " of 25");
-                        board.drawBoard();
+                        nextTurn(i, board);
                         inventorySize = board.drawPlayerInventory(j + 1);
 
                         input = scanner.nextInt();
                         scanner.nextLine();
 
                         while (input < 0 || input > inventorySize && input != 5) {
-                            flushScreen();
-                            System.out.println("Turn " + (i + 1) + " of 25");
-                            board.drawBoard();
+                            nextTurn(i, board);
                             System.out.println("Invalid item number, type again.");
                             inventorySize = board.drawPlayerInventory(j + 1);
 
@@ -244,9 +247,7 @@ public class Main {
 
                         if (input > 0 && input < 5) {
                             // USE ITEM --------------------
-                            flushScreen();
-                            System.out.println("Turn " + (i + 1) + " of 25");
-                            board.drawBoard();
+                            nextTurn(i, board);
                             System.out.println("Item used!");
                             itemUsed = true;
                         } else
@@ -256,31 +257,23 @@ public class Main {
 
                     // Realizing action
                     else if (input == 1) {
-                        flushScreen();
-                        System.out.println("Turn " + (i + 1) + " of 25");
-                        board.drawBoard();
+                        nextTurn(i, board);
                         input = chooseDirection(scanner);
 
                         board.movePlayer(j, input);
-                        flushScreen();
-                        System.out.println("Turn " + (i + 1) + " of 25");
-                        board.drawBoard();
+                        nextTurn(i, board);
                         System.out.printf("Player " + Cores.ANSI_GREEN + "J%d " + Cores.ANSI_RESET + "moved!\n", j + 1);
                     }
                 }
 
                 // If item was used, only thing player can do now is move
                 else {
-                    flushScreen();
-                    System.out.println("Turn " + (i + 1) + " of 25");
-                    board.drawBoard();
+                    nextTurn(i, board);
 
                     input = chooseDirection(scanner);
 
                     board.movePlayer(j, input);
-                    flushScreen();
-                    System.out.println("Turn " + (i + 1) + " of 25");
-                    board.drawBoard();
+                    nextTurn(i, board);
                     System.out.printf("Player " + Cores.ANSI_GREEN + "J%d " + Cores.ANSI_RESET + "moved!\n", j + 1);
                     itemUsed = false;
                 }
@@ -288,18 +281,14 @@ public class Main {
             }
 
             // Enemy turn ===================================
-            flushScreen();
-            System.out.println("Turn " + (i + 1) + " of 25");
-            board.drawBoard();
+            nextTurn(i, board);
             System.out.println("--> " + Cores.ANSI_RED + "Fake news " + Cores.ANSI_RESET + "turn");
 
             sleep(2);
 
             // Enemy movement
             board.moveFakeNews();
-            flushScreen();
-            System.out.println("Turn " + (i + 1) + " of 25");
-            board.drawBoard();
+            nextTurn(i, board);
             System.out.println("--> " + Cores.ANSI_RED + "Fake news " + Cores.ANSI_RESET + "moved");
 
             sleep(2);
