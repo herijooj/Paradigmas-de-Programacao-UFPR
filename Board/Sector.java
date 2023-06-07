@@ -2,19 +2,22 @@ package Board;
 
 public class Sector {
     
-    // attributes ====================================
+    // Attributes
+
     private int i;
     private int j;
     private String sectorState;
 
-    // constructors ==================================
+    // Constructor 
+
     public Sector(int i, int j, String sectorState) {
         this.setI(i);
         this.setJ(j);
         this.setSectorState(sectorState);
     }
 
-    // getters =======================================
+    // Getters
+
     public int getI() {
         return this.i;
     }
@@ -31,7 +34,8 @@ public class Sector {
         return this.sectorState;
     }
 
-    // setters =======================================
+    // Setters
+
     public void setI(int i) {
         if (i < 0)
             throw new IllegalArgumentException("I must be positive");
@@ -49,10 +53,4 @@ public class Sector {
     public void setSectorState(String state) {
         this.sectorState = state;
     }
-
-    // methods =======================================
-    public void draw() {
-        return;
-    }
-
 }
