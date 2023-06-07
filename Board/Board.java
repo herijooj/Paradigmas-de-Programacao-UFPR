@@ -31,6 +31,13 @@ public class Board {
     // private int playerCount;
 
     // constructor ============================================
+    /**
+     * Constructor for Board
+     * 
+     * @param size
+     * @param playerCount
+     * @return Board
+     */
     public Board(int size, int playerCount) {
         this.setSize(size);
         this.setPlayers(playerCount);
@@ -93,30 +100,37 @@ public class Board {
         return;
     }
 
+    /**
+     * Will create a List of players with their respective positions.
+     * <br>
+     * <br>
+     * A list of restricted sectors, FakeNews and Itens will also be created
+     * 
+     * @param playerCount
+     */
     public void setPlayers(int playerCount) {
         this.listaPlayers = new LinkedList<Player>();
         this.listaRestrictedSectors = new LinkedList<Coordinate>();
         this.listaFakeNews = new LinkedList<FakeNews>();
         this.listaItens = new LinkedList<ItemCharacteristics>();
 
-        // i = 0 -> (0, 4)
-        // i = 1 -> (4, 8)
-        // i = 2 -> (8, 4)
-        // i = 3 -> (4, 0)
-
         int iC, jC, i;
         Coordinate newCoordinate;
 
         for (i = 0; i < playerCount; i++) {
+            // player 1
             if (i == 0) {
                 iC = 0;
                 jC = 4;
+                // player 2
             } else if (i == 1) {
                 iC = 4;
                 jC = 8;
+                // player 3
             } else if (i == 2) {
                 iC = 8;
                 jC = 4;
+                // player 4
             } else {
                 iC = 4;
                 jC = 0;
@@ -130,8 +144,12 @@ public class Board {
         }
     }
 
+    /**
+     * Will randomly create a list of Restricted Sectors and add it to the
+     * respective list
+     * 
+     */
     public void setRestrictedSectors() {
-
         int iC, jC, i;
         Coordinate newCoordinate;
 
@@ -149,10 +167,13 @@ public class Board {
         }
     }
 
+    /**
+     * Will create a list of Fake News and add it to the respective list
+     */
     public void setFakeNews() {
         int i, iC, jC;
         Coordinate newCoordinate;
-        int F1Quantity = 0, F2Quantity = 0, F3Quantity = 0;
+        int F1Quantity = 0, F2Quantity = 0;
 
         // Create the Fake News
         for (i = 0; i < this.fakeNewsMax; i++) {
@@ -161,6 +182,7 @@ public class Board {
             jC = (int) (Math.random() * 9);
             newCoordinate = new Coordinate(iC, jC);
 
+            // if the coordinate is not equal to any other
             if (!hasEqualCoordinate(newCoordinate)) {
                 if (F1Quantity < 2) {
                     this.listaFakeNews.add(new F1(newCoordinate));
@@ -170,21 +192,20 @@ public class Board {
                     F2Quantity++;
                 } else {
                     this.listaFakeNews.add(new F3(newCoordinate));
-                    F3Quantity++;
                 }
             } else
                 i--;
         }
     }
 
-    /*
+    /**
      * Adds a singular item to the board
      * returns true if succeeded or false if the coordinate
      * generated for it was already occupied
-     * (to be used inside the setItens)
+     * 
+     * @return boolean
      */
-    public boolean addItemToBoard()
-    {
+    public boolean addItemToBoard() {
         int iC, jC, itemNum;
         Coordinate newCoordinate;
 
@@ -211,22 +232,30 @@ public class Board {
             return false;
     }
 
-    /*
-     * Sets itens to the board depending on the quantity passed
-     * as a parameter
+    /**
+     * Sets itens to the board
+     * 
+     * @param itemQuantity
      */
-    public void setItens(int itemQuantity) 
-    {
+    public void setItens(int itemQuantity) {
         int i;
 
-        for (i = 0; i < itemQuantity; i++) 
-            //System.out.println("a");
+        for (i = 0; i < itemQuantity; i++)
             if (!addItemToBoard())
                 i--;
     }
 
-    public boolean addItemToBoardAndSetEntity()
-    {
+    /**
+     * Adds a singular item to the board and sets it's entity
+     * <br>
+     * <br>
+     * if the coordinate generated for it was already occupied
+     * it will return false
+     *
+     * 
+     * @return boolean
+     */
+    public boolean addItemToBoardAndSetEntity() {
         int iC, jC, itemNum;
         Coordinate newCoordinate;
 
@@ -255,14 +284,10 @@ public class Board {
             return false;
     }
 
-
-    public void addItens(int itemQuantity) 
-    {
+    public void addItens(int itemQuantity) {
         int i;
 
-        for (i = 0; i < itemQuantity; i++) 
-        {
-            System.out.println("a");
+        for (i = 0; i < itemQuantity; i++) {
             if (!addItemToBoardAndSetEntity())
                 i--;
         }
@@ -279,39 +304,54 @@ public class Board {
 
     // methods ==================================================================
 
-    /*
+    /**
      * this method checks if the coordinate is already in use
      * by another entity, if it is, it returns true
+     * 
+     * @param coordinate
+     * @return boolean
      */
     private boolean hasEqualCoordinate(Coordinate coordinate) {
-
         int j;
 
         // Check if it has the same coordinate as a player
-        for (j = 0; j < this.listaPlayers.size(); j++)
-            if (coordinate.getI() == this.listaPlayers.get(j).getPosition().getI()
-                    && coordinate.getJ() == this.listaPlayers.get(j).getPosition().getJ())
+        int playerSize = this.listaPlayers.size();
+        for (j = 0; j < playerSize; j++) {
+            // extracting for better readability
+            int playerI = this.listaPlayers.get(j).getPosition().getI();
+            int playerJ = this.listaPlayers.get(j).getPosition().getJ();
+
+            // if it has the same coordinate as a player, return true
+            if (coordinate.getI() == playerI
+                    && coordinate.getJ() == playerJ)
                 return true;
+        }
 
         // Check if it has the same coordinate as a restricted sector
-        for (j = 0; j < this.listaRestrictedSectors.size(); j++)
-            if (coordinate.getI() == this.listaRestrictedSectors.get(j).getI()
-                    && coordinate.getJ() == this.listaRestrictedSectors.get(j).getJ())
-                return true;
+        int RestrictedSectorsSize = this.listaRestrictedSectors.size();
+        for (j = 0; j < RestrictedSectorsSize; j++) {
+            // extracting for better readability
+            int restrictedI = this.listaRestrictedSectors.get(j).getI();
+            int restrictedJ = this.listaRestrictedSectors.get(j).getJ();
 
-        // Check if it has the same coordinate as a fake news
-        /*
-        for (j = 0; j < this.listaFakeNews.size(); j++)
-            if (coordinate.getI() == this.listaFakeNews.get(j).getPosition().getI()
-                    && coordinate.getJ() == this.listaFakeNews.get(j).getPosition().getJ())
+            // if it has the same coordinate as a restricted sector, return true
+            if (coordinate.getI() == restrictedI
+                    && coordinate.getJ() == restrictedJ)
                 return true;
-                */
+        }
 
         // And check if it has the same coordinate as an item
-        for (j = 0; j < this.listaItens.size(); j++)
-            if (coordinate.getI() == this.listaItens.get(j).getPosition().getI()
-                    && coordinate.getJ() == this.listaItens.get(j).getPosition().getJ())
+        int listaItensSize = this.listaItens.size();
+        for (j = 0; j < listaItensSize; j++) {
+            // extracting for better readability
+            int itemI = this.listaItens.get(j).getPosition().getI();
+            int itemJ = this.listaItens.get(j).getPosition().getJ();
+
+            // if it has the same coordinate as an item, return true
+            if (coordinate.getI() == itemI
+                    && coordinate.getJ() == itemJ)
                 return true;
+        }
 
         // If it got here, means there's no repeated coordinate so far
         return false;
@@ -465,8 +505,7 @@ public class Board {
         }
     }
 
-    public void useItem(int playerIndex, int itemIndex)
-    {
+    public void useItem(int playerIndex, int itemIndex) {
         ItemCharacteristics item = this.listaItens.get(itemIndex);
         Player player = this.listaPlayers.get(playerIndex);
 
