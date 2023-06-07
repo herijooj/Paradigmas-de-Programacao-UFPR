@@ -53,7 +53,8 @@ public class Player extends Entity {
      */
     public void addItemToInventory(ItemCharacteristics item)
     {
-        this.inventory.add(item);
+        if (this.inventory.size() < 4)
+            this.inventory.add(item);
     }
 
     /*
@@ -92,9 +93,9 @@ public class Player extends Entity {
                 newI = this.position.getI() + 1;
                 if (!checkMovement(board.getBoard(), newI, this.position.getJ())) {
                     // substitute player for NULL
-                    System.out.println("A Player has " + Cores.ANSI_RED + "Died!" + Cores.ANSI_RESET);
-                    players.remove(this);
-                    players.add(null);
+                    //System.out.println("A Player has " + Cores.ANSI_RED + "Died!" + Cores.ANSI_RESET);
+                    //players.remove(this);
+                    //players.add(null);
                     return false;
                 } else {
                     position = new Coordinate(newI, this.position.getJ());
@@ -114,9 +115,9 @@ public class Player extends Entity {
             case 2:
                 newI = this.position.getI() - 1;
                 if (!checkMovement(board.getBoard(), newI, this.position.getJ())) {
-                    System.out.println("A Player has " + Cores.ANSI_RED + "Died!" + Cores.ANSI_RESET);
-                    players.remove(this);
-                    players.add(null);
+                    //System.out.println("A Player has " + Cores.ANSI_RED + "Died!" + Cores.ANSI_RESET);
+                    //players.remove(this);
+                    //players.add(null);
                     return false;
                 } else {
                     position = new Coordinate(newI, this.position.getJ());
@@ -136,9 +137,9 @@ public class Player extends Entity {
             case 3:
                 newJ = this.position.getJ() + 1;
                 if (!checkMovement(board.getBoard(), this.position.getI(), newJ)) {
-                    System.out.println("A Player has " + Cores.ANSI_RED + "Died!" + Cores.ANSI_RESET);
-                    players.remove(this);
-                    players.add(null);
+                    //System.out.println("A Player has " + Cores.ANSI_RED + "Died!" + Cores.ANSI_RESET);
+                    //players.remove(this);
+                    //players.add(null);
                     return false;
                 } else {
                     position = new Coordinate(this.getPosition().getI(), newJ);
@@ -158,9 +159,9 @@ public class Player extends Entity {
             case 4:
                 newJ = this.position.getJ() - 1;
                 if (!checkMovement(board.getBoard(), this.position.getI(), newJ)) {
-                    System.out.println("A Player has " + Cores.ANSI_RED + "Died!" + Cores.ANSI_RESET);
-                    players.remove(this);
-                    players.add(null);
+                    //System.out.println("A Player has " + Cores.ANSI_RED + "Died!" + Cores.ANSI_RESET);
+                    //players.remove(this);
+                    //players.add(null);
                     return false;
                 } else {
                     position = new Coordinate(this.getPosition().getI(), newJ);
