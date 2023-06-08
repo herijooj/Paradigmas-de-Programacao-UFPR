@@ -464,6 +464,8 @@ public class Board {
             // update the board
             this.board[iFakeNews][jFakeNews].setSectorState(fakeNews.get(index).toString());
         }
+        else
+            fakeNews.get(index).setState("dead");
     }
 
     /*
@@ -533,6 +535,8 @@ public class Board {
             // update the board
             this.board[iPlayer][jPlayer].setSectorState(players.get(i).toString());
         }
+        else
+            players.get(i).setState("dead");
     }
 
     public void useItem(int playerIndex, int itemIndex) {
@@ -540,6 +544,44 @@ public class Board {
         Player player = this.listaPlayers.get(playerIndex);
 
         item.itemAbility(this, player);
+    }
+
+    /*
+     * Returns a string indicating the player state
+     * Can be, dead, alive or outOfGame
+     */
+    public String checkPlayerState(int playerNum)
+    {
+        Player player = this.listaPlayers.get(playerNum - 1);
+
+        if (player.getState() == "dead")
+        {
+            player.setState("outOfGame");
+            return "dead";
+        }
+        else if (player.getState() == "alive")
+            return "alive";
+        else
+            return "outOfGame";
+    }
+
+    /*
+     * Returns a string indicating the fakeNews state
+     * Can be, dead, alive or outOfGame
+     */
+    public String checkFakeNewsState(int fakeNewsIndex)
+    {
+        FakeNews fakeNews = this.listaFakeNews.get(fakeNewsIndex);
+
+        if (fakeNews.getState() == "dead")
+        {
+            fakeNews.setState("outOfGame");
+            return "dead";
+        }
+        else if (fakeNews.getState() == "alive")
+            return "alive";
+        else
+            return "outOfGame";
     }
 
     /**
