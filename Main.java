@@ -104,9 +104,11 @@ public class Main {
         }
     }
 
-    // this function turns the turn
-    // it clears the screen, prints the turn number and draws the board
-    // it should be called at the start of each turn
+    /**
+     * this function turns the turn
+     * it clears the screen, prints the turn number and draws the board
+     * it should be called at the start of each turn
+     */
     public static void nextTurn(int turn, Board board) {
         flushScreen();
         System.out.println("Turn " + (turn + 1) + " of 25");
@@ -170,7 +172,7 @@ public class Main {
         // 25 turns
         for (int i = 0; i < 25; i++) {
             // if it is the last turn, game over
-            if (i == 24 || board.getPlayers().size() == 0) {
+            if (i == 24 || board.allPlayersDead()) {
                 flushScreen();
                 gameOver();// PASSIVO DE FAZER FACTORY METHOD, FICARA flushScreen("gameOver")
                 break;
@@ -182,21 +184,9 @@ public class Main {
             int playersQuantity = board.getPlayers().size();
             for (int j = 0; j < playersQuantity; j++) {
 
-                // if every player is null, game over
-                for (int k = 0; k < board.getPlayers().size(); k++) {
-                    if (board.getPlayers().get(k) != null) {
-                        break;
-                    }
-                    if (k == board.getPlayers().size() - 1) {
-                        flushScreen();
-                        gameOver();// PASSIVO DE FAZER FACTORY METHOD, FICARA flushScreen("gameWin")
-                        break;
-                    }
-                }
-
                 // If player died last round or before, skip
-                if (board.checkPlayerState(j + 1) == "outOfGame")
-                    continue;  
+                if (board.checkPlayerState(j) == "outOfGame")
+                    continue;
 
                 // if every fakeNews is null, game over
                 for (int k = 0; k < board.getFakeNews().size(); k++) {
@@ -226,7 +216,7 @@ public class Main {
                     }
                     input = Integer.parseInt(placeholder);
 
-                    // Moving
+                    // Action
                     if (input == 2) {
                         nextTurn(i, board);
                         inventorySize = board.drawPlayerInventory(j + 1);
@@ -240,18 +230,18 @@ public class Main {
                         }
                         input = Integer.parseInt(placeholder);
 
+                        // ISSO AQUI TA ESTRANHO, VC JÁ SABE QUE O INPUT É 2
                         if (input > 0 && input < 5) {
                             // USE ITEM --------------------
                             nextTurn(i, board);
                             System.out.println("Item used!");
-                            // board.useItem(j + 1, input - 1);
+                            // board.useItem(j + 1, input - 1); // PODE RETURNAR UM BOOLEANO
                             itemUsed = true;
                         } else
                             itemUsed = false;
-                        j--;
                     }
 
-                    // Realizing action
+                    // moving
                     else if (input == 1) {
                         nextTurn(i, board);
                         input = chooseDirection(scanner);
@@ -261,7 +251,6 @@ public class Main {
                         System.out.printf("Player " + Cores.ANSI_GREEN + "J%d " + Cores.ANSI_RESET + "moved!\n", j + 1);
                     }
                 }
-
                 // If item was used, only thing player can do now is move
                 else {
                     nextTurn(i, board);
@@ -273,14 +262,13 @@ public class Main {
                     System.out.printf("Player " + Cores.ANSI_GREEN + "J%d " + Cores.ANSI_RESET + "moved!\n", j + 1);
                     itemUsed = false;
                 }
-                sleep(2);
+                sleep(1);
 
                 // Check for player deaths
-                if (board.checkPlayerState(j + 1) == "dead")
-                {
+                if (board.checkPlayerState(j) == "dead") {
                     nextTurn(i, board);
                     System.out.printf("Player " + Cores.ANSI_GREEN + "J%d " + Cores.ANSI_RESET + "died! :(\n", j + 1);
-                    sleep(2);
+                    sleep(1);
                 }
             }
 
@@ -291,8 +279,7 @@ public class Main {
             sleep(1);
 
             // Enemy movement
-            for (int x = 0; x < board.getFakeNews().size(); x++)
-            {
+            for (int x = 0; x < board.getFakeNews().size(); x++) {
                 // Ignore outOfGame fakeNews
                 if (board.checkFakeNewsState(x) == "outOfGame")
                     continue;
@@ -302,18 +289,17 @@ public class Main {
                 System.out.println("--> " + Cores.ANSI_RED + " Fake news " + (x + 1) + Cores.ANSI_RESET + " moved");
 
                 // Check for fakeNews deaths
-                if (board.checkFakeNewsState(x) == "dead")
-                {
-                    //nextTurn(i, board);
+                if (board.checkFakeNewsState(x) == "dead") {
+                    // nextTurn(i, board);
                     System.out.printf("Fake news " + Cores.ANSI_RED + "%d " + Cores.ANSI_RESET + "died! :)\n", x + 1);
-                }                
+                }
 
-                sleep(2);
+                sleep(1);
             }
             nextTurn(i, board);
             System.out.println("--> " + Cores.ANSI_RED + "All Fake news " + Cores.ANSI_RESET + "moved");
 
-            sleep(2);
+            sleep(1);
 
             System.out.println("Press any key to continue the game...");
             scanner.nextLine();
