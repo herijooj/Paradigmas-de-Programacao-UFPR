@@ -281,12 +281,18 @@ public class Main {
             nextTurn(i, board);
             System.out.println("--> " + Cores.ANSI_RED + "Fake news " + Cores.ANSI_RESET + "turn");
 
-            sleep(2);
+            sleep(1);
 
             // Enemy movement
-            board.moveFakeNews();
+            for (int x = 0; x < board.getFakeNews().size(); x++)
+            {
+                board.moveIndividualFakeNews(x);
+                nextTurn(i, board);
+                System.out.println("--> " + Cores.ANSI_RED + (x + 1) + " Fake news " + Cores.ANSI_RESET + "moved");
+                sleep(1);
+            }
             nextTurn(i, board);
-            System.out.println("--> " + Cores.ANSI_RED + "Fake news " + Cores.ANSI_RESET + "moved");
+            System.out.println("--> " + Cores.ANSI_RED + "All Fake news " + Cores.ANSI_RESET + "moved");
 
             sleep(2);
 
