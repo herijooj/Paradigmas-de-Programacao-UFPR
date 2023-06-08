@@ -86,7 +86,7 @@ public class Main {
 
     // this function receives a key and returns the corresponding direction
     public static int keyToDirection(String key) {
-        //touppercase
+        // touppercase
         key = key.toUpperCase();
 
         // 1 = down, 2 = up, 3 = right, 4 = left
@@ -121,6 +121,7 @@ public class Main {
 
         input = scanner.nextLine();
 
+        // while the input is invalid
         while (input.length() != 1 || keyToDirection(input) == 0) {
             // clear 2 lines
             System.out.print("\033[2A");
@@ -217,6 +218,7 @@ public class Main {
                     System.out.printf("--> " + Cores.ANSI_GREEN + "Player %d " + Cores.ANSI_RESET + "turn\n", j + 1);
                     System.out.println("Press action desired [1 -> move / 2 -> use itens]");
 
+                    // input validation
                     placeholder = scanner.nextLine();
                     while (!placeholder.matches("[1-2]+")) {
                         System.out.print("\033[2A");
@@ -225,10 +227,12 @@ public class Main {
                     }
                     input = Integer.parseInt(placeholder);
 
+                    // Moving
                     if (input == 2) {
                         nextTurn(i, board);
                         inventorySize = board.drawPlayerInventory(j + 1);
 
+                        // input validation
                         placeholder = scanner.nextLine();
                         while (!placeholder.matches("[1-5]")) {
                             System.out.print("\033[2A");
@@ -241,7 +245,7 @@ public class Main {
                             // USE ITEM --------------------
                             nextTurn(i, board);
                             System.out.println("Item used!");
-                            //board.useItem(j + 1, input - 1);
+                            // board.useItem(j + 1, input - 1);
                             itemUsed = true;
                         } else
                             itemUsed = false;
