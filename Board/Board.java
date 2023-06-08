@@ -481,9 +481,6 @@ public class Board {
      **/
     public void movePlayer(int i, int direction) {
         LinkedList<Player> players = getPlayers();
-        Component source = new Component() {
-        };
-        KeyEvent e = new KeyEvent(source, 0, 0, 0, 0, ' ');
 
         // get the current coordinates
         int iPlayer = players.get(i).getPosition().getI();
@@ -493,7 +490,7 @@ public class Board {
         // clear the old position
         this.board[iPlayer][jPlayer].setSectorState("");
 
-        boolean movementWorked = players.get(i).move(this, players, e, direction);
+        boolean movementWorked = players.get(i).move(this, direction);
 
         // if the movement worked, update the board
         if (movementWorked) {
@@ -520,6 +517,7 @@ public class Board {
         board = this.getBoard();
         LinkedList<Player> players = getPlayers();
         LinkedList<FakeNews> fakeNews = getFakeNews();
+
         // draw the board
         for (int i = 0; i < size; i++) {
             // draw the top and bottom of the board
