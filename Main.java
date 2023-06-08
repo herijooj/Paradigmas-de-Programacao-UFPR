@@ -194,10 +194,9 @@ public class Main {
                     }
                 }
 
-                // if player is null, skip
-                if (board.getPlayers().get(j) == null) {
-                    continue;
-                }
+                // If player died last round or before, skip
+                if (board.checkPlayerState(j + 1) == "outOfGame")
+                    continue;  
 
                 // if every fakeNews is null, game over
                 for (int k = 0; k < board.getFakeNews().size(); k++) {
@@ -275,6 +274,14 @@ public class Main {
                     itemUsed = false;
                 }
                 sleep(2);
+
+                // Check for player deaths
+                if (board.checkPlayerState(j + 1) == "dead")
+                {
+                    nextTurn(i, board);
+                    System.out.printf("Player " + Cores.ANSI_GREEN + "J%d " + Cores.ANSI_RESET + "died! :(\n", j + 1);
+                    sleep(2);
+                }
             }
 
             // Enemy turn ===================================
@@ -286,10 +293,22 @@ public class Main {
             // Enemy movement
             for (int x = 0; x < board.getFakeNews().size(); x++)
             {
+                // Ignore outOfGame fakeNews
+                if (board.checkFakeNewsState(x) == "outOfGame")
+                    continue;
+
                 board.moveIndividualFakeNews(x);
                 nextTurn(i, board);
-                System.out.println("--> " + Cores.ANSI_RED + (x + 1) + " Fake news " + Cores.ANSI_RESET + "moved");
-                sleep(1);
+                System.out.println("--> " + Cores.ANSI_RED + " Fake news " + (x + 1) + Cores.ANSI_RESET + " moved");
+
+                // Check for fakeNews deaths
+                if (board.checkFakeNewsState(x) == "dead")
+                {
+                    //nextTurn(i, board);
+                    System.out.printf("Fake news " + Cores.ANSI_RED + "%d " + Cores.ANSI_RESET + "died! :)\n", x + 1);
+                }                
+
+                sleep(2);
             }
             nextTurn(i, board);
             System.out.println("--> " + Cores.ANSI_RED + "All Fake news " + Cores.ANSI_RESET + "moved");
