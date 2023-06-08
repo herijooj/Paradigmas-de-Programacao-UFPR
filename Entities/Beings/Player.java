@@ -179,6 +179,14 @@ public class Player extends Entity {
      * player object
      */
     public String toString() {
-        return "Player " + this.playerNum;
+
+        if (this.playerNum == 1)
+            return "Player 1";
+        else if (this.playerNum == 2)
+            return "Player 2";
+        else if (this.playerNum == 3)
+            return "Player 3";
+        else 
+            return "Player 4";
     }
 }
