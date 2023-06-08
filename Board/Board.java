@@ -433,6 +433,39 @@ public class Board {
         this.board[i][j] = new Sector(i, j, sectorState);
     }
 
+    public void moveIndividualFakeNews(int index)
+    {
+        LinkedList<FakeNews> fakeNews = getFakeNews();
+
+        if (fakeNews.get(index) == null)
+                return;
+        // passing a blank keyEvent because it's not used
+        // non-null component source and keyChar of ' ' because it's not used
+        Component source = new Component() {
+        };
+        KeyEvent e = new KeyEvent(source, 0, 0, 0, 0, ' ');
+        // get the current coordinates
+        int iFakeNews = fakeNews.get(index).getPosition().getI();
+        int jFakeNews = fakeNews.get(index).getPosition().getJ();
+
+        // clear the old position
+        this.board[iFakeNews][jFakeNews].setSectorState("");
+
+        // goes up, down, left or right one position randomly
+        int direction = (int) (Math.random() * 4) + 1;
+
+        boolean movementWorked = fakeNews.get(index).move(board, fakeNews, e, direction);
+
+        // if the movement worked, update the board
+        if (movementWorked) {
+            // get the new coordinates
+            iFakeNews = fakeNews.get(index).getPosition().getI();
+            jFakeNews = fakeNews.get(index).getPosition().getJ();
+            // update the board
+            this.board[iFakeNews][jFakeNews].setSectorState(fakeNews.get(index).toString());
+        }
+    }
+
     /*
      * This method is used to move the fake news
      * it iterates through the list of fake news
