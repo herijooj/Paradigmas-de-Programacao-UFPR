@@ -36,10 +36,10 @@ public class F3 extends FakeNews {
             case 1:
                 newI = this.position.getI() + 1;
                 newJ = this.position.getJ() + 1;
-                if (!checkMovement(board, newI, newJ)) {
+                if (!canMoveToCoordinate(board, newI, newJ)) {
                     System.out.println("A FakeNews has " + Cores.ANSI_GREEN + "Died!" + Cores.ANSI_RESET);
-                    //fakeNews.remove(this);
-                    //fakeNews.add(null);
+                    // fakeNews.remove(this);
+                    // fakeNews.add(null);
                     return false;
                 } else {
                     this.position.setI(newI);
@@ -50,10 +50,10 @@ public class F3 extends FakeNews {
             case 2:
                 newI = this.position.getI() - 1;
                 newJ = this.position.getJ() + 1;
-                if (!checkMovement(board, newI, newJ)) {
+                if (!canMoveToCoordinate(board, newI, newJ)) {
                     System.out.println("A FakeNews has " + Cores.ANSI_GREEN + "Died!" + Cores.ANSI_RESET);
-                    //fakeNews.remove(this);
-                    //fakeNews.add(null);
+                    // fakeNews.remove(this);
+                    // fakeNews.add(null);
                     return false;
                 } else {
                     this.position.setI(newI);
@@ -64,10 +64,10 @@ public class F3 extends FakeNews {
             case 3:
                 newI = this.position.getI() + 1;
                 newJ = this.position.getJ() - 1;
-                if (!checkMovement(board, newI, newJ)) {
+                if (!canMoveToCoordinate(board, newI, newJ)) {
                     System.out.println("A FakeNews has " + Cores.ANSI_GREEN + "Died!" + Cores.ANSI_RESET);
-                    //fakeNews.remove(this);
-                    //fakeNews.add(null);
+                    // fakeNews.remove(this);
+                    // fakeNews.add(null);
                     return false;
                 } else {
                     this.position.setI(newI);
@@ -78,10 +78,10 @@ public class F3 extends FakeNews {
             case 4:
                 newI = this.position.getI() - 1;
                 newJ = this.position.getJ() - 1;
-                if (!checkMovement(board, newI, newJ)) {
+                if (!canMoveToCoordinate(board, newI, newJ)) {
                     System.out.println("A FakeNews has " + Cores.ANSI_GREEN + "Died!" + Cores.ANSI_RESET);
-                    //fakeNews.remove(this);
-                    //fakeNews.add(null);
+                    // fakeNews.remove(this);
+                    // fakeNews.add(null);
                     return false;
                 } else {
                     this.position.setI(newI);

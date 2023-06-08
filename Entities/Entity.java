@@ -49,7 +49,7 @@ public abstract class Entity {
      * 
      * Returns: true if it can move, false otherwise
      **/
-    public boolean checkMovement(Sector[][] board, int i, int j) { // MUDAR NOME E USAR COORDENADAS
+    public boolean canMoveToCoordinate(Sector[][] board, int i, int j) { // MUDAR NOME E USAR COORDENADAS
         if (i < 0 || i > 8 || j < 0 || j > 8)
             return false;
 

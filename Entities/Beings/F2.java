@@ -35,10 +35,10 @@ public class F2 extends FakeNews {
             // goes two down
             case 1:
                 newI = this.position.getI() + 2;
-                if (!checkMovement(board, newI, this.position.getJ())) {
+                if (!canMoveToCoordinate(board, newI, this.position.getJ())) {
                     System.out.println("A FakeNews has " + Cores.ANSI_GREEN + "Died!" + Cores.ANSI_RESET);
-                    //fakeNews.remove(this);
-                    //fakeNews.add(null);
+                    // fakeNews.remove(this);
+                    // fakeNews.add(null);
                     return false;
                 } else {
                     this.position.setI(this.position.getI() + 2);
@@ -47,10 +47,10 @@ public class F2 extends FakeNews {
                 // goes two up
             case 2:
                 newI = this.position.getI() - 2;
-                if (!checkMovement(board, newI, this.position.getJ())) {
+                if (!canMoveToCoordinate(board, newI, this.position.getJ())) {
                     System.out.println("A FakeNews has " + Cores.ANSI_GREEN + "Died!" + Cores.ANSI_RESET);
-                    //fakeNews.remove(this);
-                    //fakeNews.add(null);
+                    // fakeNews.remove(this);
+                    // fakeNews.add(null);
                     return false;
                 } else {
                     this.position.setI(this.position.getI() - 2);
@@ -59,10 +59,10 @@ public class F2 extends FakeNews {
                 // goes two right
             case 3:
                 newJ = this.position.getJ() + 2;
-                if (!checkMovement(board, this.position.getI(), newJ)) {
+                if (!canMoveToCoordinate(board, this.position.getI(), newJ)) {
                     System.out.println("A FakeNews has " + Cores.ANSI_GREEN + "Died!" + Cores.ANSI_RESET);
-                    //fakeNews.remove(this);
-                    //fakeNews.add(null);
+                    // fakeNews.remove(this);
+                    // fakeNews.add(null);
                     return false;
                 } else {
                     this.position.setJ(this.position.getJ() + 2);
@@ -71,10 +71,10 @@ public class F2 extends FakeNews {
                 // goes two left
             case 4:
                 newJ = this.position.getJ() - 2;
-                if (!checkMovement(board, this.position.getI(), newJ)) {
+                if (!canMoveToCoordinate(board, this.position.getI(), newJ)) {
                     System.out.println("A FakeNews has " + Cores.ANSI_GREEN + "Died!" + Cores.ANSI_RESET);
-                    //fakeNews.remove(this);
-                    //fakeNews.add(null);
+                    // fakeNews.remove(this);
+                    // fakeNews.add(null);
                     return false;
                 } else {
                     this.position.setJ(this.position.getJ() - 2);
