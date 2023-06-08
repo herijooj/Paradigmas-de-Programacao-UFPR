@@ -15,11 +15,13 @@ public class Player extends Entity {
     private int playerNum;
     private LinkedList<ItemCharacteristics> inventory;
     private int inventorySize = 4;
+    private String state;
 
     // Full Constructor
     public Player(int playerNum, Coordinate position) {
         super(position);
         this.setPlayerNum(playerNum);
+        this.setState("alive");
         this.setInventory();
     }
 
@@ -32,6 +34,11 @@ public class Player extends Entity {
         return this.inventory;
     }
 
+    public String getState()
+    {
+        return this.state;
+    }
+
     // Setters
     public void setPlayerNum(int playerNum) {
         if (playerNum < 1 || playerNum > 4)
@@ -42,6 +49,14 @@ public class Player extends Entity {
 
     public void setInventory() {
         this.inventory = new LinkedList<ItemCharacteristics>();
+    }
+
+    public void setState(String state)
+    {
+        if (state != "alive" && state != "dead" && state != "outOfGame")
+            throw new IllegalArgumentException("Invalid state, valids: [alive, dead and outOfGame]");
+        else
+            this.state = state;
     }
 
     // Methods
