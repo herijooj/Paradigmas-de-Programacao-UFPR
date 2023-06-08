@@ -550,12 +550,13 @@ public class Board {
         board = this.getBoard();
         LinkedList<Player> players = getPlayers();
         LinkedList<FakeNews> fakeNews = getFakeNews();
+        int i;
 
         // draw the board
-        for (int i = 0; i < size; i++) {
+        for (i = 0; i < size; i++) {
             // draw the top and bottom of the board
             if (i == 0 || i == size) {
-                System.out.print("+----+");
+                System.out.print("  +----+");
                 for (int j = 1; j < size; j++) {
                     System.out.print("----+");
                 }
@@ -565,25 +566,25 @@ public class Board {
             // draw the first side of the board
             String currentSectorState = board[i][0].getSectorState();
             if (currentSectorState == "Player 1")
-                System.out.printf("|" + Cores.ANSI_GREEN + " J1 " + Cores.ANSI_RESET + "|");
+                System.out.printf(i + " |" + Cores.ANSI_GREEN + " J1 " + Cores.ANSI_RESET + "|");
             else if (currentSectorState == "Player 2")
-                System.out.printf("|" + Cores.ANSI_GREEN + " J2 " + Cores.ANSI_RESET + "|");
+                System.out.printf(i + " |" + Cores.ANSI_GREEN + " J2 " + Cores.ANSI_RESET + "|");
             else if (currentSectorState == "Player 3")
-                System.out.printf("|" + Cores.ANSI_GREEN + " J3 " + Cores.ANSI_RESET + "|");
+                System.out.printf(i + " |" + Cores.ANSI_GREEN + " J3 " + Cores.ANSI_RESET + "|");
             else if (currentSectorState == "Player 4")
-                System.out.printf("|" + Cores.ANSI_GREEN + " J4 " + Cores.ANSI_RESET + "|");
+                System.out.printf(i + " |" + Cores.ANSI_GREEN + " J4 " + Cores.ANSI_RESET + "|");
             else if (currentSectorState == "Restricted")
-                System.out.printf("|" + Cores.ANSI_WHITE + " XX " + Cores.ANSI_RESET + "|");
+                System.out.printf(i + " |" + Cores.ANSI_WHITE + " XX " + Cores.ANSI_RESET + "|");
             else if (currentSectorState == "F1")
-                System.out.printf("|" + Cores.ANSI_RED + " F1 " + Cores.ANSI_RESET + "|");
+                System.out.printf(i + " |" + Cores.ANSI_RED + " F1 " + Cores.ANSI_RESET + "|");
             else if (currentSectorState == "F2")
-                System.out.printf("|" + Cores.ANSI_RED + " F2 " + Cores.ANSI_RESET + "|");
+                System.out.printf(i + " |" + Cores.ANSI_RED + " F2 " + Cores.ANSI_RESET + "|");
             else if (currentSectorState == "F3")
-                System.out.printf("|" + Cores.ANSI_RED + " F3 " + Cores.ANSI_RESET + "|");
+                System.out.printf(i + " |" + Cores.ANSI_RED + " F3 " + Cores.ANSI_RESET + "|");
             else if (currentSectorState.contains("Item"))
-                System.out.printf("|" + Cores.ANSI_YELLOW + " ?? " + Cores.ANSI_RESET + "|");
+                System.out.printf(i + " |" + Cores.ANSI_YELLOW + " ?? " + Cores.ANSI_RESET + "|");
             else
-                System.out.printf("|    |");
+                System.out.printf(i + " |    |");
 
             // draw the rest of the board
             for (int j = 1; j < size; j++) {
@@ -611,15 +612,17 @@ public class Board {
             }
 
             System.out.println();
-            System.out.print("+----+");
+            System.out.print("  +----+");
 
             // draw the bottom of the board
             for (int j = 1; j < size; j++) {
                 System.out.print("----+");
             }
             System.out.println();
-
         }
+        for (i = 0; i < 9; i++)
+            System.out.print("    " + i);
+        System.out.println("\n");
     }
 
     /**
