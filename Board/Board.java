@@ -433,12 +433,11 @@ public class Board {
         this.board[i][j] = new Sector(i, j, sectorState);
     }
 
-    public void moveIndividualFakeNews(int index)
-    {
+    public void moveIndividualFakeNews(int index) {
         LinkedList<FakeNews> fakeNews = getFakeNews();
 
         if (fakeNews.get(index) == null)
-                return;
+            return;
         // passing a blank keyEvent because it's not used
         // non-null component source and keyChar of ' ' because it's not used
         Component source = new Component() {
@@ -463,8 +462,7 @@ public class Board {
             jFakeNews = fakeNews.get(index).getPosition().getJ();
             // update the board
             this.board[iFakeNews][jFakeNews].setSectorState(fakeNews.get(index).toString());
-        }
-        else
+        } else
             fakeNews.get(index).setState("dead");
     }
 
@@ -534,8 +532,7 @@ public class Board {
             jPlayer = players.get(i).getPosition().getJ();
             // update the board
             this.board[iPlayer][jPlayer].setSectorState(players.get(i).toString());
-        }
-        else
+        } else
             players.get(i).setState("dead");
     }
 
@@ -546,42 +543,51 @@ public class Board {
         item.itemAbility(this, player);
     }
 
-    /*
+    /**
      * Returns a string indicating the player state
      * Can be, dead, alive or outOfGame
+     * 
+     * @param playerNum
+     * @return "dead" | "Alive" | "OutOfGame"
      */
-    public String checkPlayerState(int playerNum)
-    {
-        Player player = this.listaPlayers.get(playerNum - 1);
+    public String checkPlayerState(int playerNum) {
+        if (this.listaPlayers.size() >= 0 && this.listaPlayers.size() <= playerNum)
+            return "outOfGame";
+        Player player = this.listaPlayers.get(playerNum);
 
-        if (player.getState() == "dead")
-        {
+        if (player.getState() == "dead") {
             player.setState("outOfGame");
             return "dead";
-        }
-        else if (player.getState() == "alive")
+        } else if (player.getState() == "alive")
+            return "alive";
+        else
+            return "outOfGame";
+
+    }
+
+    /**
+     * Returns a string indicating the fakeNews state
+     * Can be, dead, alive or outOfGame
+     */
+    public String checkFakeNewsState(int fakeNewsIndex) {
+        FakeNews fakeNews = this.listaFakeNews.get(fakeNewsIndex);
+
+        if (fakeNews.getState() == "dead") {
+            fakeNews.setState("outOfGame");
+            return "dead";
+        } else if (fakeNews.getState() == "alive")
             return "alive";
         else
             return "outOfGame";
     }
 
-    /*
-     * Returns a string indicating the fakeNews state
-     * Can be, dead, alive or outOfGame
-     */
-    public String checkFakeNewsState(int fakeNewsIndex)
-    {
-        FakeNews fakeNews = this.listaFakeNews.get(fakeNewsIndex);
-
-        if (fakeNews.getState() == "dead")
-        {
-            fakeNews.setState("outOfGame");
-            return "dead";
+    public boolean allPlayersDead() {
+        LinkedList<Player> players = this.getPlayers();
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i).getState() == "alive")
+                return false;
         }
-        else if (fakeNews.getState() == "alive")
-            return "alive";
-        else
-            return "outOfGame";
+        return true;
     }
 
     /**
