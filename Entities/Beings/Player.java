@@ -56,8 +56,7 @@ public class Player extends Entity {
     /*
      * Adds a collected item to the player inventory
      */
-    public void addItemToInventory(ItemCharacteristics item)
-    {
+    public void addItemToInventory(ItemCharacteristics item) {
         if (this.inventory.size() < this.inventorySize)
             this.inventory.add(item);
     }
@@ -66,25 +65,23 @@ public class Player extends Entity {
      * Checks if a sector has an Item
      * returns true if it has, and false if it doesn't
      */
-    public boolean hasItem(Sector[][] board, Coordinate position)
-    {
+    public boolean hasItem(Sector[][] board, Coordinate position) {
         if (board[position.getI()][position.getJ()].getSectorState().contains("Item"))
             return true;
         return false;
     }
-    
+
     /*
      * Based on the sectorState, returns an Item object
      */
-    public ItemCharacteristics getSpecificItem(Sector[][] board, Coordinate position)
-    {
+    public ItemCharacteristics getSpecificItem(Sector[][] board, Coordinate position) {
         if (board[position.getI()][position.getJ()].getSectorState() == "Item Boato")
             return (new ItemBoato(position));
         else if (board[position.getI()][position.getJ()].getSectorState() == "Item Denunciar")
             return (new ItemDenunciar(position));
         else if (board[position.getI()][position.getJ()].getSectorState() == "Item Fugir")
             return (new ItemFugir(position));
-        else 
+        else
             return (new ItemLer(position));
     }
 
@@ -101,78 +98,78 @@ public class Player extends Entity {
             case 1:
                 newI = this.position.getI() + 1;
 
-                if (!checkMovement(board.getBoard(), newI, this.position.getJ()))
+                if (!canMoveToCoordinate(board.getBoard(), newI, this.position.getJ()))
                     return false;
                 else {
                     position = new Coordinate(newI, this.position.getJ());
 
                     if (hasItem(board.getBoard(), position)) {
-                        // Adds an item to the player  
+                        // Adds an item to the player
                         // inventory and adds a new item to the board
                         addItemToInventory(getSpecificItem(board.getBoard(), position));
                         board.addItens(1);
                     }
 
                     this.position.setI(this.position.getI() + 1);
-                    return true;
                 }
+                return true;
             // Goes up
             case 2:
                 newI = this.position.getI() - 1;
 
-                if (!checkMovement(board.getBoard(), newI, this.position.getJ()))
+                if (!canMoveToCoordinate(board.getBoard(), newI, this.position.getJ()))
                     return false;
                 else {
                     position = new Coordinate(newI, this.position.getJ());
 
                     if (hasItem(board.getBoard(), position)) {
-                        // Adds an item to the player  
+                        // Adds an item to the player
                         // inventory and adds a new item to the board
                         addItemToInventory(getSpecificItem(board.getBoard(), position));
                         board.addItens(1);
                     }
 
                     this.position.setI(this.position.getI() - 1);
-                    return true;
                 }
+                return true;
 
             // Goes right
             case 3:
                 newJ = this.position.getJ() + 1;
 
-                if (!checkMovement(board.getBoard(), this.position.getI(), newJ))
+                if (!canMoveToCoordinate(board.getBoard(), this.position.getI(), newJ))
                     return false;
                 else {
                     position = new Coordinate(this.getPosition().getI(), newJ);
 
                     if (hasItem(board.getBoard(), position)) {
-                        // Adds an item to the player  
+                        // Adds an item to the player
                         // inventory and adds a new item to the board
                         addItemToInventory(getSpecificItem(board.getBoard(), position));
                         board.addItens(1);
                     }
 
                     this.position.setJ(this.position.getJ() + 1);
-                    return true;
                 }
+                return true;
             // Goes left
             case 4:
                 newJ = this.position.getJ() - 1;
-                if (!checkMovement(board.getBoard(), this.position.getI(), newJ))
+                if (!canMoveToCoordinate(board.getBoard(), this.position.getI(), newJ))
                     return false;
                 else {
                     position = new Coordinate(this.getPosition().getI(), newJ);
 
                     if (hasItem(board.getBoard(), position)) {
-                        // Adds an item to the player  
+                        // Adds an item to the player
                         // inventory and adds a new item to the board
                         addItemToInventory(getSpecificItem(board.getBoard(), position));
                         board.addItens(1);
                     }
 
                     this.position.setJ(this.position.getJ() - 1);
-                    return true;
                 }
+                return true;
         }
         return false;
     }
