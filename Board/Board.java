@@ -433,16 +433,17 @@ public class Board {
         this.board[i][j] = new Sector(i, j, sectorState);
     }
 
+    /*
+     * This method is used to move the fake news
+     * 
+     * @param index the index of the fake news to be moved
+     */
     public void moveIndividualFakeNews(int index) {
         LinkedList<FakeNews> fakeNews = getFakeNews();
 
         if (fakeNews.get(index) == null)
             return;
-        // passing a blank keyEvent because it's not used
-        // non-null component source and keyChar of ' ' because it's not used
-        Component source = new Component() {
-        };
-        KeyEvent e = new KeyEvent(source, 0, 0, 0, 0, ' ');
+
         // get the current coordinates
         int iFakeNews = fakeNews.get(index).getPosition().getI();
         int jFakeNews = fakeNews.get(index).getPosition().getJ();
@@ -460,48 +461,38 @@ public class Board {
             // get the new coordinates
             iFakeNews = fakeNews.get(index).getPosition().getI();
             jFakeNews = fakeNews.get(index).getPosition().getJ();
+
+            // checking if the movement killed a player
+            Player playerOnSector = checkIfSectorHasPlayer(new Coordinate(iFakeNews, jFakeNews));
+            if (playerOnSector != null)
+                playerOnSector.setState("dead");
+
             // update the board
             this.board[iFakeNews][jFakeNews].setSectorState(fakeNews.get(index).toString());
         } else
             fakeNews.get(index).setState("dead");
     }
 
-    /*
-     * This method is used to move the fake news
-     * it iterates through the list of fake news
+    /**
+     * This method is used to check if a sector has a player
+     * 
+     * @param position
+     * @return
      */
-    public void moveFakeNews() {
-        // iterate through the list of fake news
-        // and move them
+    public Player checkIfSectorHasPlayer(Coordinate position) {
+        LinkedList<Player> players = getPlayers();
 
-        LinkedList<FakeNews> fakeNews = getFakeNews();
-
-        // calls the move method for each fake news
-        for (int i = 0; i < fakeNews.size(); i++) {
-            if (fakeNews.get(i) == null)
+        for (int i = 0; i < players.size(); i++) {
+            // if the player is dead, it doesn't count
+            if (players.get(i).getState() != "alive")
                 continue;
 
-            // get the current coordinates
-            int iFakeNews = fakeNews.get(i).getPosition().getI();
-            int jFakeNews = fakeNews.get(i).getPosition().getJ();
-
-            // clear the old position
-            this.board[iFakeNews][jFakeNews].setSectorState("");
-
-            // goes up, down, left or right one position randomly
-            int direction = (int) (Math.random() * 4) + 1;
-
-            boolean movementWorked = fakeNews.get(i).move(this, direction);
-
-            // if the movement worked, update the board
-            if (movementWorked) {
-                // get the new coordinates
-                iFakeNews = fakeNews.get(i).getPosition().getI();
-                jFakeNews = fakeNews.get(i).getPosition().getJ();
-                // update the board
-                this.board[iFakeNews][jFakeNews].setSectorState(fakeNews.get(i).toString());
-            }
+            // if the player is in the same position as the sector
+            if (players.get(i).getPosition().getI() == position.getI()
+                    && players.get(i).getPosition().getJ() == position.getJ())
+                return players.get(i);
         }
+        return null;
     }
 
     /**
@@ -526,6 +517,7 @@ public class Board {
             // get the new coordinates
             iPlayer = players.get(i).getPosition().getI();
             jPlayer = players.get(i).getPosition().getJ();
+
             // update the board
             this.board[iPlayer][jPlayer].setSectorState(players.get(i).toString());
         } else
@@ -684,6 +676,7 @@ public class Board {
             System.out.print("| ");
             for (i = 0; i < player.getInventory().size(); i++)
                 System.out.print((i + 1) + " - " + player.getInventory().get(i).toString() + " |");
+            System.out.println("\n");
         }
 
         return player.getInventory().size();
