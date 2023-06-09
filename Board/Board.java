@@ -480,11 +480,7 @@ public class Board {
         for (int i = 0; i < fakeNews.size(); i++) {
             if (fakeNews.get(i) == null)
                 continue;
-            // passing a blank keyEvent because it's not used
-            // non-null component source and keyChar of ' ' because it's not used
-            Component source = new Component() {
-            };
-            KeyEvent e = new KeyEvent(source, 0, 0, 0, 0, ' ');
+
             // get the current coordinates
             int iFakeNews = fakeNews.get(i).getPosition().getI();
             int jFakeNews = fakeNews.get(i).getPosition().getJ();
@@ -596,8 +592,6 @@ public class Board {
     public void drawBoard() {
         size = this.getSize();
         board = this.getBoard();
-        LinkedList<Player> players = getPlayers();
-        LinkedList<FakeNews> fakeNews = getFakeNews();
         int i;
 
         // draw the board

@@ -4,10 +4,6 @@ import java.util.Scanner;
 // import custom classes
 import Board.*;
 
-import Entities.Beings.*;
-import Entities.Itens.*;
-import Entities.*;
-
 import Cores.*;
 
 public class Main {

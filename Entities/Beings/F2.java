@@ -1,9 +1,6 @@
 package Entities.Beings;
 
 // imports
-import java.util.*;
-import java.awt.event.KeyEvent;
-
 import Entities.Coordinate;
 import Board.Board;
 import Cores.Cores;

@@ -1,7 +1,6 @@
 package Entities.Beings;
 
 // imports
-
 import Entities.Coordinate;
 import Board.Board;
 
