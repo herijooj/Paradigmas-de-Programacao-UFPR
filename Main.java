@@ -130,6 +130,15 @@ public class Main {
         return keyToDirection(input);
     }
 
+    public static void checkForPlayersDeaths(Board board, int i, int j) {
+        // Check for player deaths
+        if (board.checkPlayerState(j) == "dead") {
+            nextTurn(i, board);
+            System.out.printf("Player " + Cores.ANSI_GREEN + "J%d " + Cores.ANSI_RESET + "died! :(\n", j + 1);
+            sleep(1);
+        }
+    }
+
     // main function ====================================
     public static void main(String[] args) {
 
@@ -181,7 +190,7 @@ public class Main {
             for (int j = 0; j < playersQuantity; j++) {
 
                 // If player died last round or before, skip
-                if (board.checkPlayerState(j) == "outOfGame")
+                if (board.checkPlayerState(j) == "outOfGame" || board.checkPlayerState(j) == "dead")
                     continue;
 
                 // if every fakeNews is null, game over
@@ -261,11 +270,7 @@ public class Main {
                 sleep(1);
 
                 // Check for player deaths
-                if (board.checkPlayerState(j) == "dead") {
-                    nextTurn(i, board);
-                    System.out.printf("Player " + Cores.ANSI_GREEN + "J%d " + Cores.ANSI_RESET + "died! :(\n", j + 1);
-                    sleep(1);
-                }
+                checkForPlayersDeaths(board, i, j);
             }
 
             // Enemy turn ===================================
@@ -288,6 +293,11 @@ public class Main {
                 if (board.checkFakeNewsState(x) == "dead") {
                     // nextTurn(i, board);
                     System.out.printf("Fake news " + Cores.ANSI_RED + "%d " + Cores.ANSI_RESET + "died! :)\n", x + 1);
+                }
+
+                // Check for player deaths
+                for (int j = 0; j < playersQuantity; j++) {
+                    checkForPlayersDeaths(board, i, j);
                 }
 
                 sleep(1);
