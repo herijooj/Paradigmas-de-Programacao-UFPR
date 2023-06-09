@@ -188,7 +188,7 @@ public class Main {
             // for loop between players
             int playersQuantity = board.getPlayers().size();
             for (j = 0; j < playersQuantity; j++) {
-                
+
                 // If player died last round or before, skip
                 if (board.checkPlayerState(j) == "outOfGame" || board.checkPlayerState(j) == "dead")
                     continue;
@@ -276,6 +276,13 @@ public class Main {
                     checkForPlayersDeaths(board, i, j);
                 }
                 sleep(1);
+            }
+
+            // Check if players died during movement
+            if (board.allPlayersDead()) {
+                flushScreen();
+                gameOver();
+                break;
             }
 
             // Enemy turn ===================================
