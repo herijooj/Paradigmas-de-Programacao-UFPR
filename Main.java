@@ -311,6 +311,13 @@ public class Main {
                 for (int k = 0; k < playersQuantity; k++)
                     checkForPlayersDeaths(board, i, k);
 
+                // Check if players died during fakeNews movement
+                if (board.allPlayersDead()) {
+                    flushScreen();
+                    gameOver();
+                    break;
+                }
+
                 sleep(1);
             }
             nextTurn(i, board);
