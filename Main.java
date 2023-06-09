@@ -143,7 +143,7 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        int playerCount, input, inventorySize, j = 0;
+        int playerCount, input, inventorySize, j = 0, previousJ;
         boolean itemUsed = false;
         String placeholder;
 
@@ -187,9 +187,8 @@ public class Main {
 
             // for loop between players
             int playersQuantity = board.getPlayers().size();
-            //for (int j = 0; j < playersQuantity; j++) {
-                while (j < playersQuantity)
-                {
+            for (j = 0; j < playersQuantity; j++) {
+                
                 // If player died last round or before, skip
                 if (board.checkPlayerState(j) == "outOfGame" || board.checkPlayerState(j) == "dead")
                     continue;
@@ -205,6 +204,8 @@ public class Main {
                         break;
                     }
                 }
+
+                previousJ = j;
                 // Getting action
                 if (!itemUsed) {
                     flushScreen();
@@ -259,6 +260,7 @@ public class Main {
                         board.movePlayer(j, input);
                         nextTurn(i, board);
                         System.out.printf("Player " + Cores.ANSI_GREEN + "J%d " + Cores.ANSI_RESET + "moved!\n", j + 1);
+                        checkForPlayersDeaths(board, i, j);
                     }
                 }
                 // If item was used, only thing player can do now is move
@@ -271,16 +273,10 @@ public class Main {
                     nextTurn(i, board);
                     System.out.printf("Player " + Cores.ANSI_GREEN + "J%d " + Cores.ANSI_RESET + "moved!\n", j + 1);
                     itemUsed = false;
+                    checkForPlayersDeaths(board, i, j);
                 }
                 sleep(1);
-
-                j++;
-
-                // Check for player deaths
-                checkForPlayersDeaths(board, i, j);
             }
-
-            j = 0;
 
             // Enemy turn ===================================
             nextTurn(i, board);
