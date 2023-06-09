@@ -143,7 +143,7 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        int playerCount, input, inventorySize;
+        int playerCount, input, inventorySize, j = 0;
         boolean itemUsed = false;
         String placeholder;
 
@@ -187,8 +187,9 @@ public class Main {
 
             // for loop between players
             int playersQuantity = board.getPlayers().size();
-            for (int j = 0; j < playersQuantity; j++) {
-
+            //for (int j = 0; j < playersQuantity; j++) {
+                while (j < playersQuantity)
+                {
                 // If player died last round or before, skip
                 if (board.checkPlayerState(j) == "outOfGame" || board.checkPlayerState(j) == "dead")
                     continue;
@@ -236,6 +237,8 @@ public class Main {
                         input = Integer.parseInt(placeholder);
 
                         // ISSO AQUI TA ESTRANHO, VC JÁ SABE QUE O INPUT É 2
+                        // Acho que esse if faz o mesmo que o while logo acima
+                        // Mas verifica se foi [1-4], porque o 5 eh pra sair do inventario
                         if (input > 0 && input < 5) {
                             // USE ITEM --------------------
                             nextTurn(i, board);
@@ -244,6 +247,8 @@ public class Main {
                             itemUsed = true;
                         } else
                             itemUsed = false;
+                        
+                        j--;
                     }
 
                     // moving
@@ -269,9 +274,13 @@ public class Main {
                 }
                 sleep(1);
 
+                j++;
+
                 // Check for player deaths
                 checkForPlayersDeaths(board, i, j);
             }
+
+            j = 0;
 
             // Enemy turn ===================================
             nextTurn(i, board);
@@ -296,9 +305,8 @@ public class Main {
                 }
 
                 // Check for player deaths
-                for (int j = 0; j < playersQuantity; j++) {
-                    checkForPlayersDeaths(board, i, j);
-                }
+                for (int k = 0; k < playersQuantity; k++)
+                    checkForPlayersDeaths(board, i, k);
 
                 sleep(1);
             }
