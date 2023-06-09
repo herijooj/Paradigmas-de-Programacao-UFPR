@@ -26,13 +26,12 @@ pdf:
 # Clean
 clean:
 	rm -f *.class
-	rm -f ./jogo/*.class
-	rm -f ./jogo/Board/*.class
-	rm -f ./jogo/Coordinate/*.class
-	rm -f ./jogo/Cores/*.class
-	rm -f ./jogo/Entities/*.class
-	rm -f ./jogo/Sector/*.class
+	rm -f ./Board/*.class
+	rm -f ./Cores/*.class
+	rm -f ./Entities/*.class
+	rm -f ./Entities/Beings/*.class
+	rm -f ./Entities/Beings/Itens/*.class
 
 # Run
 run:
-	java ./jogo/Main
+	java Main
