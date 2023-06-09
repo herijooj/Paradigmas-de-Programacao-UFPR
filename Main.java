@@ -301,8 +301,8 @@ public class Main {
 
             sleep(1);
 
-            System.out.println("Press any key to continue the game...");
-            scanner.nextLine();
+            // System.out.println("Press any key to continue the game...");
+            // scanner.nextLine();
         }
     }
 }
