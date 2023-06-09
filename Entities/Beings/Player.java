@@ -1,15 +1,13 @@
 package Entities.Beings;
 
-import java.awt.event.KeyEvent;
 import java.util.*;
 
 import Entities.Itens.*;
 import Entities.Coordinate;
 import Entities.Entity;
 import Board.*;
-import Cores.*;
 
-public class Player extends Entity {
+public class Player extends Entity implements Movement {
 
     // Attributes
     private int playerNum;
@@ -34,8 +32,7 @@ public class Player extends Entity {
         return this.inventory;
     }
 
-    public String getState()
-    {
+    public String getState() {
         return this.state;
     }
 
@@ -51,8 +48,7 @@ public class Player extends Entity {
         this.inventory = new LinkedList<ItemCharacteristics>();
     }
 
-    public void setState(String state)
-    {
+    public void setState(String state) {
         if (state != "alive" && state != "dead" && state != "outOfGame")
             throw new IllegalArgumentException("Invalid state, valids: [alive, dead and outOfGame]");
         else
@@ -100,10 +96,7 @@ public class Player extends Entity {
             return (new ItemLer(position));
     }
 
-    /*
-     * Moves the player according to the direction passed
-     * returns true if moved, false if couldn't move (died)
-     */
+    @Override
     public boolean move(Board board, int direction) {
         int newI, newJ;
         Coordinate position;
@@ -201,7 +194,7 @@ public class Player extends Entity {
             return "Player 2";
         else if (this.playerNum == 3)
             return "Player 3";
-        else 
+        else
             return "Player 4";
     }
 }

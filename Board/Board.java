@@ -453,7 +453,7 @@ public class Board {
         // goes up, down, left or right one position randomly
         int direction = (int) (Math.random() * 4) + 1;
 
-        boolean movementWorked = fakeNews.get(index).move(board, fakeNews, e, direction);
+        boolean movementWorked = fakeNews.get(index).move(this, direction);
 
         // if the movement worked, update the board
         if (movementWorked) {
@@ -495,7 +495,7 @@ public class Board {
             // goes up, down, left or right one position randomly
             int direction = (int) (Math.random() * 4) + 1;
 
-            boolean movementWorked = fakeNews.get(i).move(board, fakeNews, e, direction);
+            boolean movementWorked = fakeNews.get(i).move(this, direction);
 
             // if the movement worked, update the board
             if (movementWorked) {

@@ -5,7 +5,7 @@ import java.util.*;
 import java.awt.event.KeyEvent;
 
 import Entities.Coordinate;
-import Board.Sector;
+import Board.Board;
 import Cores.Cores;
 
 // class
@@ -28,14 +28,15 @@ public class F2 extends FakeNews {
         System.out.print("F2");
     }
 
-    public boolean move(Sector[][] board, LinkedList<FakeNews> fakeNews, KeyEvent e, int direction) {
+    @Override
+    public boolean move(Board board, int direction) {
 
         int newI, newJ;
         switch (direction) {
             // goes two down
             case 1:
                 newI = this.position.getI() + 2;
-                if (!canMoveToCoordinate(board, newI, this.position.getJ())) {
+                if (!canMoveToCoordinate(board.getBoard(), newI, this.position.getJ())) {
                     System.out.println("A FakeNews has " + Cores.ANSI_GREEN + "Died!" + Cores.ANSI_RESET);
                     // fakeNews.remove(this);
                     // fakeNews.add(null);
@@ -47,7 +48,7 @@ public class F2 extends FakeNews {
                 // goes two up
             case 2:
                 newI = this.position.getI() - 2;
-                if (!canMoveToCoordinate(board, newI, this.position.getJ())) {
+                if (!canMoveToCoordinate(board.getBoard(), newI, this.position.getJ())) {
                     System.out.println("A FakeNews has " + Cores.ANSI_GREEN + "Died!" + Cores.ANSI_RESET);
                     // fakeNews.remove(this);
                     // fakeNews.add(null);
@@ -59,7 +60,7 @@ public class F2 extends FakeNews {
                 // goes two right
             case 3:
                 newJ = this.position.getJ() + 2;
-                if (!canMoveToCoordinate(board, this.position.getI(), newJ)) {
+                if (!canMoveToCoordinate(board.getBoard(), this.position.getI(), newJ)) {
                     System.out.println("A FakeNews has " + Cores.ANSI_GREEN + "Died!" + Cores.ANSI_RESET);
                     // fakeNews.remove(this);
                     // fakeNews.add(null);
@@ -71,7 +72,7 @@ public class F2 extends FakeNews {
                 // goes two left
             case 4:
                 newJ = this.position.getJ() - 2;
-                if (!canMoveToCoordinate(board, this.position.getI(), newJ)) {
+                if (!canMoveToCoordinate(board.getBoard(), this.position.getI(), newJ)) {
                     System.out.println("A FakeNews has " + Cores.ANSI_GREEN + "Died!" + Cores.ANSI_RESET);
                     // fakeNews.remove(this);
                     // fakeNews.add(null);

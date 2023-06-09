@@ -1,12 +1,9 @@
 package Entities.Beings;
 
 // imports
-import java.awt.event.KeyEvent;
-import java.util.*;
 
 import Entities.Coordinate;
-import Board.Sector;
-import Cores.Cores;
+import Board.Board;
 
 // class
 public class F3 extends FakeNews {
@@ -28,7 +25,8 @@ public class F3 extends FakeNews {
         System.out.print("F3");
     }
 
-    public boolean move(Sector[][] board, LinkedList<FakeNews> fakeNews, KeyEvent e, int direction) {
+    @Override
+    public boolean move(Board board, int direction) {
 
         int newI, newJ;
         switch (direction) {
@@ -36,7 +34,7 @@ public class F3 extends FakeNews {
             case 1:
                 newI = this.position.getI() + 1;
                 newJ = this.position.getJ() + 1;
-                if (!canMoveToCoordinate(board, newI, newJ))
+                if (!canMoveToCoordinate(board.getBoard(), newI, newJ))
                     return false;
                 else {
                     this.position.setI(newI);
@@ -47,7 +45,7 @@ public class F3 extends FakeNews {
             case 2:
                 newI = this.position.getI() - 1;
                 newJ = this.position.getJ() + 1;
-                if (!canMoveToCoordinate(board, newI, newJ))
+                if (!canMoveToCoordinate(board.getBoard(), newI, newJ))
                     return false;
                 else {
                     this.position.setI(newI);
@@ -58,7 +56,7 @@ public class F3 extends FakeNews {
             case 3:
                 newI = this.position.getI() + 1;
                 newJ = this.position.getJ() - 1;
-                if (!canMoveToCoordinate(board, newI, newJ))
+                if (!canMoveToCoordinate(board.getBoard(), newI, newJ))
                     return false;
                 else {
                     this.position.setI(newI);
@@ -69,7 +67,7 @@ public class F3 extends FakeNews {
             case 4:
                 newI = this.position.getI() - 1;
                 newJ = this.position.getJ() - 1;
-                if (!canMoveToCoordinate(board, newI, newJ))
+                if (!canMoveToCoordinate(board.getBoard(), newI, newJ))
                     return false;
                 else {
                     this.position.setI(newI);

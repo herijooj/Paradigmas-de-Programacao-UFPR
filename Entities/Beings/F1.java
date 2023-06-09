@@ -5,7 +5,7 @@ import java.util.*;
 
 // imports
 import Entities.Coordinate;
-import Board.Sector;
+import Board.Board;
 import Cores.Cores;
 
 // class
@@ -28,7 +28,8 @@ public class F1 extends FakeNews {
         System.out.print("F1");
     }
 
-    public boolean move(Sector[][] board, LinkedList<FakeNews> fakeNews, KeyEvent e, int direction) {
+    @Override
+    public boolean move(Board board, int direction) {
 
         int newI, newJ;
 
@@ -37,7 +38,7 @@ public class F1 extends FakeNews {
             case 1:
                 System.out.println("DOWN");
                 newI = this.position.getI() + 1;
-                if (!canMoveToCoordinate(board, newI, this.position.getJ())) {
+                if (!canMoveToCoordinate(board.getBoard(), newI, this.position.getJ())) {
                     System.out.println("A FakeNews has " + Cores.ANSI_GREEN + "Died!" + Cores.ANSI_RESET);
                     // fakeNews.remove(this);
                     // fakeNews.add(null);
@@ -50,7 +51,7 @@ public class F1 extends FakeNews {
             case 2:
                 System.out.println("UP");
                 newI = this.position.getI() - 1;
-                if (!canMoveToCoordinate(board, newI, this.position.getJ())) {
+                if (!canMoveToCoordinate(board.getBoard(), newI, this.position.getJ())) {
                     System.out.println("A FakeNews has " + Cores.ANSI_GREEN + "Died!" + Cores.ANSI_RESET);
                     // fakeNews.remove(this);
                     // fakeNews.add(null);
@@ -63,7 +64,7 @@ public class F1 extends FakeNews {
             case 3:
                 System.out.println("RIGHT");
                 newJ = this.position.getJ() + 1;
-                if (!canMoveToCoordinate(board, this.position.getI(), newJ)) {
+                if (!canMoveToCoordinate(board.getBoard(), this.position.getI(), newJ)) {
                     System.out.println("A FakeNews has " + Cores.ANSI_GREEN + "Died!" + Cores.ANSI_RESET);
                     // fakeNews.remove(this);
                     // fakeNews.add(null);
@@ -76,7 +77,7 @@ public class F1 extends FakeNews {
             case 4:
                 System.out.println("LEFT");
                 newJ = this.position.getJ() - 1;
-                if (!canMoveToCoordinate(board, this.position.getI(), newJ)) {
+                if (!canMoveToCoordinate(board.getBoard(), this.position.getI(), newJ)) {
                     System.out.println("A FakeNews has " + Cores.ANSI_GREEN + "Died!" + Cores.ANSI_RESET);
                     // fakeNews.remove(this);
                     // fakeNews.add(null);
