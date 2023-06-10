@@ -44,7 +44,7 @@ public class Board {
         this.setRestrictedSectorsMax(4);
         this.setRestrictedSectors();
         this.setFakeNews();
-        this.setItens(2);
+        this.setItens(10);
         this.setBoard();
     }
 
