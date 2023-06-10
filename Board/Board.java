@@ -393,7 +393,7 @@ public class Board {
 
         // Verify if it is a FakeNews
         if (sectorState == "") {
-            for (int x = 0; x < this.fakeNewsMax; x++) {
+            for (int x = 0; x < this.listaFakeNews.size(); x++) {
                 int iFakeNews = this.listaFakeNews.get(x).getPosition().getI();
                 int jFakeNews = this.listaFakeNews.get(x).getPosition().getJ();
                 if (i == iFakeNews && j == jFakeNews) {
