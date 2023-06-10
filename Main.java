@@ -235,14 +235,11 @@ public class Main {
                         }
                         input = Integer.parseInt(placeholder);
 
-                        // ISSO AQUI TA ESTRANHO, VC JÁ SABE QUE O INPUT É 2
-                        // Acho que esse if faz o mesmo que o while logo acima
-                        // Mas verifica se foi [1-4], porque o 5 eh pra sair do inventario
                         if (input > 0 && input < 5) {
                             // USE ITEM --------------------
                             nextTurn(i, board);
                             System.out.println("Item used!");
-                            // board.useItem(j + 1, input - 1); // PODE RETURNAR UM BOOLEANO
+                            // board.useItem(j + 1, input - 1); // PODE RETORNAR UM BOOLEANO
                             itemUsed = true;
                         } else
                             itemUsed = false;
