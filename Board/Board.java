@@ -681,4 +681,19 @@ public class Board {
 
         return player.getInventory().size();
     }
+
+    /**
+     * Function to check if there are enemies alive
+     * return true if there are no enemies alive
+     **/
+    public boolean allEnemiesDead() {
+        int i;
+
+        // check the state of all fake news
+        for (i = 0; i < listaFakeNews.size(); i++) {
+            if (listaFakeNews.get(i).getState() == "alive")
+                return false;
+        }
+        return true;
+    }
 }
