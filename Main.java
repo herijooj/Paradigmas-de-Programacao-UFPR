@@ -183,6 +183,13 @@ public class Main {
                 break;
             }
 
+            // if there are no enemies left, game win
+            if (board.allEnemiesDead()) {
+                flushScreen();
+                gameWin();
+                break;
+            }
+
             // player turn ==================================
 
             // for loop between players
@@ -192,18 +199,6 @@ public class Main {
                 // If player died last round or before, skip
                 if (board.checkPlayerState(j) == "outOfGame" || board.checkPlayerState(j) == "dead")
                     continue;
-
-                // if every fakeNews is null, game over
-                for (int k = 0; k < board.getFakeNews().size(); k++) {
-                    if (board.getFakeNews().get(k) != null) {
-                        break;
-                    }
-                    if (k == board.getFakeNews().size() - 1) {
-                        flushScreen();
-                        gameWin();// PASSIVO DE FAZER FACTORY METHOD, FICARA flushScreen("gameWin")
-                        break;
-                    }
-                }
 
                 previousJ = j;
                 // Getting action
