@@ -24,21 +24,38 @@ public class F2 extends FakeNews {
     public void draw() {
         System.out.print("F2");
     }
-
+//
     @Override
     public boolean move(Board board, int direction) {
 
         int newI, newJ;
+        Coordinate position, randomCoordinate;
+
         switch (direction) {
             // goes two down
             case 1:
                 newI = this.position.getI() + 2;
                 if (!canMoveToCoordinate(board.getBoard(), newI, this.position.getJ())) {
-                    System.out.println("A FakeNews has " + Cores.ANSI_GREEN + "Died!" + Cores.ANSI_RESET);
-                    // fakeNews.remove(this);
-                    // fakeNews.add(null);
                     return false;
                 } else {
+                    position = new Coordinate(newI, this.position.getJ());
+
+                    if (hasItem(board.getBoard(), position)) {
+                        // Spawn another fakeNews
+
+                        // Generates random coordinate for a new fakeNews to spawn
+                        /*
+                        randomCoordinate = generateRandomPeriphericCoordinate(position);
+                        while (hasSomething(board.getBoard(), randomCoordinate))
+                            randomCoordinate = generateRandomPeriphericCoordinate(position);
+
+                        board.getFakeNews().add(new F1(randomCoordinate));
+                        */
+
+                        // Add new Item to the board
+                        board.addItens(1);
+                    }
+
                     this.position.setI(this.position.getI() + 2);
                     return true;
                 }
@@ -46,11 +63,26 @@ public class F2 extends FakeNews {
             case 2:
                 newI = this.position.getI() - 2;
                 if (!canMoveToCoordinate(board.getBoard(), newI, this.position.getJ())) {
-                    System.out.println("A FakeNews has " + Cores.ANSI_GREEN + "Died!" + Cores.ANSI_RESET);
-                    // fakeNews.remove(this);
-                    // fakeNews.add(null);
                     return false;
                 } else {
+                    position = new Coordinate(newI, this.position.getJ());
+
+                    if (hasItem(board.getBoard(), position)) {
+                        // Spawn another fakeNews
+
+                        // Generates random coordinate for a new fakeNews to spawn
+                        /*
+                        randomCoordinate = generateRandomPeriphericCoordinate(position);
+                        while (hasSomething(board.getBoard(), randomCoordinate))
+                            randomCoordinate = generateRandomPeriphericCoordinate(position);
+
+                        board.getFakeNews().add(new F1(randomCoordinate));
+                        */
+
+                        // Add new Item to the board
+                        board.addItens(1);
+                    }
+
                     this.position.setI(this.position.getI() - 2);
                     return true;
                 }
@@ -58,11 +90,26 @@ public class F2 extends FakeNews {
             case 3:
                 newJ = this.position.getJ() + 2;
                 if (!canMoveToCoordinate(board.getBoard(), this.position.getI(), newJ)) {
-                    System.out.println("A FakeNews has " + Cores.ANSI_GREEN + "Died!" + Cores.ANSI_RESET);
-                    // fakeNews.remove(this);
-                    // fakeNews.add(null);
                     return false;
                 } else {
+                    position = new Coordinate(this.position.getI(), newJ);
+
+                    if (hasItem(board.getBoard(), position)) {
+                        // Spawn another fakeNews
+
+                        // Generates random coordinate for a new fakeNews to spawn
+                        /*
+                        randomCoordinate = generateRandomPeriphericCoordinate(position);
+                        while (hasSomething(board.getBoard(), randomCoordinate))
+                            randomCoordinate = generateRandomPeriphericCoordinate(position);
+
+                        board.getFakeNews().add(new F1(randomCoordinate));
+                        */
+
+                        // Add new Item to the board
+                        board.addItens(1);
+                    }
+
                     this.position.setJ(this.position.getJ() + 2);
                     return true;
                 }
@@ -70,11 +117,26 @@ public class F2 extends FakeNews {
             case 4:
                 newJ = this.position.getJ() - 2;
                 if (!canMoveToCoordinate(board.getBoard(), this.position.getI(), newJ)) {
-                    System.out.println("A FakeNews has " + Cores.ANSI_GREEN + "Died!" + Cores.ANSI_RESET);
-                    // fakeNews.remove(this);
-                    // fakeNews.add(null);
                     return false;
                 } else {
+                    position = new Coordinate(this.position.getI(), newJ);
+
+                    if (hasItem(board.getBoard(), position)) {
+                        // Spawn another fakeNews
+
+                        // Generates random coordinate for a new fakeNews to spawn
+                        /*
+                        randomCoordinate = generateRandomPeriphericCoordinate(position);
+                        while (hasSomething(board.getBoard(), randomCoordinate))
+                            randomCoordinate = generateRandomPeriphericCoordinate(position);
+
+                        board.getFakeNews().add(new F1(randomCoordinate));
+                        */
+
+                        // Add new Item to the board
+                        board.addItens(1);
+                    }
+
                     this.position.setJ(this.position.getJ() - 2);
                     return true;
                 }
