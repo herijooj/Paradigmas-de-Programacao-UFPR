@@ -295,7 +295,16 @@ public class Main {
                 if (board.checkFakeNewsState(x) == "outOfGame")
                     continue;
 
-                board.moveIndividualFakeNews(x);
+                // To not move the recently added fakeNews
+                else if (board.checkFakeNewsState(x) == "RecentlyAdded")
+                {
+                    board.getFakeNews().get(x).setState("alive");
+                    nextTurn(i, board);
+                    continue;
+                }
+                else
+                    board.moveIndividualFakeNews(x);
+
                 nextTurn(i, board);
                 System.out.println("--> " + Cores.ANSI_RED + " Fake news " + (x + 1) + Cores.ANSI_RESET + " moved");
 
