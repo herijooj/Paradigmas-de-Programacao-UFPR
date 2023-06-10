@@ -11,8 +11,8 @@ public class F2 extends FakeNews {
     // attributes
 
     // constructor
-    public F2(Coordinate position) {
-        super(position);
+    public F2(Coordinate position, String state) {
+        super(position, state);
     }
 
     // getters
@@ -30,6 +30,7 @@ public class F2 extends FakeNews {
 
         int newI, newJ;
         Coordinate position, randomCoordinate;
+        FakeNews newFakeNews;
 
         switch (direction) {
             // goes two down
@@ -44,13 +45,15 @@ public class F2 extends FakeNews {
                         // Spawn another fakeNews
 
                         // Generates random coordinate for a new fakeNews to spawn
-                        /*
                         randomCoordinate = generateRandomPeriphericCoordinate(position);
                         while (hasSomething(board.getBoard(), randomCoordinate))
                             randomCoordinate = generateRandomPeriphericCoordinate(position);
 
-                        board.getFakeNews().add(new F1(randomCoordinate));
-                        */
+                        newFakeNews = new F2(randomCoordinate, "RecentlyAdded");
+
+                        board.getFakeNews().add(newFakeNews);
+                        addFakeNewsToSector(board, randomCoordinate, newFakeNews);
+                        
 
                         // Add new Item to the board
                         board.addItens(1);
@@ -71,13 +74,14 @@ public class F2 extends FakeNews {
                         // Spawn another fakeNews
 
                         // Generates random coordinate for a new fakeNews to spawn
-                        /*
                         randomCoordinate = generateRandomPeriphericCoordinate(position);
                         while (hasSomething(board.getBoard(), randomCoordinate))
                             randomCoordinate = generateRandomPeriphericCoordinate(position);
 
-                        board.getFakeNews().add(new F1(randomCoordinate));
-                        */
+                        newFakeNews = new F2(randomCoordinate, "RecentlyAdded");
+
+                        board.getFakeNews().add(newFakeNews);
+                        addFakeNewsToSector(board, randomCoordinate, newFakeNews);                        
 
                         // Add new Item to the board
                         board.addItens(1);
@@ -98,13 +102,14 @@ public class F2 extends FakeNews {
                         // Spawn another fakeNews
 
                         // Generates random coordinate for a new fakeNews to spawn
-                        /*
                         randomCoordinate = generateRandomPeriphericCoordinate(position);
                         while (hasSomething(board.getBoard(), randomCoordinate))
                             randomCoordinate = generateRandomPeriphericCoordinate(position);
 
-                        board.getFakeNews().add(new F1(randomCoordinate));
-                        */
+                        newFakeNews = new F2(randomCoordinate, "RecentlyAdded");
+
+                        board.getFakeNews().add(newFakeNews);
+                        addFakeNewsToSector(board, randomCoordinate, newFakeNews);                        
 
                         // Add new Item to the board
                         board.addItens(1);
@@ -125,13 +130,14 @@ public class F2 extends FakeNews {
                         // Spawn another fakeNews
 
                         // Generates random coordinate for a new fakeNews to spawn
-                        /*
                         randomCoordinate = generateRandomPeriphericCoordinate(position);
                         while (hasSomething(board.getBoard(), randomCoordinate))
                             randomCoordinate = generateRandomPeriphericCoordinate(position);
 
-                        board.getFakeNews().add(new F1(randomCoordinate));
-                        */
+                        newFakeNews = new F2(randomCoordinate, "RecentlyAdded");
+
+                        board.getFakeNews().add(newFakeNews);
+                        addFakeNewsToSector(board, randomCoordinate, newFakeNews);                        
 
                         // Add new Item to the board
                         board.addItens(1);
