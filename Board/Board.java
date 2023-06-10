@@ -322,8 +322,7 @@ public class Board {
             int playerJ = this.listaPlayers.get(j).getPosition().getJ();
 
             // if it has the same coordinate as a player, return true
-            if (coordinate.getI() == playerI
-                    && coordinate.getJ() == playerJ)
+            if (coordinate.getI() == playerI && coordinate.getJ() == playerJ)
                 return true;
         }
 
@@ -335,8 +334,19 @@ public class Board {
             int restrictedJ = this.listaRestrictedSectors.get(j).getJ();
 
             // if it has the same coordinate as a restricted sector, return true
-            if (coordinate.getI() == restrictedI
-                    && coordinate.getJ() == restrictedJ)
+            if (coordinate.getI() == restrictedI && coordinate.getJ() == restrictedJ)
+                return true;
+        }
+
+        // Check if it has the same coordinate as a Fake News
+        int listaFakeNewsSize = this.listaFakeNews.size();
+        for (j = 0; j < listaFakeNewsSize; j++) {
+            // extracting for better readability
+            int fakeNewsI = this.listaFakeNews.get(j).getPosition().getI();
+            int fakeNewsJ = this.listaFakeNews.get(j).getPosition().getJ();
+        
+            // if it has the same coordinate as an item, return true
+            if (coordinate.getI() == fakeNewsI && coordinate.getJ() == fakeNewsJ)
                 return true;
         }
 
@@ -348,8 +358,7 @@ public class Board {
             int itemJ = this.listaItens.get(j).getPosition().getJ();
 
             // if it has the same coordinate as an item, return true
-            if (coordinate.getI() == itemI
-                    && coordinate.getJ() == itemJ)
+            if (coordinate.getI() == itemI && coordinate.getJ() == itemJ)
                 return true;
         }
 
