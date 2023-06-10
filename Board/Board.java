@@ -44,7 +44,7 @@ public class Board {
         this.setRestrictedSectorsMax(4);
         this.setRestrictedSectors();
         this.setFakeNews();
-        this.setItens(16);
+        this.setItens(2);
         this.setBoard();
     }
 
@@ -185,13 +185,13 @@ public class Board {
             // if the coordinate is not equal to any other
             if (!hasEqualCoordinate(newCoordinate)) {
                 if (F1Quantity < 2) {
-                    this.listaFakeNews.add(new F1(newCoordinate));
+                    this.listaFakeNews.add(new F1(newCoordinate, "alive"));
                     F1Quantity++;
                 } else if (F1Quantity == 2 && F2Quantity < 2) {
-                    this.listaFakeNews.add(new F2(newCoordinate));
+                    this.listaFakeNews.add(new F2(newCoordinate, "alive"));
                     F2Quantity++;
                 } else {
-                    this.listaFakeNews.add(new F3(newCoordinate));
+                    this.listaFakeNews.add(new F3(newCoordinate, "alive"));
                 }
             } else
                 i--;
@@ -510,7 +510,6 @@ public class Board {
         int iPlayer = players.get(i).getPosition().getI();
         int jPlayer = players.get(i).getPosition().getJ();
 
-        // System.out.println(players.get(i).toString());
         // clear the old position
         this.board[iPlayer][jPlayer].setSectorState("");
 
@@ -569,6 +568,8 @@ public class Board {
             return "dead";
         } else if (fakeNews.getState() == "alive")
             return "alive";
+        else if (fakeNews.getState() == "RecentlyAdded")
+            return "RecentlyAdded";
         else
             return "outOfGame";
     }
