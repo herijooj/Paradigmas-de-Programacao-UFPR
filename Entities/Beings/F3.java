@@ -52,7 +52,10 @@ public class F3 extends FakeNews {
                         newFakeNews = new F3(randomCoordinate, "RecentlyAdded");
 
                         board.getFakeNews().add(newFakeNews);
-                        addFakeNewsToSector(board, randomCoordinate, newFakeNews);                        
+                        addFakeNewsToSector(board, randomCoordinate, newFakeNews);
+                        
+                        // Add new Item to the board
+                        board.addItens(1);
                     }
 
                     this.position.setI(newI);
@@ -79,7 +82,10 @@ public class F3 extends FakeNews {
                         newFakeNews = new F3(randomCoordinate, "RecentlyAdded");
 
                         board.getFakeNews().add(newFakeNews);
-                        addFakeNewsToSector(board, randomCoordinate, newFakeNews);                        
+                        addFakeNewsToSector(board, randomCoordinate, newFakeNews);
+                        
+                        // Add new Item to the board
+                        board.addItens(1);
                     }
 
                     this.position.setI(newI);
@@ -106,7 +112,10 @@ public class F3 extends FakeNews {
                         newFakeNews = new F3(randomCoordinate, "RecentlyAdded");
 
                         board.getFakeNews().add(newFakeNews);
-                        addFakeNewsToSector(board, randomCoordinate, newFakeNews);                        
+                        addFakeNewsToSector(board, randomCoordinate, newFakeNews);
+                        
+                        // Add new Item to the board
+                        board.addItens(1);
                     }
 
                     this.position.setI(newI);
@@ -133,7 +142,10 @@ public class F3 extends FakeNews {
                         newFakeNews = new F3(randomCoordinate, "RecentlyAdded");
 
                         board.getFakeNews().add(newFakeNews);
-                        addFakeNewsToSector(board, randomCoordinate, newFakeNews);                        
+                        addFakeNewsToSector(board, randomCoordinate, newFakeNews);
+                        
+                        // Add new Item to the board
+                        board.addItens(1);
                     }
                     
                     this.position.setI(newI);

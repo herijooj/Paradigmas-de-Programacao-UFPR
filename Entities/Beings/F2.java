@@ -53,6 +53,9 @@ public class F2 extends FakeNews {
 
                         board.getFakeNews().add(newFakeNews);
                         addFakeNewsToSector(board, randomCoordinate, newFakeNews);
+
+                        // Add new Item to the board
+                        board.addItens(1);
                     }
 
                     this.position.setI(this.position.getI() + 2);
@@ -77,7 +80,10 @@ public class F2 extends FakeNews {
                         newFakeNews = new F2(randomCoordinate, "RecentlyAdded");
 
                         board.getFakeNews().add(newFakeNews);
-                        addFakeNewsToSector(board, randomCoordinate, newFakeNews);                        
+                        addFakeNewsToSector(board, randomCoordinate, newFakeNews);
+                        
+                        // Add new Item to the board
+                        board.addItens(1);
                     }
 
                     this.position.setI(this.position.getI() - 2);
@@ -102,7 +108,10 @@ public class F2 extends FakeNews {
                         newFakeNews = new F2(randomCoordinate, "RecentlyAdded");
 
                         board.getFakeNews().add(newFakeNews);
-                        addFakeNewsToSector(board, randomCoordinate, newFakeNews);                        
+                        addFakeNewsToSector(board, randomCoordinate, newFakeNews);
+                        
+                        // Add new Item to the board
+                        board.addItens(1);
                     }
 
                     this.position.setJ(this.position.getJ() + 2);
@@ -127,7 +136,10 @@ public class F2 extends FakeNews {
                         newFakeNews = new F2(randomCoordinate, "RecentlyAdded");
 
                         board.getFakeNews().add(newFakeNews);
-                        addFakeNewsToSector(board, randomCoordinate, newFakeNews);                        
+                        addFakeNewsToSector(board, randomCoordinate, newFakeNews);
+                        
+                        // Add new Item to the board
+                        board.addItens(1);
                     }
 
                     this.position.setJ(this.position.getJ() - 2);

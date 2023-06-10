@@ -54,6 +54,9 @@ public class F1 extends FakeNews {
 
                         board.getFakeNews().add(newFakeNews);
                         addFakeNewsToSector(board, randomCoordinate, newFakeNews);
+
+                        // Add new Item to the board
+                        board.addItens(1);
                     }
 
                     this.position.setI(this.position.getI() + 1);
@@ -80,6 +83,9 @@ public class F1 extends FakeNews {
 
                         board.getFakeNews().add(newFakeNews);
                         addFakeNewsToSector(board, randomCoordinate, newFakeNews);
+
+                        // Add new Item to the board
+                        board.addItens(1);
                     }
 
                     this.position.setI(this.position.getI() - 1);
@@ -106,6 +112,9 @@ public class F1 extends FakeNews {
 
                         board.getFakeNews().add(newFakeNews);
                         addFakeNewsToSector(board, randomCoordinate, newFakeNews);
+
+                        // Add new Item to the board
+                        board.addItens(1);
                     }
 
                     this.position.setJ(this.position.getJ() + 1);
@@ -132,6 +141,9 @@ public class F1 extends FakeNews {
 
                         board.getFakeNews().add(newFakeNews);
                         addFakeNewsToSector(board, randomCoordinate, newFakeNews);
+
+                        // Add new Item to the board
+                        board.addItens(1);
                     }
                     this.position.setJ(this.position.getJ() - 1);
                     return true;
