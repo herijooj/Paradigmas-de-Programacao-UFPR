@@ -206,7 +206,9 @@ public class Main {
                 previousJ = j;
                 // Getting action
                 if (!itemUsed) {
-                    nextTurn(i, board);
+                    flushScreen();
+                    System.out.println("Turn " + (i + 1) + " of 25");
+                    board.drawBoard();
                     System.out.printf("--> " + Cores.ANSI_GREEN + "Player %d " + Cores.ANSI_RESET + "turn\n", j + 1);
                     System.out.println("Press action desired [1 -> move / 2 -> use itens]");
 
@@ -226,25 +228,25 @@ public class Main {
 
                         // input validation
                         placeholder = scanner.nextLine();
-                        while (!placeholder.matches("[1-" + inventorySize + "]+")) {
-                            if (placeholder.equals("5")) {
-                                placeholder = "0";
-                                break;
-                            }
+                        while (!placeholder.matches("[1-5]")) {
                             System.out.print("\033[2A");
-                            System.out.println("invalid entry, Try again. [1-" + inventorySize + "]");
+                            System.out.println("invalid entry, Try again. [1 -> move / 2 -> use itens]");
                             placeholder = scanner.nextLine();
                         }
                         input = Integer.parseInt(placeholder);
 
-                        // using item
-                        if (input != 0) {
-                            board.useItem(j, input - 1);
-                            itemUsed = true;
+                        // ISSO AQUI TA ESTRANHO, VC JÁ SABE QUE O INPUT É 2
+                        // Acho que esse if faz o mesmo que o while logo acima
+                        // Mas verifica se foi [1-4], porque o 5 eh pra sair do inventario
+                        if (input > 0 && input < 5) {
+                            // USE ITEM --------------------
                             nextTurn(i, board);
-                            System.out.printf("Player " + Cores.ANSI_GREEN + "J%d " + Cores.ANSI_RESET + "used an item!\n", j + 1);
-                            checkForPlayersDeaths(board, i, j);
-                        }                      
+                            System.out.println("Item used!");
+                            // board.useItem(j + 1, input - 1); // PODE RETURNAR UM BOOLEANO
+                            itemUsed = true;
+                        } else
+                            itemUsed = false;
+                        
                         j--;
                     }
 
