@@ -500,6 +500,10 @@ public class Board {
      * it iterates through the list of players
      **/
     public void movePlayer(int i, int direction) {
+        // if the direction is 0, don't move
+        if (direction == 0)
+            return;
+
         LinkedList<Player> players = getPlayers();
 
         // get the current coordinates
