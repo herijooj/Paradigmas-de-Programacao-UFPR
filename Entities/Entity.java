@@ -59,4 +59,19 @@ public abstract class Entity {
             return false;
         return true;
     }
+//
+    /**
+     * Check if a given coordinate has something in it
+     * 
+     * 
+     * Returns: true if it has, false otherwise 
+     **/
+    public boolean hasSomething(Sector[][] board, Coordinate position)
+    {
+        String sectorState = board[position.getI()][position.getJ()].getSectorState();
+
+        if (sectorState != "")
+            return true;
+        return false;
+    }
 }
