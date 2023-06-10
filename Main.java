@@ -86,6 +86,7 @@ public class Main {
         key = key.toUpperCase();
 
         // 1 = down, 2 = up, 3 = right, 4 = left
+        // 0 = don't move
         switch (key) {
             case "W":
                 return 2;
@@ -95,8 +96,10 @@ public class Main {
                 return 1;
             case "D":
                 return 3;
-            default:
+            case "Q":
                 return 0;
+            default:
+                return -1;
         }
     }
 
@@ -115,15 +118,15 @@ public class Main {
     public static int chooseDirection(Scanner scanner) {
         String input;
 
-        System.out.println("Choose a direction to move [WASD]");
+        System.out.println("Choose a direction to move [WASD] or press Q to stay still");
 
         input = scanner.nextLine();
 
         // while the input is invalid
-        while (input.length() != 1 || keyToDirection(input) == 0) {
+        while (input.length() != 1 || keyToDirection(input) == -1) {
             // clear 2 lines
             System.out.print("\033[2A");
-            System.out.println("Invalid input, choose a direction to move [WASD]");
+            System.out.println("Invalid input, choose a direction to move [WASD] or press Q to stay still");
             input = scanner.nextLine();
         }
 
