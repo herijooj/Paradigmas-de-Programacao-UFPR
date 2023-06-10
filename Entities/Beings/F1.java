@@ -25,7 +25,7 @@ public class F1 extends FakeNews {
         System.out.print("F1");
     }
 //
-    //@Override
+    @Override
     public boolean move(Board board, int direction) {
 
         int newI, newJ;
