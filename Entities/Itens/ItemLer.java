@@ -36,11 +36,13 @@ public class ItemLer extends ItemCharacteristics {
         int randomIndex = (int) (Math.random() * enemies.size());
 
         // while the enemy is not alive, get another random index
-        while (enemies.get(randomIndex).getState() != "alive" || enemies.get(randomIndex).getState() != "RecentlyAdded")
+        while (enemies.get(randomIndex).getState() != "alive" && enemies.get(randomIndex).getState() != "RecentlyAdded")
             randomIndex = (int) (Math.random() * enemies.size());
+
         // kill the enemy
-        enemies.get(randomIndex).setState("dead");
-        System.out.printf("Fake news " + Cores.ANSI_RED + "%d " + Cores.ANSI_RESET + "died! :)\n", randomIndex);
+        board.getBoard()[enemies.get(randomIndex).getPosition().getI()][enemies.get(randomIndex).getPosition().getJ()].setSectorState("");
+        enemies.get(randomIndex).setState("outOfGame");
+        System.out.printf("Fake news " + Cores.ANSI_RED + "%d " + Cores.ANSI_RESET + "eliminated! :)\n", randomIndex + 1);
         return;
     }
 
