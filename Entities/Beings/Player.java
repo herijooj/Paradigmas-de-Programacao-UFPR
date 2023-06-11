@@ -99,9 +99,10 @@ public class Player extends Entity implements Movement {
     }
 
     @Override
-    public boolean move(Board board, int direction) {
+    public String move(Board board, int direction) {
         int newI, newJ;
         Coordinate position;
+        ItemCharacteristics item;
 
         switch (direction) {
             // Goes down
@@ -109,79 +110,152 @@ public class Player extends Entity implements Movement {
                 newI = this.position.getI() + 1;
 
                 if (!canMoveToCoordinate(board.getBoard(), newI, this.position.getJ()))
-                    return false;
+                    return "dead";
                 else {
                     position = new Coordinate(newI, this.position.getJ());
 
                     if (hasItem(board.getBoard(), position)) {
                         // Adds an item to the player
                         // inventory and adds a new item to the board
-                        addItemToInventory(getSpecificItem(board.getBoard(), position));
+                        item = getSpecificItem(board.getBoard(), position);
+
+                        if (item instanceof ItemBoato)
+                        {
+                            // Clear the item from the board
+                            board.getBoard()[position.getI()][position.getJ()].setSectorState("");
+
+                            // Add another item to the board
+                            board.addItens(1);
+
+                            // Set the new player position
+                            this.position.setI(newI);
+
+                            return "boato";
+                        }
+                        else
+                            addItemToInventory(item);
+
+                        // Add a new item to the board
                         board.addItens(1);
                     }
 
-                    this.position.setI(this.position.getI() + 1);
+                    this.position.setI(newI);
                 }
-                return true;
+                return "moved";
             // Goes up
             case 2:
                 newI = this.position.getI() - 1;
 
                 if (!canMoveToCoordinate(board.getBoard(), newI, this.position.getJ()))
-                    return false;
+                    return "dead";
                 else {
                     position = new Coordinate(newI, this.position.getJ());
 
                     if (hasItem(board.getBoard(), position)) {
                         // Adds an item to the player
                         // inventory and adds a new item to the board
-                        addItemToInventory(getSpecificItem(board.getBoard(), position));
+                        item = getSpecificItem(board.getBoard(), position);
+
+                        if (item instanceof ItemBoato)
+                        {
+                            // Clear the item from the board
+                            board.getBoard()[position.getI()][position.getJ()].setSectorState("");
+
+                            // Add another item to the board
+                            board.addItens(1);
+
+                            // Set the new player position
+                            this.position.setI(newI);
+
+                            return "boato";
+                        }
+                        else
+                            addItemToInventory(item);
+
+                        // Add a new item to the board
                         board.addItens(1);
                     }
 
-                    this.position.setI(this.position.getI() - 1);
+                    this.position.setI(newI);
                 }
-                return true;
+                return "moved";
 
             // Goes right
             case 3:
                 newJ = this.position.getJ() + 1;
 
                 if (!canMoveToCoordinate(board.getBoard(), this.position.getI(), newJ))
-                    return false;
+                    return "dead";
                 else {
                     position = new Coordinate(this.getPosition().getI(), newJ);
 
                     if (hasItem(board.getBoard(), position)) {
                         // Adds an item to the player
                         // inventory and adds a new item to the board
-                        addItemToInventory(getSpecificItem(board.getBoard(), position));
+                        item = getSpecificItem(board.getBoard(), position);
+
+                        if (item instanceof ItemBoato)
+                        {
+                            // Clear the item from the board
+                            board.getBoard()[position.getI()][position.getJ()].setSectorState("");
+
+                            // Add another item to the board
+                            board.addItens(1);
+
+                            // Set the new player position
+                            this.position.setJ(newJ);
+
+                            return "boato";
+                        }
+                        else
+                            addItemToInventory(item);
+
+                        // Add a new item to the board
                         board.addItens(1);
                     }
 
-                    this.position.setJ(this.position.getJ() + 1);
+                    // Set the new player position
+                    this.position.setJ(newJ);
                 }
-                return true;
+                return "moved";
             // Goes left
             case 4:
                 newJ = this.position.getJ() - 1;
                 if (!canMoveToCoordinate(board.getBoard(), this.position.getI(), newJ))
-                    return false;
+                    return "dead";
                 else {
                     position = new Coordinate(this.getPosition().getI(), newJ);
 
                     if (hasItem(board.getBoard(), position)) {
                         // Adds an item to the player
                         // inventory and adds a new item to the board
-                        addItemToInventory(getSpecificItem(board.getBoard(), position));
+                        item = getSpecificItem(board.getBoard(), position);
+
+                        if (item instanceof ItemBoato)
+                        {
+                            // Clear the item from the board
+                            board.getBoard()[position.getI()][position.getJ()].setSectorState("");
+
+                            // Add another item to the board
+                            board.addItens(1);
+
+                            // Set the new player position
+                            this.position.setJ(newJ);
+
+                            return "boato";
+                        }
+                        else
+                            addItemToInventory(item);
+
+                        // Add a new item to the board
                         board.addItens(1);
                     }
 
-                    this.position.setJ(this.position.getJ() - 1);
+                    this.position.setJ(newJ);
                 }
-                return true;
+                return "moved";
         }
-        return false;
+        return "dead";
     }
 
     /*
