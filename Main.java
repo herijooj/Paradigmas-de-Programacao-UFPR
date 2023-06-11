@@ -263,6 +263,7 @@ public class Main {
                             // input-1 because the item number is 1,2,3,4 and the array is 0,1,2,3
                             board.useItem(j + 1, input - 1); // PODE RETORNAR UM BOOLEANO
                             itemUsed = true;
+                            sleep(1);
                         } else
                             itemUsed = false;
 
