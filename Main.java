@@ -5,6 +5,8 @@ import java.util.Scanner;
 import Board.*;
 
 import Cores.*;
+import Entities.Coordinate;
+import Entities.Itens.*;
 
 public class Main {
 
@@ -107,8 +109,11 @@ public class Main {
      * this function turns the turn
      * it clears the screen, prints the turn number and draws the board
      * it should be called at the start of each turn
+     * 
+     * @param turn  the current turn
+     * @param board the board object
      */
-    public static void nextTurn(int turn, Board board) {
+    public static void increaseTurnAndDrawBoard(int turn, Board board) {
         flushScreen();
         System.out.println("Turn " + (turn + 1) + " of 25");
         board.drawBoard();
@@ -136,7 +141,7 @@ public class Main {
     public static void checkForPlayersDeaths(Board board, int i, int j) {
         // Check for player deaths
         if (board.checkPlayerState(j) == "dead") {
-            nextTurn(i, board);
+            increaseTurnAndDrawBoard(i, board);
             System.out.printf("Player " + Cores.ANSI_GREEN + "J%d " + Cores.ANSI_RESET + "died! :(\n", j + 1);
             sleep(1);
         }
@@ -199,6 +204,21 @@ public class Main {
             int playersQuantity = board.getPlayers().size();
             for (j = 0; j < playersQuantity; j++) {
 
+                // ESTOU USANDO PARA TESTAR OS ITENS
+                // generate each item in the current player position
+                Coordinate playerPosition = board.getPlayers().get(j).getPosition();
+                ItemCharacteristics itemDenunciar = new ItemDenunciar(playerPosition);
+                ItemCharacteristics itemLer = new ItemLer(playerPosition);
+                ItemCharacteristics itemFugir = new ItemFugir(playerPosition);
+                ItemCharacteristics itemBoato = new ItemBoato(playerPosition);
+
+                // add the items to the current player inventory
+                board.getPlayers().get(j).addItemToInventory(itemBoato);
+                board.getPlayers().get(j).addItemToInventory(itemDenunciar);
+                board.getPlayers().get(j).addItemToInventory(itemLer);
+                board.getPlayers().get(j).addItemToInventory(itemFugir);
+                // ESTOU USANDO PARA TESTAR OS ITENS
+
                 // If player died last round or before, skip
                 if (board.checkPlayerState(j) == "outOfGame" || board.checkPlayerState(j) == "dead")
                     continue;
@@ -223,7 +243,7 @@ public class Main {
 
                     // Action
                     if (input == 2) {
-                        nextTurn(i, board);
+                        increaseTurnAndDrawBoard(i, board);
                         inventorySize = board.drawPlayerInventory(j + 1);
 
                         // input validation
@@ -237,35 +257,37 @@ public class Main {
 
                         if (input > 0 && input < 5) {
                             // USE ITEM --------------------
-                            nextTurn(i, board);
+                            increaseTurnAndDrawBoard(i, board);
                             System.out.println("Item used!");
-                            // board.useItem(j + 1, input - 1); // PODE RETORNAR UM BOOLEANO
+                            // j+1 because the player number is 1,2,3,4 and the array is 0,1,2,3
+                            // input-1 because the item number is 1,2,3,4 and the array is 0,1,2,3
+                            board.useItem(j + 1, input - 1); // PODE RETORNAR UM BOOLEANO
                             itemUsed = true;
                         } else
                             itemUsed = false;
-                        
+
                         j--;
                     }
 
                     // moving
                     else if (input == 1) {
-                        nextTurn(i, board);
+                        increaseTurnAndDrawBoard(i, board);
                         input = chooseDirection(scanner);
 
                         board.movePlayer(j, input);
-                        nextTurn(i, board);
+                        increaseTurnAndDrawBoard(i, board);
                         System.out.printf("Player " + Cores.ANSI_GREEN + "J%d " + Cores.ANSI_RESET + "moved!\n", j + 1);
                         checkForPlayersDeaths(board, i, j);
                     }
                 }
                 // If item was used, only thing player can do now is move
                 else {
-                    nextTurn(i, board);
+                    increaseTurnAndDrawBoard(i, board);
 
                     input = chooseDirection(scanner);
 
                     board.movePlayer(j, input);
-                    nextTurn(i, board);
+                    increaseTurnAndDrawBoard(i, board);
                     System.out.printf("Player " + Cores.ANSI_GREEN + "J%d " + Cores.ANSI_RESET + "moved!\n", j + 1);
                     itemUsed = false;
                     checkForPlayersDeaths(board, i, j);
@@ -281,7 +303,7 @@ public class Main {
             }
 
             // Enemy turn ===================================
-            nextTurn(i, board);
+            increaseTurnAndDrawBoard(i, board);
             System.out.println("--> " + Cores.ANSI_RED + "Fake news " + Cores.ANSI_RESET + "turn");
 
             sleep(1);
@@ -293,21 +315,19 @@ public class Main {
                     continue;
 
                 // To not move the recently added fakeNews
-                else if (board.checkFakeNewsState(x) == "RecentlyAdded")
-                {
+                else if (board.checkFakeNewsState(x) == "RecentlyAdded") {
                     board.getFakeNews().get(x).setState("alive");
-                    nextTurn(i, board);
+                    increaseTurnAndDrawBoard(i, board);
                     continue;
-                }
-                else
+                } else
                     board.moveIndividualFakeNews(x);
 
-                nextTurn(i, board);
+                increaseTurnAndDrawBoard(i, board);
                 System.out.println("--> " + Cores.ANSI_RED + " Fake news " + (x + 1) + Cores.ANSI_RESET + " moved");
 
                 // Check for fakeNews deaths
                 if (board.checkFakeNewsState(x) == "dead") {
-                    // nextTurn(i, board);
+                    // increaseTurnAndDrawBoard(i, board);
                     System.out.printf("Fake news " + Cores.ANSI_RED + "%d " + Cores.ANSI_RESET + "died! :)\n", x + 1);
                 }
 
@@ -324,7 +344,7 @@ public class Main {
 
                 sleep(1);
             }
-            nextTurn(i, board);
+            increaseTurnAndDrawBoard(i, board);
             System.out.println("--> " + Cores.ANSI_RED + "All Fake news " + Cores.ANSI_RESET + "moved");
 
             sleep(1);
