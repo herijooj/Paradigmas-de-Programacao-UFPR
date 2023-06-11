@@ -122,6 +122,6 @@ public abstract class FakeNews extends Entity implements Movement {
      * @param direction the direction of the movement
      * 
      */
-    public abstract boolean move(Board board, int direction);
+    public abstract String move(Board board, int direction);
     // checks if the movement is valid
 }
