@@ -26,7 +26,7 @@ public class F1 extends FakeNews {
     }
 //
     @Override
-    public boolean move(Board board, int direction) {
+    public String move(Board board, int direction) {
 
         int newI, newJ;
         Coordinate position, randomCoordinate;
@@ -38,7 +38,7 @@ public class F1 extends FakeNews {
                 System.out.println("DOWN");
                 newI = this.position.getI() + 1;
                 if (!canMoveToCoordinate(board.getBoard(), newI, this.position.getJ())) {
-                    return false;
+                    return "dead";
                 } else {
                     position = new Coordinate(newI, this.position.getJ());
 
@@ -60,14 +60,14 @@ public class F1 extends FakeNews {
                     }
 
                     this.position.setI(this.position.getI() + 1);
-                    return true;
+                    return "moved";
                 }
                 // goes up
             case 2:
                 System.out.println("UP");
                 newI = this.position.getI() - 1;
                 if (!canMoveToCoordinate(board.getBoard(), newI, this.position.getJ())) {
-                    return false;
+                    return "dead";
                 } else {
                     position = new Coordinate(newI, this.position.getJ());
 
@@ -89,14 +89,14 @@ public class F1 extends FakeNews {
                     }
 
                     this.position.setI(this.position.getI() - 1);
-                    return true;
+                    return "moved";
                 }
                 // goes right
             case 3:
                 System.out.println("RIGHT");
                 newJ = this.position.getJ() + 1;
                 if (!canMoveToCoordinate(board.getBoard(), this.position.getI(), newJ)) {
-                    return false;
+                    return "dead";
                 } else {
                     position = new Coordinate(this.position.getI(), newJ);
 
@@ -118,14 +118,14 @@ public class F1 extends FakeNews {
                     }
 
                     this.position.setJ(this.position.getJ() + 1);
-                    return true;
+                    return "moved";
                 }
                 // goes left
             case 4:
                 System.out.println("LEFT");
                 newJ = this.position.getJ() - 1;
                 if (!canMoveToCoordinate(board.getBoard(), this.position.getI(), newJ)) {
-                    return false;
+                    return "dead";
                 } else {
                     position = new Coordinate(this.position.getI(), newJ);
 
@@ -146,10 +146,10 @@ public class F1 extends FakeNews {
                         board.addItens(1);
                     }
                     this.position.setJ(this.position.getJ() - 1);
-                    return true;
+                    return "moved";
                 }
         }
-        return false;
+        return "dead";
     }
 
     public String toString() {
