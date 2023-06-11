@@ -41,7 +41,7 @@ public class Board {
         this.setRestrictedSectorsMax(4);
         this.setRestrictedSectors();
         this.setFakeNews();
-        this.setItens(1);
+        this.setItens(10);
         this.setBoard();
     }
 
@@ -213,7 +213,8 @@ public class Board {
 
         // See if coordinate generated isn't already occupied
         if (!hasEqualCoordinate(newCoordinate)) {
-            itemNum = (int) (Math.random() * 4);
+            //itemNum = (int) (Math.random() * 4);
+            itemNum = 0; // PRA TESTAR
 
             if (itemNum == 0)
                 this.listaItens.add(new ItemBoato(newCoordinate));
@@ -263,7 +264,8 @@ public class Board {
 
         // See if coordinate generated isn't already occupied
         if (!hasEqualCoordinate(newCoordinate)) {
-            itemNum = (int) (Math.random() * 4);
+            //itemNum = (int) (Math.random() * 4);
+            itemNum = 0;
 
             if (itemNum == 0)
                 this.listaItens.add(new ItemBoato(newCoordinate));
@@ -460,10 +462,10 @@ public class Board {
         // goes up, down, left or right one position randomly
         int direction = (int) (Math.random() * 4) + 1;
 
-        boolean movementWorked = fakeNews.get(index).move(this, direction);
+        String movementWorked = fakeNews.get(index).move(this, direction);
 
         // if the movement worked, update the board
-        if (movementWorked) {
+        if (movementWorked == "moved") {
             // get the new coordinates
             iFakeNews = fakeNews.get(index).getPosition().getI();
             jFakeNews = fakeNews.get(index).getPosition().getJ();
@@ -475,7 +477,7 @@ public class Board {
 
             // update the board
             this.board[iFakeNews][jFakeNews].setSectorState(fakeNews.get(index).toString());
-        } else
+        } else if (movementWorked == "dead")
             fakeNews.get(index).setState("dead");
     }
 
@@ -519,18 +521,36 @@ public class Board {
         // clear the old position
         this.board[iPlayer][jPlayer].setSectorState("");
 
-        boolean movementWorked = players.get(i).move(this, direction);
+        String movementWorked = players.get(i).move(this, direction);
 
         // if the movement worked, update the board
-        if (movementWorked) {
+        if (movementWorked == "moved") {
             // get the new coordinates
             iPlayer = players.get(i).getPosition().getI();
             jPlayer = players.get(i).getPosition().getJ();
 
             // update the board
             this.board[iPlayer][jPlayer].setSectorState(players.get(i).toString());
-        } else
+        }
+        else if (movementWorked == "dead")
             players.get(i).setState("dead");
+        else  // BOATO
+        {
+            int randomDirection = (int) (Math.random() * 4) + 1;
+            Coordinate newCoordinate;
+
+            // Get the new coordinates
+            iPlayer = players.get(i).getPosition().getI();
+            jPlayer = players.get(i).getPosition().getJ();
+
+            newCoordinate = new Coordinate(iPlayer, jPlayer);
+
+            // Player is in the item boato area
+            this.board[iPlayer][jPlayer].setSectorState(players.get(i).toString());
+
+            // Move again, but randomly
+            this.movePlayer(i, randomDirection);
+        }
     }
 
     /**
@@ -540,13 +560,12 @@ public class Board {
      * @param itemIndex   the index of the item being used
      */
     public void useItem(int playerIndex, int itemIndex) {
-        //ItemCharacteristics item = this.listaItens.get(itemIndex);
         Player player = this.listaPlayers.get(playerIndex - 1);
         ItemCharacteristics item = player.getInventory().get(itemIndex);
 
-        //System.out.println(item.toString());
-
         item.itemAbility(this, player);
+
+        player.getInventory().remove(itemIndex);
     }
 
     /**
