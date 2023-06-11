@@ -18,11 +18,21 @@ public abstract class FakeNews extends Entity implements Movement {
     }
 
     // getters
+    /**
+     * Function that returns the state of the Fake News
+     * 
+     * @return String "alive", "dead", "RecentlyAdded" or "outOfGame
+     */
     public String getState() {
         return this.state;
     }
 
     // setters
+    /**
+     * Function that sets the state of the Fake News
+     * 
+     * @param state "alive", "dead", "RecentlyAdded" or "outOfGame
+     */
     public void setState(String state) {
         if (state != "alive" && state != "dead" && state != "outOfGame" && state != "RecentlyAdded")
             throw new IllegalArgumentException("Invalid state, valids: [alive, dead, RecentlyAdded and outOfGame]");
@@ -35,57 +45,57 @@ public abstract class FakeNews extends Entity implements Movement {
     /**
      * Function that generates coordinates for new Fake News generations,
      * based on a coordinate passed as a parameter (center), it generates
-     * a new coordinate around that center 
+     * a new coordinate around that center
      * 
      * Returns: new Coordinate;
-    */
+     */
     public Coordinate generateRandomPeriphericCoordinate(Coordinate center) {
         int iC = center.getI();
         int jC = center.getJ();
         int iOffset, jOffset, newI, newJ;
-    
+
         // If the center is on the bottom line
         if (iC == 8) {
-            iOffset = (int) (Math.random() * 2);             // Random offset for i coordinate (0 or 1)
-            jOffset = (int) (Math.random() * 3) - 1;         // Random offset for j coordinate (-1, 0, or 1)
+            iOffset = (int) (Math.random() * 2); // Random offset for i coordinate (0 or 1)
+            jOffset = (int) (Math.random() * 3) - 1; // Random offset for j coordinate (-1, 0, or 1)
         }
         // If the center is on the top line
         else if (iC == 0) {
-            iOffset = (int) (Math.random() * 2) - 1;         // Random offset for i coordinate (-1 or 0)
-            jOffset = (int) (Math.random() * 3) - 1;         // Random offset for j coordinate (-1, 0, or 1)
+            iOffset = (int) (Math.random() * 2) - 1; // Random offset for i coordinate (-1 or 0)
+            jOffset = (int) (Math.random() * 3) - 1; // Random offset for j coordinate (-1, 0, or 1)
         }
         // If the center is in the leftmost column
         else if (jC == 0) {
-            iOffset = (int) (Math.random() * 3) - 1;         // Random offset for i coordinate (-1, 0, or 1)
-            jOffset = (int) (Math.random() * 2) - 1;         // Random offset for j coordinate (-1 or 0)
+            iOffset = (int) (Math.random() * 3) - 1; // Random offset for i coordinate (-1, 0, or 1)
+            jOffset = (int) (Math.random() * 2) - 1; // Random offset for j coordinate (-1 or 0)
         }
         // If the center is in the rightmost column
         else if (jC == 8) {
-            iOffset = (int) (Math.random() * 3) - 1;         // Random offset for i coordinate (-1, 0, or 1)
-            jOffset = (int) (Math.random() * 2);             // Random offset for j coordinate (0 or 1)
+            iOffset = (int) (Math.random() * 3) - 1; // Random offset for i coordinate (-1, 0, or 1)
+            jOffset = (int) (Math.random() * 2); // Random offset for j coordinate (0 or 1)
         }
         // If the center is in any other position
         else {
-            iOffset = (int) (Math.random() * 3) - 1;         // Random offset for i coordinate (-1, 0, or 1)
-            jOffset = (int) (Math.random() * 3) - 1;         // Random offset for j coordinate (-1, 0, or 1)
+            iOffset = (int) (Math.random() * 3) - 1; // Random offset for i coordinate (-1, 0, or 1)
+            jOffset = (int) (Math.random() * 3) - 1; // Random offset for j coordinate (-1, 0, or 1)
         }
-    
+
         // Calculate the new coordinates based on the offsets
-        newI = Math.max(0, Math.min(8, iC + iOffset));       // Adjusted new i coordinate within valid range
-        newJ = Math.max(0, Math.min(8, jC + jOffset));       // Adjusted new j coordinate within valid range
-    
-        // If the generated coordinates are the same as the center coordinates, adjust them
+        newI = Math.max(0, Math.min(8, iC + iOffset)); // Adjusted new i coordinate within valid range
+        newJ = Math.max(0, Math.min(8, jC + jOffset)); // Adjusted new j coordinate within valid range
+
+        // If the generated coordinates are the same as the center coordinates, adjust
+        // them
         while (newI == iC && newJ == jC) {
-            iOffset = (int) (Math.random() * 3) - 1;         // Random adjustment for i coordinate (-1, 0, or 1)
-            jOffset = (int) (Math.random() * 3) - 1;         // Random adjustment for j coordinate (-1, 0, or 1)
-            newI = Math.max(0, Math.min(8, iC + iOffset));   // Adjusted new i coordinate within valid range
-            newJ = Math.max(0, Math.min(8, jC + jOffset));   // Adjusted new j coordinate within valid range
+            iOffset = (int) (Math.random() * 3) - 1; // Random adjustment for i coordinate (-1, 0, or 1)
+            jOffset = (int) (Math.random() * 3) - 1; // Random adjustment for j coordinate (-1, 0, or 1)
+            newI = Math.max(0, Math.min(8, iC + iOffset)); // Adjusted new i coordinate within valid range
+            newJ = Math.max(0, Math.min(8, jC + jOffset)); // Adjusted new j coordinate within valid range
         }
-    
+
         return new Coordinate(newI, newJ);
     }
-    
-    
+
     /*
      * Checks if a sector has an Item
      * returns true if it has, and false if it doesn't
@@ -96,8 +106,7 @@ public abstract class FakeNews extends Entity implements Movement {
         return false;
     }
 
-    public void addFakeNewsToSector(Board board, Coordinate position, FakeNews fn)
-    {
+    public void addFakeNewsToSector(Board board, Coordinate position, FakeNews fn) {
         if (fn instanceof F1)
             board.getBoard()[position.getI()][position.getJ()].setSectorState("F1");
         else if (fn instanceof F2)
