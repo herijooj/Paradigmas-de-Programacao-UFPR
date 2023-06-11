@@ -1,357 +1,155 @@
+package Entities.Beings;
 
-import java.util.Scanner;
-
-// import custom classes
-import Board.*;
-
-import Cores.*;
+// imports
 import Entities.Coordinate;
-import Entities.Itens.*;
+import Board.Board;
+import Cores.Cores;
 
-public class Main {
+// class
+public class F2 extends FakeNews {
 
-    // function to generate random number
-    public static int randomNumber(int min, int max) {
-        return (int) (Math.random() * (max - min + 1) + min);
+    // attributes
+
+    // constructor
+    public F2(Coordinate position, String state) {
+        super(position, state);
     }
 
-    // ascii art title screen
-    public static void titleScreen() {
-        String[] pattern = {
-                ".........................................................................",
-                ".######...####...##..##..######..........##..##..######..##...##...####..",
-                ".##......##..##..##.##...##..............###.##..##......##...##..##.....",
-                ".####....######..####....####............##.###..####....##.#.##...####..",
-                ".##......##..##..##.##...##..............##..##..##......#######......##.",
-                ".##......##..##..##..##..######..........##..##..######...##.##....####..",
-                "........................................................................."
-        };
-        for (int i = 0; i < pattern.length; i++) {
-            System.out.println(pattern[i]);
-        }
+    // getters
+
+    // setters
+
+    // methods
+
+    public void draw() {
+        System.out.print("F2");
     }
+//
+    @Override
+    public String move(Board board, int direction) {
 
-    public static void gameOver() {
-        String[] pattern = {
-                "   _____                         ____                 ",
-                "  / ____|                       / __ \\                ",
-                " | |  __  __ _ _ __ ___   ___  | |  | |_   _____ _ __ ",
-                " | | |_ |/ _` | '_ ` _ \\ / _ \\ | |  | \\ \\ / / _ \\ '__|",
-                " | |__| | (_| | | | | | |  __/ | |__| |\\ V /  __/ |   ",
-                "  \\_____|\\__,_|_| |_| |_|\\___|  \\____/  \\_/ \\___|_|   "
-        };
-        for (int i = 0; i < pattern.length; i++) {
-            System.out.println(pattern[i]);
-        }
-        // exit program
-        System.exit(1);
-    }
+        int newI, newJ;
+        Coordinate position, randomCoordinate;
+        FakeNews newFakeNews;
 
-    // placeholder for game win
-    public static void gameWin() {
-        String[] pattern = {
-                "  __          __  _                            _ ",
-                "  \\ \\        / / | |                          | |",
-                "   \\ \\  /\\  / /__| | ___ ___  _ __ ___   ___  | |",
-                "    \\ \\/  \\/ / _ \\ |/ __/ _ \\| '_ ` _ \\ / _ \\ | |",
-                "     \\  /\\  /  __/ | (_| (_) | | | | | |  __/ |_|",
-                "      \\/  \\/ \\___|_|\\___\\___/|_| |_| |_|\\___| (_)"
-        };
-        for (int i = 0; i < pattern.length; i++) {
-            System.out.println(pattern[i]);
-        }
-        // exit program
-        System.exit(0);
+        switch (direction) {
+            // goes two down
+            case 1:
+                newI = this.position.getI() + 2;
+                if (!canMoveToCoordinate(board.getBoard(), newI, this.position.getJ())) {
+                    return "dead";
+                } else {
+                    position = new Coordinate(newI, this.position.getJ());
 
-    }
+                    if (hasItem(board.getBoard(), position)) {
+                        // Spawn another fakeNews
 
-    public static void sleep(int seconds) {
-        // Stops time for 1 secondd
-        try {
-            // in milliseconds
-            Thread.sleep(seconds * 1000);
-        } catch (InterruptedException e) {
-            // Handle the exception if needed
-            e.printStackTrace();
-        }
-    }
+                        // Generates random coordinate for a new fakeNews to spawn
+                        randomCoordinate = generateRandomPeriphericCoordinate(position);
+                        while (hasSomething(board.getBoard(), randomCoordinate))
+                            randomCoordinate = generateRandomPeriphericCoordinate(position);
 
-    // function to clear screen
-    public static void flushScreen() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-    }
+                        newFakeNews = new F2(randomCoordinate, "RecentlyAdded");
 
-    // this function receives a key and returns the corresponding direction
-    public static int keyToDirection(String key) {
-        // touppercase
-        key = key.toUpperCase();
+                        board.getFakeNews().add(newFakeNews);
+                        addFakeNewsToSector(board, randomCoordinate, newFakeNews);
 
-        // 1 = down, 2 = up, 3 = right, 4 = left
-        // 0 = don't move
-        switch (key) {
-            case "W":
-                return 2;
-            case "A":
-                return 4;
-            case "S":
-                return 1;
-            case "D":
-                return 3;
-            case "Q":
-                return 0;
-            default:
-                return -1;
-        }
-    }
-
-    /**
-     * this function turns the turn
-     * it clears the screen, prints the turn number and draws the board
-     * it should be called at the start of each turn
-     * 
-     * @param turn  the current turn
-     * @param board the board object
-     */
-    public static void increaseTurnAndDrawBoard(int turn, Board board) {
-        flushScreen();
-        System.out.println("Turn " + (turn + 1) + " of 25");
-        board.drawBoard();
-    }
-
-    // choose a direction to move
-    public static int chooseDirection(Scanner scanner) {
-        String input;
-
-        System.out.println("Choose a direction to move [WASD] or press Q to stay still");
-
-        input = scanner.nextLine();
-
-        // while the input is invalid
-        while (input.length() != 1 || keyToDirection(input) == -1) {
-            // clear 2 lines
-            System.out.print("\033[2A");
-            System.out.println("Invalid input, choose a direction to move [WASD] or press Q to stay still");
-            input = scanner.nextLine();
-        }
-
-        return keyToDirection(input);
-    }
-
-    public static void checkForPlayersDeaths(Board board, int i, int j) {
-        // Check for player deaths
-        if (board.checkPlayerState(j) == "dead") {
-            increaseTurnAndDrawBoard(i, board);
-            System.out.printf("Player " + Cores.ANSI_GREEN + "J%d " + Cores.ANSI_RESET + "died! :(\n", j + 1);
-            sleep(1);
-        }
-    }
-
-    // main function ====================================
-    public static void main(String[] args) {
-
-        Scanner scanner = new Scanner(System.in);
-        int playerCount, input, inventorySize, j = 0, previousJ;
-        boolean itemUsed = false;
-        String placeholder;
-
-        // title screen ------------------------------------
-        flushScreen();
-        titleScreen();
-        System.out.println("Welcome to the game!");
-
-        // configuration screen ----------------------------
-        System.out.println("Choose a number of players [1-4]");
-        placeholder = scanner.nextLine();
-        while (!placeholder.matches("[1-4]")) {
-            System.out.print("\033[2A");
-            System.out.println("Invalid input, choose a number of players [1-4]");
-            placeholder = scanner.nextLine();
-        }
-        playerCount = Integer.parseInt(placeholder);
-
-        // game start --------------------------------------
-        flushScreen();
-        titleScreen();
-        System.out.println(playerCount + " player game starting...");
-        sleep(2);
-        flushScreen();
-
-        // game loop ---------------------------------------
-
-        // create board
-        Board board = new Board(9, playerCount);
-
-        // 25 turns
-        for (int i = 0; i < 25; i++) {
-            // if it is the last turn, game over
-            if (i == 24 || board.allPlayersDead()) {
-                flushScreen();
-                gameOver();// PASSIVO DE FAZER FACTORY METHOD, FICARA flushScreen("gameOver")
-                break;
-            }
-
-            // if there are no enemies left, game win
-            if (board.allEnemiesDead()) {
-                flushScreen();
-                gameWin();
-                break;
-            }
-
-            // player turn ==================================
-
-            // for loop between players
-            int playersQuantity = board.getPlayers().size();
-            for (j = 0; j < playersQuantity; j++) {
-
-                // ESTOU USANDO PARA TESTAR OS ITENS
-                // generate each item in the current player position
-                Coordinate playerPosition = board.getPlayers().get(j).getPosition();
-                ItemCharacteristics itemDenunciar = new ItemDenunciar(playerPosition);
-                ItemCharacteristics itemLer = new ItemLer(playerPosition);
-                ItemCharacteristics itemFugir = new ItemFugir(playerPosition);
-                ItemCharacteristics itemBoato = new ItemBoato(playerPosition);
-
-                // add the items to the current player inventory
-                //board.getPlayers().get(j).addItemToInventory(itemBoato);
-                //board.getPlayers().get(j).addItemToInventory(itemDenunciar);
-                //board.getPlayers().get(j).addItemToInventory(itemLer);
-                //board.getPlayers().get(j).addItemToInventory(itemFugir);
-                // ESTOU USANDO PARA TESTAR OS ITENS
-
-                // If player died last round or before, skip
-                if (board.checkPlayerState(j) == "outOfGame" || board.checkPlayerState(j) == "dead")
-                    continue;
-
-                previousJ = j;
-                // Getting action
-                if (!itemUsed) {
-                    flushScreen();
-                    System.out.println("Turn " + (i + 1) + " of 25");
-                    board.drawBoard();
-                    System.out.printf("--> " + Cores.ANSI_GREEN + "Player %d " + Cores.ANSI_RESET + "turn\n", j + 1);
-                    System.out.println("Press action desired [1 -> move / 2 -> use itens]");
-
-                    // input validation
-                    placeholder = scanner.nextLine();
-                    while (!placeholder.matches("[1-2]+")) {
-                        System.out.print("\033[2A");
-                        System.out.println("invalid entry, Try again. [1 -> move / 2 -> use itens]");
-                        placeholder = scanner.nextLine();
-                    }
-                    input = Integer.parseInt(placeholder);
-
-                    // Action
-                    if (input == 2) {
-                        increaseTurnAndDrawBoard(i, board);
-                        inventorySize = board.drawPlayerInventory(j + 1);
-
-                        // input validation
-                        placeholder = scanner.nextLine();
-                        while (!placeholder.matches("[1-5]")) {
-                            System.out.print("\033[2A");
-                            System.out.println("invalid entry, Try again. [1 -> move / 2 -> use itens]");
-                            placeholder = scanner.nextLine();
-                        }
-                        input = Integer.parseInt(placeholder);
-
-                        if (input > 0 && input < 5) {
-                            // USE ITEM --------------------
-                            increaseTurnAndDrawBoard(i, board);
-                            System.out.println("Item used!");
-                            // j+1 because the player number is 1,2,3,4 and the array is 0,1,2,3
-                            // input-1 because the item number is 1,2,3,4 and the array is 0,1,2,3
-                            board.useItem(j + 1, input - 1); // PODE RETORNAR UM BOOLEANO
-                            itemUsed = true;
-                            sleep(1);
-                        } else
-                            itemUsed = false;
-
-                        j--;
+                        // Add new Item to the board
+                        board.addItens(1);
                     }
 
-                    // moving
-                    else if (input == 1) {
-                        increaseTurnAndDrawBoard(i, board);
-                        input = chooseDirection(scanner);
+                    this.position.setI(this.position.getI() + 2);
+                    return "moved";
+                }
+                // goes two up
+            case 2:
+                newI = this.position.getI() - 2;
+                if (!canMoveToCoordinate(board.getBoard(), newI, this.position.getJ())) {
+                    return "dead";
+                } else {
+                    position = new Coordinate(newI, this.position.getJ());
 
-                        board.movePlayer(j, input);
-                        increaseTurnAndDrawBoard(i, board);
-                        System.out.printf("Player " + Cores.ANSI_GREEN + "J%d " + Cores.ANSI_RESET + "moved!\n", j + 1);
-                        checkForPlayersDeaths(board, i, j);
+                    if (hasItem(board.getBoard(), position)) {
+                        // Spawn another fakeNews
+
+                        // Generates random coordinate for a new fakeNews to spawn
+                        randomCoordinate = generateRandomPeriphericCoordinate(position);
+                        while (hasSomething(board.getBoard(), randomCoordinate))
+                            randomCoordinate = generateRandomPeriphericCoordinate(position);
+
+                        newFakeNews = new F2(randomCoordinate, "RecentlyAdded");
+
+                        board.getFakeNews().add(newFakeNews);
+                        addFakeNewsToSector(board, randomCoordinate, newFakeNews);
+                        
+                        // Add new Item to the board
+                        board.addItens(1);
                     }
+
+                    this.position.setI(this.position.getI() - 2);
+                    return "moved";
                 }
-                // If item was used, only thing player can do now is move
-                else {
-                    increaseTurnAndDrawBoard(i, board);
+                // goes two right
+            case 3:
+                newJ = this.position.getJ() + 2;
+                if (!canMoveToCoordinate(board.getBoard(), this.position.getI(), newJ)) {
+                    return "dead";
+                } else {
+                    position = new Coordinate(this.position.getI(), newJ);
 
-                    input = chooseDirection(scanner);
+                    if (hasItem(board.getBoard(), position)) {
+                        // Spawn another fakeNews
 
-                    board.movePlayer(j, input);
-                    increaseTurnAndDrawBoard(i, board);
-                    System.out.printf("Player " + Cores.ANSI_GREEN + "J%d " + Cores.ANSI_RESET + "moved!\n", j + 1);
-                    itemUsed = false;
-                    checkForPlayersDeaths(board, i, j);
+                        // Generates random coordinate for a new fakeNews to spawn
+                        randomCoordinate = generateRandomPeriphericCoordinate(position);
+                        while (hasSomething(board.getBoard(), randomCoordinate))
+                            randomCoordinate = generateRandomPeriphericCoordinate(position);
+
+                        newFakeNews = new F2(randomCoordinate, "RecentlyAdded");
+
+                        board.getFakeNews().add(newFakeNews);
+                        addFakeNewsToSector(board, randomCoordinate, newFakeNews);
+                        
+                        // Add new Item to the board
+                        board.addItens(1);
+                    }
+
+                    this.position.setJ(this.position.getJ() + 2);
+                    return "moved";
                 }
-                sleep(1);
-            }
+                // goes two left
+            case 4:
+                newJ = this.position.getJ() - 2;
+                if (!canMoveToCoordinate(board.getBoard(), this.position.getI(), newJ)) {
+                    return "dead";
+                } else {
+                    position = new Coordinate(this.position.getI(), newJ);
 
-            // Check if players died during movement
-            if (board.allPlayersDead()) {
-                flushScreen();
-                gameOver();
-                break;
-            }
+                    if (hasItem(board.getBoard(), position)) {
+                        // Spawn another fakeNews
 
-            // Enemy turn ===================================
-            increaseTurnAndDrawBoard(i, board);
-            System.out.println("--> " + Cores.ANSI_RED + "Fake news " + Cores.ANSI_RESET + "turn");
+                        // Generates random coordinate for a new fakeNews to spawn
+                        randomCoordinate = generateRandomPeriphericCoordinate(position);
+                        while (hasSomething(board.getBoard(), randomCoordinate))
+                            randomCoordinate = generateRandomPeriphericCoordinate(position);
 
-            sleep(1);
+                        newFakeNews = new F2(randomCoordinate, "RecentlyAdded");
 
-            // Enemy movement
-            for (int x = 0; x < board.getFakeNews().size(); x++) {
-                // Ignore outOfGame fakeNews
-                if (board.checkFakeNewsState(x) == "outOfGame")
-                    continue;
+                        board.getFakeNews().add(newFakeNews);
+                        addFakeNewsToSector(board, randomCoordinate, newFakeNews);
+                        
+                        // Add new Item to the board
+                        board.addItens(1);
+                    }
 
-                // To not move the recently added fakeNews
-                else if (board.checkFakeNewsState(x) == "RecentlyAdded") {
-                    board.getFakeNews().get(x).setState("alive");
-                    increaseTurnAndDrawBoard(i, board);
-                    continue;
-                } else
-                    board.moveIndividualFakeNews(x);
-
-                increaseTurnAndDrawBoard(i, board);
-                System.out.println("--> " + Cores.ANSI_RED + " Fake news " + (x + 1) + Cores.ANSI_RESET + " moved");
-
-                // Check for fakeNews deaths
-                if (board.checkFakeNewsState(x) == "dead") {
-                    // increaseTurnAndDrawBoard(i, board);
-                    System.out.printf("Fake news " + Cores.ANSI_RED + "%d " + Cores.ANSI_RESET + "died! :)\n", x + 1);
+                    this.position.setJ(this.position.getJ() - 2);
+                    return "moved";
                 }
-
-                // Check for player deaths
-                for (int k = 0; k < playersQuantity; k++)
-                    checkForPlayersDeaths(board, i, k);
-
-                // Check if players died during fakeNews movement
-                if (board.allPlayersDead()) {
-                    flushScreen();
-                    gameOver();
-                    break;
-                }
-
-                sleep(1);
-            }
-            increaseTurnAndDrawBoard(i, board);
-            System.out.println("--> " + Cores.ANSI_RED + "All Fake news " + Cores.ANSI_RESET + "moved");
-
-            sleep(1);
-
-            // System.out.println("Press any key to continue the game...");
-            // scanner.nextLine();
         }
+        return "dead";
+    }
+
+    public String toString() {
+        return "F2";
     }
 }
