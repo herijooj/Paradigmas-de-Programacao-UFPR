@@ -213,10 +213,10 @@ public class Main {
                 ItemCharacteristics itemBoato = new ItemBoato(playerPosition);
 
                 // add the items to the current player inventory
-                board.getPlayers().get(j).addItemToInventory(itemBoato);
-                board.getPlayers().get(j).addItemToInventory(itemDenunciar);
-                board.getPlayers().get(j).addItemToInventory(itemLer);
-                board.getPlayers().get(j).addItemToInventory(itemFugir);
+                //board.getPlayers().get(j).addItemToInventory(itemBoato);
+                //board.getPlayers().get(j).addItemToInventory(itemDenunciar);
+                //board.getPlayers().get(j).addItemToInventory(itemLer);
+                //board.getPlayers().get(j).addItemToInventory(itemFugir);
                 // ESTOU USANDO PARA TESTAR OS ITENS
 
                 // If player died last round or before, skip
