@@ -3,13 +3,10 @@ package Board;
 // imports 
 import java.util.*;
 import Cores.Cores;
-import java.awt.Component;
-import java.awt.event.KeyEvent;
 
 import Entities.*;
 import Entities.Beings.*;
 import Entities.Itens.*;
-import Board.Sector;
 
 // class
 public class Board {
@@ -344,7 +341,7 @@ public class Board {
             // extracting for better readability
             int fakeNewsI = this.listaFakeNews.get(j).getPosition().getI();
             int fakeNewsJ = this.listaFakeNews.get(j).getPosition().getJ();
-        
+
             // if it has the same coordinate as an item, return true
             if (coordinate.getI() == fakeNewsI && coordinate.getJ() == fakeNewsJ)
                 return true;
@@ -536,6 +533,12 @@ public class Board {
             players.get(i).setState("dead");
     }
 
+    /**
+     * this is a wrapper method for the item ability method
+     * 
+     * @param playerIndex the index of the player using the item
+     * @param itemIndex   the index of the item being used
+     */
     public void useItem(int playerIndex, int itemIndex) {
         ItemCharacteristics item = this.listaItens.get(itemIndex);
         Player player = this.listaPlayers.get(playerIndex);

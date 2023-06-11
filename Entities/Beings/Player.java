@@ -66,6 +66,8 @@ public class Player extends Entity implements Movement {
 
     /*
      * Adds a collected item to the player inventory
+     * 
+     * @param item the item to be added
      */
     public void addItemToInventory(ItemCharacteristics item) {
         if (this.inventory.size() < this.inventorySize)

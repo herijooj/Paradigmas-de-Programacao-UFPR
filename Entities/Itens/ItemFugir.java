@@ -1,6 +1,6 @@
 package Entities.Itens;
 
-import java.util.Scanner;
+import java.util.*;
 import Entities.Coordinate;
 import Entities.Beings.*;
 import Board.Sector;
@@ -21,33 +21,22 @@ public class ItemFugir extends ItemCharacteristics {
     // setters
 
     // methods
-    /*
-    public void itemAbility(Sector[][] board, Player player) {
-        // Move o jogador para uma posição da E/S
-        Scanner input = new Scanner(System.in);
-
-        System.out.println("move to wich position? (i, j)");
-        int i = input.nextInt();
-        int j = input.nextInt();
-
-        //player.move(board, i, j);
-
-        input.close();
-    }
-    */
 
     public void draw() {
         // TODO
     }
 
-    public void itemAbility(Board board, Player player) 
-    {
-        // deleta todos os inimigos ao redor do jogador
-        // recebe um vetor e checa a posição de cada inimigo
+    /**
+     * This item lets the player choose a position to go
+     * 
+     * @param board  the board
+     * @param player the player
+     */
+    public void itemAbility(Board board, Player player) {
+
     }
 
-    public String toString() 
-    {
+    public String toString() {
         return "Item Fugir";
     }
 }
