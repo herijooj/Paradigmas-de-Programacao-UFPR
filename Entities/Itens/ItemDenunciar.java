@@ -32,6 +32,7 @@ public class ItemDenunciar extends ItemCharacteristics {
      */
     public void itemAbility(Board board, Player player) {
         LinkedList<FakeNews> fakeNewsList = board.getFakeNews();
+        int i, j;
 
         // create a list of positions, where the posistion has distance of 1 from the
         // player
@@ -50,24 +51,25 @@ public class ItemDenunciar extends ItemCharacteristics {
         positions.add(new Coordinate(player.getPosition().getI() + 1, player.getPosition().getJ() - 1)); // left-down
 
         // for each position, check if there is a fakeNews
-        for (Coordinate position : positions) {
-            for (FakeNews fakeNews : fakeNewsList) {
-                if (fakeNews.getPosition().equals(position)) {
-                    // check state of the fakeNews
-                    if (fakeNews.getState().equals("RecentlyAdded") || fakeNews.getState().equals("alive")) {
-                        fakeNews.setState("dead");
-                        System.out.printf("Fake news " + Cores.ANSI_RED + "%d " + Cores.ANSI_RESET + "died! :)\n",
-                                fakeNewsList.indexOf(fakeNews));
-
+        for (i = 0; i < positions.size(); i++)
+        {
+            for (j = 0; j < fakeNewsList.size(); j++)
+            {
+                // If fakeNews is in the area
+                if (fakeNewsList.get(j).getPosition().getI() == positions.get(i).getI() && fakeNewsList.get(j).getPosition().getJ() == positions.get(i).getJ())
+                {
+                    System.out.println("In sight");
+                    if (fakeNewsList.get(j).getState() == "RecentlyAdded" || fakeNewsList.get(j).getState() == "alive")
+                    {
+                        // Set state to outOfGame and setSectorState to nothing there
+                        fakeNewsList.get(j).setState("outOfGame");
+                        board.getBoard()[fakeNewsList.get(j).getPosition().getI()][fakeNewsList.get(j).getPosition().getJ()].setSectorState("");
+                        System.out.printf("Fake news " + Cores.ANSI_RED + "%d " + Cores.ANSI_RESET + "eliminated! :)\n", j + 1);
                     }
                     break;
                 }
             }
-            // PODEMOS FAZER DESENHAR UMA EXPLOSÃO AQUI
         }
-
-        // deleta todos os inimigos ao redor do jogador
-        // recebe um vetor e checa a posição de cada inimigo
     }
 
     public void draw() {
