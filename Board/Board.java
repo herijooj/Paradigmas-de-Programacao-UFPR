@@ -41,7 +41,7 @@ public class Board {
         this.setRestrictedSectorsMax(4);
         this.setRestrictedSectors();
         this.setFakeNews();
-        this.setItens(10);
+        this.setItens(1);
         this.setBoard();
     }
 
@@ -540,8 +540,11 @@ public class Board {
      * @param itemIndex   the index of the item being used
      */
     public void useItem(int playerIndex, int itemIndex) {
-        ItemCharacteristics item = this.listaItens.get(itemIndex);
-        Player player = this.listaPlayers.get(playerIndex);
+        //ItemCharacteristics item = this.listaItens.get(itemIndex);
+        Player player = this.listaPlayers.get(playerIndex - 1);
+        ItemCharacteristics item = player.getInventory().get(itemIndex);
+
+        //System.out.println(item.toString());
 
         item.itemAbility(this, player);
     }
