@@ -115,7 +115,7 @@ public class Main {
      */
     public static void increaseTurnAndDrawBoard(int turn, Board board) {
         flushScreen();
-        System.out.println("Turn " + (turn + 1) + " of 25");
+        System.out.println("Turn " + (turn + 1) + " of 20");
         board.drawBoard();
     }
 
@@ -145,6 +145,32 @@ public class Main {
             System.out.printf("Player " + Cores.ANSI_GREEN + "J%d " + Cores.ANSI_RESET + "died! :(\n", j + 1);
             sleep(1);
         }
+    }
+
+    public static void printPositionUpdate(Board board, int index, String entityType)
+    {
+        Coordinate position;
+
+        if (entityType == "player")
+        {
+            if (board.getPlayers().get(index).getState() == "alive")
+            {
+                position = board.getPlayers().get(index).getPosition();
+
+                System.out.printf("Player " + Cores.ANSI_GREEN + "J%d " + Cores.ANSI_RESET + "moved to position: %d%d\n", index + 1, position.getI(), position.getJ());
+            }
+        }
+
+        // "fakeNews"
+        else
+        {
+            if (board.getFakeNews().get(index).getState() == "alive")
+            {
+                position = board.getFakeNews().get(index).getPosition();
+
+                System.out.println("--> " + Cores.ANSI_RED + " Fake news " + (index + 1) + Cores.ANSI_RESET + " moved to position: " + position.getI() + "" + position.getJ());
+            }
+        }    
     }
 
     // main function ====================================
@@ -182,12 +208,12 @@ public class Main {
         // create board
         Board board = new Board(9, playerCount);
 
-        // 25 turns
-        for (int i = 0; i < 25; i++) {
+        // 20 turns
+        for (int i = 0; i < 20; i++) {
             // if it is the last turn, game over
-            if (i == 24 || board.allPlayersDead()) {
+            if (i == 19 || board.allPlayersDead()) {
                 flushScreen();
-                gameOver();// PASSIVO DE FAZER FACTORY METHOD, FICARA flushScreen("gameOver")
+                gameOver();
                 break;
             }
 
@@ -227,7 +253,7 @@ public class Main {
                 // Getting action
                 if (!itemUsed) {
                     flushScreen();
-                    System.out.println("Turn " + (i + 1) + " of 25");
+                    System.out.println("Turn " + (i + 1) + " of 20");
                     board.drawBoard();
                     System.out.printf("--> " + Cores.ANSI_GREEN + "Player %d " + Cores.ANSI_RESET + "turn\n", j + 1);
                     System.out.println("Press action desired [1 -> move / 2 -> use itens]");
@@ -278,6 +304,7 @@ public class Main {
                         board.movePlayer(j, input);
                         increaseTurnAndDrawBoard(i, board);
                         System.out.printf("Player " + Cores.ANSI_GREEN + "J%d " + Cores.ANSI_RESET + "moved!\n", j + 1);
+                        printPositionUpdate(board, j, "player");
                         checkForPlayersDeaths(board, i, j);
                     }
                 }
@@ -290,10 +317,11 @@ public class Main {
                     board.movePlayer(j, input);
                     increaseTurnAndDrawBoard(i, board);
                     System.out.printf("Player " + Cores.ANSI_GREEN + "J%d " + Cores.ANSI_RESET + "moved!\n", j + 1);
+                    printPositionUpdate(board, j, "player");
                     itemUsed = false;
                     checkForPlayersDeaths(board, i, j);
                 }
-                sleep(1);
+                sleep(3);
             }
 
             // Check if players died during movement
@@ -325,10 +353,11 @@ public class Main {
 
                 increaseTurnAndDrawBoard(i, board);
                 System.out.println("--> " + Cores.ANSI_RED + " Fake news " + (x + 1) + Cores.ANSI_RESET + " moved");
+                printPositionUpdate(board, x, "fakeNews");
 
                 // Check for fakeNews deaths
-                if (board.checkFakeNewsState(x) == "dead") {
-                    // increaseTurnAndDrawBoard(i, board);
+                if (board.checkFakeNewsState(x) == "dead")
+                {
                     System.out.printf("Fake news " + Cores.ANSI_RED + "%d " + Cores.ANSI_RESET + "died! :)\n", x + 1);
                 }
 
@@ -343,15 +372,12 @@ public class Main {
                     break;
                 }
 
-                sleep(1);
+                sleep(3);
             }
             increaseTurnAndDrawBoard(i, board);
             System.out.println("--> " + Cores.ANSI_RED + "All Fake news " + Cores.ANSI_RESET + "moved");
 
             sleep(1);
-
-            // System.out.println("Press any key to continue the game...");
-            // scanner.nextLine();
         }
     }
 }
