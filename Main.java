@@ -46,23 +46,17 @@ public class Main {
         // exit program
         System.exit(1);
     }
-
-    // placeholder for game win
+          
     public static void gameWin() {
-        String[] pattern = {
-                "  __          __  _                            _ ",
-                "  \\ \\        / / | |                          | |",
-                "   \\ \\  /\\  / /__| | ___ ___  _ __ ___   ___  | |",
-                "    \\ \\/  \\/ / _ \\ |/ __/ _ \\| '_ ` _ \\ / _ \\ | |",
-                "     \\  /\\  /  __/ | (_| (_) | | | | | |  __/ |_|",
-                "      \\/  \\/ \\___|_|\\___\\___/|_| |_| |_|\\___| (_)"
-        };
-        for (int i = 0; i < pattern.length; i++) {
-            System.out.println(pattern[i]);
-        }
-        // exit program
-        System.exit(0);
+        String pattern = " __     __          __          _______ _   _ _ \n" +
+                         " \\ \\   / /          \\ \\        / /_   _| \\ | | |\n" +
+                         "  \\ \\_/ /__  _   _   \\ \\  /\\  / /  | | |  \\| | |\n" +
+                         "   \\   / _ \\| | | |   \\ \\/  \\/ /   | | | . ` | |\n" +
+                         "    | | (_) | |_| |    \\  /\\  /   _| |_| |\\  |_|\n" +
+                         "    |_|\\___/ \\__,_|     \\/  \\/   |_____|_| \\_(_)\n" +
+                         "                                                ";
 
+        System.out.println(pattern);
     }
 
     public static void sleep(int seconds) {
