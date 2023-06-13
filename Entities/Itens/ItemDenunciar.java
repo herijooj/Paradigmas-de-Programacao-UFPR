@@ -58,7 +58,6 @@ public class ItemDenunciar extends ItemCharacteristics {
                 // If fakeNews is in the area
                 if (fakeNewsList.get(j).getPosition().getI() == positions.get(i).getI() && fakeNewsList.get(j).getPosition().getJ() == positions.get(i).getJ())
                 {
-                    System.out.println("In sight");
                     if (fakeNewsList.get(j).getState() == "RecentlyAdded" || fakeNewsList.get(j).getState() == "alive")
                     {
                         // Set state to outOfGame and setSectorState to nothing there
