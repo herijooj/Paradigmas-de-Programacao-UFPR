@@ -46,17 +46,23 @@ public class Main {
         // exit program
         System.exit(1);
     }
-          
-    public static void gameWin() {
-        String pattern = " __     __          __          _______ _   _ _ \n" +
-                         " \\ \\   / /          \\ \\        / /_   _| \\ | | |\n" +
-                         "  \\ \\_/ /__  _   _   \\ \\  /\\  / /  | | |  \\| | |\n" +
-                         "   \\   / _ \\| | | |   \\ \\/  \\/ /   | | | . ` | |\n" +
-                         "    | | (_) | |_| |    \\  /\\  /   _| |_| |\\  |_|\n" +
-                         "    |_|\\___/ \\__,_|     \\/  \\/   |_____|_| \\_(_)\n" +
-                         "                                                ";
 
-        System.out.println(pattern);
+    // placeholder for game win
+    public static void gameWin() {
+        String[] pattern = {
+                "  __          __  _                            _ ",
+                "  \\ \\        / / | |                          | |",
+                "   \\ \\  /\\  / /__| | ___ ___  _ __ ___   ___  | |",
+                "    \\ \\/  \\/ / _ \\ |/ __/ _ \\| '_ ` _ \\ / _ \\ | |",
+                "     \\  /\\  /  __/ | (_| (_) | | | | | |  __/ |_|",
+                "      \\/  \\/ \\___|_|\\___\\___/|_| |_| |_|\\___| (_)"
+        };
+        for (int i = 0; i < pattern.length; i++) {
+            System.out.println(pattern[i]);
+        }
+        // exit program
+        System.exit(0);
+
     }
 
     public static void sleep(int seconds) {
@@ -223,21 +229,6 @@ public class Main {
             // for loop between players
             int playersQuantity = board.getPlayers().size();
             for (j = 0; j < playersQuantity; j++) {
-
-                // ESTOU USANDO PARA TESTAR OS ITENS
-                // generate each item in the current player position
-                Coordinate playerPosition = board.getPlayers().get(j).getPosition();
-                ItemCharacteristics itemDenunciar = new ItemDenunciar(playerPosition);
-                ItemCharacteristics itemLer = new ItemLer(playerPosition);
-                ItemCharacteristics itemFugir = new ItemFugir(playerPosition);
-                ItemCharacteristics itemBoato = new ItemBoato(playerPosition);
-
-                // add the items to the current player inventory
-                //board.getPlayers().get(j).addItemToInventory(itemBoato);
-                //board.getPlayers().get(j).addItemToInventory(itemDenunciar);
-                //board.getPlayers().get(j).addItemToInventory(itemLer);
-                //board.getPlayers().get(j).addItemToInventory(itemFugir);
-                // ESTOU USANDO PARA TESTAR OS ITENS
 
                 // If player died last round or before, skip
                 if (board.checkPlayerState(j) == "outOfGame" || board.checkPlayerState(j) == "dead")
