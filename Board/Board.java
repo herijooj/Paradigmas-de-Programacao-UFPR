@@ -25,7 +25,6 @@ public class Board {
     private int itemMax = 2;
 
     private LinkedList<Player> listaPlayers;
-    // private int playerCount;
 
     // constructor ============================================
     /**
@@ -41,7 +40,7 @@ public class Board {
         this.setRestrictedSectorsMax(4);
         this.setRestrictedSectors();
         this.setFakeNews();
-        this.setItens(10);
+        this.setItens(2);
         this.setBoard();
     }
 
@@ -213,8 +212,7 @@ public class Board {
 
         // See if coordinate generated isn't already occupied
         if (!hasEqualCoordinate(newCoordinate)) {
-            //itemNum = (int) (Math.random() * 4);
-            itemNum = 0; // PRA TESTAR
+            itemNum = (int) (Math.random() * 4);
 
             if (itemNum == 0)
                 this.listaItens.add(new ItemBoato(newCoordinate));
@@ -264,8 +262,7 @@ public class Board {
 
         // See if coordinate generated isn't already occupied
         if (!hasEqualCoordinate(newCoordinate)) {
-            //itemNum = (int) (Math.random() * 4);
-            itemNum = 0;
+            itemNum = (int) (Math.random() * 4);
 
             if (itemNum == 0)
                 this.listaItens.add(new ItemBoato(newCoordinate));
@@ -712,10 +709,18 @@ public class Board {
             System.out.println("Player " + playerNum + ", this is your inventory");
             System.out.println("Choose the item you want to use, or 5 to return");
             System.out.println("==================INVENTORY===================\n");
-            System.out.print("| ");
+
             for (i = 0; i < player.getInventory().size(); i++)
-                System.out.print((i + 1) + " - " + player.getInventory().get(i).toString() + " |");
-            System.out.println("\n");
+            {   
+                System.out.print((i + 1) + " - " + player.getInventory().get(i).toString() + " - ");
+
+                if (player.getInventory().get(i).toString() == "Item Ler")
+                    System.out.println("Ler uma noticia real, elimina uma FN aleatória do tabuleiro.");
+                else if (player.getInventory().get(i).toString() == "Item Denunciar")
+                    System.out.println("Denunciar FN, elimina todas as FN ao redor do jogador.");
+                else if (player.getInventory().get(i).toString() == "Item Fugir")
+                    System.out.println("Fuja para uma posição do tabuleiro que será escolhida ao utilizar o item."); 
+            }
         }
 
         return player.getInventory().size();
