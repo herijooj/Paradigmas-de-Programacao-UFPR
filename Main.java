@@ -46,15 +46,15 @@ public class Main {
         // exit program
         System.exit(1);
     }
-          
+
     public static void gameWin() {
         String pattern = " __     __          __          _______ _   _ _ \n" +
-                         " \\ \\   / /          \\ \\        / /_   _| \\ | | |\n" +
-                         "  \\ \\_/ /__  _   _   \\ \\  /\\  / /  | | |  \\| | |\n" +
-                         "   \\   / _ \\| | | |   \\ \\/  \\/ /   | | | . ` | |\n" +
-                         "    | | (_) | |_| |    \\  /\\  /   _| |_| |\\  |_|\n" +
-                         "    |_|\\___/ \\__,_|     \\/  \\/   |_____|_| \\_(_)\n" +
-                         "                                                ";
+                " \\ \\   / /          \\ \\        / /_   _| \\ | | |\n" +
+                "  \\ \\_/ /__  _   _   \\ \\  /\\  / /  | | |  \\| | |\n" +
+                "   \\   / _ \\| | | |   \\ \\/  \\/ /   | | | . ` | |\n" +
+                "    | | (_) | |_| |    \\  /\\  /   _| |_| |\\  |_|\n" +
+                "    |_|\\___/ \\__,_|     \\/  \\/   |_____|_| \\_(_)\n" +
+                "                                                ";
 
         System.out.println(pattern);
     }
@@ -141,30 +141,28 @@ public class Main {
         }
     }
 
-    public static void printPositionUpdate(Board board, int index, String entityType)
-    {
+    public static void printPositionUpdate(Board board, int index, String entityType) {
         Coordinate position;
 
-        if (entityType == "player")
-        {
-            if (board.getPlayers().get(index).getState() == "alive")
-            {
+        if (entityType == "player") {
+            if (board.getPlayers().get(index).getState() == "alive") {
                 position = board.getPlayers().get(index).getPosition();
 
-                System.out.printf("Player " + Cores.ANSI_GREEN + "J%d " + Cores.ANSI_RESET + "moved to position: %d-%d\n", index + 1, position.getI(), position.getJ());
+                System.out.printf(
+                        "Player " + Cores.ANSI_GREEN + "J%d " + Cores.ANSI_RESET + "moved to position: %d-%d\n",
+                        index + 1, position.getI(), position.getJ());
             }
         }
 
         // "fakeNews"
-        else
-        {
-            if (board.getFakeNews().get(index).getState() == "alive")
-            {
+        else {
+            if (board.getFakeNews().get(index).getState() == "alive") {
                 position = board.getFakeNews().get(index).getPosition();
 
-                System.out.println("--> " + Cores.ANSI_RED + " Fake news " + (index + 1) + Cores.ANSI_RESET + " moved to position: " + position.getI() + "-" + position.getJ());
+                System.out.println("--> " + Cores.ANSI_RED + " Fake news " + (index + 1) + Cores.ANSI_RESET
+                        + " moved to position: " + position.getI() + "-" + position.getJ());
             }
-        }    
+        }
     }
 
     // main function ====================================
@@ -300,7 +298,7 @@ public class Main {
                     itemUsed = false;
                     checkForPlayersDeaths(board, i, j);
                 }
-                sleep(3);
+                sleep(2);
             }
 
             // Check if players died during movement
@@ -335,8 +333,7 @@ public class Main {
                 printPositionUpdate(board, x, "fakeNews");
 
                 // Check for fakeNews deaths
-                if (board.checkFakeNewsState(x) == "dead")
-                {
+                if (board.checkFakeNewsState(x) == "dead") {
                     System.out.printf("Fake news " + Cores.ANSI_RED + "%d " + Cores.ANSI_RESET + "died! :)\n", x + 1);
                 }
 

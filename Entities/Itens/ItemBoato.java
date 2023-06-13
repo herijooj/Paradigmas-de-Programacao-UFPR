@@ -26,11 +26,10 @@ public class ItemBoato extends ItemCharacteristics {
      */
     public void itemAbility(Board board, Player player) // ESSA FUNÇÃO NÃO TA FAZENDO SENTIDO
     {
-        // Used automatically in the movePlayers function        
+        // Used automatically in the movePlayers function
     }
 
     public void draw() {
-        // TODO
     }
 
     public String toString() {

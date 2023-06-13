@@ -3,7 +3,6 @@ package Entities.Itens;
 import java.util.*;
 import Entities.Coordinate;
 import Entities.Beings.*;
-import Board.Sector;
 import Board.*;
 
 // class
@@ -23,7 +22,6 @@ public class ItemFugir extends ItemCharacteristics {
     // methods
 
     public void draw() {
-        // TODO
     }
 
     /**
@@ -31,9 +29,7 @@ public class ItemFugir extends ItemCharacteristics {
      *
      * returns true if it is, false if it isnt
      */
-    public boolean validPosition(Board board, int input)
-    {
-        int i, j;
+    public boolean validPosition(Board board, int input) {
 
         // Verifies if it is in the board
         if (input < 0 || input > 88)
@@ -53,8 +49,7 @@ public class ItemFugir extends ItemCharacteristics {
      * @param board  the board
      * @param player the player
      */
-    public void itemAbility(Board board, Player player) 
-    {
+    public void itemAbility(Board board, Player player) {
         Scanner sc = new Scanner(System.in);
         int input;
         Coordinate newCoordinate;
@@ -64,8 +59,7 @@ public class ItemFugir extends ItemCharacteristics {
         input = sc.nextInt();
         sc.nextLine();
 
-        while (!validPosition(board, input))
-        {
+        while (!validPosition(board, input)) {
             System.out.println("Cant move to that position, type again: ");
             input = sc.nextInt();
             sc.nextLine();
@@ -82,6 +76,8 @@ public class ItemFugir extends ItemCharacteristics {
         board.getBoard()[newCoordinate.getI()][newCoordinate.getJ()].setSectorState(player.toString());
 
         System.out.println("Player " + player.getPlayerNum() + " moved!");
+
+        sc.close();
     }
 
     public String toString() {
