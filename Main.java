@@ -157,7 +157,7 @@ public class Main {
             {
                 position = board.getPlayers().get(index).getPosition();
 
-                System.out.printf("Player " + Cores.ANSI_GREEN + "J%d " + Cores.ANSI_RESET + "moved to position: %d%d\n", index + 1, position.getI(), position.getJ());
+                System.out.printf("Player " + Cores.ANSI_GREEN + "J%d " + Cores.ANSI_RESET + "moved to position: %d-%d\n", index + 1, position.getI(), position.getJ());
             }
         }
 
@@ -168,7 +168,7 @@ public class Main {
             {
                 position = board.getFakeNews().get(index).getPosition();
 
-                System.out.println("--> " + Cores.ANSI_RED + " Fake news " + (index + 1) + Cores.ANSI_RESET + " moved to position: " + position.getI() + "" + position.getJ());
+                System.out.println("--> " + Cores.ANSI_RED + " Fake news " + (index + 1) + Cores.ANSI_RESET + " moved to position: " + position.getI() + "-" + position.getJ());
             }
         }    
     }
