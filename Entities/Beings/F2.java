@@ -8,22 +8,12 @@ import Cores.Cores;
 // class
 public class F2 extends FakeNews {
 
-    // attributes
-
-    // constructor
+    // Constructor
     public F2(Coordinate position, String state) {
         super(position, state);
     }
 
-    // getters
-
-    // setters
-
-    // methods
-
-    public void draw() {
-        System.out.print("F2");
-    }
+    // Methods
 
     @Override
     public String move(Board board, int direction) {
@@ -52,9 +42,8 @@ public class F2 extends FakeNews {
                 return "dead";
         }
 
-        if (!canMoveToCoordinate(board.getBoard(), position.getI(), position.getJ())) {
+        if (!canMoveToCoordinate(board.getBoard(), position.getI(), position.getJ()))
             return "dead";
-        }
 
         if (hasItem(board.getBoard(), position)) {
             // Spawn another fakeNews
@@ -71,15 +60,14 @@ public class F2 extends FakeNews {
             board.addItens(1);
         }
 
-        if (direction == 1) {
+        if (direction == 1)
             this.position.setI(this.position.getI() + 2);
-        } else if (direction == 2) {
+        else if (direction == 2)
             this.position.setI(this.position.getI() - 2);
-        } else if (direction == 3) {
+        else if (direction == 3)
             this.position.setJ(this.position.getJ() + 2);
-        } else if (direction == 4) {
+        else if (direction == 4)
             this.position.setJ(this.position.getJ() - 2);
-        }
 
         return "moved";
     }
