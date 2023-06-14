@@ -24,8 +24,7 @@ public class ItemBoato extends ItemCharacteristics {
      * @param board
      * @param player the player
      */
-    public void itemAbility(Board board, Player player) // ESSA FUNÇÃO NÃO TA FAZENDO SENTIDO
-    {
+    public void itemAbility(Board board, Player player) {
         // Used automatically in the movePlayers function
     }
 

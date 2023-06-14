@@ -119,8 +119,7 @@ public class Player extends Entity implements Movement {
                         // inventory and adds a new item to the board
                         item = getSpecificItem(board.getBoard(), position);
 
-                        if (item instanceof ItemBoato)
-                        {
+                        if (item instanceof ItemBoato) {
                             // Clear the item from the board
                             board.getBoard()[position.getI()][position.getJ()].setSectorState("");
 
@@ -131,8 +130,7 @@ public class Player extends Entity implements Movement {
                             this.position.setI(newI);
 
                             return "boato";
-                        }
-                        else
+                        } else
                             addItemToInventory(item);
 
                         // Add a new item to the board
@@ -156,8 +154,7 @@ public class Player extends Entity implements Movement {
                         // inventory and adds a new item to the board
                         item = getSpecificItem(board.getBoard(), position);
 
-                        if (item instanceof ItemBoato)
-                        {
+                        if (item instanceof ItemBoato) {
                             // Clear the item from the board
                             board.getBoard()[position.getI()][position.getJ()].setSectorState("");
 
@@ -168,8 +165,7 @@ public class Player extends Entity implements Movement {
                             this.position.setI(newI);
 
                             return "boato";
-                        }
-                        else
+                        } else
                             addItemToInventory(item);
 
                         // Add a new item to the board
@@ -194,8 +190,7 @@ public class Player extends Entity implements Movement {
                         // inventory and adds a new item to the board
                         item = getSpecificItem(board.getBoard(), position);
 
-                        if (item instanceof ItemBoato)
-                        {
+                        if (item instanceof ItemBoato) {
                             // Clear the item from the board
                             board.getBoard()[position.getI()][position.getJ()].setSectorState("");
 
@@ -206,8 +201,7 @@ public class Player extends Entity implements Movement {
                             this.position.setJ(newJ);
 
                             return "boato";
-                        }
-                        else
+                        } else
                             addItemToInventory(item);
 
                         // Add a new item to the board
@@ -231,8 +225,7 @@ public class Player extends Entity implements Movement {
                         // inventory and adds a new item to the board
                         item = getSpecificItem(board.getBoard(), position);
 
-                        if (item instanceof ItemBoato)
-                        {
+                        if (item instanceof ItemBoato) {
                             // Clear the item from the board
                             board.getBoard()[position.getI()][position.getJ()].setSectorState("");
 
@@ -243,8 +236,7 @@ public class Player extends Entity implements Movement {
                             this.position.setJ(newJ);
 
                             return "boato";
-                        }
-                        else
+                        } else
                             addItemToInventory(item);
 
                         // Add a new item to the board
