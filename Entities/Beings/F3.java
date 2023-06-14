@@ -7,23 +7,13 @@ import Board.Board;
 // class
 public class F3 extends FakeNews {
 
-    // attributes
-
-    // constructor
+    // Constructor
     public F3(Coordinate position, String state) {
         super(position, state);
     }
 
-    // getters
-
-    // setters
-
-    // methods
-
-    public void draw() {
-        System.out.print("F3");
-    }
-//
+    // Methods
+    
     @Override
     public String move(Board board, int direction) {
 
