@@ -91,8 +91,6 @@ public class Main {
                 return 1;
             case "D":
                 return 3;
-            case "Q":
-                return 0;
             default:
                 return -1;
         }
@@ -116,7 +114,7 @@ public class Main {
     public static int chooseDirection(Scanner scanner) {
         String input;
 
-        System.out.println("Choose a direction to move [WASD] or press Q to stay still");
+        System.out.println("Choose a direction to move [WASD]");
 
         input = scanner.nextLine();
 
@@ -124,7 +122,7 @@ public class Main {
         while (input.length() != 1 || keyToDirection(input) == -1) {
             // clear 2 lines
             System.out.print("\033[2A");
-            System.out.println("Invalid input, choose a direction to move [WASD] or press Q to stay still");
+            System.out.println("Invalid input, choose a direction to move [WASD]");
             input = scanner.nextLine();
         }
 
