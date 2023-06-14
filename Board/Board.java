@@ -179,7 +179,7 @@ public class Board {
             newCoordinate = new Coordinate(iC, jC);
 
             // if the coordinate is not equal to any other
-            if (!hasEqualCoordinate(newCoordinate)) {
+            if (!onBorder(newCoordinate) && !hasEqualCoordinate(newCoordinate)) {
                 if (F1Quantity < 2) {
                     this.listaFakeNews.add(new F1(newCoordinate, "alive"));
                     F1Quantity++;
@@ -192,6 +192,19 @@ public class Board {
             } else
                 i--;
         }
+    }
+
+    /**
+     * check if a coordinate is on the border of the board
+     * 
+     * @param coordinate
+     * @return boolean
+     */
+    public boolean onBorder(Coordinate coordinate) {
+        if (coordinate.getI() == 0 || coordinate.getI() == 8 || coordinate.getJ() == 0
+                || coordinate.getJ() == 8)
+            return true;
+        return false;
     }
 
     /**
@@ -528,10 +541,9 @@ public class Board {
 
             // update the board
             this.board[iPlayer][jPlayer].setSectorState(players.get(i).toString());
-        }
-        else if (movementWorked == "dead")
+        } else if (movementWorked == "dead")
             players.get(i).setState("dead");
-        else  // BOATO
+        else // BOATO
         {
             int randomDirection = (int) (Math.random() * 4) + 1;
             Coordinate newCoordinate;
@@ -710,8 +722,7 @@ public class Board {
             System.out.println("Choose the item you want to use, or 5 to return");
             System.out.println("==================INVENTORY===================\n");
 
-            for (i = 0; i < player.getInventory().size(); i++)
-            {   
+            for (i = 0; i < player.getInventory().size(); i++) {
                 System.out.print((i + 1) + " - " + player.getInventory().get(i).toString() + " - ");
 
                 if (player.getInventory().get(i).toString() == "Item Ler")
@@ -719,7 +730,7 @@ public class Board {
                 else if (player.getInventory().get(i).toString() == "Item Denunciar")
                     System.out.println("Denunciar FN, elimina todas as FN ao redor do jogador.");
                 else if (player.getInventory().get(i).toString() == "Item Fugir")
-                    System.out.println("Fuja para uma posição do tabuleiro que será escolhida ao utilizar o item."); 
+                    System.out.println("Fuja para uma posição do tabuleiro que será escolhida ao utilizar o item.");
             }
         }
 
