@@ -8,21 +8,12 @@ import Board.*;
 // class
 public class ItemFugir extends ItemCharacteristics {
 
-    // attributes
-
-    // constructor
+    // Constructor
     public ItemFugir(Coordinate position) {
         super(position);
     }
 
-    // getters
-
-    // setters
-
-    // methods
-
-    public void draw() {
-    }
+    // Methods
 
     /**
      * Verifies if a given position is valid
