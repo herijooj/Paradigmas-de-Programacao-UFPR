@@ -6,7 +6,6 @@ import Board.*;
 
 import Cores.*;
 import Entities.Coordinate;
-import Entities.Itens.*;
 
 public class Main {
 
