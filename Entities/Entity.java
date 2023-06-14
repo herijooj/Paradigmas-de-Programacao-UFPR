@@ -7,7 +7,6 @@ public abstract class Entity {
 
     // Attributes
     protected Coordinate position;
-    protected boolean alive = true;
 
     // Constructor
     public Entity(Coordinate position) {
@@ -20,9 +19,6 @@ public abstract class Entity {
         return this.position;
     }
 
-    public boolean isAlive() {
-        return this.alive;
-    }
 
     // Setters
     public void setPosition(Coordinate position) {
@@ -33,9 +29,6 @@ public abstract class Entity {
         this.position.setJ(position.getJ());
     }
 
-    public void setAlive(boolean alive) {
-        this.alive = alive;
-    }
 
     // Methods
 
