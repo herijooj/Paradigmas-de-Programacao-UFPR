@@ -22,20 +22,16 @@ public class Coordinate {
     // setters
 
     public void setI(int i) {
-        // if (i < 0)
-        // throw new IllegalArgumentException("I must be positive and less than 10");
         this.i = i;
         return;
     }
 
     public void setJ(int j) {
-        // if (j < 0)
-        // throw new IllegalArgumentException("J must be positive and less than 10");
         this.j = j;
         return;
     }
 
-    // methods
+    // Methods
 
     // this method calculates the distance between two coordinates
     public int calculateDistance(Coordinate coordinate) {
