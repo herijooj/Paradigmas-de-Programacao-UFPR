@@ -48,6 +48,12 @@ public class Player extends Entity implements Movement {
         this.inventory = new LinkedList<ItemCharacteristics>();
     }
 
+    /**
+     * Sets the state of the player.
+     *
+     * @param state the new state of the player. Must be one of "alive", "dead", or "outOfGame".
+     * @throws IllegalArgumentException if the state is not one of the valid options.
+     */
     public void setState(String state) {
         if (state != "alive" && state != "dead" && state != "outOfGame")
             throw new IllegalArgumentException("Invalid state, valids: [alive, dead and outOfGame]");
