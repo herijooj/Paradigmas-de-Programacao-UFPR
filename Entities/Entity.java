@@ -55,19 +55,20 @@ public abstract class Entity {
 
         // checking if the sector already has something other than a player or item
         String sectorState = board[i][j].getSectorState();
-        if (sectorState == "Restricted" || sectorState == "F1" || sectorState == "F2" || sectorState == "F3")
+        if (sectorState == "Restricted" || sectorState == "F1" || sectorState == "F2" || sectorState == "F3"
+                || sectorState.contains("Player"))
             return false;
         return true;
     }
-//
+
+    //
     /**
      * Check if a given coordinate has something in it
      * 
      * 
-     * Returns: true if it has, false otherwise 
+     * Returns: true if it has, false otherwise
      **/
-    public boolean hasSomething(Sector[][] board, Coordinate position)
-    {
+    public boolean hasSomething(Sector[][] board, Coordinate position) {
         String sectorState = board[position.getI()][position.getJ()].getSectorState();
 
         if (sectorState != "")
