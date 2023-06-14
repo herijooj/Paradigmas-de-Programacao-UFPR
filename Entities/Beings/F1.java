@@ -8,23 +8,13 @@ import Cores.Cores;
 // class
 public class F1 extends FakeNews {
 
-    // attributes
-
-    // constructor
+    // Constructor
     public F1(Coordinate position, String state) {
         super(position, state);
     }
 
-    // getters
-
-    // setters
-
-    // methods
-
-    public void draw() {
-        System.out.print("F1");
-    }
-//
+    // Methods
+    
     @Override
     public String move(Board board, int direction) {
 
