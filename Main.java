@@ -42,7 +42,7 @@ public class Main {
         for (int i = 0; i < pattern.length; i++) {
             System.out.println(pattern[i]);
         }
-        // exit program
+        // Exit program
         System.exit(1);
     }
 
@@ -58,8 +58,8 @@ public class Main {
         System.out.println(pattern);
     }
 
+    // Stops time for the given seconds
     public static void sleep(int seconds) {
-        // Stops time for 1 secondd
         try {
             // in milliseconds
             Thread.sleep(seconds * 1000);
@@ -69,13 +69,13 @@ public class Main {
         }
     }
 
-    // function to clear screen
+    // Function to clear screen
     public static void flushScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
 
-    // this function receives a key and returns the corresponding direction
+    // This function receives a key and returns the corresponding direction
     public static int keyToDirection(String key) {
         // touppercase
         key = key.toUpperCase();
@@ -97,7 +97,7 @@ public class Main {
     }
 
     /**
-     * this function turns the turn
+     * This function turns the turn
      * it clears the screen, prints the turn number and draws the board
      * it should be called at the start of each turn
      * 
@@ -110,7 +110,7 @@ public class Main {
         board.drawBoard();
     }
 
-    // choose a direction to move
+    // Choose a direction to move
     public static int chooseDirection(Scanner scanner) {
         String input;
 
@@ -199,6 +199,7 @@ public class Main {
 
         // 20 turns
         for (int i = 0; i < 20; i++) {
+
             // if it is the last turn, game over
             if (i == 19 || board.allPlayersDead()) {
                 flushScreen();
@@ -330,9 +331,8 @@ public class Main {
                 printPositionUpdate(board, x, "fakeNews");
 
                 // Check for fakeNews deaths
-                if (board.checkFakeNewsState(x) == "dead") {
+                if (board.checkFakeNewsState(x) == "dead")
                     System.out.printf("Fake news " + Cores.ANSI_RED + "%d " + Cores.ANSI_RESET + "died! :)\n", x + 1);
-                }
 
                 // Check for player deaths
                 for (int k = 0; k < playersQuantity; k++)
@@ -347,6 +347,7 @@ public class Main {
 
                 sleep(3);
             }
+            
             increaseTurnAndDrawBoard(i, board);
             System.out.println("--> " + Cores.ANSI_RED + "All Fake news " + Cores.ANSI_RESET + "moved");
 
