@@ -11,18 +11,12 @@ import Cores.Cores;
 // class
 public class ItemDenunciar extends ItemCharacteristics {
 
-    // attributes
-
-    // constructor
+    // Constructor
     public ItemDenunciar(Coordinate position) {
         super(position);
     }
 
-    // getters
-
-    // setters
-
-    // methods
+    // Methods
     /**
      * This item will kill all the enemies that are in a distance of 1 from the
      * player
@@ -41,11 +35,13 @@ public class ItemDenunciar extends ItemCharacteristics {
         // for each position, check if there is a fakeNews
         for (i = 0; i < positions.size(); i++) {
             for (j = 0; j < fakeNewsList.size(); j++) {
+
                 // If fakeNews is in the area
                 if (fakeNewsList.get(j).getPosition().getI() == positions.get(i).getI()
                         && fakeNewsList.get(j).getPosition().getJ() == positions.get(i).getJ()) {
-                    if (fakeNewsList.get(j).getState() == "RecentlyAdded"
-                            || fakeNewsList.get(j).getState() == "alive") {
+
+                    if (fakeNewsList.get(j).getState() == "RecentlyAdded" || fakeNewsList.get(j).getState() == "alive") {
+
                         // Set state to outOfGame and setSectorState to nothing there
                         fakeNewsList.get(j).setState("outOfGame");
                         board.getBoard()[fakeNewsList.get(j).getPosition().getI()][fakeNewsList.get(j).getPosition()
@@ -60,7 +56,7 @@ public class ItemDenunciar extends ItemCharacteristics {
     }
 
     /**
-     * creates a list of possible positions to go
+     * Creates a list of possible positions to go
      * based on the player's position
      * 
      * @param position the position of the player
@@ -82,10 +78,6 @@ public class ItemDenunciar extends ItemCharacteristics {
         positions.add(new Coordinate(position.getI() + 1, position.getJ() - 1)); // left-down
 
         return positions;
-    }
-
-    public void draw() {
-        // TODO
     }
 
     public String toString() {
