@@ -96,15 +96,15 @@ public abstract class FakeNews extends Entity implements Movement {
         return new Coordinate(newI, newJ);
     }
 
-    /*
-     * Checks if a sector has an Item
-     * returns true if it has, and false if it doesn't
-     */
-    public boolean hasItem(Sector[][] board, Coordinate position) {
-        if (board[position.getI()][position.getJ()].getSectorState().contains("Item"))
-            return true;
-        return false;
-    }
+    // /*
+    //  * Checks if a sector has an Item
+    //  * returns true if it has, and false if it doesn't
+    //  */
+    // public boolean hasItem(Sector[][] board, Coordinate position) {
+    //     if (board[position.getI()][position.getJ()].getSectorState().contains("Item"))
+    //         return true;
+    //     return false;
+    // }
 
     public void addFakeNewsToSector(Board board, Coordinate position, FakeNews fn) {
         if (fn instanceof F1)

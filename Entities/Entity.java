@@ -64,4 +64,14 @@ public abstract class Entity {
             return true;
         return false;
     }
+
+    /*
+     * Checks if a sector has an Item
+     * returns true if it has, and false if it doesn't
+     */
+    public boolean hasItem(Sector[][] board, Coordinate position) {
+        if (board[position.getI()][position.getJ()].getSectorState().contains("Item"))
+            return true;
+        return false;
+    }
 }
