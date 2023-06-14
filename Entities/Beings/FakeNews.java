@@ -8,16 +8,16 @@ import Board.*;
 // class
 public abstract class FakeNews extends Entity implements Movement {
 
-    // attributes
+    // Attributes
     protected String state;
 
-    // constructor
+    // Constructor
     public FakeNews(Coordinate position, String state) {
         super(position);
         this.setState(state);
     }
 
-    // getters
+    // Getters
     /**
      * Function that returns the state of the Fake News
      * 
@@ -27,7 +27,7 @@ public abstract class FakeNews extends Entity implements Movement {
         return this.state;
     }
 
-    // setters
+    // Setters
     /**
      * Function that sets the state of the Fake News
      * 
@@ -40,7 +40,7 @@ public abstract class FakeNews extends Entity implements Movement {
             this.state = state;
     }
 
-    // methods
+    // Methods
 
     /**
      * Function that generates coordinates for new Fake News generations,
