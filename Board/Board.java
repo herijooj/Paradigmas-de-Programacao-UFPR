@@ -448,7 +448,8 @@ public class Board {
 
         // If it is none of the 4, them it assings the sector with
         // sectorState == NULL meaning there's nothing there
-        this.board[i][j] = new Sector(i, j, sectorState);
+        Coordinate coordinate = new Coordinate(i, j);
+        this.board[i][j] = new Sector(coordinate, sectorState);
     }
 
     /*
