@@ -58,13 +58,6 @@ public class Player extends Entity implements Movement {
     // Methods
 
     /*
-     * Draws the player on screen
-     */
-    public void draw() {
-        System.out.printf("J%d", this.playerNum);
-    }
-
-    /*
      * Adds a collected item to the player inventory
      * 
      * @param item the item to be added
