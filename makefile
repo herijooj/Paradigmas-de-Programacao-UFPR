@@ -25,9 +25,12 @@ pdf:
 
 # Clean
 clean:
-	# rm -f *.class
-	# rm -f ./Board/*.class
-	# rm -f ./Entities/*.class
+	rm -f *.class
+	rm -f ./Board/*.class
+	rm -f ./Cores/*.class
+	rm -f ./Entities/*.class
+	rm -f ./Entities/Beings/*.class
+	rm -f ./Entities/Itens/*.class
 
 # Run
 run:

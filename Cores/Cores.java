@@ -1,4 +1,4 @@
-package jogo;
+package Cores;
 
 public class Cores {
     public static final String ANSI_RESET = "\u001B[0m";

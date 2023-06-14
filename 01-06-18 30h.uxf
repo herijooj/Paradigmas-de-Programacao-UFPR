@@ -1,0 +1,193 @@
+<diagram program="umletino" version="15.1"><zoom_level>9</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLPackage</id><coordinates><x>765</x><y>0</y><w>486</w><h>360</h></coordinates><panel_attributes>Package Board
+--
+bg=white</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>783</x><y>36</y><w>189</w><h>198</h></coordinates><panel_attributes>Sector
+--
+-Relationship: 
+public class Sector
+--
+Attributes:
+- i: int;
+- j: int; 
+- restricted: bool; 
+- sectorState: String;
+--
+Methods
++ getI(): int;
++ getJ(): int;
++ isRestricted(): bool;
++ setters()
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>990</x><y>36</y><w>252</w><h>306</h></coordinates><panel_attributes>Board
+--
+-Relationship: 
+public class Board
+--
+Attributes:
+- size: int;
+- board: Sector[][]; 
+- listaRestrictedSectors: LinkedList&lt;Coordinate&gt;;
+- restrictedSectorsMax: int;
+- listaFakeNews: LinkedList&lt;Coordinate&gt;;
+- fakeNewsMax: int;
+- listaItens: LinkedList&lt;Coordinate&gt;;
+- itemMax: int;
+--
+Methods
++ getters();
++ setRestrictedSectors();
++ setFakeNews();
++ setItens();
++ setBoard();
++ drawBoard(): void;
+- HasEqualCoordinate(Coordinate c): boolean;
+- SetEntityToBoard(int i, int j): void;
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>0</x><y>360</y><w>1764</w><h>846</h></coordinates><panel_attributes>Package Entities
+--
+bg=white</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>927</x><y>387</y><w>189</w><h>144</h></coordinates><panel_attributes>&lt;&lt;abstract&gt;&gt;
+Entity
+--
+-Relationship: 
+public abstract class Entity
+--
+Attributes:
+# position: Coordinate;
+--
+Methods
++ getters() / setters();
++ abstract draw(): void;
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>459</x><y>522</y><w>585</w><h>189</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>630;10;10;190</additional_attributes></element><element><id>UMLClass</id><coordinates><x>360</x><y>693</y><w>288</w><h>117</h></coordinates><panel_attributes>&lt;&lt;abstract&gt;&gt;
+Item Characteristics
+--
+-Relationship: 
+public abstract class ItemCharacteristics extends Entity
+--
+Attributes:
+--
+Methods
++ abstract itemAbility(): void;
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>1026</x><y>648</y><w>720</w><h>540</h></coordinates><panel_attributes>Package Beings
+--
+bg=white</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1188</x><y>828</y><w>252</w><h>126</h></coordinates><panel_attributes>&lt;&lt;abstract&gt;&gt;
+Fake news
+--
+-Relationship: 
+public abstract class FakeNews extends Entity
+implements Movement
+--
+Attributes:
+--
+Methods
++ getters() / setters();
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1503</x><y>828</y><w>207</w><h>171</h></coordinates><panel_attributes>&lt;&lt;concrete&gt;&gt;
+Player
+--
+-Relationship: 
+public class Player extends Entity
+--
+Attributes:
+- playerNum: int;
+--
+Methods
++ getPlayerNum(): int;
++ setPlayerNum(int playerNum): void;
++ move(): void;
++ draw(): void;
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1035</x><y>1035</y><w>180</w><h>126</h></coordinates><panel_attributes>&lt;&lt;concrete&gt;&gt;
+F1
+--
+-Relationship: 
+public class F1 extends FakeNews
+--
+Attributes:
+--
+Methods
++ move(): void;
++ draw() : void;
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1224</x><y>1035</y><w>180</w><h>126</h></coordinates><panel_attributes>&lt;&lt;concrete&gt;&gt;
+F2
+--
+-Relationship: 
+public class F2 extends FakeNews
+--
+Attributes:
+--
+Methods
++ move(): void;
++ draw() : void;
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1413</x><y>1035</y><w>180</w><h>126</h></coordinates><panel_attributes>&lt;&lt;concrete&gt;&gt;
+F3
+--
+-Relationship: 
+public class F3 extends FakeNews
+--
+Attributes:
+--
+Methods
++ move(): void;
++ draw() : void;
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1116</x><y>945</y><w>216</w><h>108</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>220;10;10;100</additional_attributes></element><element><id>Relation</id><coordinates><x>1305</x><y>945</y><w>27</w><h>108</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;100</additional_attributes></element><element><id>Relation</id><coordinates><x>1305</x><y>945</y><w>216</w><h>108</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;220;100</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1521</x><y>675</y><w>189</w><h>99</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
+Movement
+--
+-Relationship: 
+public interface Movement
+--
+Methods
++ abstract move(): void;
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1602</x><y>765</y><w>36</w><h>81</h></coordinates><panel_attributes>lt=&lt;..</panel_attributes><additional_attributes>20;10;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>1305</x><y>765</y><w>324</w><h>81</h></coordinates><panel_attributes>lt=&lt;..</panel_attributes><additional_attributes>340;10;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>1017</x><y>522</y><w>612</w><h>324</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;660;340</additional_attributes></element><element><id>Relation</id><coordinates><x>1017</x><y>522</y><w>315</w><h>324</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;330;340</additional_attributes></element><element><id>UMLClass</id><coordinates><x>756</x><y>945</y><w>234</w><h>117</h></coordinates><panel_attributes>&lt;&lt;concrete&gt;&gt;
+ItemLer
+--
+-Relationship: 
+public class ItemLer extends ItemCharacteristics
+--
+Attributes:
+--
+Methods
++ itemAbility(): void;
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>270</x><y>945</y><w>234</w><h>117</h></coordinates><panel_attributes>&lt;&lt;concrete&gt;&gt;
+ItemDenunciar
+--
+-Relationship: 
+public class ItemDenunciar extends ItemCharacteristics
+--
+Attributes:
+--
+Methods
++ itemAbility(): void;
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>513</x><y>945</y><w>234</w><h>117</h></coordinates><panel_attributes>&lt;&lt;concrete&gt;&gt;
+ItemFugir
+--
+-Relationship: 
+public class ItemFugir extends ItemCharacteristics
+--
+Attributes:
+--
+Methods
++ itemAbility(): void;
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>27</x><y>945</y><w>234</w><h>117</h></coordinates><panel_attributes>&lt;&lt;concrete&gt;&gt;
+ItemBoato
+--
+-Relationship: 
+public class ItemBoato extends ItemCharacteristics
+--
+Attributes:
+--
+Methods
++ itemAbility(): void;
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>18</x><y>648</y><w>981</w><h>432</h></coordinates><panel_attributes>Package Beings
+--
+bg=white</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>504</x><y>801</y><w>387</w><h>162</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;410;160</additional_attributes></element><element><id>Relation</id><coordinates><x>504</x><y>801</y><w>144</w><h>162</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;140;160</additional_attributes></element><element><id>Relation</id><coordinates><x>378</x><y>801</y><w>153</w><h>162</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>150;10;10;160</additional_attributes></element><element><id>Relation</id><coordinates><x>135</x><y>801</y><w>396</w><h>162</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>420;10;10;160</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1206</x><y>387</y><w>261</w><h>171</h></coordinates><panel_attributes>Coordinate
+--
+-Relationship: 
+public class Coordinate
+--
+Attributes:
+- i: int;
+- j: int;
+--
+Methods
++ getters() / setters();
++ calculateDistance(Coordinate coordinate): int;
++ isValid(): boolean;
++ static generateRandomCoordinate(): Coordinate;
+--</panel_attributes><additional_attributes></additional_attributes></element></diagram>
