@@ -10,18 +10,12 @@ import Cores.Cores;
 // class
 public class ItemLer extends ItemCharacteristics {
 
-    // attributes
-
-    // constructor
+    // Constructor
     public ItemLer(Coordinate position) {
         super(position);
     }
 
-    // getters
-
-    // setters
-
-    // methods
+    // Methods
     /**
      * This item deletes a random enemy from the board
      * 
@@ -44,10 +38,6 @@ public class ItemLer extends ItemCharacteristics {
         enemies.get(randomIndex).setState("outOfGame");
         System.out.printf("Fake news " + Cores.ANSI_RED + "%d " + Cores.ANSI_RESET + "eliminated! :)\n", randomIndex + 1);
         return;
-    }
-
-    public void draw() {
-        // TODO
     }
 
     public String toString() {
