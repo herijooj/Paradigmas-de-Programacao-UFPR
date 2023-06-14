@@ -5,20 +5,17 @@ import Board.Sector;
 // class
 public abstract class Entity {
 
-    // attributes
+    // Attributes
     protected Coordinate position;
     protected boolean alive = true;
-    // the type can be handled by the class name
-    // it is not necessary to have an attribute for it
-    // it can be tested with instanceof
 
-    // constructor
+    // Constructor
     public Entity(Coordinate position) {
-        this.position = new Coordinate(0, 0); // Tava dando bug de inicializacao NULL
+        this.position = new Coordinate(0, 0); // fix inicialization bug
         this.setPosition(position);
     }
 
-    // getters
+    // Getters
     public Coordinate getPosition() {
         return this.position;
     }
@@ -27,7 +24,7 @@ public abstract class Entity {
         return this.alive;
     }
 
-    // setters
+    // Setters
     public void setPosition(Coordinate position) {
         if (position.getI() < 0 || position.getI() > 8 || position.getJ() < 0 || position.getJ() > 8)
             throw new IllegalArgumentException("i and j must be positive");
@@ -40,8 +37,7 @@ public abstract class Entity {
         this.alive = alive;
     }
 
-    // methods
-    public abstract void draw();
+    // Methods
 
     /**
      * Check if a Beign can move to a certain position
