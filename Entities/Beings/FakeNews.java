@@ -12,6 +12,11 @@ public abstract class FakeNews extends Entity implements Movement {
     protected String state;
 
     // Constructor
+    /**
+     * Constructor for the Fake News class
+     * 
+     * @param position where the Fake News will be placed
+     */
     public FakeNews(Coordinate position, String state) {
         super(position);
         this.setState(state);
@@ -47,7 +52,9 @@ public abstract class FakeNews extends Entity implements Movement {
      * based on a coordinate passed as a parameter (center), it generates
      * a new coordinate around that center
      * 
-     * Returns: new Coordinate;
+     * @param center the coordinate around which the new coordinate will be
+     *               generated
+     * @return Coordinate: the new coordinate generated
      */
     public Coordinate generateRandomPeriphericCoordinate(Coordinate center) {
         int iC = center.getI();
@@ -96,16 +103,13 @@ public abstract class FakeNews extends Entity implements Movement {
         return new Coordinate(newI, newJ);
     }
 
-    // /*
-    //  * Checks if a sector has an Item
-    //  * returns true if it has, and false if it doesn't
-    //  */
-    // public boolean hasItem(Sector[][] board, Coordinate position) {
-    //     if (board[position.getI()][position.getJ()].getSectorState().contains("Item"))
-    //         return true;
-    //     return false;
-    // }
-
+    /**
+     * Function that adds a Fake News to a sector of the board
+     * 
+     * @param board
+     * @param position
+     * @param fn       the Fake News to be added
+     */
     public void addFakeNewsToSector(Board board, Coordinate position, FakeNews fn) {
         if (fn instanceof F1)
             board.getBoard()[position.getI()][position.getJ()].setSectorState("F1");
