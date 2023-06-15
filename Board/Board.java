@@ -16,13 +16,13 @@ public class Board {
     private Sector[][] board;
 
     private LinkedList<Coordinate> listaRestrictedSectors;
-    private int restrictedSectorsMax = 4;
+    private int restrictedSectorsMax;
 
     private LinkedList<FakeNews> listaFakeNews;
-    private int fakeNewsMax = 6;
+    private int fakeNewsMax;
 
     private LinkedList<Item> listaItens;
-    private int itemMax = 2;
+    private int itemMax;
 
     private LinkedList<Player> listaPlayers;
 
@@ -34,13 +34,15 @@ public class Board {
      * @param playerCount
      * @return Board
      */
-    public Board(int size, int playerCount) {
+    public Board(int size, int playerCount, int restrictedSectorMax, int fakeNewsMax, int itemMax) {
         this.setSize(size);
         this.setPlayers(playerCount);
-        this.setRestrictedSectorsMax(4);
+        this.setRestrictedSectorsMax(restrictedSectorMax);
+        this.setfakeNewsMax(fakeNewsMax);
+        this.setItemMax(itemMax);
         this.setRestrictedSectors();
         this.setFakeNews();
-        this.setItens(2);
+        this.setItens();
         this.setBoard();
     }
 
@@ -94,6 +96,18 @@ public class Board {
             throw new IllegalArgumentException("Restricted sectors count must be positive");
         this.restrictedSectorsMax = number;
         return;
+    }
+
+    public void setfakeNewsMax(int fakeNewsMax) {
+        if (fakeNewsMax < 0)
+            throw new IllegalArgumentException("Fake news Max must be positive");
+        this.fakeNewsMax = fakeNewsMax;
+    }
+
+    public void setItemMax(int itemMax) {
+        if (itemMax < 0)
+            throw new IllegalArgumentException("Item max must be positive");
+        this.itemMax = itemMax;
     }
 
     /**
@@ -246,10 +260,10 @@ public class Board {
      * 
      * @param itemQuantity
      */
-    public void setItens(int itemQuantity) {
+    public void setItens() {
         int i;
 
-        for (i = 0; i < itemQuantity; i++)
+        for (i = 0; i < this.itemMax; i++)
             if (!addItemToBoard())
                 i--;
     }
