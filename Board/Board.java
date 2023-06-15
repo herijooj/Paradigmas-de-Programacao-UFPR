@@ -150,7 +150,7 @@ public class Board {
 
             // Doesn't need to verify repeteated position for
             // player, it's a static position and the first to be generated
-            this.listaPlayers.add(new Player(i + 1, newCoordinate));
+            this.listaPlayers.add(new Player(i + 1, newCoordinate, 4));
         }
     }
 
