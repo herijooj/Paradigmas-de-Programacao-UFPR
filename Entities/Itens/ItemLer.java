@@ -8,7 +8,7 @@ import Entities.Beings.*;
 import Cores.Cores;
 
 // class
-public class ItemLer extends ItemCharacteristics {
+public class ItemLer extends Item {
 
     // Constructor
     public ItemLer(Coordinate position) {

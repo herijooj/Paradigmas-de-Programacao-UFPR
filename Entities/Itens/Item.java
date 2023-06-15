@@ -6,12 +6,12 @@ import Entities.Beings.*;
 import Board.*;
 
 // class
-public abstract class ItemCharacteristics extends Entity {
+public abstract class Item extends Entity {
     // attributes
     protected Coordinate position;
 
     // constructor
-    public ItemCharacteristics(Coordinate position) {
+    public Item(Coordinate position) {
         super(position);
     }
 

@@ -6,7 +6,7 @@ import Entities.Beings.*;
 import Board.*;
 
 // class
-public class ItemFugir extends ItemCharacteristics {
+public class ItemFugir extends Item {
 
     // Constructor
     public ItemFugir(Coordinate position) {

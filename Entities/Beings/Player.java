@@ -11,7 +11,7 @@ public class Player extends Entity implements Movement {
 
     // Attributes
     private int playerNum;
-    private LinkedList<ItemCharacteristics> inventory;
+    private LinkedList<Item> inventory;
     private int inventorySize = 4;
     private String state;
 
@@ -28,7 +28,7 @@ public class Player extends Entity implements Movement {
         return this.playerNum;
     }
 
-    public LinkedList<ItemCharacteristics> getInventory() {
+    public LinkedList<Item> getInventory() {
         return this.inventory;
     }
 
@@ -45,7 +45,7 @@ public class Player extends Entity implements Movement {
     }
 
     public void setInventory() {
-        this.inventory = new LinkedList<ItemCharacteristics>();
+        this.inventory = new LinkedList<Item>();
     }
 
     /**
@@ -68,7 +68,7 @@ public class Player extends Entity implements Movement {
      * 
      * @param item the item to be added
      */
-    public void addItemToInventory(ItemCharacteristics item) {
+    public void addItemToInventory(Item item) {
         if (this.inventory.size() < this.inventorySize)
             this.inventory.add(item);
     }
@@ -86,7 +86,7 @@ public class Player extends Entity implements Movement {
     /*
      * Based on the sectorState, returns an Item object
      */
-    public ItemCharacteristics getSpecificItem(Sector[][] board, Coordinate position) {
+    public Item getSpecificItem(Sector[][] board, Coordinate position) {
         if (board[position.getI()][position.getJ()].getSectorState() == "Item Boato")
             return (new ItemBoato(position));
         else if (board[position.getI()][position.getJ()].getSectorState() == "Item Denunciar")
@@ -101,7 +101,7 @@ public class Player extends Entity implements Movement {
     public String move(Board board, int direction) {
         int newI, newJ;
         Coordinate position;
-        ItemCharacteristics item;
+        Item item;
 
         switch (direction) {
             // Goes down

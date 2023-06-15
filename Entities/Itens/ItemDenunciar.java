@@ -9,7 +9,7 @@ import Entities.Beings.*;
 import Cores.Cores;
 
 // class
-public class ItemDenunciar extends ItemCharacteristics {
+public class ItemDenunciar extends Item {
 
     // Constructor
     public ItemDenunciar(Coordinate position) {

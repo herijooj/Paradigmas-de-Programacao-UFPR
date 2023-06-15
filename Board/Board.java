@@ -21,7 +21,7 @@ public class Board {
     private LinkedList<FakeNews> listaFakeNews;
     private int fakeNewsMax = 6;
 
-    private LinkedList<ItemCharacteristics> listaItens;
+    private LinkedList<Item> listaItens;
     private int itemMax = 2;
 
     private LinkedList<Player> listaPlayers;
@@ -65,7 +65,7 @@ public class Board {
         return this.listaFakeNews;
     }
 
-    public LinkedList<ItemCharacteristics> getItens() {
+    public LinkedList<Item> getItens() {
         return this.listaItens;
     }
 
@@ -108,7 +108,7 @@ public class Board {
         this.listaPlayers = new LinkedList<Player>();
         this.listaRestrictedSectors = new LinkedList<Coordinate>();
         this.listaFakeNews = new LinkedList<FakeNews>();
-        this.listaItens = new LinkedList<ItemCharacteristics>();
+        this.listaItens = new LinkedList<Item>();
 
         int iC, jC, i;
         Coordinate newCoordinate;
@@ -571,7 +571,7 @@ public class Board {
      */
     public void useItem(int playerIndex, int itemIndex) {
         Player player = this.listaPlayers.get(playerIndex - 1);
-        ItemCharacteristics item = player.getInventory().get(itemIndex);
+        Item item = player.getInventory().get(itemIndex);
 
         item.itemAbility(this, player);
 

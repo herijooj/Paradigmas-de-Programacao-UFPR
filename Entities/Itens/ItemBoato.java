@@ -5,7 +5,7 @@ import Board.*;
 import Entities.Beings.*;
 
 // class
-public class ItemBoato extends ItemCharacteristics {
+public class ItemBoato extends Item {
 
     // Constructor
     public ItemBoato(Coordinate position) {
