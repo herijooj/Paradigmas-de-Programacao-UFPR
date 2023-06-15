@@ -12,14 +12,15 @@ public class Player extends Entity implements Movement {
     // Attributes
     private int playerNum;
     private LinkedList<Item> inventory;
-    private int inventorySize = 4;
+    private int inventorySize;
     private String state;
 
     // Full Constructor
-    public Player(int playerNum, Coordinate position) {
+    public Player(int playerNum, Coordinate position, int inventorySize) {
         super(position);
         this.setPlayerNum(playerNum);
         this.setState("alive");
+        this.setInventorySize(inventorySize);
         this.setInventory();
     }
 
@@ -46,6 +47,13 @@ public class Player extends Entity implements Movement {
 
     public void setInventory() {
         this.inventory = new LinkedList<Item>();
+    }
+
+    public void setInventorySize(int inventorySize) {
+        if (inventorySize < 0)
+            throw new IllegalArgumentException("Inventory size must be positive");   
+
+        this.inventorySize = inventorySize;
     }
 
     /**
