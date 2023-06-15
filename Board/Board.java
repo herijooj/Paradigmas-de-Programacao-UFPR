@@ -47,43 +47,93 @@ public class Board {
     }
 
     // getters ================================================
+    /**
+     * Will return the size of the board
+     * 
+     * @return int
+     */
     public int getSize() {
         return this.size;
     }
 
+    /**
+     * Will return the board
+     * 
+     * @return Sector[][]
+     */
     public Sector[][] getBoard() {
         return this.board;
     }
 
+    /**
+     * Will return the list of players
+     * 
+     * @return LinkedList<Player>
+     */
     public LinkedList<Player> getPlayers() {
         return this.listaPlayers;
     }
 
+    /**
+     * Will return the list of restricted sectors
+     * 
+     * @return LinkedList<Coordinate>
+     */
     public LinkedList<Coordinate> getRestrictedSectors() {
         return this.listaRestrictedSectors;
     }
 
+    /**
+     * Will return the list of fake news
+     * 
+     * @return LinkedList<FakeNews>
+     */
     public LinkedList<FakeNews> getFakeNews() {
         return this.listaFakeNews;
     }
 
+    /**
+     * Will return the list of itens
+     * 
+     * @return LinkedList<Item>
+     */
     public LinkedList<Item> getItens() {
         return this.listaItens;
     }
 
+    /**
+     * Will return the max number of restricted sectors
+     * 
+     * @return int
+     */
     public int getRestrictedSectorsMax() {
         return this.restrictedSectorsMax;
     }
 
+    /**
+     * Will return the max number of fake news
+     * 
+     * @return int
+     */
     public int getFakeNewsMax() {
         return this.fakeNewsMax;
     }
 
+    /**
+     * Will return the max number of itens
+     * 
+     * @return int
+     */
     public int getItensMax() {
         return this.itemMax;
     }
 
     // setters =================================================
+    /**
+     * Will set the board size
+     * 
+     * @param size
+     */
     public void setSize(int size) {
         if (size < 0)
             throw new IllegalArgumentException("Size must be positive");
@@ -91,6 +141,11 @@ public class Board {
         return;
     }
 
+    /**
+     * Will set the maximum number of restricted sectors
+     * 
+     * @param number
+     */
     public void setRestrictedSectorsMax(int number) {
         if (number < 0)
             throw new IllegalArgumentException("Restricted sectors count must be positive");
@@ -98,12 +153,22 @@ public class Board {
         return;
     }
 
+    /**
+     * Will set the maximum number of fake news
+     * 
+     * @param number
+     */
     public void setfakeNewsMax(int fakeNewsMax) {
         if (fakeNewsMax < 0)
             throw new IllegalArgumentException("Fake news Max must be positive");
         this.fakeNewsMax = fakeNewsMax;
     }
 
+    /**
+     * Will set the maximum number of itens
+     * 
+     * @param number
+     */
     public void setItemMax(int itemMax) {
         if (itemMax < 0)
             throw new IllegalArgumentException("Item max must be positive");
@@ -300,7 +365,7 @@ public class Board {
             else
                 this.listaItens.add(new ItemLer(newCoordinate));
 
-            setEntityToSector(iC, jC);
+            setEntityToSector(newCoordinate);
 
             return true;
         } else
@@ -316,13 +381,19 @@ public class Board {
         }
     }
 
+    /**
+     * Sets the entity to each sector of the board
+     */
     public void setBoard() {
         this.board = new Sector[this.size][this.size];
+        Coordinate currentCoordinate;
 
         // Set the restricted ones to the board
         for (int i = 0; i < this.size; i++)
-            for (int j = 0; j < this.size; j++)
-                setEntityToSector(i, j);
+            for (int j = 0; j < this.size; j++) {
+                currentCoordinate = new Coordinate(i, j);
+                setEntityToSector(currentCoordinate);
+            }
     }
 
     // methods ==================================================================
@@ -389,16 +460,22 @@ public class Board {
         return false;
     }
 
-    /*
+    /**
      * Helper method used in the setBoard method
+     * 
      */
-    private void setEntityToSector(int i, int j) {
+    private void setEntityToSector(Coordinate coordinate) {
         String sectorState = "";
+        int i = coordinate.getI();
+        int j = coordinate.getJ();
 
         // Vefiry if it is a Player
         for (int x = 0; x < this.listaPlayers.size(); x++) {
+            // extracting for better readability
             int iPlayer = this.listaPlayers.get(x).getPosition().getI();
             int jPlayer = this.listaPlayers.get(x).getPosition().getJ();
+
+            // if it is a player, set the sectorState that represents the player
             if (i == iPlayer && j == jPlayer) {
                 if (this.listaPlayers.get(x).getPlayerNum() == 1)
                     sectorState = "Player 1";
@@ -462,7 +539,6 @@ public class Board {
 
         // If it is none of the 4, them it assings the sector with
         // sectorState == NULL meaning there's nothing there
-        Coordinate coordinate = new Coordinate(i, j);
         this.board[i][j] = new Sector(coordinate, sectorState);
     }
 
