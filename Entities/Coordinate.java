@@ -33,7 +33,12 @@ public class Coordinate {
 
     // Methods
 
-    // this method calculates the distance between two coordinates
+    /**
+     * Function that calculates the distance between two coordinates
+     * 
+     * @param coordinate
+     * @return
+     */
     public int calculateDistance(Coordinate coordinate) {
         int i = this.getI();
         int j = this.getJ();
@@ -45,7 +50,11 @@ public class Coordinate {
         return distance;
     }
 
-    // this method checks if the coordinate is valid
+    /**
+     * Function that checks if the coordinate is valid (within the board)
+     * 
+     * @return boolean: true if the coordinate is valid, false otherwise
+     */
     public boolean Isvalid() {
         int i = this.getI();
         int j = this.getJ();
@@ -55,7 +64,11 @@ public class Coordinate {
         return true;
     }
 
-    // this function generates a random coordinate
+    /**
+     * Function that generates a random coordinate within the board
+     * 
+     * @return Coordinate: the generated coordinate
+     */
     public static Coordinate generateRandomCoordinate() {
         int i = (int) (Math.random() * 10);
         int j = (int) (Math.random() * 10);
