@@ -6,8 +6,6 @@ public class Sector {
     
     // Attributes
 
-    // private int i;
-    // private int j;
     private Coordinate coordinate;
     private String sectorState;
 
@@ -17,16 +15,6 @@ public class Sector {
         this.setCoordinate(coordinate);
         this.setSectorState(sectorState);
     }
-
-    // Getters
-
-    // public int getI() {
-    //     return this.i;
-    // }
-
-    // public int getJ() {
-    //     return this.j;
-    // }
 
     public Coordinate getCoordinate() {
         return this.coordinate;
@@ -41,20 +29,6 @@ public class Sector {
     }
 
     // Setters
-
-    // public void setI(int i) {
-    //     if (i < 0)
-    //         throw new IllegalArgumentException("I must be positive");
-    //     this.i = i;
-    //     return;
-    // }
-
-    // public void setJ(int j) {
-    //     if (j < 0)
-    //         throw new IllegalArgumentException("J must be positive");
-    //     this.j = j;
-    //     return;
-    // }
 
     public void setCoordinate(Coordinate coordinate) {
         this.coordinate = coordinate;
