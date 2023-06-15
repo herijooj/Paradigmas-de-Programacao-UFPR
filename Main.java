@@ -116,6 +116,8 @@ public class Main {
 
         System.out.println("Choose a direction to move [WASD]");
 
+        sleep(1);
+
         input = scanner.nextLine();
 
         // while the input is invalid
@@ -278,7 +280,8 @@ public class Main {
 
                         board.movePlayer(j, input);
                         increaseTurnAndDrawBoard(i, board);
-                        //System.out.printf("Player " + Cores.ANSI_GREEN + "J%d " + Cores.ANSI_RESET + "moved!\n", j + 1);
+                        // System.out.printf("Player " + Cores.ANSI_GREEN + "J%d " + Cores.ANSI_RESET +
+                        // "moved!\n", j + 1);
                         printPositionUpdate(board, j, "player");
                         checkForPlayersDeaths(board, i, j);
                     }
@@ -291,7 +294,8 @@ public class Main {
 
                     board.movePlayer(j, input);
                     increaseTurnAndDrawBoard(i, board);
-                    //System.out.printf("Player " + Cores.ANSI_GREEN + "J%d " + Cores.ANSI_RESET + "moved!\n", j + 1);
+                    // System.out.printf("Player " + Cores.ANSI_GREEN + "J%d " + Cores.ANSI_RESET +
+                    // "moved!\n", j + 1);
                     printPositionUpdate(board, j, "player");
                     itemUsed = false;
                     checkForPlayersDeaths(board, i, j);
@@ -327,7 +331,8 @@ public class Main {
                     board.moveIndividualFakeNews(x);
 
                 increaseTurnAndDrawBoard(i, board);
-                //System.out.println("--> " + Cores.ANSI_RED + " Fake news " + (x + 1) + Cores.ANSI_RESET + " moved");
+                // System.out.println("--> " + Cores.ANSI_RED + " Fake news " + (x + 1) +
+                // Cores.ANSI_RESET + " moved");
                 printPositionUpdate(board, x, "fakeNews");
 
                 // Check for fakeNews deaths
@@ -347,7 +352,7 @@ public class Main {
 
                 sleep(3);
             }
-            
+
             increaseTurnAndDrawBoard(i, board);
             System.out.println("--> " + Cores.ANSI_RED + "All Fake news " + Cores.ANSI_RESET + "moved");
 
