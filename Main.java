@@ -195,7 +195,7 @@ public class Main {
         // game loop ---------------------------------------
 
         // create board
-        Board board = new Board(9, playerCount);
+        Board board = new Board(9, playerCount, 4, 6, 2);
 
         // 20 turns
         for (int i = 0; i < 20; i++) {
