@@ -48,6 +48,18 @@ public abstract class FakeNews extends Entity implements Movement {
     // Methods
 
     /**
+     * Adjusts a coordinate by adding an offset and ensuring that the result is within
+     * the valid range of coordinates (0 to 8 inclusive).
+     *
+     * @param coordinate the coordinate to adjust
+     * @param offset the offset to add to the coordinate
+     * @return the adjusted coordinate within the valid range
+     */
+    private int adjustCoordinate(int coordinate, int offset) {
+        return Math.max(0, Math.min(8, coordinate + offset));
+    }
+
+    /**
      * Function that generates coordinates for new Fake News generations,
      * based on a coordinate passed as a parameter (center), it generates
      * a new coordinate around that center
@@ -88,16 +100,16 @@ public abstract class FakeNews extends Entity implements Movement {
         }
 
         // Calculate the new coordinates based on the offsets
-        newI = Math.max(0, Math.min(8, iC + iOffset)); // Adjusted new i coordinate within valid range
-        newJ = Math.max(0, Math.min(8, jC + jOffset)); // Adjusted new j coordinate within valid range
+        newI = adjustCoordinate(iC, iOffset); // Adjusted new i coordinate within valid range
+        newJ = adjustCoordinate(jC, jOffset); // Adjusted new j coordinate within valid range
 
         // If the generated coordinates are the same as the center coordinates, adjust
         // them
         while (newI == iC && newJ == jC) {
             iOffset = (int) (Math.random() * 3) - 1; // Random adjustment for i coordinate (-1, 0, or 1)
             jOffset = (int) (Math.random() * 3) - 1; // Random adjustment for j coordinate (-1, 0, or 1)
-            newI = Math.max(0, Math.min(8, iC + iOffset)); // Adjusted new i coordinate within valid range
-            newJ = Math.max(0, Math.min(8, jC + jOffset)); // Adjusted new j coordinate within valid range
+            newI = adjustCoordinate(iC, iOffset); // Adjusted new i coordinate within valid range
+            newJ = adjustCoordinate(jC, jOffset); // Adjusted new j coordinate within valid range
         }
 
         return new Coordinate(newI, newJ);
