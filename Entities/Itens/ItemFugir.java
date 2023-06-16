@@ -16,9 +16,11 @@ public class ItemFugir extends Item {
     // Methods
 
     /**
-     * Verifies if a given position is valid
+     * Checks if a given position is valid on the board.
      *
-     * returns true if it is, false if it isnt
+     * @param board The game board.
+     * @param input The position to be checked.
+     * @return {@code true} if the position is valid, {@code false} otherwise.
      */
     public boolean validPosition(Board board, int input) {
 
@@ -35,10 +37,10 @@ public class ItemFugir extends Item {
     }
 
     /**
-     * This item lets the player choose a position to go
-     * 
-     * @param board  the board
-     * @param player the player
+     * Executes the ability of an item for a player, allowing them to move to a specified position on the board.
+     *
+     * @param board  The game board.
+     * @param player The player who is using the item.
      */
     public void itemAbility(Board board, Player player) {
         Scanner sc = new Scanner(System.in);

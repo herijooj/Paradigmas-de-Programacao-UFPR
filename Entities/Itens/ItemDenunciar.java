@@ -17,12 +17,12 @@ public class ItemDenunciar extends Item {
     }
 
     // Methods
+
     /**
-     * This item will kill all the enemies that are in a distance of 1 from the
-     * player
-     * 
-     * @param board  the board
-     * @param player the player
+     * Executes the ability of an item that eliminates all enemies within a distance of 1 from the player.
+     *
+     * @param board  The game board.
+     * @param player The player using the item.
      */
     public void itemAbility(Board board, Player player) {
         LinkedList<FakeNews> fakeNewsList = board.getFakeNews();
@@ -56,11 +56,10 @@ public class ItemDenunciar extends Item {
     }
 
     /**
-     * Creates a list of possible positions to go
-     * based on the player's position
-     * 
-     * @param position the position of the player
-     * @return a list of possible positions
+     * Generates a list of possible positions to move to based on the player's current position.
+     *
+     * @param position The current position of the player.
+     * @return A LinkedList of Coordinate objects representing the possible positions.
      */
     public LinkedList<Coordinate> possiblePositions(Coordinate position) {
         LinkedList<Coordinate> positions = new LinkedList<Coordinate>();

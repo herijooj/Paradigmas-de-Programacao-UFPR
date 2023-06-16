@@ -21,9 +21,8 @@ public abstract class Item extends Entity {
     }
 
     // setters
-    // não precisa fazer nenhuma verificação pois a classe 'Coordenada' já verifica
     public void setPosition(Coordinate position) {
-        this.position = position;
+        this.position = position; // não precisa fazer nenhuma verificação pois a classe 'Coordenada' já verifica
     }
 
     // methods

@@ -34,10 +34,10 @@ public class Coordinate {
     // Methods
 
     /**
-     * Function that calculates the distance between two coordinates
-     * 
-     * @param coordinate
-     * @return
+     * Calculates the distance between the current Coordinate object and the given Coordinate object.
+     *
+     * @param coordinate The Coordinate object to calculate the distance to.
+     * @return The distance between the two Coordinate objects as an integer.
      */
     public int calculateDistance(Coordinate coordinate) {
         int i = this.getI();
@@ -51,9 +51,9 @@ public class Coordinate {
     }
 
     /**
-     * Function that checks if the coordinate is valid (within the board)
-     * 
-     * @return boolean: true if the coordinate is valid, false otherwise
+     * Checks if the current Coordinate object is valid within a 10x10 grid.
+     *
+     * @return true if the Coordinate object is valid, false otherwise.
      */
     public boolean Isvalid() {
         int i = this.getI();
@@ -65,9 +65,9 @@ public class Coordinate {
     }
 
     /**
-     * Function that generates a random coordinate within the board
-     * 
-     * @return Coordinate: the generated coordinate
+     * Generates a random coordinate within a 10x10 grid.
+     *
+     * @return A randomly generated Coordinate object.
      */
     public static Coordinate generateRandomCoordinate() {
         int i = (int) (Math.random() * 10);

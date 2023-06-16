@@ -16,11 +16,12 @@ public class ItemLer extends Item {
     }
 
     // Methods
+    
     /**
-     * This item deletes a random enemy from the board
-     * 
-     * @param board  the board
-     * @param player the player
+     * Executes the ability of an item that deletes a random enemy from the board.
+     *
+     * @param board  The game board.
+     * @param player The player using the item.
      */
     public void itemAbility(Board board, Player player) {
         // extracting enemies

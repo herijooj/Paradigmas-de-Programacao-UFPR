@@ -31,13 +31,15 @@ public abstract class Entity {
 
 
     // Methods
-
+    
     /**
-     * Check if a Beign can move to a certain position
-     * 
-     * 
-     * Returns: true if it can move, false otherwise
-     **/
+     * Checks if the given coordinate on the board is a valid move location for the entity.
+     *
+     * @param board the board to check for valid move locations.
+     * @param i the row index of the coordinate to check.
+     * @param j the column index of the coordinate to check.
+     * @return true if the coordinate is a valid move location, false otherwise.
+     */
     public boolean canMoveToCoordinate(Sector[][] board, int i, int j) { // MUDAR NOME E USAR COORDENADAS
         if (i < 0 || i > 8 || j < 0 || j > 8)
             return false;
@@ -50,13 +52,13 @@ public abstract class Entity {
         return true;
     }
 
-    //
     /**
-     * Check if a given coordinate has something in it
-     * 
-     * 
-     * Returns: true if it has, false otherwise
-     **/
+     * Checks if the given position on the board has any entity or item.
+     *
+     * @param board the board to check for entities or items.
+     * @param position the position on the board to check for an entity or item.
+     * @return true if the position has an entity or item, false otherwise.
+     */
     public boolean hasSomething(Sector[][] board, Coordinate position) {
         String sectorState = board[position.getI()][position.getJ()].getSectorState();
 
@@ -65,9 +67,12 @@ public abstract class Entity {
         return false;
     }
 
-    /*
-     * Checks if a sector has an Item
-     * returns true if it has, and false if it doesn't
+    /**
+     * Checks if the given position on the board has an item.
+     *
+     * @param board the board to check for items.
+     * @param position the position on the board to check for an item.
+     * @return true if the position has an item, false otherwise.
      */
     public boolean hasItem(Sector[][] board, Coordinate position) {
         if (board[position.getI()][position.getJ()].getSectorState().contains("Item"))
