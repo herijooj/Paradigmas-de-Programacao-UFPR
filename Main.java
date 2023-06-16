@@ -168,7 +168,7 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        int playerCount, input, inventorySize, j = 0, previousJ;
+        int playerCount, input, j = 0;
         boolean itemUsed = false;
         String placeholder;
 
@@ -226,7 +226,6 @@ public class Main {
                 if (board.checkPlayerState(j) == "outOfGame" || board.checkPlayerState(j) == "dead")
                     continue;
 
-                previousJ = j;
                 // Getting action
                 if (!itemUsed) {
                     flushScreen();
@@ -247,7 +246,6 @@ public class Main {
                     // Action
                     if (input == 2) {
                         increaseTurnAndDrawBoard(i, board);
-                        inventorySize = board.drawPlayerInventory(j + 1);
 
                         // input validation
                         placeholder = scanner.nextLine();
