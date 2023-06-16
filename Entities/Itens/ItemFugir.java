@@ -69,8 +69,6 @@ public class ItemFugir extends Item {
         board.getBoard()[newCoordinate.getI()][newCoordinate.getJ()].setSectorState(player.toString());
 
         System.out.println("Player " + player.getPlayerNum() + " moved!");
-
-        sc.close();
     }
 
     public String toString() {
