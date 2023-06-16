@@ -10,12 +10,13 @@ import Entities.Coordinate;
 public class Main {
 
     /**
-     * Generates a random integer between the specified minimum and maximum values (inclusive).
+     * Generates a random integer between the specified minimum and maximum values
+     * (inclusive).
      *
      * @param min the minimum value of the random number (inclusive)
      * @param max the maximum value of the random number (inclusive)
      * @return a random integer between the minimum and maximum values (inclusive)
-     */ 
+     */
     public static int randomNumber(int min, int max) {
         return (int) (Math.random() * (max - min + 1) + min);
     }
@@ -23,9 +24,10 @@ public class Main {
     /**
      * Prints a title screen to the console.
      *
-     * The title screen is a pattern of dots and characters that spells out the word "Fake News".
+     * The title screen is a pattern of dots and characters that spells out the word
+     * "Fake News".
      * The pattern is printed to the console using the System.out.println method.
-     */    
+     */
     public static void titleScreen() {
         String[] pattern = {
                 ".........................................................................",
@@ -44,9 +46,10 @@ public class Main {
     /**
      * Prints a Game Over screen to the console.
      *
-     * The Game Over is a pattern of lines and symbols that spells out the word "GameOver".
+     * The Game Over is a pattern of lines and symbols that spells out the word
+     * "GameOver".
      * The pattern is printed to the console using the System.out.println method.
-     */  
+     */
     public static void gameOver() {
         String[] pattern = {
                 "   _____                         ____                 ",
@@ -66,9 +69,10 @@ public class Main {
     /**
      * Prints a Game Win screen to the console.
      *
-     * The Game Win is a pattern of lines and symbols that spells out the word "You Win".
+     * The Game Win is a pattern of lines and symbols that spells out the word "You
+     * Win".
      * The pattern is printed to the console using the System.out.println method.
-     */  
+     */
     public static void gameWin() {
         String pattern = " __     __          __          _______ _   _ _ \n" +
                 " \\ \\   / /          \\ \\        / /_   _| \\ | | |\n" +
@@ -86,7 +90,7 @@ public class Main {
      *
      * @param seconds the number of seconds to sleep
      * @throws InterruptedException if the thread is interrupted while sleeping
-     */    
+     */
     public static void sleep(int seconds) {
         try {
             // in milliseconds
@@ -97,9 +101,9 @@ public class Main {
         }
     }
 
-
     /**
-     * Clears the console screen by printing the ANSI escape codes for the "home" and "clear screen" commands.
+     * Clears the console screen by printing the ANSI escape codes for the "home"
+     * and "clear screen" commands.
      */
     public static void flushScreen() {
         System.out.print("\033[H\033[2J");
@@ -110,7 +114,8 @@ public class Main {
      * Maps a keyboard key to a direction for the game.
      *
      * @param key the keyboard key to map to a direction
-     * @return the direction mapped to the keyboard key (1 = down, 2 = up, 3 = right, 4 = left, 0 = don't move)
+     * @return the direction mapped to the keyboard key (1 = down, 2 = up, 3 =
+     *         right, 4 = left, 0 = don't move)
      */
     public static int keyToDirection(String key) {
         // touppercase
@@ -147,10 +152,12 @@ public class Main {
     }
 
     /**
-     * Prompts the user to choose a direction to move in the game and returns the corresponding direction.
+     * Prompts the user to choose a direction to move in the game and returns the
+     * corresponding direction.
      *
      * @param scanner the scanner to read user input from
-     * @return the direction chosen by the user (1 = down, 2 = up, 3 = right, 4 = left, 0 = don't move)
+     * @return the direction chosen by the user (1 = down, 2 = up, 3 = right, 4 =
+     *         left, 0 = don't move)
      * @throws InterruptedException if the thread is interrupted while sleeping
      */
     public static int chooseDirection(Scanner scanner) {
@@ -172,11 +179,12 @@ public class Main {
     }
 
     /**
-     * Checks if a player has died on the game board and prints a message if they have.
+     * Checks if a player has died on the game board and prints a message if they
+     * have.
      *
      * @param board the game board to check for player deaths
-     * @param i the current turn number
-     * @param j the index of the player to check for death
+     * @param i     the current turn number
+     * @param j     the index of the player to check for death
      * @throws InterruptedException if the thread is interrupted while sleeping
      */
     public static void checkForPlayersDeaths(Board board, int i, int j) {
@@ -189,10 +197,12 @@ public class Main {
     }
 
     /**
-     * Prints an update to the console about the position of a player or fake news entity on the game board.
+     * Prints an update to the console about the position of a player or fake news
+     * entity on the game board.
      *
-     * @param board the game board containing the entity
-     * @param index the index of the entity in the list of players or fake news entities
+     * @param board      the game board containing the entity
+     * @param index      the index of the entity in the list of players or fake news
+     *                   entities
      * @param entityType the type of entity ("player" or "fakeNews")
      */
     public static void printPositionUpdate(Board board, int index, String entityType) {
@@ -213,7 +223,8 @@ public class Main {
             if (board.getFakeNews().get(index).getState() == "alive") {
                 position = board.getFakeNews().get(index).getPosition();
 
-                System.out.println("--> " + Cores.ANSI_RED + " Fake news " + board.getFakeNews().get(index).toString() + Cores.ANSI_RESET
+                System.out.println("--> " + Cores.ANSI_RED + " Fake news " + board.getFakeNews().get(index).toString()
+                        + Cores.ANSI_RESET
                         + " moved to position: " + position.getI() + "-" + position.getJ());
             }
         }
@@ -252,7 +263,7 @@ public class Main {
         // game loop ---------------------------------------
 
         // create board
-        Board board = new Board(9, playerCount, 4, 6, 20);
+        Board board = new Board(9, playerCount, 4, 6, 2);
 
         // 20 turns
         for (int i = 0; i < 20; i++) {
@@ -385,7 +396,8 @@ public class Main {
 
                 // Check for fakeNews deaths
                 if (board.checkFakeNewsState(x) == "dead")
-                    System.out.printf("Fake news " + Cores.ANSI_RED + "%s " + Cores.ANSI_RESET + "died! :)\n", board.getFakeNews().get(x).toString());
+                    System.out.printf("Fake news " + Cores.ANSI_RED + "%s " + Cores.ANSI_RESET + "died! :)\n",
+                            board.getFakeNews().get(x).toString());
                 // Check for player deaths
                 for (int k = 0; k < playersQuantity; k++)
                     checkForPlayersDeaths(board, i, k);
