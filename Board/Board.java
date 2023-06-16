@@ -637,13 +637,10 @@ public class Board {
         else // BOATO
         {
             int randomDirection = (int) (Math.random() * 4) + 1;
-            Coordinate newCoordinate;
 
             // Get the new coordinates
             iPlayer = players.get(i).getPosition().getI();
             jPlayer = players.get(i).getPosition().getJ();
-
-            newCoordinate = new Coordinate(iPlayer, jPlayer);
 
             // Player is in the item boato area
             this.board[iPlayer][jPlayer].setSectorState(players.get(i).toString());
