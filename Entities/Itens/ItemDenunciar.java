@@ -26,34 +26,28 @@ public class ItemDenunciar extends Item {
      */
     public void itemAbility(Board board, Player player) {
         LinkedList<FakeNews> fakeNewsList = board.getFakeNews();
-        int i, j;
 
-        // create a list of positions, where the posistion has distance of 1 from the
-        // player
+        // create a list of positions, where the position has a distance of 1 from the player
         LinkedList<Coordinate> positions = possiblePositions(player.getPosition());
 
         // for each position, check if there is a fakeNews
-        for (i = 0; i < positions.size(); i++) {
-            for (j = 0; j < fakeNewsList.size(); j++) {
-
+        for (Coordinate position : positions) {
+            for (FakeNews fakeNews : fakeNewsList) {
                 // If fakeNews is in the area
-                if (fakeNewsList.get(j).getPosition().getI() == positions.get(i).getI()
-                        && fakeNewsList.get(j).getPosition().getJ() == positions.get(i).getJ()) {
-
-                    if (fakeNewsList.get(j).getState() == "RecentlyAdded" || fakeNewsList.get(j).getState() == "alive") {
-
+                if (fakeNews.getPosition().equals(position)) {
+                    if (fakeNews.getState().equals("RecentlyAdded") || fakeNews.getState().equals("alive")) {
                         // Set state to outOfGame and setSectorState to nothing there
-                        fakeNewsList.get(j).setState("outOfGame");
-                        board.getBoard()[fakeNewsList.get(j).getPosition().getI()][fakeNewsList.get(j).getPosition()
-                                .getJ()].setSectorState("");
-                        System.out.printf("Fake news " + Cores.ANSI_RED + "%d " + Cores.ANSI_RESET + "eliminated! :)\n",
-                                j + 1);
+                        fakeNews.setState("outOfGame");
+                        board.getBoard()[fakeNews.getPosition().getI()][fakeNews.getPosition().getJ()].setSectorState("");
+                        System.out.printf("Fake news " + Cores.ANSI_RED + "%s " + Cores.ANSI_RESET + "eliminated! :)\n",
+                                fakeNews.toString() + 1);
                     }
                     break;
                 }
             }
         }
     }
+
 
     /**
      * Generates a list of possible positions to move to based on the player's current position.
