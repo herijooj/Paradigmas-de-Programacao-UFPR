@@ -4,6 +4,10 @@ package Entities.Beings;
 import Entities.Coordinate;
 import Board.Board;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.BiFunction;
+
 // class
 public class F3 extends FakeNews {
 
@@ -13,137 +17,59 @@ public class F3 extends FakeNews {
     }
 
     // Methods
-    
-    @Override
-    public String move(Board board, int direction) {
 
+
+    /**
+     * Moves the player in the given direction and updates the board accordingly.
+     *
+     * @param board the board to update
+     * @param direction the direction to move in (1 = down, 2 = up, 3 = right, 4 = left)
+     * @return a string indicating the result of the move ("moved" if successful, "dead" if the move resulted in death)
+     */
+    public String move(Board board, int direction) {
         int newI, newJ;
         Coordinate position, randomCoordinate;
         FakeNews newFakeNews;
 
-        switch (direction) {
-            // goes down-right
-            case 1:
-                newI = this.position.getI() + 1;
-                newJ = this.position.getJ() + 1;
-                if (!canMoveToCoordinate(board.getBoard(), newI, newJ))
-                    return "dead";
-                else {
-                    position = new Coordinate(newI, newJ);
+        Map<Integer, BiFunction<Integer, Integer, Coordinate>> directionMap = new HashMap<>();
+        directionMap.put(1, (i, j) -> new Coordinate(i + 1, j + 1));
+        directionMap.put(2, (i, j) -> new Coordinate(i - 1, j + 1));
+        directionMap.put(3, (i, j) -> new Coordinate(i + 1, j - 1));
+        directionMap.put(4, (i, j) -> new Coordinate(i - 1, j - 1));
 
-                    if (hasItem(board.getBoard(), position)) {
-                        // Spawn another fakeNews
-
-                        // Generates random coordinate for a new fakeNews to spawn
-                        randomCoordinate = generateRandomPeriphericCoordinate(position);
-                        while (hasSomething(board.getBoard(), randomCoordinate))
-                            randomCoordinate = generateRandomPeriphericCoordinate(position);
-
-                        newFakeNews = new F3(randomCoordinate, "RecentlyAdded");
-
-                        board.getFakeNews().add(newFakeNews);
-                        addFakeNewsToSector(board, randomCoordinate, newFakeNews);
-                        
-                        // Add new Item to the board
-                        board.addItens(1);
-                    }
-
-                    this.position.setI(newI);
-                    this.position.setJ(newJ);
-                    return "moved";
-                }
-                // goes up-right
-            case 2:
-                newI = this.position.getI() - 1;
-                newJ = this.position.getJ() + 1;
-                if (!canMoveToCoordinate(board.getBoard(), newI, newJ))
-                    return "dead";
-                else {
-                    position = new Coordinate(newI, newJ);
-
-                    if (hasItem(board.getBoard(), position)) {
-                        // Spawn another fakeNews
-
-                        // Generates random coordinate for a new fakeNews to spawn
-                        randomCoordinate = generateRandomPeriphericCoordinate(position);
-                        while (hasSomething(board.getBoard(), randomCoordinate))
-                            randomCoordinate = generateRandomPeriphericCoordinate(position);
-
-                        newFakeNews = new F3(randomCoordinate, "RecentlyAdded");
-
-                        board.getFakeNews().add(newFakeNews);
-                        addFakeNewsToSector(board, randomCoordinate, newFakeNews);
-                        
-                        // Add new Item to the board
-                        board.addItens(1);
-                    }
-
-                    this.position.setI(newI);
-                    this.position.setJ(newJ);
-                    return "moved";
-                }
-                // goes down-left
-            case 3:
-                newI = this.position.getI() + 1;
-                newJ = this.position.getJ() - 1;
-                if (!canMoveToCoordinate(board.getBoard(), newI, newJ))
-                    return "dead";
-                else {
-                    position = new Coordinate(newI, newJ);
-
-                    if (hasItem(board.getBoard(), position)) {
-                        // Spawn another fakeNews
-
-                        // Generates random coordinate for a new fakeNews to spawn
-                        randomCoordinate = generateRandomPeriphericCoordinate(position);
-                        while (hasSomething(board.getBoard(), randomCoordinate))
-                            randomCoordinate = generateRandomPeriphericCoordinate(position);
-
-                        newFakeNews = new F3(randomCoordinate, "RecentlyAdded");
-
-                        board.getFakeNews().add(newFakeNews);
-                        addFakeNewsToSector(board, randomCoordinate, newFakeNews);
-                        
-                        // Add new Item to the board
-                        board.addItens(1);
-                    }
-
-                    this.position.setI(newI);
-                    this.position.setJ(newJ);
-                    return "moved";
-                }
-                // goes up-left
-            case 4:
-                newI = this.position.getI() - 1;
-                newJ = this.position.getJ() - 1;
-                if (!canMoveToCoordinate(board.getBoard(), newI, newJ))
-                    return "dead";
-                else {
-                    position = new Coordinate(newI, newJ);
-
-                    if (hasItem(board.getBoard(), position)) {
-                        // Spawn another fakeNews
-
-                        // Generates random coordinate for a new fakeNews to spawn
-                        randomCoordinate = generateRandomPeriphericCoordinate(position);
-                        while (hasSomething(board.getBoard(), randomCoordinate))
-                            randomCoordinate = generateRandomPeriphericCoordinate(position);
-
-                        newFakeNews = new F3(randomCoordinate, "RecentlyAdded");
-
-                        board.getFakeNews().add(newFakeNews);
-                        addFakeNewsToSector(board, randomCoordinate, newFakeNews);
-                        
-                        // Add new Item to the board
-                        board.addItens(1);
-                    }
-                    
-                    this.position.setI(newI);
-                    this.position.setJ(newJ);
-                    return "moved";
-                }
+        BiFunction<Integer, Integer, Coordinate> directionFunction = directionMap.getOrDefault(direction, (i, j) -> null);
+        if (directionFunction == null) {
+            return "dead";
         }
-        return "dead";
+
+        newI = this.position.getI();
+        newJ = this.position.getJ();
+        position = directionFunction.apply(newI, newJ);
+
+        if (!canMoveToCoordinate(board.getBoard(), position.getI(), position.getJ())) {
+            return "dead";
+        }
+
+        if (hasItem(board.getBoard(), position)) {
+            // Spawn another fakeNews
+
+            // Generates random coordinate for a new fakeNews to spawn
+            randomCoordinate = generateRandomPeriphericCoordinate(position);
+            while (hasSomething(board.getBoard(), randomCoordinate))
+                randomCoordinate = generateRandomPeriphericCoordinate(position);
+
+            newFakeNews = new F3(randomCoordinate, "RecentlyAdded");
+
+            board.getFakeNews().add(newFakeNews);
+            addFakeNewsToSector(board, randomCoordinate, newFakeNews);
+
+            // Add new Item to the board
+            board.addItens(1);
+        }
+
+        this.position.setI(position.getI());
+        this.position.setJ(position.getJ());
+        return "moved";
     }
 
     public String toString() {
