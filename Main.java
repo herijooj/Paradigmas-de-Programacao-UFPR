@@ -158,7 +158,7 @@ public class Main {
             if (board.getFakeNews().get(index).getState() == "alive") {
                 position = board.getFakeNews().get(index).getPosition();
 
-                System.out.println("--> " + Cores.ANSI_RED + " Fake news " + (index + 1) + Cores.ANSI_RESET
+                System.out.println("--> " + Cores.ANSI_RED + " Fake news " + board.getFakeNews().get(index).toString() + Cores.ANSI_RESET
                         + " moved to position: " + position.getI() + "-" + position.getJ());
             }
         }
@@ -278,8 +278,6 @@ public class Main {
 
                         board.movePlayer(j, input);
                         increaseTurnAndDrawBoard(i, board);
-                        // System.out.printf("Player " + Cores.ANSI_GREEN + "J%d " + Cores.ANSI_RESET +
-                        // "moved!\n", j + 1);
                         printPositionUpdate(board, j, "player");
                         checkForPlayersDeaths(board, i, j);
                     }
@@ -292,8 +290,6 @@ public class Main {
 
                     board.movePlayer(j, input);
                     increaseTurnAndDrawBoard(i, board);
-                    // System.out.printf("Player " + Cores.ANSI_GREEN + "J%d " + Cores.ANSI_RESET +
-                    // "moved!\n", j + 1);
                     printPositionUpdate(board, j, "player");
                     itemUsed = false;
                     checkForPlayersDeaths(board, i, j);
@@ -329,14 +325,11 @@ public class Main {
                     board.moveIndividualFakeNews(x);
 
                 increaseTurnAndDrawBoard(i, board);
-                // System.out.println("--> " + Cores.ANSI_RED + " Fake news " + (x + 1) +
-                // Cores.ANSI_RESET + " moved");
                 printPositionUpdate(board, x, "fakeNews");
 
                 // Check for fakeNews deaths
                 if (board.checkFakeNewsState(x) == "dead")
-                    System.out.printf("Fake news " + Cores.ANSI_RED + "%d " + Cores.ANSI_RESET + "died! :)\n", x + 1);
-
+                    System.out.printf("Fake news " + Cores.ANSI_RED + "%s " + Cores.ANSI_RESET + "died! :)\n", board.getFakeNews().get(x).toString());
                 // Check for player deaths
                 for (int k = 0; k < playersQuantity; k++)
                     checkForPlayersDeaths(board, i, k);
