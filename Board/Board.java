@@ -406,14 +406,11 @@ public class Board {
      * @return boolean
      */
     private boolean hasEqualCoordinate(Coordinate coordinate) {
-        int j;
-
         // Check if it has the same coordinate as a player
-        int playerSize = this.listaPlayers.size();
-        for (j = 0; j < playerSize; j++) {
+        for (Player player : listaPlayers) {
             // extracting for better readability
-            int playerI = this.listaPlayers.get(j).getPosition().getI();
-            int playerJ = this.listaPlayers.get(j).getPosition().getJ();
+            int playerI = player.getPosition().getI();
+            int playerJ = player.getPosition().getJ();
 
             // if it has the same coordinate as a player, return true
             if (coordinate.getI() == playerI && coordinate.getJ() == playerJ)
@@ -421,11 +418,10 @@ public class Board {
         }
 
         // Check if it has the same coordinate as a restricted sector
-        int RestrictedSectorsSize = this.listaRestrictedSectors.size();
-        for (j = 0; j < RestrictedSectorsSize; j++) {
+        for (Coordinate restrictedSector : listaRestrictedSectors) {
             // extracting for better readability
-            int restrictedI = this.listaRestrictedSectors.get(j).getI();
-            int restrictedJ = this.listaRestrictedSectors.get(j).getJ();
+            int restrictedI = restrictedSector.getI();
+            int restrictedJ = restrictedSector.getJ();
 
             // if it has the same coordinate as a restricted sector, return true
             if (coordinate.getI() == restrictedI && coordinate.getJ() == restrictedJ)
@@ -433,23 +429,21 @@ public class Board {
         }
 
         // Check if it has the same coordinate as a Fake News
-        int listaFakeNewsSize = this.listaFakeNews.size();
-        for (j = 0; j < listaFakeNewsSize; j++) {
+        for (FakeNews fakeNews : listaFakeNews) {
             // extracting for better readability
-            int fakeNewsI = this.listaFakeNews.get(j).getPosition().getI();
-            int fakeNewsJ = this.listaFakeNews.get(j).getPosition().getJ();
+            int fakeNewsI = fakeNews.getPosition().getI();
+            int fakeNewsJ = fakeNews.getPosition().getJ();
 
-            // if it has the same coordinate as an item, return true
+            // if it has the same coordinate as a Fake News, return true
             if (coordinate.getI() == fakeNewsI && coordinate.getJ() == fakeNewsJ)
                 return true;
         }
 
-        // And check if it has the same coordinate as an item
-        int listaItensSize = this.listaItens.size();
-        for (j = 0; j < listaItensSize; j++) {
+        // Check if it has the same coordinate as an item
+        for (Item item : listaItens) {
             // extracting for better readability
-            int itemI = this.listaItens.get(j).getPosition().getI();
-            int itemJ = this.listaItens.get(j).getPosition().getJ();
+            int itemI = item.getPosition().getI();
+            int itemJ = item.getPosition().getJ();
 
             // if it has the same coordinate as an item, return true
             if (coordinate.getI() == itemI && coordinate.getJ() == itemJ)
@@ -460,6 +454,7 @@ public class Board {
         return false;
     }
 
+
     /**
      * Helper method used in the setBoard method
      * 
@@ -469,23 +464,29 @@ public class Board {
         int i = coordinate.getI();
         int j = coordinate.getJ();
 
-        // Vefiry if it is a Player
-        for (int x = 0; x < this.listaPlayers.size(); x++) {
-            // extracting for better readability
-            int iPlayer = this.listaPlayers.get(x).getPosition().getI();
-            int jPlayer = this.listaPlayers.get(x).getPosition().getJ();
+        // Verify if it is a Player
+        for (Player player : this.listaPlayers) {
+            // Extracting for better readability
+            int iPlayer = player.getPosition().getI();
+            int jPlayer = player.getPosition().getJ();
 
-            // if it is a player, set the sectorState that represents the player
+            // If it is a player, set the sectorState that represents the player
             if (i == iPlayer && j == jPlayer) {
-                if (this.listaPlayers.get(x).getPlayerNum() == 1)
-                    sectorState = "Player 1";
-                else if (this.listaPlayers.get(x).getPlayerNum() == 2)
-                    sectorState = "Player 2";
-                else if (this.listaPlayers.get(x).getPlayerNum() == 3)
-                    sectorState = "Player 3";
-                else
-                    sectorState = "Player 4";
-
+                int playerNum = player.getPlayerNum();
+                switch (playerNum) {
+                    case 1:
+                        sectorState = "Player 1";
+                        break;
+                    case 2:
+                        sectorState = "Player 2";
+                        break;
+                    case 3:
+                        sectorState = "Player 3";
+                        break;
+                    default:
+                        sectorState = "Player 4";
+                        break;
+                }
                 break;
             }
         }
@@ -501,14 +502,15 @@ public class Board {
         }
 
         // Verify if it is a FakeNews
-        if (sectorState == "") {
-            for (int x = 0; x < this.listaFakeNews.size(); x++) {
-                int iFakeNews = this.listaFakeNews.get(x).getPosition().getI();
-                int jFakeNews = this.listaFakeNews.get(x).getPosition().getJ();
+        if (sectorState.equals("")) {
+            for (FakeNews fakeNews : this.listaFakeNews) {
+                int iFakeNews = fakeNews.getPosition().getI();
+                int jFakeNews = fakeNews.getPosition().getJ();
+
                 if (i == iFakeNews && j == jFakeNews) {
-                    if (this.listaFakeNews.get(x) instanceof F1)
+                    if (fakeNews instanceof F1)
                         sectorState = "F1";
-                    else if (this.listaFakeNews.get(x) instanceof F2)
+                    else if (fakeNews instanceof F2)
                         sectorState = "F2";
                     else
                         sectorState = "F3";
@@ -518,19 +520,21 @@ public class Board {
             }
         }
 
+
         // Verify if it is an item
-        if (sectorState == "") {
-            for (int x = 0; x < this.listaItens.size(); x++) {
-                int iItem = this.listaItens.get(x).getPosition().getI();
-                int jItem = this.listaItens.get(x).getPosition().getJ();
+        if (sectorState.equals("")) {
+            for (Item item : this.listaItens) {
+                int iItem = item.getPosition().getI();
+                int jItem = item.getPosition().getJ();
+
                 if (i == iItem && j == jItem) {
-                    if (this.listaItens.get(x) instanceof ItemBoato)
+                    if (item instanceof ItemBoato)
                         sectorState = "Item Boato";
-                    else if (this.listaItens.get(x) instanceof ItemDenunciar)
+                    else if (item instanceof ItemDenunciar)
                         sectorState = "Item Denunciar";
-                    else if (this.listaItens.get(x) instanceof ItemFugir)
+                    else if (item instanceof ItemFugir)
                         sectorState = "Item Fugir";
-                    else if (this.listaItens.get(x) instanceof ItemLer)
+                    else if (item instanceof ItemLer)
                         sectorState = "Item Ler";
                     break;
                 }
@@ -591,15 +595,15 @@ public class Board {
     public Player checkIfSectorHasPlayer(Coordinate position) {
         LinkedList<Player> players = getPlayers();
 
-        for (int i = 0; i < players.size(); i++) {
+        for (Player player : players) {
             // if the player is dead, it doesn't count
-            if (players.get(i).getState() != "alive")
+            if (!player.getState().equals("alive"))
                 continue;
 
             // if the player is in the same position as the sector
-            if (players.get(i).getPosition().getI() == position.getI()
-                    && players.get(i).getPosition().getJ() == position.getJ())
-                return players.get(i);
+            if (player.getPosition().getI() == position.getI()
+                    && player.getPosition().getJ() == position.getJ())
+                return player;
         }
         return null;
     }
@@ -803,21 +807,22 @@ public class Board {
         int i;
         Player player = listaPlayers.get(playerNum - 1);
 
-        if (player.getInventory().size() == 0)
+        if (player.getInventory().size() == 0) {
             System.out.println("Player " + playerNum + ", you have no items in your inventory, press 5 to return");
-        else {
+        } else {
             System.out.println("Player " + playerNum + ", this is your inventory");
             System.out.println("Choose the item you want to use, or 5 to return");
             System.out.println("==================INVENTORY===================\n");
 
-            for (i = 0; i < player.getInventory().size(); i++) {
-                System.out.print((i + 1) + " - " + player.getInventory().get(i).toString() + " - ");
+            for (Item item : player.getInventory()) {
+                i = player.getInventory().indexOf(item);
+                System.out.print((i + 1) + " - " + item.toString() + " - ");
 
-                if (player.getInventory().get(i).toString() == "Item Ler")
+                if (item instanceof ItemLer)
                     System.out.println("Ler uma noticia real, elimina uma FN aleatória do tabuleiro.");
-                else if (player.getInventory().get(i).toString() == "Item Denunciar")
+                else if (item instanceof ItemDenunciar)
                     System.out.println("Denunciar FN, elimina todas as FN ao redor do jogador.");
-                else if (player.getInventory().get(i).toString() == "Item Fugir")
+                else if (item instanceof ItemFugir)
                     System.out.println("Fuja para uma posição do tabuleiro que será escolhida ao utilizar o item.");
             }
         }
@@ -825,16 +830,16 @@ public class Board {
         return player.getInventory().size();
     }
 
+    
+
     /**
      * Function to check if there are enemies alive
      * return true if there are no enemies alive
      **/
     public boolean allEnemiesDead() {
-        int i;
-
         // check the state of all fake news
-        for (i = 0; i < listaFakeNews.size(); i++) {
-            if (listaFakeNews.get(i).getState() == "alive")
+        for (FakeNews fakeNews : listaFakeNews) {
+            if (fakeNews.getState().equals("alive"))
                 return false;
         }
         return true;
