@@ -1,0 +1,209 @@
+<diagram program="umletino" version="15.1"><zoom_level>4</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLPackage</id><coordinates><x>476</x><y>0</y><w>244</w><h>208</h></coordinates><panel_attributes>Package Board
+--
+bg=white</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>484</x><y>12</y><w>84</w><h>56</h></coordinates><panel_attributes>Sector
+--
+-Relationship: 
+public class Sector
+--
+Attributes:
+- coordinate: Coordinate;  
+- sectorState: String;
+--
+Methods
++ getters() / setters();
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>576</x><y>12</y><w>132</w><h>188</h></coordinates><panel_attributes>Board
+--
+-Relationship: 
+public class Board
+--
+Attributes:
+- size: int;
+- board: Sector[][]; 
+- listaRestrictedSectors: LinkedList&lt;Coordinate&gt;;
+- restrictedSectorsMax: int;
+- listaFakeNews: LinkedList&lt;Coordinate&gt;;
+- fakeNewsMax: int;
+- listaItens: LinkedList&lt;Coordinate&gt;;
+- itemMax: int;
+- listaPlayer: LinkedList&lt;Player&gt;;
+--
+Methods
++ getters(); / setters();
++ SetEntityToBoard(int i, int j): void;
++ onBorder(Coordinate coordinate): boolean ;
++ addItens(int itemQuantity): void;
++ addItemToBoard(): boolean;
++ addItemToBoardAndSetEntity(): boolean;
++ hasEqualCoordinate(Coordinate coordinate): boolean;
++ moveIndividualFakeNews(int index): void;
++ checkIfSectorHasPlayer(Coordinate position): Player;
++ movePlayer(int i, int direction): void;
++ useItem(int playerIndex, int itemIndex): void;
++ checkFakeNewsState(int fakeNewsIndex): String;
++ allPlayersDead(): boolean;
++ drawBoard(): void;
++ drawPlayerInventory(int playerNum): int;
++ allEnemiesDead(): boolean;   
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>20</x><y>204</y><w>872</w><h>376</h></coordinates><panel_attributes>Package Entities
+--
+bg=white</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>468</x><y>216</y><w>148</w><h>76</h></coordinates><panel_attributes>&lt;&lt;abstract&gt;&gt;
+Entity
+--
+-Relationship: 
+public abstract class Entity
+--
+Attributes:
+# position: Coordinate;
+--
+Methods
++ getters() / setters();
++ canMoveToCoordinate(Sector[][] board, int i, int j): boolean;
++ hasSomething(Sector[][] board, Coordinate position): boolean;
++ hasItem(Sector[][] board, Coordinate position): boolean; 
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>324</x><y>288</y><w>196</w><h>72</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>470;10;10;160</additional_attributes></element><element><id>UMLClass</id><coordinates><x>280</x><y>352</y><w>128</w><h>64</h></coordinates><panel_attributes>&lt;&lt;abstract&gt;&gt;
+Item
+--
+-Relationship: 
+public abstract class ItemCharacteristics extends Entity
+--
+Attributes:
+# position: Coordinate;
+--
+Methods
++ getters() / setters();
++ abstract itemAbility(): void;
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>564</x><y>328</y><w>320</w><h>240</h></coordinates><panel_attributes>Package Beings
+--
+bg=white</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>580</x><y>404</y><w>184</w><h>80</h></coordinates><panel_attributes>&lt;&lt;abstract&gt;&gt;
+Fake news
+--
+-Relationship: 
+public abstract class FakeNews extends Entity
+implements Movement
+--
+Attributes:
+# state: String;
+--
+Methods
++ getters() / setters();
++ generateRandomPeriphericCoordinate(Coordinate center): Coordinate;
++ addFakeNewsToSector(Board board, Coordinate position, FakeNews fn): void;
++  abstract move(Board board, int direction): String;
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>776</x><y>404</y><w>92</w><h>92</h></coordinates><panel_attributes>&lt;&lt;concrete&gt;&gt;
+Player
+--
+-Relationship: 
+public class Player extends Entity 
+implements movement
+--
+Attributes:
+- playerNum: int;
+- inventory: LinkedList&lt;Item&gt;;
+- inventorySize: int;
+- state: String;
+--
+Methods
++ setters() / getters();
++ move(): void;
++ toString(): String;
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>568</x><y>504</y><w>80</w><h>56</h></coordinates><panel_attributes>&lt;&lt;concrete&gt;&gt;
+F1
+--
+-Relationship: 
+public class F1 extends FakeNews
+--
+Attributes:
+--
+Methods
++ move(): void;
++ toString(): String;
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>652</x><y>504</y><w>80</w><h>56</h></coordinates><panel_attributes>&lt;&lt;concrete&gt;&gt;
+F2
+--
+-Relationship: 
+public class F2 extends FakeNews
+--
+Attributes:
+--
+Methods
++ move(): void;
++ toString(): String;
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>736</x><y>504</y><w>80</w><h>56</h></coordinates><panel_attributes>&lt;&lt;concrete&gt;&gt;
+F3
+--
+-Relationship: 
+public class F3 extends FakeNews
+--
+Attributes:
+--
+Methods
++ move(): void;
++ toString(): String;
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>604</x><y>480</y><w>72</w><h>32</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>160;10;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>664</x><y>480</y><w>36</w><h>32</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;70;60</additional_attributes></element><element><id>Relation</id><coordinates><x>668</x><y>480</y><w>116</w><h>32</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;270;60</additional_attributes></element><element><id>UMLClass</id><coordinates><x>784</x><y>344</y><w>84</w><h>44</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
+Movement
+--
+-Relationship: 
+public interface Movement
+--
+Methods
++ abstract move(): void;
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>820</x><y>384</y><w>16</w><h>28</h></coordinates><panel_attributes>lt=&lt;..</panel_attributes><additional_attributes>20;10;10;50</additional_attributes></element><element><id>Relation</id><coordinates><x>668</x><y>384</y><w>168</w><h>28</h></coordinates><panel_attributes>lt=&lt;..</panel_attributes><additional_attributes>400;10;10;50</additional_attributes></element><element><id>Relation</id><coordinates><x>508</x><y>288</y><w>324</w><h>124</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;790;290</additional_attributes></element><element><id>Relation</id><coordinates><x>508</x><y>288</y><w>136</w><h>124</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;320;290</additional_attributes></element><element><id>UMLClass</id><coordinates><x>412</x><y>464</y><w>104</w><h>56</h></coordinates><panel_attributes>&lt;&lt;concrete&gt;&gt;
+ItemLer
+--
+-Relationship: 
+public class ItemLer extends Item
+--
+Attributes:
+--
+Methods
++ itemAbility(): void;
++ toString(): void;
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>148</x><y>464</y><w>152</w><h>64</h></coordinates><panel_attributes>&lt;&lt;concrete&gt;&gt;
+ItemDenunciar
+--
+-Relationship: 
+public class ItemDenunciar extends Item
+--
+Attributes:
+--
+Methods
++ itemAbility(): void;
++ possiblePositions(Coordinate position): LinkedList&lt;Coordinate&gt;;
++ toString(): void;
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>304</x><y>464</y><w>104</w><h>56</h></coordinates><panel_attributes>&lt;&lt;concrete&gt;&gt;
+ItemFugir
+--
+-Relationship: 
+public class ItemFugir extends Item
+--
+Attributes:
+--
+Methods
++ itemAbility(): void;
++ toString(): void;
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>36</x><y>464</y><w>104</w><h>56</h></coordinates><panel_attributes>&lt;&lt;concrete&gt;&gt;
+ItemBoato
+--
+-Relationship: 
+public class ItemBoato extends Item
+--
+Attributes:
+--
+Methods
++ itemAbility(): void;
++ toString(): void;
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>344</x><y>412</y><w>128</w><h>60</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;300;130</additional_attributes></element><element><id>Relation</id><coordinates><x>344</x><y>412</y><w>20</w><h>60</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;30;130</additional_attributes></element><element><id>Relation</id><coordinates><x>196</x><y>412</y><w>160</w><h>60</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>380;10;10;130</additional_attributes></element><element><id>Relation</id><coordinates><x>84</x><y>412</y><w>272</w><h>60</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>660;10;10;130</additional_attributes></element><element><id>UMLClass</id><coordinates><x>644</x><y>216</y><w>152</w><h>52</h></coordinates><panel_attributes>Coordinate
+--
+-Relationship: 
+public class Coordinate
+--
+Attributes:
+- position: Coordinate;
+--
+Methods
++ getters() / setters();
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>28</x><y>332</y><w>496</w><h>200</h></coordinates><panel_attributes>Package Beings
+--
+bg=white</panel_attributes><additional_attributes></additional_attributes></element></diagram>
