@@ -3,7 +3,6 @@ package Entities.Beings;
 // imports
 import Entities.Coordinate;
 import Board.Board;
-import Cores.Cores;
 import java.util.Map;
 import java.util.HashMap;
 
@@ -17,6 +16,13 @@ public class F1 extends FakeNews {
 
     // Methods
     
+    /**
+     * Moves the player in the given direction and updates the board accordingly.
+     *
+     * @param board the board to update
+     * @param direction the direction to move in (1 = down, 2 = up, 3 = right, 4 = left)
+     * @return a string indicating the result of the move ("moved" if successful, "dead" if the move resulted in death)
+     */
     @Override
     public String move(Board board, int direction) {
 
