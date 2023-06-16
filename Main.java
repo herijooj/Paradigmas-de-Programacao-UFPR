@@ -158,8 +158,6 @@ public class Main {
 
         System.out.println("Choose a direction to move [WASD]");
 
-        sleep(1);
-
         input = scanner.nextLine();
 
         // while the input is invalid
@@ -254,7 +252,7 @@ public class Main {
         // game loop ---------------------------------------
 
         // create board
-        Board board = new Board(9, playerCount, 4, 6, 2);
+        Board board = new Board(9, playerCount, 4, 6, 20);
 
         // 20 turns
         for (int i = 0; i < 20; i++) {
@@ -303,6 +301,7 @@ public class Main {
                     // Action
                     if (input == 2) {
                         increaseTurnAndDrawBoard(i, board);
+                        board.drawPlayerInventory(j + 1);
 
                         // input validation
                         placeholder = scanner.nextLine();
