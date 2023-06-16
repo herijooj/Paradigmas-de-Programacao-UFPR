@@ -63,18 +63,15 @@ public class ItemDenunciar extends Item {
      */
     public LinkedList<Coordinate> possiblePositions(Coordinate position) {
         LinkedList<Coordinate> positions = new LinkedList<Coordinate>();
-        positions.add(new Coordinate(position.getI() + 1, position.getJ())); // down
-        positions.add(new Coordinate(position.getI() + 1, position.getJ() - 1)); // down-left
-        positions.add(new Coordinate(position.getI() + 1, position.getJ() + 1)); // down-right
-        positions.add(new Coordinate(position.getI() - 1, position.getJ())); // up
-        positions.add(new Coordinate(position.getI() - 1, position.getJ() - 1)); // up-left
-        positions.add(new Coordinate(position.getI() - 1, position.getJ() + 1)); // up-right
-        positions.add(new Coordinate(position.getI(), position.getJ() + 1)); // right
-        positions.add(new Coordinate(position.getI() - 1, position.getJ() + 1)); // right-up
-        positions.add(new Coordinate(position.getI() + 1, position.getJ() + 1)); // right
-        positions.add(new Coordinate(position.getI(), position.getJ() - 1)); // left
-        positions.add(new Coordinate(position.getI() - 1, position.getJ() - 1)); // left-up
-        positions.add(new Coordinate(position.getI() + 1, position.getJ() - 1)); // left-down
+
+        for (int i = -1; i <= 1; i++) {
+            for (int j = -1; j <= 1; j++) {
+                if (i == 0 && j == 0) {
+                    continue; // skip the current position
+                }
+                positions.add(new Coordinate(position.getI() + i, position.getJ() + j));
+            }
+        }
 
         return positions;
     }
