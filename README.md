@@ -51,9 +51,9 @@ Estes elementos irão se relacionar por meio de orientação a objetos. A seguir
 
 ## autores
 
-- [https://github.com/herijooj] (Heric Camargo)
-- [https://github.com/FontouraAbreu] (Vinicius Fontoura)
-- [https://github.com/amalra1] (Pedro Amaral)
+- [Heric Camargo](https://github.com/herijooj)
+- [Vinicius Fontoura](https://github.com/FontouraAbreu)
+- [Pedro Amaral](https://github.com/amalra1)
 
 ## anotações
 
